@@ -1,0 +1,37 @@
+class SiteLocatorDimensions {
+  static const dpNegative4 = -4.0;
+  static const dp0 = 0.0;
+  static const dpPoint25 = 0.25;
+  static const dp1 = 1.0;
+  static const dp3 = 3.0;
+  static const dp4 = 4.0;
+  static const dp6 = 6.0;
+  static const dp8 = 8.0;
+  static const dp10 = 10.0;
+  static const dp11 = 11.0;
+  static const dp12 = 12.0;
+  static const dp14 = 14.0;
+  static const dp15 = 15.0;
+  static const dp16 = 16.0;
+  static const dp20 = 20.0;
+  static const dp22 = 22.0;
+  static const dp24 = 24.0;
+  static const dp26 = 26.0;
+  static const dp28 = 28.0;
+  static const dp30 = 30.0;
+  static const dp32 = 32.0;
+  static const dp35 = 35.0;
+  static const dp38 = 38.0;
+  static const dp40 = 40.0;
+  static const dp44 = 44.0;
+  static const dp48 = 48.0;
+  static const dp52 = 52.0;
+  static const dp57 = 57.0;
+  static const dp58 = 58.0;
+  static const dp60 = 60.0;
+  static const dp70 = 70.0;
+  static const dp75 = 75.0;
+  static const dp100 = 100.0;
+  static const dp104 = 104.0;
+  static const dp106 = 106.0;
+}

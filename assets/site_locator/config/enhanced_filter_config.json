@@ -1,0 +1,348 @@
+{
+    "amenities": [
+        {
+            "type": "enhancedFilter",
+            "key": "atm",
+            "label": "ATM",
+            "serviceType": "amenities",
+            "order": 1,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "convStore",
+            "label": "Convenience Store",
+            "serviceType": "amenities",
+            "order": 2,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "restaurant24Hr",
+            "label": "24 Hour Restaurant",
+            "serviceType": "amenities",
+            "order": 3,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "shower",
+            "label": "Shower",
+            "serviceType": "amenities",
+            "order": 4,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "truckStop",
+            "label": "Truck Stop",
+            "serviceType": "amenities",
+            "order": 5,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "restaurant",
+            "label": "Restaurant",
+            "serviceType": "amenities",
+            "order": 6,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "lounge",
+            "label": "Lounge",
+            "serviceType": "amenities",
+            "order": 7,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "laundry",
+            "label": "Laundry",
+            "serviceType": "amenities",
+            "order": 8,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "motel",
+            "label": "Motel",
+            "serviceType": "amenities",
+            "order": 9,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "cashAdvance",
+            "label": "Cash Advance",
+            "serviceType": "amenities",
+            "order": 10,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "deli",
+            "label": "Deli",
+            "serviceType": "amenities",
+            "order": 11,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "gameRoom",
+            "label": "Game Room",
+            "serviceType": "amenities",
+            "order": 12,
+            "flavors": [
+                "comdata"
+            ]
+        }
+    ],
+    "location_features": [
+        {
+            "type": "enhancedFilter",
+            "key": "services24Hr",
+            "label": "24 Hour Services",
+            "serviceType": "features",
+            "order": 1,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "payAtPump",
+            "label": "Automated Fuel Pump",
+            "serviceType": "features",
+            "order": 2,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "hwyAccess",
+            "label": "Highway Access",
+            "serviceType": "features",
+            "order": 3,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "rigAccess",
+            "label": "18-Wheeler Access",
+            "serviceType": "features",
+            "order": 4,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "rigParking",
+            "label": "18-Wheeler Parking",
+            "serviceType": "features",
+            "order": 5,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "unattended",
+            "label": "Unattended",
+            "serviceType": "features",
+            "order": 6,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "truckWash",
+            "label": "Truck Wash",
+            "serviceType": "features",
+            "order": 7,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "scales",
+            "label": "Scales",
+            "serviceType": "features",
+            "order": 8,
+            "flavors": [
+                "comdata",
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "highSpeedPump",
+            "label": "High Speed Pump",
+            "serviceType": "features",
+            "order": 9,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "tankReader",
+            "label": "Tank Reader",
+            "serviceType": "features",
+            "order": 10,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "permits",
+            "label": "Permits",
+            "serviceType": "features",
+            "order": 11,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "repairs",
+            "label": "Repairs",
+            "serviceType": "features",
+            "order": 12,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "safeHaven",
+            "label": "Safe Haven",
+            "serviceType": "features",
+            "order": 13,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "truckersStore",
+            "label": "Truckers Store",
+            "serviceType": "features",
+            "order": 14,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "tireRepair",
+            "label": "Tire Repair",
+            "serviceType": "features",
+            "order": 15,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "wreckerService",
+            "label": "Wrecker Service",
+            "serviceType": "features",
+            "order": 16,
+            "flavors": [
+                "comdata"
+            ]
+        }
+    ],
+    "location_types": [
+        {
+            "type": "enhancedFilter",
+            "key": "fuel",
+            "label": "Fuel Stations",
+            "serviceType": "locationType",
+            "order": 1,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "truckStop",
+            "label": "Truck Stop",
+            "serviceType": "locationType",
+            "order": 2,
+            "flavors": [
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "service",
+            "label": "Service Stations",
+            "serviceType": "locationType",
+            "order": 3,
+            "flavors": [
+                "fuelman",
+                "comdata"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "discounts",
+            "label": "Discounts Applied",
+            "serviceType": "locationType",
+            "order": 4,
+            "flavors": [
+                "fuelman"
+            ]
+        },
+        {
+            "type": "enhancedFilter",
+            "key": "gallonUp",
+            "label": "Gallon UP",
+            "serviceType": "locationType",
+            "order": 5,
+            "flavors": [
+                "comdata"
+            ]
+        }
+    ]
+}
