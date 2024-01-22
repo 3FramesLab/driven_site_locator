@@ -16,7 +16,6 @@ class DrivenSiteLocator {
   void Function()? onInactivityTimeOut;
   double? bottomNavBarHeight;
   void Function(bool)? onTimerLogout;
-  bool _isUserAuthenticated = false;
   Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen;
   void Function({dynamic arguments})? navigateToCardholderSiteLocatorMap;
   Future<void> Function()? navigateToAdminLocatorTab;
@@ -142,10 +141,6 @@ class DrivenSiteLocator {
     this.flavor = flavor;
   }
 
-  void setIsUserAuthenticated(bool isUserAuthenticated) {
-    _isUserAuthenticated = isUserAuthenticated;
-  }
-
   void setFleetManagerAccessToken(String? fleetManagerAccessToken) {
     _fleetManagerAccessToken = fleetManagerAccessToken;
   }
@@ -179,12 +174,6 @@ class DrivenSiteLocator {
   // }
 
   // bool getIsPreviousScreenLogin() => _isPreviousScreenLogin;
-
-  /// Replaced AdminRoutes.dashboard
-  bool get isUserAuthenticated => _isUserAuthenticated == true;
-
-  /// Replaced Routes.welcome
-  bool get isUserUnauthenticated => _isUserAuthenticated == false;
 
   void setWalletData({
     required bool hasCards,

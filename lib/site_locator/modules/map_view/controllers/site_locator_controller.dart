@@ -1221,9 +1221,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         Get.currentRoute == SiteLocatorRoutes.siteLocationsListView ||
         // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage ||
         // (Get.currentRoute == SiteLocatorRoutes.dashboard &&
-        DrivenSiteLocator.instance.isUserAuthenticated ||
-        (DrivenSiteLocator.instance.isUserAuthenticated &&
-            isLocatorBottomNavTabPressed());
+
+        // DrivenSiteLocator.instance.isUserAuthenticated ||
+        // (DrivenSiteLocator.instance.isUserAuthenticated &&
+
+        isUserAuthenticated ||
+        (isUserAuthenticated && isLocatorBottomNavTabPressed());
     return canShowFlag;
   }
 
@@ -1404,7 +1407,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   bool get _isAuthenticatedMapView =>
-      DrivenSiteLocator.instance.isUserAuthenticated;
+      // DrivenSiteLocator.instance.isUserAuthenticated;
+      isUserAuthenticated;
   // Get.currentRoute == SiteLocatorRoutes.dashboard ||
   // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage;
 
