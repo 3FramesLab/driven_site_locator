@@ -17,7 +17,7 @@ class DrivenSiteLocator {
   double? bottomNavBarHeight;
   void Function(bool)? onTimerLogout;
   Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen;
-  void Function({dynamic arguments})? navigateToCardholderSiteLocatorMap;
+  void Function()? navigateToCardholderSiteLocatorMap;
   Future<void> Function()? navigateToAdminLocatorTab;
 
   String? _fleetManagerAccessToken;
@@ -65,7 +65,7 @@ class DrivenSiteLocator {
     void Function(bool)? onTimerLogout,
     double? bottomNavBarHeight,
     Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen,
-    void Function({dynamic arguments})? navigateToCardholderSiteLocatorMap,
+    void Function()? navigateToCardholderSiteLocatorMap,
     Future<void> Function()? navigateToAdminLocatorTab,
     Widget? walletHeader,
   }) async {
@@ -121,7 +121,8 @@ class DrivenSiteLocator {
   }
 
   void setNavigateToCardholderSiteLocatorMap(
-      void Function({dynamic arguments})? navigateToCardholderSiteLocatorMap) {
+    void Function()? navigateToCardholderSiteLocatorMap,
+  ) {
     this.navigateToCardholderSiteLocatorMap =
         navigateToCardholderSiteLocatorMap;
   }
