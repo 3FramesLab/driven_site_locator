@@ -58,7 +58,6 @@ class DrivenSiteLocator {
   Future<void> init({
     // required SiteLocatorEntitlementRepository siteLocatorEntitlementRepository,
     required bool isInactivityWrapperActivated,
-    required Map<String, String?> env,
     AppFlavor flavor = AppFlavor.none,
     // Map<String, dynamic>? configDataJson,
     String appVersionNumber = '',
@@ -80,8 +79,6 @@ class DrivenSiteLocator {
     setNavigateToCardholderSiteLocatorMap(navigateToCardholderSiteLocatorMap);
     setNavigateToAdminLocatorTab(navigateToAdminLocatorTab);
     setNavigateToLogin(navigateToLogin);
-
-    this.env = env;
     this.setLocatorMapAsPreferredHomeScreen =
         setLocatorMapAsPreferredHomeScreen;
     this.walletHeader = walletHeader;
@@ -198,4 +195,6 @@ class DrivenSiteLocator {
   String get accountCode => _accountCode;
 
   String get customerId => _customerId;
+
+  void setEnv(Map<String, String?> env) => this.env = env;
 }
