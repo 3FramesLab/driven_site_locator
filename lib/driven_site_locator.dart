@@ -19,6 +19,7 @@ class DrivenSiteLocator {
   Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen;
   void Function()? navigateToCardholderSiteLocatorMap;
   Future<void> Function()? navigateToAdminLocatorTab;
+  Map<String, String?> env = {};
 
   String? _fleetManagerAccessToken;
   String _appLoginUserType = '';
@@ -57,6 +58,7 @@ class DrivenSiteLocator {
   Future<void> init({
     // required SiteLocatorEntitlementRepository siteLocatorEntitlementRepository,
     required bool isInactivityWrapperActivated,
+    required Map<String, String?> env,
     AppFlavor flavor = AppFlavor.none,
     // Map<String, dynamic>? configDataJson,
     String appVersionNumber = '',
@@ -79,6 +81,7 @@ class DrivenSiteLocator {
     setNavigateToAdminLocatorTab(navigateToAdminLocatorTab);
     setNavigateToLogin(navigateToLogin);
 
+    this.env = env;
     this.setLocatorMapAsPreferredHomeScreen =
         setLocatorMapAsPreferredHomeScreen;
     this.walletHeader = walletHeader;
