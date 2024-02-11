@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:driven_site_locator/site_locator/controllers/setup_wizard_controller.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/utilities/site_info_utils.dart';
@@ -25,10 +24,7 @@ class SetUpWizardSlidingPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final double setUpWizardPanelHeight = controller.panelMaxHeight(context);
     final double topPadding = MediaQuery.of(context).padding.top;
-    final adjustedHeight =
-        // Get.currentRoute == SiteLocatorRoutes.dashboard ? 70 : 30;
-        // DrivenSiteLocator.instance.isUserAuthenticated ? 70 : 30;
-        controller.isUserAuthenticated ? 70 : 30;
+    final adjustedHeight = controller.isUserAuthenticated ? 70 : 30;
     return SlidingUpPanel(
       defaultPanelState: PanelState.OPEN,
       controller: controller.setUpWizardPanelController,

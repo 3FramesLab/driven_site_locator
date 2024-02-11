@@ -46,7 +46,6 @@ class CardholderSetupController extends GetxController {
         if (!Globals().isCardHolderLogin) {
           navigateToAdminDashboard();
         } else {
-          // AdminRouteHelper.cardholderSiteLocatorMap();
           DrivenSiteLocator.instance.navigateToCardholderSiteLocatorMap?.call();
         }
       }
@@ -55,7 +54,6 @@ class CardholderSetupController extends GetxController {
 
   void navigateToAdminDashboard() {
     try {
-      // Get.find<DashboardController>().navigateToAdminLocatorTab();
       DrivenSiteLocator.instance.navigateToAdminLocatorTab?.call();
     } catch (_) {}
   }

@@ -10,7 +10,6 @@ import 'package:driven_site_locator/site_locator/widgets/site_locator_menu_cards
 
 class SiteLocatorMenu extends StatelessWidget {
   const SiteLocatorMenu({Key? key}) : super(key: key);
-  // final EntitlementRepository repository = Get.find();
   static final repository = SiteLocatorEntitlementUtils.instance;
 
   @override

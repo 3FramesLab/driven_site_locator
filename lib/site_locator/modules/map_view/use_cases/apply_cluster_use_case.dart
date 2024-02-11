@@ -1,12 +1,12 @@
 part of map_view_module;
 
-class ApplyClusterUseCase extends BaseFutureUseCase<void, ApplyClusterParams> {
+class ApplyClusterUseCase
+    extends BaseFutureUseCase<List<Marker>, ApplyClusterParams> {
   @override
-  Future<void>? execute(ApplyClusterParams param) async {
+  Future<List<Marker>> execute(ApplyClusterParams param) async {
     final markerCluster = param.markerCluster;
     final currentLatLngBounds = param.currentLatLngBounds;
     final siteLocationDisplayData = param.siteLocationDisplayData;
-    final markers = param.markers;
     final siteLocationHashmap = param.siteLocationHashmap;
 
     final List<Marker> clusterMarkers = [];
@@ -48,8 +48,7 @@ class ApplyClusterUseCase extends BaseFutureUseCase<void, ApplyClusterParams> {
         );
       }
     }
-    markers.clear();
-    markers.addAll(clusterMarkers);
+    return clusterMarkers;
   }
 
   void addSiteLocation({
@@ -69,7 +68,6 @@ class ApplyClusterParams {
   final LatLngBounds currentLatLngBounds;
   final int currentZoom;
   final List<SiteLocation> siteLocationDisplayData;
-  final RxList<Marker> markers;
   final Future<Marker> Function(MapMarker cluster) getSiteCluster;
   final Marker Function(MapMarker marker) getSiteMarker;
   final Map<String, SiteLocation> siteLocationHashmap;
@@ -79,7 +77,6 @@ class ApplyClusterParams {
     required this.currentLatLngBounds,
     required this.currentZoom,
     required this.siteLocationDisplayData,
-    required this.markers,
     required this.getSiteCluster,
     required this.getSiteMarker,
     required this.siteLocationHashmap,

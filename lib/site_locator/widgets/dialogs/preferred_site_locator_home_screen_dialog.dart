@@ -41,7 +41,6 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
     trackAction(
       AnalyticsTrackActionName.preferredHomeScreenYesButtonEvent,
     );
-    // LocalStorageAdapter.setLocatorMapAsPreferredHomeScreen(AppStrings.trueText);
     DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
       AppStrings.trueText,
     );
@@ -53,8 +52,6 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
           trackAction(
             AnalyticsTrackActionName.preferredHomeScreenNoButtonEvent,
           );
-          // LocalStorageAdapter.setLocatorMapAsPreferredHomeScreen(
-          //     AppStrings.falseText);
           DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
             AppStrings.falseText,
           );

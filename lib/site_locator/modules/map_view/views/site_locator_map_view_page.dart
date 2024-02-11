@@ -16,8 +16,6 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   final SetUpWizardController setUpWizardController = Get.find();
   final FuelPriceDisclaimerController fuelPriceDisclaimerController =
       Get.find();
-  // static final EntitlementRepository _entitlementRepository =
-  //     Get.find<EntitlementRepository>();
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
   @override
@@ -40,12 +38,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       await siteLocatorController.updateCurrentMapZoomLevel();
 
       siteLocatorController.show2CTAButton(show2CTA: true);
-      if (siteLocatorController.isFullMapViewFirstLaunch) {
-        await Future.delayed(const Duration(milliseconds: 500), () async {
-          await siteLocatorController.updateFullMapViewSitesData();
-        });
-        siteLocatorController.isFullMapViewFirstLaunch = false;
-      }
+
+      await Future.delayed(const Duration(milliseconds: 500), () async {
+        await siteLocatorController.updateFullMapViewSitesData();
+      });
     });
     super.initState();
     WidgetsBinding.instance.addObserver(this);

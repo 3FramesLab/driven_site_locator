@@ -10,27 +10,33 @@ class SiteInfoHeader extends StatelessWidget {
   final SiteLocation selectedSiteLocation;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Stack(
+        Flexible(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              headerWidget(),
+              locationNameWidget(),
+            ],
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            headerWidget(),
             fuelTitleWidget(),
+            const VerticalSpacer(size: 2),
+            if (AppUtils.isFuelman || AppUtils.isIFleet) fuelPriceWidget(),
           ],
         ),
-        locationNameWidget()
       ],
     );
   }
 
   Widget headerWidget() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        _logoTitleWidget(),
-      ],
-    );
+    return _logoTitleWidget();
   }
 
   Widget _logoTitleWidget() {
@@ -41,8 +47,6 @@ class SiteInfoHeader extends StatelessWidget {
           _brandLogo(),
           const HorizontalSpacer(size: 4),
           fuelBrandNameWidget(),
-          const HorizontalSpacer(size: 4),
-          if (AppUtils.isFuelman || AppUtils.isIFleet) fuelPriceWidget(),
         ],
       ),
     );
@@ -68,7 +72,7 @@ class SiteInfoHeader extends StatelessWidget {
   }
 
   Widget fuelBrandNameWidget() {
-    return Expanded(
+    return Flexible(
       child: Semantics(
         container: true,
         label: SemanticStrings.siteInfoFuelBrandName,
@@ -85,19 +89,15 @@ class SiteInfoHeader extends StatelessWidget {
   }
 
   Widget fuelTitleWidget() {
-    return Positioned(
-      top: 0,
-      right: 4,
-      child: Semantics(
-        container: true,
-        label: SemanticStrings.siteInfoFuelTitle,
-        child: Text(
-          SiteInfoUtils.getFuelTitle(selectedSiteLocation),
-          style: const TextStyle(
-            fontFamily: DrivenFonts.avertaFontFamily,
-            fontWeight: bold,
-            fontSize: 14,
-          ),
+    return Semantics(
+      container: true,
+      label: SemanticStrings.siteInfoFuelTitle,
+      child: Text(
+        SiteInfoUtils.getFuelTitle(selectedSiteLocation),
+        style: const TextStyle(
+          fontFamily: DrivenFonts.avertaFontFamily,
+          fontWeight: bold,
+          fontSize: 14,
         ),
       ),
     );

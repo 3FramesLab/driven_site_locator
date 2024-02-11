@@ -1,9 +1,7 @@
-import 'package:driven_common/analytics/analytics.dart';
-import 'package:driven_common/driven_components/driven_components_module.dart';
 import 'package:driven_common/globals.dart';
 import 'package:driven_common/utils/safe_launch.dart';
+import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 

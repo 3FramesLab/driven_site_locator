@@ -8,11 +8,12 @@ class FilterMarkersUseCase
     if (param.filteredSiteLocationsList.isNotEmpty &&
         param.rawMarkersList.isNotEmpty) {
       for (final SiteLocation item in param.filteredSiteLocationsList) {
-        filteredMarkersList.add(
-          param.rawMarkersList.firstWhere(
-            (element) => element.markerId.value == item.masterIdentifier,
-          ),
+        final markerFromRawList = param.rawMarkersList.firstWhereOrNull(
+          (element) => element.markerId.value == item.masterIdentifier,
         );
+        if (markerFromRawList != null) {
+          filteredMarkersList.add(markerFromRawList);
+        }
       }
     }
     return filteredMarkersList;

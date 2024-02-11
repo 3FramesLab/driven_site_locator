@@ -167,7 +167,4 @@ mixin SiteLocatorState {
   FuelPreferenceType selectedCardFuelPreferenceType = FuelPreferenceType.both;
 
   bool isComingFromRecenter = false;
-
-  /// Below variables in use when site locator is plugin
-  String getLoginUserType = '';
 }

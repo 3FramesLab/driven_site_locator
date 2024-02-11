@@ -344,13 +344,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await processSiteLocations(siteLocations ?? []);
       await validateSiteLocationWithFilters();
       //For comdata, getting fuel prices and merging into site locations.
-      // if (AppUtils.isComdata && Get.currentRoute != Routes.welcomeScreen) {
       if (AppUtils.isComdata && !isWelcomeScreen) {
         await _getAndUpdateFuelPreferenceType();
 
         await updateSiteLocationsFuelPricesForComdata();
       }
-      // if (AppUtils.isComdata && Get.currentRoute == Routes.welcomeScreen) {
       if (AppUtils.isComdata && isWelcomeScreen) {
         ManageCacheFuelPrices.setSelectedCardCustomerIdEmpty();
       }
@@ -517,6 +515,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         isComingFromRecenter = false;
         return;
       }
+      if (isFullMapViewFirstLaunch) {
+        isFullMapViewFirstLaunch = false;
+        return;
+      }
       trackAction(AnalyticsTrackActionName.repositionEvent);
       if (!isClusterClick &&
           isFetchSitesData &&
@@ -537,7 +539,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             await validateLastSavedCenterLocationUseCase
                 .execute(newCenterLocation);
 
-        unawaited(applyClustering());
+        await applyClustering();
 
         if (allowGateKeeperToGetSiteLocationsData() &&
             !isZoomedWithinCurrentLatLngBounds()) {
@@ -683,6 +685,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> onCameraIdle() async {
+    isMoveCameraCallingFromMapView = true;
     await setCenterCoordinate();
   }
 
@@ -715,7 +718,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (isMoveCameraCallingFromMapView) {
       canClearSearchTextField = true;
     }
-    isMoveCameraCallingFromMapView = true;
     clearSearchPlaceInput();
     isFetchSitesData = true;
     isMapPinTapped = false;
@@ -741,8 +743,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     PinVariantStore.statusList = brandPinVariantList;
     rawMarkersList =
         generateMarkerList(brandPinVariantList, SiteLocatorConstants.resetCode);
-    markers.clear();
-    markers.addAll(rawMarkersList);
+
     if (welcomeScreenMarkers.isEmpty) {
       welcomeScreenMarkers.addAll(markers.toList());
     }
@@ -1121,7 +1122,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> _filterMapPins(
     List<SiteLocation> filteredSiteLocationsList,
   ) async {
-    markers.clear();
+    setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
     if (isGenerateMapPinsOnFiltering) {
       await processSiteLocations(siteLocations ?? []);
       isGenerateMapPinsOnFiltering = false;
@@ -1131,8 +1132,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       rawMarkersList,
       filteredSiteLocationsList,
     );
-
     await _generateClusterData(markersWithoutCluster);
+    hideFuelGaugeIndicator();
   }
 
   Future<List<Marker>> filterMarkers(List<Marker> rawMarkersList,
@@ -1221,10 +1222,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         Get.currentRoute == SiteLocatorRoutes.siteLocationsListView ||
         // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage ||
         // (Get.currentRoute == SiteLocatorRoutes.dashboard &&
-
-        // DrivenSiteLocator.instance.isUserAuthenticated ||
-        // (DrivenSiteLocator.instance.isUserAuthenticated &&
-
         isUserAuthenticated ||
         (isUserAuthenticated && isLocatorBottomNavTabPressed());
     return canShowFlag;
@@ -1406,11 +1403,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     return deviceHeight - deviceEdgePadding;
   }
 
-  bool get _isAuthenticatedMapView =>
-      // DrivenSiteLocator.instance.isUserAuthenticated;
-      isUserAuthenticated;
-  // Get.currentRoute == SiteLocatorRoutes.dashboard ||
-  // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage;
+  bool get _isAuthenticatedMapView => isUserAuthenticated;
 
   double get lastZoomComputed => lastZoomByUser();
 
@@ -1459,7 +1452,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> onMapViewTap() async {
-    // if (Get.currentRoute == Routes.welcomeScreen) {
     if (isWelcomeScreen) {
       await navToNextPageOnMapViewTap();
     } else {
@@ -1492,10 +1484,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
+  bool get isWelcomeScreen => DrivenSiteLocator.instance.getIsWelcomeScreen();
+
   // TODO(Smeet): check implementation.
   bool get inFullMapViewScreen =>
       Get.currentRoute == SiteLocatorRoutes.siteLocatorMapView ||
-      // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage;
       DrivenSiteLocator.instance.getIsCardholderFullMapScreen();
 
   void closeSiteLocatorMenuPanel() {
@@ -1693,14 +1686,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     return value;
   }
 
-  /// isPreviousScreenLogin = Get.previousRoute == Routes.login
   Future<void> initAuthenticatedMapView(
       {bool isPreviousScreenLogin = false}) async {
     isExecuteCameraMoveForCardHolderOnFirstLaunch = false;
     isUserAuthenticated = true;
     isShowBackButton = false;
 
-    // final loginUserType = LocalStorageAdapter.getLoginUserType();
     final loginUserType = DrivenSiteLocator.instance.getAppLoginUserType();
     if (loginUserType.isNotEmpty && loginUserType == InternalText.cardholder) {
       if (isPreviousScreenLogin) {
@@ -1812,7 +1803,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       },
     );
 
-    unawaited(applyClustering());
+    await applyClustering();
   }
 
   void updateMarkerDensity(List<MapMarker> markers) {
@@ -1833,7 +1824,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
     double? appliedZoom = zoom;
     final defaultZoomLevel = SiteLocatorConfig.mapZoomLevel;
-    // if (Get.currentRoute == Routes.welcomeScreen) {
     if (isWelcomeScreen) {
       appliedZoom = currentZoomLevel ?? defaultZoomLevel;
     } else {
@@ -1850,13 +1840,17 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       currentLatLngBounds: currentLatLngBounds(),
       currentZoom: appliedZoom.toInt(),
       siteLocationDisplayData: siteLocationDisplayData,
-      markers: markers,
       getSiteCluster: _getSiteCluster,
       getSiteMarker: getSiteMarker,
       siteLocationHashmap: siteLocationHashmap,
     );
 
-    await applyClusterUseCase.execute(applyClusterParam);
+    final markersList = await applyClusterUseCase.execute(applyClusterParam);
+    await Future.delayed(const Duration(milliseconds: 500));
+    markers.clear();
+    if (markersList.isNotEmpty) {
+      markers.addAll(markersList);
+    }
   }
 
   Future<Marker> _getSiteCluster(MapMarker cluster) async {
@@ -1899,7 +1893,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         ),
       );
       await Future.delayed(const Duration(milliseconds: 500));
-      unawaited(applyClustering(newZoomLevel));
+      await applyClustering(newZoomLevel);
     }
   }
 
@@ -1932,6 +1926,4 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   // Cluster end region
-
-  bool get isWelcomeScreen => DrivenSiteLocator.instance.getIsWelcomeScreen();
 }
