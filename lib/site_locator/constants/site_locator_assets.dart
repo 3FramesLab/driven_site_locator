@@ -37,7 +37,6 @@ class SiteLocatorAssets {
   // COMDATA ASSET PATHS
 
   static const assetPathComdata = '$packagePath/assets/site_locator/comdata';
-  static const assetJsonPathComdata = 'assets/site_locator/comdata';
   static const comdataSiteBrandLogoDFC =
       '$assetPathComdata/site-comdata-logo.png';
   static const pinBgNormalFilePathDFC = '$assetPathComdata/normal-pin-drop.png';
@@ -52,9 +51,9 @@ class SiteLocatorAssets {
   static const comdataSitesResponseJsonPath =
       '$assetPathComdata/sites_response.json';
   static const enhancedFilterConfig =
-      '$assetJsonPathComdata/config/enhanced_filter_config.json';
+      '$assetPath/config/enhanced_filter_config.json';
   static const enhancedFilterConfigEmptyAminities =
-      '$assetJsonPathComdata/config/enhanced_filter_config_test.json';
+      '$assetPath/config/enhanced_filter_config_test.json';
 
   // Common assets images
   static const exitSign = '$packagePath/assets/images/exit_sign.png';
