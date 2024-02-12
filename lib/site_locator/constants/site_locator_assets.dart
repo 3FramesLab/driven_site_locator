@@ -1,6 +1,9 @@
 class SiteLocatorAssets {
   static const packagePath = 'packages/driven_site_locator';
   static const assetPath = '$packagePath/assets/site_locator';
+
+  static const assetJsonPath = 'assets/site_locator';
+
   static const fuelmanBrandFilePath = '$assetPath/site-fuelman-logo.png';
   static const pinBgFilePath = '$assetPath/white-pin-drop.png';
   static const pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
@@ -21,7 +24,7 @@ class SiteLocatorAssets {
       '$packagePath/assets/images/radioButtonSelected.png';
   static const radioButtonDisabled =
       '$packagePath/assets/images/radioButtonDisabled.png';
-  static const backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
+  static const backupBrandLogoUrlsPath = '$assetJsonPath/brand_logo_urls.json';
   static const fuelPriceDisclaimerInfoIcon =
       '$assetPath/fuel_price_disclaimer_info_icon.png';
   static const loginIcon = '$assetPath/loginIcon.png';
@@ -34,6 +37,7 @@ class SiteLocatorAssets {
   // COMDATA ASSET PATHS
 
   static const assetPathComdata = '$packagePath/assets/site_locator/comdata';
+  static const assetJsonPathComdata = 'assets/site_locator/comdata';
   static const comdataSiteBrandLogoDFC =
       '$assetPathComdata/site-comdata-logo.png';
   static const pinBgNormalFilePathDFC = '$assetPathComdata/normal-pin-drop.png';
@@ -48,9 +52,9 @@ class SiteLocatorAssets {
   static const comdataSitesResponseJsonPath =
       '$assetPathComdata/sites_response.json';
   static const enhancedFilterConfig =
-      '$assetPath/config/enhanced_filter_config.json';
+      '$assetJsonPathComdata/config/enhanced_filter_config.json';
   static const enhancedFilterConfigEmptyAminities =
-      '$assetPath/config/enhanced_filter_config_test.json';
+      '$assetJsonPathComdata/config/enhanced_filter_config_test.json';
 
   // Common assets images
   static const exitSign = '$packagePath/assets/images/exit_sign.png';
