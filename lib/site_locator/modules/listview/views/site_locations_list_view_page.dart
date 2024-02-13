@@ -6,22 +6,34 @@ class SiteLocationsListViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: WillPopScope(
-        onWillPop: _onWillPop,
-        child: SiteLocatorScaffold(
-          backgroundColor: Colors.white,
-          body: Obx(
-            () {
-              return controller.isInitialListLoading()
-                  ? const ListViewCardShimmer()
-                  : _displaySiteLocationCardList();
-            },
+    if (GetPlatform.isMobile) {
+      print('smeet log: in mobile');
+      return SafeArea(
+        bottom: false,
+        child: WillPopScope(
+          onWillPop: _onWillPop,
+          child: SiteLocatorScaffold(
+            backgroundColor: Colors.white,
+            body: Obx(
+              () {
+                return controller.isInitialListLoading()
+                    ? const ListViewCardShimmer()
+                    : _displaySiteLocationCardList();
+              },
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      print('smeet log: in web');
+      return Obx(
+        () {
+          return controller.isInitialListLoading()
+              ? const ListViewCardShimmer()
+              : _displaySiteLocationCardList();
+        },
+      );
+    }
   }
 
   PreferredSizeWidget get _appBar => DrivenAppBar(
