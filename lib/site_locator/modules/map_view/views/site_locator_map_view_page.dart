@@ -118,13 +118,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     trackAction(
       AnalyticsTrackActionName.recenterButtonClickedEvent,
     );
-    await Get.dialog(
-      UseCurrentLocationDialog(),
-      barrierDismissible: false,
-    );
-    // siteLocatorController.canClearSearchTextField = true;
-    // siteLocatorController.clearSearchPlaceInput();
-    // await siteLocatorController.onReCenterButtonClicked();
+
+    siteLocatorController.canClearSearchTextField = true;
+    siteLocatorController.clearSearchPlaceInput();
+    await siteLocatorController.onReCenterButtonClicked();
   }
 
   Future<void> _showFuelPriceDisclaimerDialog() => Get.dialog(

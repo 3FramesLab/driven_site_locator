@@ -1577,6 +1577,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   void filterButtonTap() {
+    Get.dialog(
+      UseCurrentLocationDialog(),
+      barrierDismissible: false,
+    );
     if (isShowLoading()) {
       return;
     }
