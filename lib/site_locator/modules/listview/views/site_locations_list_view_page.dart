@@ -7,7 +7,6 @@ class SiteLocationsListViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (GetPlatform.isMobile) {
-      print('smeet log: in mobile');
       return SafeArea(
         bottom: false,
         child: WillPopScope(
@@ -25,7 +24,6 @@ class SiteLocationsListViewPage extends StatelessWidget {
         ),
       );
     } else {
-      print('smeet log: in web');
       return Obx(
         () {
           return controller.isInitialListLoading()
@@ -51,7 +49,7 @@ class SiteLocationsListViewPage extends StatelessWidget {
       children: [
         Column(
           children: [
-            _appBar,
+            if (GetPlatform.isMobile) _appBar,
             _filterSearchTextField(),
             const SizedBox(height: 12),
             Expanded(child: _siteLocationCards(items, itemCount)),
@@ -69,8 +67,10 @@ class SiteLocationsListViewPage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: _searchPlaceTextField),
-          const SizedBox(width: 8),
-          SitesListFilterButton(),
+          if (GetPlatform.isMobile) ...[
+            const SizedBox(width: 8),
+            SitesListFilterButton(),
+          ]
         ],
       ),
     );
