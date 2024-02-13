@@ -52,7 +52,7 @@ class SiteLocatorAssets {
   static const comdataSitesResponseJsonPath =
       '$assetJsonPathComdata/sites_response.json';
   static const enhancedFilterConfig =
-      'assets/config/enhanced_filter_config.json';
+      'assets/site_locator/config/enhanced_filter_config.json';
   static const enhancedFilterConfigEmptyAminities =
       '$assetJsonPath/config/enhanced_filter_config_test.json';
 
