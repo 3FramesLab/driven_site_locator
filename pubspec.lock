@@ -93,8 +93,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "release/version-0.0.2"
-      resolved-ref: "212fd747c2874c4e923e92fdb5f06f0808c6ead5"
+      ref: "feature/add-width-in-driven-dialog"
+      resolved-ref: c8d98fcb96e72a8696106d32c516cf7e501469ff
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"

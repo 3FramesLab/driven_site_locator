@@ -15,7 +15,7 @@ dependencies:
   driven_common:
     git:
       url: https://github.com/3FramesLab/flutter_driven-common
-      ref: release/version-0.0.2
+      ref: feature/add-width-in-driven-dialog
       version: ^0.0.2
   equatable: ^2.0.0
   flutter:
