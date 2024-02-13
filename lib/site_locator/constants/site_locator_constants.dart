@@ -3,6 +3,16 @@ import 'package:driven_site_locator/site_locator/data/models/enum_values.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SiteLocatorConstants {
+  // Location dialog
+  static const useMyLocation = '''
+You are currently viewing fuel sites in {Nashville, TN}.\n
+To view fuel sites in a different location, use the search bar or enable “sitelocator.fuelman.com” to use your current location.
+''';
+
+  static const useMyLocationButton = 'Use My Current Location';
+  static String continueWithoutUsingMyLocation =
+      'Continue without using my location';
+
   //site-locator
   static const mapDebounceTimeInSeconds = 2;
   static const siteLocatorAccessTokenExpiryTimeInMinutes = 30;

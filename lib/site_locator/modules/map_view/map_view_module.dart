@@ -75,15 +75,14 @@ import 'package:driven_site_locator/site_locator/utilities/site_locator_utils.da
 import 'package:driven_site_locator/site_locator/views/map_view_page/widgets/menu/site_locator_menu_icon.dart';
 import 'package:driven_site_locator/site_locator/views/map_view_page/widgets/menu/site_locator_menu_panel.dart';
 import 'package:driven_site_locator/site_locator/views/setup_wizard/setup_wizard_sliding_panel.dart';
-import 'package:driven_site_locator/site_locator/views/site_info_panel/site_info_sliding_panel.dart';
 import 'package:driven_site_locator/site_locator/widgets/back_button.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/change_filters_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/enhanced_no_locations_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/fuel_price_disclaimer_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/no_locations_dialog.dart';
+import 'package:driven_site_locator/site_locator/widgets/dialogs/user_current_location_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_google_maps_cluster/flutter_google_maps_cluster.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
