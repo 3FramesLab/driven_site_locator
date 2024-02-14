@@ -13,7 +13,7 @@ class UseCurrentLocationDialog extends StatelessWidget {
       primaryButton: _primaryButton(context),
       isDynamicAlert: true,
       secondaryRightButtonOnPressed: _onCancelButtonTap,
-      secondaryBody: Text(SiteLocatorConstants.continueWithoutUsingMyLocation),
+      clickableText: SiteLocatorConstants.continueWithoutUsingMyLocation,
     );
   }
 
