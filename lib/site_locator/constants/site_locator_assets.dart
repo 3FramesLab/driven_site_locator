@@ -65,4 +65,7 @@ class SiteLocatorAssets {
   // Card holder setup page
   static const cardHolderSetupPageStepThree =
       '$assetPath/cardholder_setup_page_step_three.png';
+
+  // Top header route icon
+  static const routeIcon = '$assetPath/route_icon.png';
 }
