@@ -39,14 +39,15 @@ class SiteLocatorAssets {
   static const assetPathComdata = '$packagePath/assets/site_locator/comdata';
   static const assetJsonPathComdata = 'assets/site_locator/comdata';
   static const comdataSiteBrandLogoDFC =
-      '$assetPathComdata/site-comdata-logo.png';
-  static const pinBgNormalFilePathDFC = '$assetPathComdata/normal-pin-drop.png';
+      'site_locator/comdata/site-comdata-logo.png';
+  static const pinBgNormalFilePathDFC =
+      'site_locator/comdata/normal-pin-drop.png';
   static const pinBgGallonUpFilePathDFC =
-      '$assetPathComdata/gallonup-pin-drop.png';
+      'site_locator/comdata/gallonup-pin-drop.png';
   static const normalPriceBannerPinFilePathDFC =
-      '$assetPathComdata/normal-marker.png';
+      'site_locator/comdata/normal-marker.png';
   static const gallonUpPriceBannerPinFilePathDFC =
-      '$assetPathComdata/gallonup-marker.png';
+      'site_locator/comdata/gallonup-marker.png';
 
   // Json Files
   static const comdataSitesResponseJsonPath =
