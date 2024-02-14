@@ -185,15 +185,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       /// [fetchSitesFromRemote] is responsible for checking time and
       /// if [newCenterLocation] is within 1 mile of the stored cache location.
       if (forceApiCall || fetchSitesFromRemote) {
-        setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
+        // setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
         await fetchSitesFromServer();
         if (updateLocationCache || isFirstLaunch) {
           await storeSiteDataInCache();
         }
       } else {
         if (allowGateKeeperToGetSiteLocationsData()) {
-          setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
-          feedRelayToFuelGaugeProgress();
+          // setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
+          // feedRelayToFuelGaugeProgress();
           await getSitesDataFromCache();
         }
       }
