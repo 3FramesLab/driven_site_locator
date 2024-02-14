@@ -4,7 +4,7 @@ class SiteLocatorAssets {
 
   static const assetJsonPath = 'assets/site_locator';
 
-  static const fuelmanBrandFilePath = '$assetPath/site-fuelman-logo.png';
+  static const fuelmanBrandFilePath = 'site_locator/site-fuelman-logo.png';
   static const pinBgFilePath = '$assetPath/white-pin-drop.png';
   static const pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
   static const normalPriceBannerPinFilePath = '$assetPath/regular-marker.png';
