@@ -36,7 +36,7 @@ class LeftHeader extends StatelessWidget {
           //   ),
           // if (!CustomUI.hasToShowTopMenuAndLogo(context)) MenuAndSearchbar(),
           MenuAndSearchbar(),
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(top: 20),
             child: Row(
               children: [

@@ -7,7 +7,7 @@ class MenuAndSearchbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        HambergerMenu(),
+        HambergerMenu(),  
         const SizedBox(width: 275, child: SearchPlaceTextField()),
       ],
     );
