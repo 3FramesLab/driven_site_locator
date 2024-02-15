@@ -29,6 +29,7 @@ class RoutePlannerButton extends StatelessWidget {
               height: SiteLocatorDimensions.dp24,
               width: SiteLocatorDimensions.dp24,
             ),
+            const SizedBox(width: 2),
             const Text('Route Planner'),
           ],
         ),
