@@ -42,7 +42,7 @@ class SiteLocationsListViewPage extends StatelessWidget {
             _appBar,
             _filterSearchTextField(),
             const SizedBox(height: 12),
-            Expanded(child: _siteLocationCards(items, itemCount)),
+            Expanded(child: SiteLocationList()),
             const SizedBox(height: 32),
           ],
         ),

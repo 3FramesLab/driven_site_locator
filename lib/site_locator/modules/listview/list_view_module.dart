@@ -9,6 +9,7 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/data/models/diesel_prices_pack.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/filters/filter_module.dart';
+import 'package:driven_site_locator/site_locator/modules/listview/widgets/site_location_list.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/modules/search_locations/search_location_module.dart';
 import 'package:driven_site_locator/site_locator/styles/site_locator_colors.dart';
