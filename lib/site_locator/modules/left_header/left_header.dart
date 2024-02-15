@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/filter_button/filters_button.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/route_planner_button/route_planner_button.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/widgets/top_menu_logo_header.dart';
@@ -6,12 +7,7 @@ import 'package:flutter/material.dart';
 
 class LeftHeader extends StatelessWidget {
   final double padding;
-  const LeftHeader({Key? key, this.padding = 20}) : super(key: key);
-
-  const LeftHeader.nopadding({
-    Key? key,
-    this.padding = 0,
-  }) : super(key: key);
+  const LeftHeader({Key? key, this.padding = SiteLocatorDimensions.dp16}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +25,15 @@ class LeftHeader extends StatelessWidget {
       child: Column(
         children: [
           TopMenuLogoHeader(),
-          const SizedBox(width: 275,child: SearchPlaceTextField()),
-           const Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Row(
-              children: [
-                Expanded(child: FiltersButton()),
-                SizedBox(width: 24),
-                Expanded(child: RoutePlannerButton()),
-              ],
-            ),
-          ),
+          const SearchPlaceTextField(),
+          const SizedBox(height: SiteLocatorDimensions.dp24),
+           const Row(
+             children: [
+               Expanded(child: FiltersButton()),
+               SizedBox(width: SiteLocatorDimensions.dp24),
+               Expanded(child: RoutePlannerButton()),
+             ],
+           ),
         ],
       ),
     );
