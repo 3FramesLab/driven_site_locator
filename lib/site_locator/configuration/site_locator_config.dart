@@ -14,7 +14,6 @@ import 'package:driven_site_locator/site_locator/data/models/site_filter.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/models/config_properties_model.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_map_zoom_level_use_case.dart';
-import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/custom_pin.dart';
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/display_diesel_price_usecase.dart';
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/get_diesel_prices_pack_usecase.dart';
 import 'package:driven_site_locator/site_locator/utilities/math_utils.dart';
@@ -105,9 +104,10 @@ class SiteLocatorConfig {
       _setIsClusterFeatureEnabled();
       _setClusterDensity();
       _setFuelPriceCacheDuration();
-      if (isDisplayMapEnabled) {
-        await CustomPin.initEvents(setup: setup, canCacheAllLogos: setup);
-      }
+      // TODO(Siva): need to check
+      // if (isDisplayMapEnabled) {
+      //   await CustomPin.initEvents(setup: setup, canCacheAllLogos: setup);
+      // }
     } catch (e) {
       Globals().dynatrace.logError(
             name: 'error in site locator config init method',
@@ -172,7 +172,7 @@ class SiteLocatorConfig {
       final logoFileName = configProperties?.defaultBrandLogo[AppUtils.flavor];
       // defaultBrandLogoPath = '${SiteLocatorAssets.assetPath}/$logoFileName';
       // TODO(Siva): need to check
-      defaultBrandLogoPath = '/site_locator/comdata/$logoFileName';
+      defaultBrandLogoPath = '/site_locator/$logoFileName';
     }
   }
 
