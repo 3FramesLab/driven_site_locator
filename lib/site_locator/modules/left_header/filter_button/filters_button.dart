@@ -19,7 +19,7 @@ class FiltersButton extends StatelessWidget {
           foregroundColor: Colors.black,
           side: const BorderSide(width: 2),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.filter_alt_outlined),
