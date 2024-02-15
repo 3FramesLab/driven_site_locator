@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 
 class LeftHeader extends StatelessWidget {
   final double padding;
-  const LeftHeader({Key? key, this.padding = SiteLocatorDimensions.dp16}) : super(key: key);
+  const LeftHeader({Key? key, this.padding = SiteLocatorDimensions.dp16})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +28,13 @@ class LeftHeader extends StatelessWidget {
           TopMenuLogoHeader(),
           const SearchPlaceTextField(),
           const SizedBox(height: SiteLocatorDimensions.dp24),
-           const Row(
-             children: [
-               Expanded(child: FiltersButton()),
-               SizedBox(width: SiteLocatorDimensions.dp24),
-               Expanded(child: RoutePlannerButton()),
-             ],
-           ),
+          Row(
+            children: [
+              Expanded(child: FiltersButton()),
+              SizedBox(width: SiteLocatorDimensions.dp24),
+              Expanded(child: RoutePlannerButton()),
+            ],
+          ),
         ],
       ),
     );
