@@ -37,6 +37,7 @@ class AppUtils {
 }
 
 enum AppFlavor {
+  fuelmanWeb('fuleman_web'),
   comdata('comdata'),
   fuelman('fuelman'),
   ifleet('ifleet'),
