@@ -204,6 +204,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
       isFirstLaunch = false;
     } on Exception catch (e) {
+      print(e);
       Globals().dynatrace.logError(
             name: DynatraceErrorMessages.getSitesAPIErrorName,
             value: DynatraceErrorMessages.getSitesAPIErrorValue,
