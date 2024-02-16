@@ -1174,7 +1174,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    await fetchNextSetDrivingDistance(nextSet.toList());
+    // TODO: Smeet - uncomment below line
+    // await fetchNextSetDrivingDistance(nextSet.toList());
     listViewItems.addAll(nextSet);
     presentPageIndex(presentPageIndex() + perPageCount());
     isInitialListLoading(false);
