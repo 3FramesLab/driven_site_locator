@@ -202,6 +202,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (isFirstLaunch) {
         await moveCameraPosition(currentLatLngBounds());
       }
+      resetPrevSelectedMarkerStatus();
+      unawaited(setListViewInitializers());
       isFirstLaunch = false;
     } on Exception catch (e) {
       print(e);
