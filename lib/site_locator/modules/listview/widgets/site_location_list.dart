@@ -12,12 +12,14 @@ class SiteLocationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int present = controller.presentPageIndex();
-    final originalItems = controller.siteLocations ?? [];
-    final items = controller.listViewItems();
-    final itemCount =
-        (present <= originalItems.length) ? items.length + 1 : items.length;
-    return _siteLocationCards(items, itemCount);
+    return Obx(() {
+      final int present = controller.presentPageIndex();
+      final originalItems = controller.siteLocations ?? [];
+      final items = controller.listViewItems();
+      final itemCount =
+          (present <= originalItems.length) ? items.length + 1 : items.length;
+      return _siteLocationCards(items, itemCount);
+    });
   }
 
   Widget _siteLocationCards(List<SiteLocation> items, int itemCount) {
