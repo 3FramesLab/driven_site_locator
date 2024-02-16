@@ -248,29 +248,33 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget filterListButtons() {
-    return Obx(
-      () => Positioned(
-        left: DrivenDimensions.dp16,
-        bottom: siteLocatorController.floatingButtonsBottomPosition(),
-        child: FloatingMapButtonsContainer(),
-      ),
-    );
+    return !GetPlatform.isWeb
+        ? Obx(
+            () => Positioned(
+              left: DrivenDimensions.dp16,
+              bottom: siteLocatorController.floatingButtonsBottomPosition(),
+              child: FloatingMapButtonsContainer(),
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
-  Widget menuWithSearchBarContainer() => Row(
-        children: [
-          Visibility(
-            visible: _entitlementRepository.isDisplaySettingsEnabled,
-            child: SiteLocatorMenuIcon(),
-          ),
-          SizedBox(
-            width: _entitlementRepository.isDisplaySettingsEnabled
-                ? SiteLocatorDimensions.dp3
-                : SiteLocatorDimensions.dp10,
-          ),
-          Flexible(child: searchTextfieldContainer()),
-        ],
-      );
+  Widget menuWithSearchBarContainer() => !GetPlatform.isWeb
+      ? Row(
+          children: [
+            Visibility(
+              visible: _entitlementRepository.isDisplaySettingsEnabled,
+              child: SiteLocatorMenuIcon(),
+            ),
+            SizedBox(
+              width: _entitlementRepository.isDisplaySettingsEnabled
+                  ? SiteLocatorDimensions.dp3
+                  : SiteLocatorDimensions.dp10,
+            ),
+            Flexible(child: searchTextfieldContainer()),
+          ],
+        )
+      : const SizedBox.shrink();
 
   Widget _buildMenuBody() => SiteLocatorMenuPanel(
         body: const SizedBox(
