@@ -101,8 +101,8 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "release/version-0.0.2"
-      resolved-ref: "6a05155c099d8d726a8693a884995e884a0fe361"
+      ref: "feature/driven-common-base"
+      resolved-ref: c1fdd1870e7930ceb5bfc897282f4df8561c2559
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"
@@ -117,10 +117,10 @@ packages:
     dependency: transitive
     description:
       name: dynatrace_flutter_plugin
-      sha256: c063ca16c0c66a8a311172ce71443d2d003b2e0a7f123056ffeec73080cf6267
+      sha256: b7aa4f42a13f109369189dc911f35fede2c7c7fe086e4a1ebe9463f2422ef11a
       url: "https://pub.dev"
     source: hosted
-    version: "3.279.2"
+    version: "3.283.1"
   equatable:
     dependency: transitive
     description:
@@ -461,10 +461,10 @@ packages:
     dependency: transitive
     description:
       name: mask_text_input_formatter
-      sha256: "8182cae94ff153e70071f86523d0d09112094e9de366a2e749e6aa9c865e70f2"
+      sha256: "978c58ec721c25621ceb468e633f4eef64b64d45424ac4540e0565d4f7c800cd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.0"
+    version: "2.9.0"
   matcher:
     dependency: transitive
     description:

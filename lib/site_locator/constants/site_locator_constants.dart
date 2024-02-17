@@ -138,6 +138,16 @@ class SiteLocatorConstants {
 
   static const updateLocationDistanceInMeters = 100;
   static const thresholdForShowingChangeFiltersDialog = 3;
+
+  // SiteLocator Web
+  static const useMyLocation = '''
+You are currently viewing fuel sites in {Nashville, TN}.\n
+To view fuel sites in a different location, use the search bar or enable “sitelocator.fuelman.com” to use your current location.
+''';
+
+  static const useMyLocationButton = 'Use My Current Location';
+  static String continueWithoutUsingMyLocation =
+      'Continue without using my location';
 }
 
 class QuickFilterLabel {

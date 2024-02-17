@@ -93,8 +93,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "release/version-0.0.2"
-      resolved-ref: "212fd747c2874c4e923e92fdb5f06f0808c6ead5"
+      ref: "feature/driven-common-base"
+      resolved-ref: c1fdd1870e7930ceb5bfc897282f4df8561c2559
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"
@@ -446,10 +446,10 @@ packages:
     dependency: transitive
     description:
       name: mask_text_input_formatter
-      sha256: "4b40b7cbf1859a5e16a6c441faa00f36842068eca185985b2b30e61432058ef4"
+      sha256: "978c58ec721c25621ceb468e633f4eef64b64d45424ac4540e0565d4f7c800cd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.0"
+    version: "2.9.0"
   matcher:
     dependency: transitive
     description:
