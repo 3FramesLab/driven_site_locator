@@ -35,13 +35,7 @@ class LeftHeader extends StatelessWidget {
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
             const FiltersButton()
           ] else ...[
-            Row(
-              children: [
-                const Expanded(child: FiltersButton()),
-                const SizedBox(width: SiteLocatorDimensions.dp24),
-                const Expanded(child: RoutePlannerButton()),
-              ],
-            ),
+            const RoutePlannerButton(),
           ],
         ],
       ),
