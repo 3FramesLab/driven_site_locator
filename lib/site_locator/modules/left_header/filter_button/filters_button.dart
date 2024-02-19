@@ -7,7 +7,7 @@ class FiltersButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 45,
-      width: 100,
+      width: 150,
       child: OutlinedButton(
         onPressed: () {
           // TODO
