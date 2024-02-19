@@ -159,7 +159,24 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         SiteLocatorConstants.isLocationPermissionStatusUpdated,
         value: true,
       );
+    } else if (GetPlatform.isWeb) {
+      final LocationPermission locationPermission =
+          await Geolocator.checkPermission();
+      print('locationPermission: $locationPermission');
+      if (locationPermission != LocationPermission.always &&
+          locationPermission != LocationPermission.whileInUse) {
+        unawaited(Get.dialog(
+          EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
+          barrierDismissible: false,
+        ));
+      }
     }
+    await subscribeToLocationStream();
+  }
+
+  Future<void> onUseMyLocation() async {
+    Get.back();
+    await Geolocator.requestPermission();
     await subscribeToLocationStream();
   }
 

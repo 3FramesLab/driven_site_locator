@@ -34,7 +34,9 @@ dependencies:
   map_launcher: ^2.4.0
   path_provider: ^2.0.15
   plugin_platform_interface: ^2.0.2
+  pointer_interceptor: ^0.9.3+5
   sliding_up_panel: ^2.0.0+1
+  
 
       
 dev_dependencies:

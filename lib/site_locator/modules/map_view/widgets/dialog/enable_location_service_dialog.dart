@@ -1,19 +1,43 @@
-import 'package:driven_common/driven_components/driven_components_module.dart';
+import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
-class UseCurrentLocationDialog extends StatelessWidget {
+class EnableLocationServiceDialog extends StatelessWidget {
+  final Function()? onUseMyLocation;
+
+  const EnableLocationServiceDialog({
+    required this.onUseMyLocation,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return DrivenDialog(
-      height: 100,
-      width: 350,
-      text: _message(),
-      primaryButton: _primaryButton(context),
-      isDynamicAlert: true,
-      secondaryRightButtonOnPressed: _onCancelButtonTap,
-      clickableText: SiteLocatorConstants.continueWithoutUsingMyLocation,
+    return PointerInterceptor(
+      child: DrivenDialog(
+        height: 100,
+        width: 350,
+        text: _message(),
+        primaryButton: _primaryButton(context),
+        isDynamicAlert: true,
+        secondaryButton: _secondaryRightButton(),
+      ),
+    );
+  }
+
+  Widget _secondaryRightButton() {
+    const textStyle = TextStyle(
+      fontSize: 14,
+      fontWeight: DrivenFonts.fontWeightSemibold,
+      color: Colors.black,
+      decoration: TextDecoration.underline,
+    );
+    return TextButton(
+      onPressed: _onCancelButtonTap,
+      child: Text(
+        SiteLocatorConstants.continueWithoutUsingMyLocation,
+        style: textStyle,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 
@@ -28,7 +52,7 @@ class UseCurrentLocationDialog extends StatelessWidget {
       ];
 
   Widget _primaryButton(BuildContext context) => PrimaryButton(
-        onPressed: Get.back,
+        onPressed: onUseMyLocation,
         text: SiteLocatorConstants.useMyLocationButton,
       );
 }

@@ -422,6 +422,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "pointer_interceptor",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/pointer_interceptor-0.9.3+5",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "rational",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/rational-2.2.2",
       "packageUri": "lib/",
@@ -632,7 +638,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-02-17T16:54:23.644630Z",
+  "generated": "2024-02-19T13:08:35.484829Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
