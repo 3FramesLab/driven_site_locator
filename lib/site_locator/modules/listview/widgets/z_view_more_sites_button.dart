@@ -13,7 +13,8 @@ class ViewMoreSitesButton extends StatelessWidget {
           color: Colors.white,
           child: siteLocatorController.isViewMoreLoading()
               ? _loadingProgress()
-              : _viewMoreSitesButton(),
+              : const SizedBox.shrink(),
+          // : _viewMoreSitesButton(),
         ),
       ),
     );
