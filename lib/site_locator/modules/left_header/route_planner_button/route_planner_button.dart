@@ -9,7 +9,7 @@ class RoutePlannerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 45,
-      width: 150,
+      width: 158,
       child: OutlinedButton(
         onPressed: () {
           // TODO
