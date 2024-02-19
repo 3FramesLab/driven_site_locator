@@ -31,15 +31,17 @@ class LeftHeader extends StatelessWidget {
           TopMenuLogoHeader(),
           const SearchPlaceTextField(),
           const SizedBox(height: SiteLocatorDimensions.dp24),
-          Row(
-            children: [
-              const Expanded(child: FiltersButton()),
-              if (_entitlementRepository.isEnhancedFilterEnabled) ...[
+          if (_entitlementRepository.isEnhancedFilterEnabled) ...[
+            Row(
+              children: [
+                const Expanded(child: FiltersButton()),
                 const SizedBox(width: SiteLocatorDimensions.dp24),
                 const Expanded(child: RoutePlannerButton()),
               ],
-            ],
-          ),
+            ),
+          ] else ...[
+            const FiltersButton()
+          ],
         ],
       ),
     );
