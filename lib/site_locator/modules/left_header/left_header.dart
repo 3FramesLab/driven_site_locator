@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class LeftHeader extends StatelessWidget {
   final double padding;
+
   const LeftHeader({Key? key, this.padding = SiteLocatorDimensions.dp16})
       : super(key: key);
 
@@ -32,6 +33,8 @@ class LeftHeader extends StatelessWidget {
           const SearchPlaceTextField(),
           const SizedBox(height: SiteLocatorDimensions.dp24),
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
+            const FiltersButton()
+          ] else ...[
             Row(
               children: [
                 const Expanded(child: FiltersButton()),
@@ -39,8 +42,6 @@ class LeftHeader extends StatelessWidget {
                 const Expanded(child: RoutePlannerButton()),
               ],
             ),
-          ] else ...[
-            const FiltersButton()
           ],
         ],
       ),
