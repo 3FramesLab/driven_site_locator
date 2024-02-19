@@ -18,6 +18,7 @@ class SiteLocatorEntitlementRepository {
   final bool isDiscountFeatureEnabled;
   final bool isFeeDisclaimerEnabled;
   final bool isClusterFeatureEnabled;
+  final bool isEnhanceFilterEnabled;
 
   // Account Entitlement
   final bool isHelpCenterEnabled;
@@ -42,6 +43,7 @@ class SiteLocatorEntitlementRepository {
     required this.isFeeDisclaimerEnabled,
     required this.isClusterFeatureEnabled,
     required this.isHelpCenterEnabled,
+    required this.isEnhanceFilterEnabled,
   });
 }
 
@@ -91,4 +93,6 @@ class SiteLocatorEntitlementUtils {
       siteLocatorEntitlementRepository?.isClusterFeatureEnabled ?? false;
   bool get isHelpCenterEnabled =>
       siteLocatorEntitlementRepository?.isHelpCenterEnabled ?? false;
+  bool get isEnhanceFilterEnabled =>
+      siteLocatorEntitlementRepository?.isEnhanceFilterEnabled ?? false;
 }

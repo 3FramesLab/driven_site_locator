@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/filter_button/filters_button.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/route_planner_button/route_planner_button.dart';
@@ -12,6 +13,8 @@ class LeftHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
+
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
@@ -30,9 +33,11 @@ class LeftHeader extends StatelessWidget {
           const SizedBox(height: SiteLocatorDimensions.dp24),
           Row(
             children: [
-              Expanded(child: FiltersButton()),
-              SizedBox(width: SiteLocatorDimensions.dp24),
-              Expanded(child: RoutePlannerButton()),
+              const Expanded(child: FiltersButton()),
+              if (!_entitlementRepository.isEnhanceFilterEnabled) ...[
+                const SizedBox(width: SiteLocatorDimensions.dp24),
+                const Expanded(child: RoutePlannerButton()),
+              ]
             ],
           ),
         ],
