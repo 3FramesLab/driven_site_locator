@@ -1200,25 +1200,85 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isInitialListLoading(false);
   }
 
-  Future<void> listViewShowMoreHandler() async {
-    trackAction(
-      AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
-    );
+  // TODO(Siva)- need to check and remove
+  // Future<void> listViewShowMoreHandler() async {
+  //   trackAction(
+  //     AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
+  //   );
+  //   final List<SiteLocation> originalItems = getSiteLocationsForListView();
+  //   if ((presentPageIndex() + perPageCount()) > originalItems.length) {
+  //     final nextSet =
+  //         originalItems.getRange(presentPageIndex(), originalItems.length);
+  //     await fetchNextSetDrivingDistance(nextSet.toList());
+  //     listViewItems.addAll(nextSet);
+  //   } else {
+  //     final nextSet = originalItems.getRange(
+  //         presentPageIndex(), presentPageIndex() + perPageCount());
+  //     await fetchNextSetDrivingDistance(nextSet.toList());
+  //     listViewItems.addAll(nextSet);
+  //   }
+  //   presentPageIndex(presentPageIndex() + perPageCount());
+  //   isViewMoreLoading(false);
+  // }
+
+  //list view scroll behavior - start
+
+  bool canFireListViewScrollHandler(ScrollController listScrollController) =>
+      (listScrollController.hasClients)
+          ? listScrollController.offset >=
+                  listScrollController.position.maxScrollExtent &&
+              loadMoreSitesOnScroll()
+          : false;
+
+  bool canFireListViewShowMorelHandler() {
     final List<SiteLocation> originalItems = getSiteLocationsForListView();
-    if ((presentPageIndex() + perPageCount()) > originalItems.length) {
-      final nextSet =
-          originalItems.getRange(presentPageIndex(), originalItems.length);
-      await fetchNextSetDrivingDistance(nextSet.toList());
-      listViewItems.addAll(nextSet);
-    } else {
-      final nextSet = originalItems.getRange(
-          presentPageIndex(), presentPageIndex() + perPageCount());
-      await fetchNextSetDrivingDistance(nextSet.toList());
-      listViewItems.addAll(nextSet);
-    }
-    presentPageIndex(presentPageIndex() + perPageCount());
-    isViewMoreLoading(false);
+    final originalItemsCount = originalItems.length;
+    final oddSitesCount = originalItemsCount - presentPageIndex();
+    return !oddSitesCount.isNegative && loadMoreSitesOnScroll();
   }
+
+  void listViewScrollHandler(ScrollController listScrollcontroller) {
+    if (canFireListViewScrollHandler(listScrollcontroller) &&
+        canFireListViewShowMorelHandler()) {
+      listViewShowMoreHandler();
+    }
+  }
+
+  int getNextListEndRange() {
+    final List<SiteLocation> originalItems = getSiteLocationsForListView();
+    final originalItemsCount = originalItems.length;
+    int endRange = presentPageIndex();
+    final tempCount = originalItemsCount - presentPageIndex();
+    if (tempCount > perPageCount()) {
+      endRange = presentPageIndex() + perPageCount();
+    } else {
+      endRange = originalItemsCount;
+    }
+    debugPrint('SCROLL-LIST::: inside originalItemsCount $originalItemsCount');
+    debugPrint('SCROLL-LIST::: inside nextEndRange $endRange');
+    return endRange;
+  }
+
+  Future<void> listViewShowMoreHandler() async {
+    if (loadMoreSitesOnScroll()) {
+      trackAction(
+        AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
+        // adobeCustomTag: AdobeTagProperties.listView,
+      );
+
+      final List<SiteLocation> originalItems = getSiteLocationsForListView();
+      final nextEndRange = getNextListEndRange();
+      final nextSet = originalItems.getRange(presentPageIndex(), nextEndRange);
+      loadMoreSitesOnScroll(false);
+      await fetchNextSetDrivingDistance(nextSet.toList());
+      listViewItems.addAll(nextSet);
+      presentPageIndex(presentPageIndex() + perPageCount());
+      isViewMoreLoading(false);
+      loadMoreSitesOnScroll(true);
+    }
+  }
+
+  //list view scroll behavior - end
 
   List<SiteLocation> getSiteLocationsForListView() => List.from(
         siteLocationDisplayData,
