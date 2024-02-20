@@ -166,7 +166,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (locationPermission != LocationPermission.always &&
           locationPermission != LocationPermission.whileInUse) {
         unawaited(Get.dialog(
-          EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
+          EnableLocationServiceDialog(
+              onUseMyLocation: () => onUseMyLocation(locationPermission)),
           barrierDismissible: false,
         ));
       }
@@ -174,10 +175,14 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     await subscribeToLocationStream();
   }
 
-  Future<void> onUseMyLocation() async {
+  Future<void> onUseMyLocation(LocationPermission locationPermission) async {
     Get.back();
-    await Geolocator.requestPermission();
-    await subscribeToLocationStream();
+    if (locationPermission == LocationPermission.deniedForever) {
+      // should enable service from web browser settings.
+    } else {
+      await Geolocator.requestPermission();
+      await subscribeToLocationStream();
+    }
   }
 
   Future<String> getAccessTokenForSites() async =>

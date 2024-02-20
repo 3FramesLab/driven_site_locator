@@ -172,9 +172,7 @@ class SiteLocatorConfig {
   static void _setDefaultBrandLogoPath() {
     if (configProperties?.defaultBrandLogo[AppUtils.flavor] != null) {
       final logoFileName = configProperties?.defaultBrandLogo[AppUtils.flavor];
-      // defaultBrandLogoPath = '${SiteLocatorAssets.assetPath}/$logoFileName';
-      // TODO(Siva): need to check
-      defaultBrandLogoPath = '/site_locator/$logoFileName';
+      defaultBrandLogoPath = '${SiteLocatorAssets.assetPath}/$logoFileName';
     }
   }
 
