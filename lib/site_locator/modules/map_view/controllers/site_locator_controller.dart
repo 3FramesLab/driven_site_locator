@@ -730,7 +730,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       canRecenterMapViewOnLocationChange = false;
     }
     forceResetCanRecenterMapView = false;
-    if (Platform.isIOS) {
+    if (!kIsWeb && Platform.isIOS) {
       if (backFromWelcomeToMapView()) {
         backFromWelcomeToMapView(false);
       } else {
