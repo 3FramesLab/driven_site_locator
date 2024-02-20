@@ -67,7 +67,9 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   @override
   Widget build(BuildContext context) {
-    if (GetPlatform.isMobile) {
+    if (GetPlatform.isWeb) {
+      return _bodyContainer(context);
+    } else {
       return Scaffold(
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
@@ -76,8 +78,6 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           child: _bodyContainer(context),
         ),
       );
-    } else {
-      return _bodyContainer(context);
     }
   }
 
@@ -94,12 +94,12 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   List<Widget> _buildSiteLocatorViewBody() {
-    if (GetPlatform.isMobile) {
+    if (GetPlatform.isWeb) {
+      return _buildMapView();
+    } else {
       return setUpWizardController.canShowSetUpWizard()
           ? _buildSetUpWizardView()
           : _buildMapView();
-    } else {
-      return _buildMapView();
     }
   }
 
@@ -109,10 +109,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   List<Widget> _buildMapView() {
     return [
-      if (GetPlatform.isMobile)
-        SiteInfoSlidingPanel(body: _body(context))
+      if (GetPlatform.isWeb)
+        _body(context)
       else
-        _body(context),
+        SiteInfoSlidingPanel(body: _body(context)),
       gpsIconButton(),
       filterListButtons(),
     ];
