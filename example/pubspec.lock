@@ -101,8 +101,8 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "feature/driven-common-base"
-      resolved-ref: c1fdd1870e7930ceb5bfc897282f4df8561c2559
+      ref: "feature/fix-sitelocator-api-cors"
+      resolved-ref: "949b1f11a2c66282f6a503df9cd77f84e4413499"
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"

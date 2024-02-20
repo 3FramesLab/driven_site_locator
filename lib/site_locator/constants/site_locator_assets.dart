@@ -2,15 +2,16 @@ class SiteLocatorAssets {
   static const packagePath = 'packages/driven_site_locator';
   static const assetPath = '$packagePath/assets/site_locator';
 
-  static const assetJsonPath = 'assets/site_locator';
+// assets/packages/driven_site_locator/assets/site_locator/loginIcon
+  // static const assetJsonPath = 'assets/site_locator';
 
-  static const fuelmanBrandFilePath = 'site_locator/site-fuelman-logo.png';
+  static const fuelmanBrandFilePath = '$assetPath/site-fuelman-logo.png';
   static const pinBgFilePath = '$assetPath/white-pin-drop.png';
   static const pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
   static const normalPriceBannerPinFilePath = '$assetPath/regular-marker.png';
   static const discountPriceBannerPinFilePath =
       '$assetPath/discount-marker.png';
-  static const fuelManBrandLogo = 'assets/site_locator/site-fuelman-logo.png';
+  static const fuelManBrandLogo = '$assetPath/site-fuelman-logo.png';
   static const double logoSize = 40;
   static const discountPriceBannerMapPinFilePath =
       '$assetPath/discount_marker.png';
@@ -24,7 +25,7 @@ class SiteLocatorAssets {
       '$packagePath/assets/images/radioButtonSelected.png';
   static const radioButtonDisabled =
       '$packagePath/assets/images/radioButtonDisabled.png';
-  static const backupBrandLogoUrlsPath = '$assetJsonPath/brand_logo_urls.json';
+  static const backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
   static const fuelPriceDisclaimerInfoIcon =
       '$assetPath/fuel_price_disclaimer_info_icon.png';
   static const loginIcon = '$assetPath/loginIcon.png';
@@ -37,25 +38,24 @@ class SiteLocatorAssets {
   // COMDATA ASSET PATHS
 
   static const assetPathComdata = '$packagePath/assets/site_locator/comdata';
-  static const assetJsonPathComdata = 'assets/site_locator/comdata';
+  // static const assetJsonPathComdata = 'assets/site_locator/comdata';
   static const comdataSiteBrandLogoDFC =
-      'site_locator/comdata/site-comdata-logo.png';
-  static const pinBgNormalFilePathDFC =
-      'site_locator/comdata/normal-pin-drop.png';
+      '$assetPathComdata/site-comdata-logo.png';
+  static const pinBgNormalFilePathDFC = '$assetPathComdata/normal-pin-drop.png';
   static const pinBgGallonUpFilePathDFC =
-      'site_locator/comdata/gallonup-pin-drop.png';
+      '$assetPathComdata/gallonup-pin-drop.png';
   static const normalPriceBannerPinFilePathDFC =
-      'site_locator/comdata/normal-marker.png';
+      '$assetPathComdata/normal-marker.png';
   static const gallonUpPriceBannerPinFilePathDFC =
-      'site_locator/comdata/gallonup-marker.png';
+      '$assetPathComdata/gallonup-marker.png';
 
   // Json Files
   static const comdataSitesResponseJsonPath =
-      '$assetJsonPathComdata/sites_response.json';
+      '$assetPathComdata/sites_response.json';
   static const enhancedFilterConfig =
-      'site_locator/config/enhanced_filter_config.json';
+      'assets/site_locator/config/enhanced_filter_config.json';
   static const enhancedFilterConfigEmptyAminities =
-      '$assetJsonPath/config/enhanced_filter_config_test.json';
+      'assets/site_locator/config/enhanced_filter_config_test.json';
 
   // Common assets images
   static const exitSign = '$packagePath/assets/images/exit_sign.png';
