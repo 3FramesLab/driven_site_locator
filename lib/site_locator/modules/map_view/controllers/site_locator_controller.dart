@@ -177,12 +177,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> onUseMyLocation(LocationPermission locationPermission) async {
     Get.back();
-    if (locationPermission == LocationPermission.deniedForever) {
-      // should enable service from web browser settings.
-    } else {
-      await Geolocator.requestPermission();
-      await subscribeToLocationStream();
-    }
+    // if (locationPermission == LocationPermission.deniedForever) {
+    //   // should enable service from web browser settings.
+    // } else {
+    await Geolocator.requestPermission();
+    await subscribeToLocationStream();
+    // }
   }
 
   Future<String> getAccessTokenForSites() async =>
