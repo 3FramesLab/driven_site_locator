@@ -67,7 +67,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   @override
   Widget build(BuildContext context) {
-    if (GetPlatform.isWeb) {
+    if (kIsWeb) {
       return _bodyContainer(context);
     } else {
       return Scaffold(
@@ -94,7 +94,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   List<Widget> _buildSiteLocatorViewBody() {
-    if (GetPlatform.isWeb) {
+    if (kIsWeb) {
       return _buildMapView();
     } else {
       return setUpWizardController.canShowSetUpWizard()
@@ -248,7 +248,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget filterListButtons() {
-    return !GetPlatform.isWeb
+    return !kIsWeb
         ? Obx(
             () => Positioned(
               left: DrivenDimensions.dp16,
@@ -259,7 +259,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         : const SizedBox.shrink();
   }
 
-  Widget menuWithSearchBarContainer() => !GetPlatform.isWeb
+  Widget menuWithSearchBarContainer() => !kIsWeb
       ? Row(
           children: [
             Visibility(
