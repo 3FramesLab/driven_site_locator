@@ -1,11 +1,12 @@
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 
 class FuelGaugeProps {
   // static const String scaleBgPath =
   //     'assets/site_locator/fuel_gauge_scale_bg.png';
   static const String scaleBgPath =
-      'packages/driven_site_locator/assets/site_locator/fuel_gauge_scale_bg.png';
+      '${SiteLocatorAssets.assetPath}/fuel_gauge_scale_bg.png';
   static const String findingFuelLocationMessage = 'Finding Fueling Locations';
   static const String retrievingFuelPricesUnAuthMessage =
       'Retrieving Fuel Prices';
