@@ -285,7 +285,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   Widget applyForFuelman() {
     return Positioned(
-      right: 10,
+      right: 32,
       top: 28,
       child: SizedBox(
         width: 207,
