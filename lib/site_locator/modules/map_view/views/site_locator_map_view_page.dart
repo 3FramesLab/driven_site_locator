@@ -110,7 +110,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   List<Widget> _buildMapView() {
     return [
-      SiteInfoSlidingPanel(body: _body(context)),
+      if (kIsWeb)
+        _body(context)
+      else
+        SiteInfoSlidingPanel(body: _body(context)),
       gpsIconButton(),
       filterListButtons(),
     ];
