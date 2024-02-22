@@ -139,6 +139,11 @@ class SiteLocatorConstants {
   static const updateLocationDistanceInMeters = 100;
   static const thresholdForShowingChangeFiltersDialog = 3;
 
+  // Apply for fuelman
+  static const applyForFuelman = 'Apply for Fuelman';
+  static const applyForFuelmanUrl =
+      'https://www.fuelman.com/fuel-cards/in-town-fleets/ ';
+
   // SiteLocator Web
   static const useMyLocation = '''
 You are currently viewing fuel sites in {Nashville, TN}.\n

@@ -2,6 +2,7 @@ library map_view_module;
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:js' as js;
 
 import 'package:cron/cron.dart';
 import 'package:driven_common/common/driven_dimensions.dart';

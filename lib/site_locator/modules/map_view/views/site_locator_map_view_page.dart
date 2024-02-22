@@ -193,6 +193,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         _siteLocatorMapView(),
         _headerColumn(topPadding),
         _loadingIndicator(),
+        applyForFuelman(),
       ],
     );
   }
@@ -281,4 +282,19 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           height: SiteLocatorDimensions.dp100,
         ),
       );
+
+  Widget applyForFuelman() {
+    return Positioned(
+      right: 10,
+      top: 10,
+      child: SizedBox(
+        width: 207,
+        child: PrimaryButton(
+          onPressed: () => js.context
+              .callMethod('open', [SiteLocatorConstants.applyForFuelmanUrl]),
+          text: SiteLocatorConstants.applyForFuelman,
+        ),
+      ),
+    );
+  }
 }
