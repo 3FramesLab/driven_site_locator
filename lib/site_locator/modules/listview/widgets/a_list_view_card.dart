@@ -35,12 +35,22 @@ class SiteLocationInfoCard extends GetView<SiteLocatorController> {
   }
 
   Widget _cardInfoBody(BuildContext context) {
-    return Wrap(
-      children: [
-        CardInfoBodyLeft(siteLocation),
-        const SizedBox(width: 15),
-        CardInfoBodyRight(siteLocation),
-      ],
-    );
+    if (kIsWeb) {
+      return Row(
+        children: [
+          Expanded(child: CardInfoBodyLeft(siteLocation)),
+          const SizedBox(width: 15),
+          Expanded(child: CardInfoBodyRight(siteLocation)),
+        ],
+      );
+    } else {
+      return Wrap(
+        children: [
+          CardInfoBodyLeft(siteLocation),
+          const SizedBox(width: 15),
+          CardInfoBodyRight(siteLocation),
+        ],
+      );
+    }
   }
 }

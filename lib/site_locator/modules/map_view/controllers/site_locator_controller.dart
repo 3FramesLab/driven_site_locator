@@ -161,8 +161,30 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         SiteLocatorConstants.isLocationPermissionStatusUpdated,
         value: true,
       );
+    } else if (GetPlatform.isWeb) {
+      final LocationPermission locationPermission =
+          await Geolocator.checkPermission();
+      print('locationPermission: $locationPermission');
+      if (locationPermission != LocationPermission.always &&
+          locationPermission != LocationPermission.whileInUse) {
+        unawaited(Get.dialog(
+          EnableLocationServiceDialog(
+              onUseMyLocation: () => onUseMyLocation(locationPermission)),
+          barrierDismissible: false,
+        ));
+      }
     }
     await subscribeToLocationStream();
+  }
+
+  Future<void> onUseMyLocation(LocationPermission locationPermission) async {
+    Get.back();
+    // if (locationPermission == LocationPermission.deniedForever) {
+    //   // should enable service from web browser settings.
+    // } else {
+    await Geolocator.requestPermission();
+    await subscribeToLocationStream();
+    // }
   }
 
   Future<String> getAccessTokenForSites() async =>
@@ -718,7 +740,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       canRecenterMapViewOnLocationChange = false;
     }
     forceResetCanRecenterMapView = false;
-    if (Platform.isIOS) {
+    if (!kIsWeb && Platform.isIOS) {
       if (backFromWelcomeToMapView()) {
         backFromWelcomeToMapView(false);
       } else {

@@ -68,14 +68,18 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
+    if (kIsWeb) {
+      return _bodyContainer(context);
+    } else {
+      return Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+          ),
+          child: _bodyContainer(context),
         ),
-        child: _bodyContainer(context),
-      ),
-    );
+      );
+    }
   }
 
   Widget _bodyContainer(BuildContext context) {
@@ -91,9 +95,13 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   List<Widget> _buildSiteLocatorViewBody() {
-    return setUpWizardController.canShowSetUpWizard()
-        ? _buildSetUpWizardView()
-        : _buildMapView();
+    if (kIsWeb) {
+      return _buildMapView();
+    } else {
+      return setUpWizardController.canShowSetUpWizard()
+          ? _buildSetUpWizardView()
+          : _buildMapView();
+    }
   }
 
   List<Widget> _buildSetUpWizardView() {
@@ -240,29 +248,33 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget filterListButtons() {
-    return Obx(
-      () => Positioned(
-        left: DrivenDimensions.dp16,
-        bottom: siteLocatorController.floatingButtonsBottomPosition(),
-        child: FloatingMapButtonsContainer(),
-      ),
-    );
+    return !kIsWeb
+        ? Obx(
+            () => Positioned(
+              left: DrivenDimensions.dp16,
+              bottom: siteLocatorController.floatingButtonsBottomPosition(),
+              child: FloatingMapButtonsContainer(),
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
-  Widget menuWithSearchBarContainer() => Row(
-        children: [
-          Visibility(
-            visible: _entitlementRepository.isDisplaySettingsEnabled,
-            child: SiteLocatorMenuIcon(),
-          ),
-          SizedBox(
-            width: _entitlementRepository.isDisplaySettingsEnabled
-                ? SiteLocatorDimensions.dp3
-                : SiteLocatorDimensions.dp10,
-          ),
-          Flexible(child: searchTextfieldContainer()),
-        ],
-      );
+  Widget menuWithSearchBarContainer() => !kIsWeb
+      ? Row(
+          children: [
+            Visibility(
+              visible: _entitlementRepository.isDisplaySettingsEnabled,
+              child: SiteLocatorMenuIcon(),
+            ),
+            SizedBox(
+              width: _entitlementRepository.isDisplaySettingsEnabled
+                  ? SiteLocatorDimensions.dp3
+                  : SiteLocatorDimensions.dp10,
+            ),
+            Flexible(child: searchTextfieldContainer()),
+          ],
+        )
+      : const SizedBox(height: 30);
 
   Widget _buildMenuBody() => SiteLocatorMenuPanel(
         body: const SizedBox(
