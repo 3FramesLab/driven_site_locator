@@ -289,10 +289,22 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       top: 10,
       child: SizedBox(
         width: 207,
-        child: PrimaryButton(
+        child: RoundedButton2(
           onPressed: () => js.context
               .callMethod('open', [SiteLocatorConstants.applyForFuelmanUrl]),
-          text: SiteLocatorConstants.applyForFuelman,
+          backgroundColor: SiteLocatorColors.red,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(SiteLocatorConstants.applyForFuelman),
+              const SizedBox(width: 2),
+              Image.asset(
+                SiteLocatorAssets.fuelmanBrandFilePath,
+                height: SiteLocatorDimensions.dp24,
+                width: SiteLocatorDimensions.dp24,
+              ),
+            ],
+          ),
         ),
       ),
     );
