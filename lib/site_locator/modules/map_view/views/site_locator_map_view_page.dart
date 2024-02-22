@@ -275,7 +275,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             Flexible(child: searchTextfieldContainer()),
           ],
         )
-      : const SizedBox(height: 25);
+      : const SizedBox(height: 20);
 
   Widget _buildMenuBody() => SiteLocatorMenuPanel(
         body: const SizedBox(
