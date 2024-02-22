@@ -192,8 +192,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
-        _loadingIndicator(),
         applyForFuelman(),
+        _loadingIndicator(),
       ],
     );
   }
@@ -275,7 +275,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             Flexible(child: searchTextfieldContainer()),
           ],
         )
-      : const SizedBox(height: 30);
+      : const SizedBox(height: 25);
 
   Widget _buildMenuBody() => SiteLocatorMenuPanel(
         body: const SizedBox(
