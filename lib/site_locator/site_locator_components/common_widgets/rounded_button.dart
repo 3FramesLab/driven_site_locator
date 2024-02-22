@@ -1,6 +1,6 @@
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 
-class RoundedButton2 extends StatelessWidget {
+class RoundedButtonWithChild extends StatelessWidget {
   final double height;
   final VoidCallback? onPressed;
   final Widget child;
@@ -10,7 +10,7 @@ class RoundedButton2 extends StatelessWidget {
   final BorderSide? side;
   final TextStyle? buttonTextStyle;
 
-  const RoundedButton2({
+  const RoundedButtonWithChild({
     required this.onPressed,
     required this.child,
     required this.backgroundColor,

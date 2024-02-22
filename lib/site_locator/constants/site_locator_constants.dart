@@ -147,6 +147,7 @@ class SiteLocatorConstants {
   static const applyForFuelman = 'Apply for Fuelman';
   static const applyForFuelmanUrl =
       'https://www.fuelman.com/fuel-cards/in-town-fleets/ ';
+  static const openApplyForFuelmanError = 'Could not launch url.';
 
   // SiteLocator Web
   static const useMyLocation = '''

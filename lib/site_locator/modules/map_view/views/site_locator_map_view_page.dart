@@ -289,9 +289,11 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       top: 28,
       child: SizedBox(
         width: 207,
-        child: RoundedButton2(
-          onPressed: () => js.context
-              .callMethod('open', [SiteLocatorConstants.applyForFuelmanUrl]),
+        child: RoundedButtonWithChild(
+          onPressed: () => SiteLocatorUtils.launchURL(
+            SiteLocatorConstants.applyForFuelmanUrl,
+            SiteLocatorConstants.openApplyForFuelmanError,
+          ),
           backgroundColor: SiteLocatorColors.red,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
