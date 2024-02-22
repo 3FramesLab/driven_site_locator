@@ -139,6 +139,10 @@ class SiteLocatorConstants {
   static const updateLocationDistanceInMeters = 100;
   static const thresholdForShowingChangeFiltersDialog = 3;
 
+  // Left Header
+  static const filters = 'Filters';
+  static const routePlanner = 'Route Planner';
+
   // Apply for fuelman
   static const applyForFuelman = 'Apply for Fuelman';
   static const applyForFuelmanUrl =

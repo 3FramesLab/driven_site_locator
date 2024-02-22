@@ -286,7 +286,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   Widget applyForFuelman() {
     return Positioned(
       right: 10,
-      top: 10,
+      top: 28,
       child: SizedBox(
         width: 207,
         child: RoundedButton2(
@@ -296,8 +296,11 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(SiteLocatorConstants.applyForFuelman),
-              const SizedBox(width: 2),
+              const Text(
+                SiteLocatorConstants.applyForFuelman,
+                style: f16RegularWhite,
+              ),
+              const SizedBox(width: 20),
               Image.asset(
                 SiteLocatorAssets.fuelmanBrandFilePath,
                 height: SiteLocatorDimensions.dp24,

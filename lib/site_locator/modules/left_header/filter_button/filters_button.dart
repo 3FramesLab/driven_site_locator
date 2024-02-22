@@ -1,3 +1,5 @@
+import 'package:driven_common/driven_common_resources_module.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:flutter/material.dart';
 
 class FiltersButton extends StatelessWidget {
@@ -25,7 +27,10 @@ class FiltersButton extends StatelessWidget {
           children: [
             Icon(Icons.filter_alt_outlined),
             SizedBox(width: 2),
-            Text('Filters'),
+            Text(
+              SiteLocatorConstants.filters,
+              style: f14SemiboldBlack,
+            ),
           ],
         ),
       ),

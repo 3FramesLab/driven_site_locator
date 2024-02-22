@@ -1,4 +1,6 @@
+import 'package:driven_common/driven_common_resources_module.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +33,10 @@ class RoutePlannerButton extends StatelessWidget {
               width: SiteLocatorDimensions.dp24,
             ),
             const SizedBox(width: 2),
-            const Text('Route Planner'),
+            const Text(
+              SiteLocatorConstants.routePlanner,
+              style: f14SemiboldBlack,
+            ),
           ],
         ),
       ),
