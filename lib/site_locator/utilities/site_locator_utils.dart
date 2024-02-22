@@ -56,6 +56,7 @@ class SiteLocatorUtils {
       AvailableMap selectedMap, Coords destinationLatLng) async {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerViewAllDiscountsLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     await selectedMap.showDirections(destination: destinationLatLng);
   }

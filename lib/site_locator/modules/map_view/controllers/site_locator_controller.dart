@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 part of map_view_module;
 
 class SiteLocatorController extends GetxController with SiteLocatorState {
@@ -13,21 +15,21 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   @override
   void onClose() {
-    _cancelTimers();
+    _cancelLoadingPeriodicTimer();
     super.onClose();
   }
 
   void initiateTimers() {
-    isFuelGuageProgressTimerInitiated(true);
-    fuelGuageProgressTimer =
+    isSitesLoadingTimerInitiated(true);
+    sitesLoadingPeriodicTimer =
         Timer.periodic(const Duration(milliseconds: 1000), (t) {
-      fuelGuageProgressTimer = t;
-      fuelGaugeProgressController.progressValue(0);
+      sitesLoadingPeriodicTimer = t;
+      _cancelLoadingTimerOnSafeThreshold(getSitesLoadingProgress());
     });
   }
 
-  void _cancelTimers() {
-    fuelGuageProgressTimer?.cancel();
+  void _cancelLoadingPeriodicTimer() {
+    sitesLoadingPeriodicTimer?.cancel();
   }
 
   void fetchSitesScheduler() {
@@ -62,8 +64,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
     validateLastSavedCenterLocationUseCase =
         Get.put(ValidateLastSavedCenterLocationUseCase());
-    calculateFuelGaugeProgressUseCase =
-        Get.put(CalculateFuelGaugeProgressUseCase());
+    calculateSitesLoadingProgressUseCase =
+        Get.put(CalculateSitesLoadingProgressUseCase());
     filterSitesUseCase = Get.put(FilterSitesUseCase());
     updateMarkerIconUseCase = Get.put(UpdateMarkerIconUseCase());
     generateMarkersUseCase = Get.put(GenerateMarkersUseCase());
@@ -207,15 +209,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       /// [fetchSitesFromRemote] is responsible for checking time and
       /// if [newCenterLocation] is within 1 mile of the stored cache location.
       if (forceApiCall || fetchSitesFromRemote) {
-        // setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
+        setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
         await fetchSitesFromServer();
         if (updateLocationCache || isFirstLaunch) {
           await storeSiteDataInCache();
         }
       } else {
         if (allowGateKeeperToGetSiteLocationsData()) {
-          // setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
-          // feedRelayToFuelGaugeProgress();
+          setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
+          feedRelayToSitesLoadingProgress();
           await getSitesDataFromCache();
         }
       }
@@ -224,13 +226,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (isFirstLaunch) {
         await moveCameraPosition(currentLatLngBounds());
       }
-      if (kIsWeb) {
-        resetPrevSelectedMarkerStatus();
-        unawaited(setListViewInitializers());
-      }
       isFirstLaunch = false;
     } on Exception catch (e) {
-      print(e);
       Globals().dynatrace.logError(
             name: DynatraceErrorMessages.getSitesAPIErrorName,
             value: DynatraceErrorMessages.getSitesAPIErrorValue,
@@ -240,7 +237,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   bool allowGateKeeperToGetSiteLocationsData() =>
-      getFuelGaugeLoadingProgress() == 0;
+      getSitesLoadingProgress() == 0;
 
   Future<void> fetchSitesFromServer() async {
     try {
@@ -260,84 +257,94 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> getSitesData(
       Map<String, dynamic> jsonData, String accessToken) async {
     filteredSiteLocationsList.clear();
-    fuelGaugeProgressController.setFindingSiteLocationsMessage();
-    initiateFuelGaugeLoadingProgressValue();
+    sitesLoadingProgressController.setFindingSiteLocationsMessage();
+    initiateSitesLoadingProgressValue();
     siteLocations = await siteLocationsService.getSiteLocationsData(
       jsonData,
       headerQueryParams: accessToken,
     );
-    relayFuelGaugeLoadingProgressValue(siteLocations);
+    relaySitesLoadingProgressValue(siteLocations);
   }
 
-  void feedRelayToFuelGaugeProgress() {
-    initiateFuelGaugeLoadingProgressValue();
-    relayFuelGaugeLoadingProgressValue(siteLocations);
+  void feedRelayToSitesLoadingProgress() {
+    initiateSitesLoadingProgressValue();
+    relaySitesLoadingProgressValue(siteLocations);
   }
 
-  void setFuelGaugeLoadingProgress(double value) {
-    fuelGaugeProgressController.progressValue(value);
+  void setSitesLoadingProgress(double value) {
+    sitesLoadingProgressController.progressValue(value);
   }
 
-  double getFuelGaugeLoadingProgress() {
-    return fuelGaugeProgressController.progressValue();
+  double getSitesLoadingProgress() {
+    return sitesLoadingProgressController.progressValue();
   }
 
-  void toggleFuelGaugeIndicatorVisibility({required bool visible}) {
-    fuelGaugeProgressController.canShowFuelGaugeIndicator(visible);
+  void toggleSitesLoadingIndicatorVisibility({required bool visible}) {
+    sitesLoadingProgressController.canShowIndicator(visible);
   }
 
-  bool getHastoShowFuelGaugeIndicator() {
-    return fuelGaugeProgressController.canShowFuelGaugeIndicator();
+  bool getHastoShowSitesLoadingIndicator() {
+    return sitesLoadingProgressController.canShowIndicator();
   }
 
-  void hideFuelGaugeIndicator() {
-    toggleFuelGaugeIndicatorVisibility(visible: false);
-    setFuelGaugeLoadingProgress(0);
-    fuelGaugeProgressController.resetMessage();
-    _cancelTimers();
+  void hideSitesLoadingIndicator() {
+    toggleSitesLoadingIndicatorVisibility(visible: false);
+    setSitesLoadingProgress(0);
+    sitesLoadingProgressController.resetMessage();
+    _cancelLoadingPeriodicTimer();
   }
 
-  void initiateFuelGaugeLoadingProgressValue() {
-    isFuelGuageProgressTimerInitiated(true);
-    Timer.periodic(Duration(milliseconds: FuelGaugeProps.stepUpPeriodicTimer),
+  void initiateSitesLoadingProgressValue() {
+    isSitesLoadingTimerInitiated(true);
+    Timer.periodic(
+        Duration(milliseconds: SitesLoadingProgressProps.stepUpPeriodicTimer),
         (t) {
-      fuelGuageProgressTimer = t;
-      stepUpFuelGaugeCyclicValue();
+      sitesLoadingPeriodicTimer = t;
+      stepUpSitesLoadingCyclicValue();
     });
   }
 
-  void relayFuelGaugeLoadingProgressValue(List<SiteLocation>? siteLocations) {
-    setFuelGaugeLoadingProgress(fuelGaugeProgressController.progressValue());
-    final periodicInterval = SiteInfoUtils.getFuelGaugePeriodicInterval(
+  void relaySitesLoadingProgressValue(List<SiteLocation>? siteLocations) {
+    setSitesLoadingProgress(sitesLoadingProgressController.progressValue());
+    final periodicInterval = SiteInfoUtils.getSitesLoadingPeriodicInterval(
         (siteLocations ?? []).length);
     Timer.periodic(Duration(milliseconds: periodicInterval), (t) {
-      fuelGuageProgressTimer = t;
-      stepUpFuelGaugeCyclicValue();
+      sitesLoadingPeriodicTimer = t;
+      stepUpSitesLoadingCyclicValue();
     });
   }
 
-  void stepUpFuelGaugeCyclicValue() {
-    final param = CalculateFuelGaugeProgressParam(
+  void stepUpSitesLoadingCyclicValue() {
+    final param = CalculateSitesLoadingProgressParam(
       canShowLoading: isShowLoading(),
-      previousValue: fuelGaugeProgressController.progressValue(),
+      previousValue: sitesLoadingProgressController.progressValue(),
     );
-    final currentValue = calculateFuelGaugeProgressUseCase.execute(param);
-    setFuelGaugeLoadingProgress(currentValue);
+    final currentValue = calculateSitesLoadingProgressUseCase.execute(param);
+    setSitesLoadingProgress(currentValue);
     if (!isShowLoading()) {
-      fuelGuageProgressTimer?.cancel();
+      _cancelLoadingPeriodicTimer();
+    } else {
+      _cancelLoadingTimerOnSafeThreshold(currentValue);
     }
   }
 
-  void resetFuelGaugeLoadingProgressValue() {
-    if (getFuelGaugeLoadingProgress() > 0) {
-      setFuelGaugeLoadingProgress(100);
-      Future.delayed(Duration(milliseconds: FuelGaugeProps.toHideAfter),
-          hideFuelGaugeIndicator);
-    } else {
-      hideFuelGaugeIndicator();
+  void _cancelLoadingTimerOnSafeThreshold(double currentValue) {
+    if (currentValue > SitesLoadingProgressProps.safeMaxValue) {
+      _cancelLoadingPeriodicTimer();
     }
-    if (isFuelGuageProgressTimerInitiated()) {
-      fuelGuageProgressTimer?.cancel();
+  }
+
+  void resetSitesLoadingIndicatorProgressValue() {
+    if (getSitesLoadingProgress() > 0) {
+      setSitesLoadingProgress(100);
+      Future.delayed(
+          Duration(milliseconds: SitesLoadingProgressProps.toHideAfter),
+          hideSitesLoadingIndicator);
+    } else {
+      hideSitesLoadingIndicator();
+    }
+    if (isSitesLoadingTimerInitiated()) {
+      _cancelLoadingPeriodicTimer();
     }
     isShowLoading(false);
   }
@@ -546,7 +553,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         isFullMapViewFirstLaunch = false;
         return;
       }
-      trackAction(AnalyticsTrackActionName.repositionEvent);
+      trackAction(
+        AnalyticsTrackActionName.repositionEvent,
+        // // adobeCustomTag: AdobeTagProperties.mapView,
+      );
       if (!isClusterClick &&
           isFetchSitesData &&
           !isMapPinTapped &&
@@ -799,6 +809,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     try {
       trackAction(
         AnalyticsTrackActionName.locationPinClickedEvent,
+        // // adobeCustomTag: AdobeTagProperties.mapView,
       );
       SiteLocatorUtils.hideKeyboard();
       closeSiteLocatorMenuPanel();
@@ -1089,11 +1100,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
         trackAction(
           AnalyticsTrackActionName.listViewRemoveFromFavoritesLinkClickEvent,
+          // // adobeCustomTag: AdobeTagProperties.listView,
         );
       } else {
         trackAction(
           AnalyticsTrackActionName
               .siteInfoDrawerRemoveFromFavoritesLinkClickEvent,
+          // // adobeCustomTag: AdobeTagProperties.siteInfo,
         );
       }
 
@@ -1103,10 +1116,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
         trackAction(
           AnalyticsTrackActionName.listViewAddToFavoritesLinkClickEvent,
+          // // adobeCustomTag: AdobeTagProperties.listView,
         );
       } else {
         trackAction(
           AnalyticsTrackActionName.siteInfoDrawerAddToFavoritesLinkClickEvent,
+          // // adobeCustomTag: AdobeTagProperties.siteInfo,
         );
       }
 
@@ -1149,7 +1164,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> _filterMapPins(
     List<SiteLocation> filteredSiteLocationsList,
   ) async {
-    setFuelGaugeLoadingProgress(FuelGaugeProps.initialValue);
     if (isGenerateMapPinsOnFiltering) {
       await processSiteLocations(siteLocations ?? []);
       isGenerateMapPinsOnFiltering = false;
@@ -1160,7 +1174,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       filteredSiteLocationsList,
     );
     await _generateClusterData(markersWithoutCluster);
-    hideFuelGaugeIndicator();
   }
 
   Future<List<Marker>> filterMarkers(List<Marker> rawMarkersList,
@@ -1198,31 +1211,63 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    // TODO: Smeet - uncomment below line
-    // await fetchNextSetDrivingDistance(nextSet.toList());
+    await fetchNextSetDrivingDistance(nextSet.toList());
     listViewItems.addAll(nextSet);
     presentPageIndex(presentPageIndex() + perPageCount());
     isInitialListLoading(false);
   }
 
-  Future<void> listViewShowMoreHandler() async {
-    trackAction(
-      AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
-    );
+  bool canFireListViewScrollHandler(ScrollController listScrollcontroller) =>
+      (listScrollcontroller.hasClients)
+          ? listScrollcontroller.offset >=
+                  listScrollcontroller.position.maxScrollExtent &&
+              loadMoreSitesOnScroll()
+          : false;
+
+  bool canFireListViewShowMorelHandler() {
     final List<SiteLocation> originalItems = getSiteLocationsForListView();
-    if ((presentPageIndex() + perPageCount()) > originalItems.length) {
-      final nextSet =
-          originalItems.getRange(presentPageIndex(), originalItems.length);
-      await fetchNextSetDrivingDistance(nextSet.toList());
-      listViewItems.addAll(nextSet);
-    } else {
-      final nextSet = originalItems.getRange(
-          presentPageIndex(), presentPageIndex() + perPageCount());
-      await fetchNextSetDrivingDistance(nextSet.toList());
-      listViewItems.addAll(nextSet);
+    final originalItemsCount = originalItems.length;
+    final oddSitesCount = originalItemsCount - presentPageIndex();
+    return !oddSitesCount.isNegative && loadMoreSitesOnScroll();
+  }
+
+  void listViewScrollHandler(ScrollController listScrollcontroller) {
+    if (canFireListViewScrollHandler(listScrollcontroller) &&
+        canFireListViewShowMorelHandler()) {
+      listViewShowMoreHandler();
     }
-    presentPageIndex(presentPageIndex() + perPageCount());
-    isViewMoreLoading(false);
+  }
+
+  int getNextListEndRange() {
+    final List<SiteLocation> originalItems = getSiteLocationsForListView();
+    final originalItemsCount = originalItems.length;
+    int endRange = presentPageIndex();
+    final tempCount = originalItemsCount - presentPageIndex();
+    if (tempCount > perPageCount()) {
+      endRange = presentPageIndex() + perPageCount();
+    } else {
+      endRange = originalItemsCount;
+    }
+    return endRange;
+  }
+
+  Future<void> listViewShowMoreHandler() async {
+    if (loadMoreSitesOnScroll()) {
+      trackAction(
+        AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
+        // // adobeCustomTag: AdobeTagProperties.listView,
+      );
+
+      final List<SiteLocation> originalItems = getSiteLocationsForListView();
+      final nextEndRange = getNextListEndRange();
+      final nextSet = originalItems.getRange(presentPageIndex(), nextEndRange);
+      loadMoreSitesOnScroll(false);
+      await fetchNextSetDrivingDistance(nextSet.toList());
+      listViewItems.addAll(nextSet);
+      presentPageIndex(presentPageIndex() + perPageCount());
+      isViewMoreLoading(false);
+      loadMoreSitesOnScroll(true);
+    }
   }
 
   List<SiteLocation> getSiteLocationsForListView() => List.from(
@@ -1276,11 +1321,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     try {
       trackAction(
         AnalyticsTrackActionName.noLocationModalExpandSearchEvent,
+        // // adobeCustomTag: AdobeTagProperties.modals,
       );
       isFetchSitesData = false;
       incrementExpandRadiusButtonTapCount();
       Get.back();
-      feedRelayToFuelGaugeProgress();
+      feedRelayToSitesLoadingProgress();
       isShowLoading(true);
       isInitialListLoading(true);
       final calculatedLatLngBounds = MapUtilities.toBounds(
@@ -1361,6 +1407,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void _setFullViewStatus() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerSlideToFullScreenEvent,
+      // // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     isShownRemainingFullSiteInfo(true);
     isSiteInfoFullViewed(true);
@@ -1627,10 +1674,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (hasToMakeAPICall) {
       trackAction(
         AnalyticsTrackActionName.mapZoomOutEvent,
+        // // adobeCustomTag: AdobeTagProperties.mapView,
       );
     } else {
       trackAction(
         AnalyticsTrackActionName.mapZoomInEvent,
+        // // adobeCustomTag: AdobeTagProperties.mapView,
       );
     }
   }
@@ -1638,42 +1687,49 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void getFilterTapTrackAction() {
     trackAction(
       AnalyticsTrackActionName.filtersButtonClickedEvent,
+      // // adobeCustomTag: AdobeTagProperties.mapView,
     );
   }
 
   void getListViewTapTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listviewButtonsClickedEvent,
+      // // adobeCustomTag: AdobeTagProperties.mapView,
     );
   }
 
   void getNoLocationModalCancelClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.noLocationModalCancelLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.modals,
     );
   }
 
   void getNoLocationModalClearNewFilterClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.noLocationModalClearNewFilterLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.modals,
     );
   }
 
   void getListViewDetailsLinkClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listViewDetailsLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getListViewDirectionsLinkClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listViewDirectionsLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getListViewFilterClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listViewFiltersButtonClickEvent,
+      // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
@@ -1681,10 +1737,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
       trackAction(
         AnalyticsTrackActionName.listViewScreenExecuteSearchEvent,
+        // adobeCustomTag: AdobeTagProperties.listView,
       );
     } else {
       trackAction(
         AnalyticsTrackActionName.executeSearchEvent,
+        // adobeCustomTag: AdobeTagProperties.mapView,
       );
     }
   }
@@ -1692,16 +1750,21 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void getSiteInfoDrawerCallButtonClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerCallButtonLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
   }
 
   void getSiteInfoDrawerDirectionsButtonClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerDirectionsButtonLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
   }
 
-  void trackMapClick() => trackAction(AnalyticsTrackActionName.mapClick);
+  void trackMapClick() => trackAction(
+        AnalyticsTrackActionName.mapClick,
+        // adobeCustomTag: AdobeTagProperties.welcome,
+      );
 
   void trackWalletSiteLocatorClick() =>
       trackAction(AnalyticsTrackActionName.walletSiteLocatorClick);

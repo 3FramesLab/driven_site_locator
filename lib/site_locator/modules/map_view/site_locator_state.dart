@@ -5,7 +5,8 @@ mixin SiteLocatorState {
   SiteLocatorAccessTokenController siteLocatorAccessTokenController =
       Get.put(SiteLocatorAccessTokenController());
   final searchPlacesController = Get.put(SearchPlacesController());
-  final FuelGaugeProgressController fuelGaugeProgressController = Get.find();
+  final SitesLoadingProgressController sitesLoadingProgressController =
+      Get.find();
   CardholderSetupController cardholderSetupController = Get.find();
 
   RxDouble infoPanelInitialHeight = SiteLocatorConstants.panelWidgetHeight.obs;
@@ -88,6 +89,7 @@ mixin SiteLocatorState {
   int maxCountPerPage = 10;
   RxBool isInitialListLoading = false.obs;
   RxBool isViewMoreLoading = false.obs;
+  RxBool loadMoreSitesOnScroll = true.obs;
 
   final _filterSessionManager = SiteFilterSessionManager();
 
@@ -148,7 +150,7 @@ mixin SiteLocatorState {
   late ApplyClusterUseCase applyClusterUseCase;
   Map<LatLng, Site> siteHashmap = {};
   Map<String, SiteLocation> siteLocationHashmap = {};
-  final List<SiteLocation> siteLocationDisplayData = [];
+  List<SiteLocation> siteLocationDisplayData = [];
   final List<MapMarker> clusterMarkers = [];
   MarkerCluster<MapMarker>? markerCluster;
   final GridManager gridManager = GridManager(
@@ -157,9 +159,10 @@ mixin SiteLocatorState {
     gridCellSize: 50,
   );
   final double densityThreshold = 10;
-  late CalculateFuelGaugeProgressUseCase calculateFuelGaugeProgressUseCase;
-  late Timer? fuelGuageProgressTimer;
-  RxBool isFuelGuageProgressTimerInitiated = false.obs;
+  late CalculateSitesLoadingProgressUseCase
+      calculateSitesLoadingProgressUseCase;
+  late Timer? sitesLoadingPeriodicTimer;
+  RxBool isSitesLoadingTimerInitiated = false.obs;
 
   List<FuelPreferences> fuelPreferencesList = [];
   late GetFuelPreferencesUseCase getFuelPreferencesUseCase;

@@ -5,10 +5,28 @@ import 'package:driven_site_locator/site_locator/modules/search_locations/search
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SiteLocationList extends StatelessWidget {
-  final SiteLocatorController controller = Get.find();
-  final SearchPlacesController searchPlacesController = Get.find();
+class SiteLocationList extends StatefulWidget {
   SiteLocationList({super.key});
+
+  @override
+  State<SiteLocationList> createState() => _SiteLocationListState();
+}
+
+class _SiteLocationListState extends State<SiteLocationList> {
+  final SiteLocatorController controller = Get.find();
+  late ScrollController listScrollcontroller;
+
+  final SearchPlacesController searchPlacesController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    listScrollcontroller = ScrollController()
+      ..addListener(listViewScrollEventListener);
+  }
+
+  void listViewScrollEventListener() =>
+      controller.listViewScrollHandler(listScrollcontroller);
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +45,11 @@ class SiteLocationList extends StatelessWidget {
       return NoLocationsFound();
     } else {
       return ListView.builder(
+        controller: listScrollcontroller,
         itemCount: itemCount,
         itemBuilder: (context, index) {
           return (index == items.length)
-              ? ViewMoreSitesButton()
+              ? ViewMoreSitesLoadingProgress()
               : SiteLocationInfoCard(items[index], index);
         },
       );

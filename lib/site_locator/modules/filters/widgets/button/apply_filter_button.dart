@@ -24,6 +24,7 @@ class ApplyFilterButton extends StatelessWidget {
   Future<void> _applyFilterTap() async {
     trackAction(
       AnalyticsTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
+      // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
     );
     await filterController.onApplyFilterClick();
   }

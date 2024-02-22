@@ -14,7 +14,7 @@ class GetSitesUncachedFuelPriceUseCase extends BaseFutureUseCase<
 
     if (ManageCacheFuelPrices.isStoreCachPeriodExpired()) {
       ManageCacheFuelPrices.forceToRemoveAllFuelPrices();
-      ManageCacheFuelPrices.showRetrieveFuelPricesFuelGaugeMessage(
+      ManageCacheFuelPrices.showRetrieveFuelPricesMessage(
           param.siteLocatorController);
       uncachedSiteLocations = truckStopSiteLocations;
     } else {

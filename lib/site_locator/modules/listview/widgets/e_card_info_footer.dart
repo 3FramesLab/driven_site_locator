@@ -74,7 +74,8 @@ class CardInfoFooter extends StatelessWidget {
         ? const Expanded(
             child: Center(
               child: Chip(
-                label: Text(SiteLocatorConstants.gallonUp, style: f14BoldWhite),
+                label:
+                    Text(SiteLocatorConstants.preferred, style: f14BoldWhite),
                 backgroundColor: SiteLocatorColors.darkBlue,
                 padding: EdgeInsets.only(top: 4, bottom: 6, left: 2, right: 2),
               ),
