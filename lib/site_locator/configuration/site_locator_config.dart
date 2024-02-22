@@ -77,7 +77,10 @@ class SiteLocatorConfig {
     bool setup = true,
     Map<String, dynamic>? configDataJson,
   }) async {
-    await _setupConfigData(setup: setup);
+    await _setupConfigData(
+      setup: setup,
+      configDataJson: configDataJson,
+    );
   }
 
   static Future<void> _setupConfigData({
