@@ -237,7 +237,7 @@ class SiteInfoUtils {
         child: DrivenDivider(height: 5, color: Colors.grey[300]),
       );
 
-  static int getFuelGaugePeriodicInterval(int sitesCount) {
+  static int getSitesLoadingPeriodicInterval(int sitesCount) {
     final timeInterval = sitesCount < 100
         ? 300
         : sitesCount < 200

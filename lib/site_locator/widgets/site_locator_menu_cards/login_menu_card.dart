@@ -22,11 +22,13 @@ class LoginMenuCard extends StatelessWidget {
     if (siteLocatorController.isUserAuthenticated) {
       trackAction(
         AnalyticsTrackActionName.menuDrawerLogoutLinkClickEvent,
+        // adobeCustomTag: AdobeTagProperties.slMenu,
       );
       await DrivenSiteLocator.instance.logoutDialog?.call();
     } else {
       trackAction(
         AnalyticsTrackActionName.menuDrawerLoginLinkClickEvent,
+        // adobeCustomTag: AdobeTagProperties.slMenu,
       );
       DrivenSiteLocator.instance.navigateToLogin?.call();
     }

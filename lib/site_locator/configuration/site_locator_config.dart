@@ -77,10 +77,7 @@ class SiteLocatorConfig {
     bool setup = true,
     Map<String, dynamic>? configDataJson,
   }) async {
-    await _setupConfigData(
-      setup: setup,
-      configDataJson: configDataJson,
-    );
+    await _setupConfigData(setup: setup);
   }
 
   static Future<void> _setupConfigData({
@@ -105,8 +102,6 @@ class SiteLocatorConfig {
       _setIsClusterFeatureEnabled();
       _setClusterDensity();
       _setFuelPriceCacheDuration();
-
-      // TODO(Siva): need to check
       if (isDisplayMapEnabled) {
         await CustomPin.initEvents(setup: setup, canCacheAllLogos: setup);
       }
@@ -126,7 +121,6 @@ class SiteLocatorConfig {
     // if (json != null) {
     //   configProperties = ConfigPropertiesModel.fromJson(json);
     // }
-
     if (configDataJson != null) {
       configProperties = ConfigPropertiesModel.fromJson(configDataJson);
     }
@@ -207,7 +201,8 @@ class SiteLocatorConfig {
   }
 
   static void _setFuelPriceCacheDuration() {
-    if (configProperties?.fuelPriceCacheDuration[AppUtils.flavor] != null) {
+    if (configProperties?.fuelPriceCacheDuration != null &&
+        configProperties?.fuelPriceCacheDuration[AppUtils.flavor] != null) {
       fuelPriceCacheDuration =
           int.parse(configProperties?.fuelPriceCacheDuration[AppUtils.flavor]);
     }

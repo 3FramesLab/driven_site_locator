@@ -1,8 +1,26 @@
 part of list_view_module;
 
-class SiteLocationsListViewPage extends StatelessWidget {
-  final SiteLocatorController controller = Get.find();
+class SiteLocationsListViewPage extends StatefulWidget {
+  @override
+  State<SiteLocationsListViewPage> createState() =>
+      _SiteLocationsListViewPageState();
+}
+
+class _SiteLocationsListViewPageState extends State<SiteLocationsListViewPage> {
+  final SiteLocatorController siteLocatorController = Get.find();
+
   final SearchPlacesController searchPlacesController = Get.find();
+  late ScrollController listScrollcontroller;
+
+  @override
+  void initState() {
+    super.initState();
+    listScrollcontroller = ScrollController()
+      ..addListener(listViewScrollEventListener);
+  }
+
+  void listViewScrollEventListener() =>
+      siteLocatorController.listViewScrollHandler(listScrollcontroller);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +32,7 @@ class SiteLocationsListViewPage extends StatelessWidget {
           backgroundColor: Colors.white,
           body: Obx(
             () {
-              return controller.isInitialListLoading()
+              return siteLocatorController.isInitialListLoading()
                   ? const ListViewCardShimmer()
                   : _displaySiteLocationCardList();
             },
@@ -30,9 +48,9 @@ class SiteLocationsListViewPage extends StatelessWidget {
       );
 
   Widget _displaySiteLocationCardList() {
-    final int present = controller.presentPageIndex();
-    final originalItems = controller.siteLocations ?? [];
-    final items = controller.listViewItems();
+    final int present = siteLocatorController.presentPageIndex();
+    final originalItems = siteLocatorController.siteLocations ?? [];
+    final items = siteLocatorController.listViewItems();
     final itemCount =
         (present <= originalItems.length) ? items.length + 1 : items.length;
     return Stack(
@@ -42,7 +60,7 @@ class SiteLocationsListViewPage extends StatelessWidget {
             _appBar,
             _filterSearchTextField(),
             const SizedBox(height: 12),
-            Expanded(child: SiteLocationList()),
+            Expanded(child: _siteLocationCards(items, itemCount)),
             const SizedBox(height: 32),
           ],
         ),
@@ -71,10 +89,11 @@ class SiteLocationsListViewPage extends StatelessWidget {
       return NoLocationsFound();
     } else {
       return ListView.builder(
+        controller: listScrollcontroller,
         itemCount: itemCount,
         itemBuilder: (context, index) {
           return (index == items.length)
-              ? ViewMoreSitesButton()
+              ? ViewMoreSitesLoadingProgress()
               : SiteLocationInfoCard(items[index], index);
         },
       );
@@ -87,8 +106,8 @@ class SiteLocationsListViewPage extends StatelessWidget {
   }
 
   void _popPage() {
-    if (controller.locationPanelController.isPanelOpen) {
-      controller.locationPanelController.close();
+    if (siteLocatorController.locationPanelController.isPanelOpen) {
+      siteLocatorController.locationPanelController.close();
     } else {
       Get.back();
     }

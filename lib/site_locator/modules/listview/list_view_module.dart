@@ -9,7 +9,6 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/data/models/diesel_prices_pack.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/filters/filter_module.dart';
-import 'package:driven_site_locator/site_locator/modules/listview/widgets/site_location_list.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/modules/search_locations/search_location_module.dart';
 import 'package:driven_site_locator/site_locator/styles/site_locator_colors.dart';
@@ -20,7 +19,6 @@ import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/h
 import 'package:driven_site_locator/site_locator/widgets/back_to_map_button.dart';
 import 'package:driven_site_locator/site_locator/widgets/site_info_detail.dart';
 import 'package:driven_site_locator/site_locator/widgets/site_locator_scaffold.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 part 'views/site_locations_list_view_page.dart';

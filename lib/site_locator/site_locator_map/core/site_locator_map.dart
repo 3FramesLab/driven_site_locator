@@ -10,7 +10,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 class SiteLocatorMap extends StatefulWidget {
   final List<Site> siteList;
@@ -59,36 +58,33 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
 
   @override
   Widget build(BuildContext context) {
-    return PointerInterceptor(
-      child: Obx(() {
-        return GoogleMap(
-          gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{
-            Factory<OneSequenceGestureRecognizer>(
-              EagerGestureRecognizer.new,
-            ),
-          },
-          zoomControlsEnabled: false,
-          buildingsEnabled: false,
-          myLocationButtonEnabled: false,
-          circles: getCirclesSet(),
-          markers: _getMarkersToDisplay,
-          initialCameraPosition: getInitialCameraPosition(),
-          onMapCreated: _onMapCreated,
-          onCameraMove: widget.onCameraMove,
-          onCameraIdle: widget.onCameraIdle,
-          onTap: (point) {
-            FocusScope.of(context).requestFocus(FocusNode());
-            final FocusScopeNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus &&
-                currentFocus.focusedChild != null) {
-              currentFocus.focusedChild?.unfocus();
-            }
-            widget.siteLocatorController
-                .resetMarkers(PinVariantStore.statusList);
-          },
-        );
-      }),
-    );
+    return Obx(() {
+      return GoogleMap(
+        gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{
+          Factory<OneSequenceGestureRecognizer>(
+            EagerGestureRecognizer.new,
+          ),
+        },
+        zoomControlsEnabled: false,
+        buildingsEnabled: false,
+        myLocationButtonEnabled: false,
+        circles: getCirclesSet(),
+        markers: _getMarkersToDisplay,
+        initialCameraPosition: getInitialCameraPosition(),
+        onMapCreated: _onMapCreated,
+        onCameraMove: widget.onCameraMove,
+        onCameraIdle: widget.onCameraIdle,
+        onTap: (point) {
+          FocusScope.of(context).requestFocus(FocusNode());
+          final FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            currentFocus.focusedChild?.unfocus();
+          }
+          widget.siteLocatorController.resetMarkers(PinVariantStore.statusList);
+        },
+      );
+    });
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {

@@ -71,6 +71,7 @@ class SiteInfoHeaderBannerContent extends StatelessWidget {
   void _feesMayApplyTap() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerFeesMayApplyLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     Get.toNamed(SiteLocatorRoutes.extendedNetworkFeesPage);
   }
