@@ -69,4 +69,8 @@ class SiteLocatorAssets {
 
   // Top header route icon
   static const routeIcon = '$assetPath/route_icon.png';
+
+  // Zoom In/Out icon
+  static const zoomInIcon = '$assetPath/zoom_in_icon.png';
+  static const zoomOutIcon = '$assetPath/zoom_out_icon.png';
 }
