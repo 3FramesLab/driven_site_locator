@@ -41,7 +41,7 @@ class UpdateSiteLocationsFuelPricesUseCase
       // Fuel Price Caching Mechanism usecase interface ends
 
       if (uncachedSiteLocations.isNotEmpty) {
-        ManageCacheFuelPrices.showRetrieveFuelPricesFuelGaugeMessage(
+        ManageCacheFuelPrices.showRetrieveFuelPricesMessage(
             siteLocatorController!);
         final fuelPricesApiCallBatchesCount =
             getFuelPricesApiCallBatchesCount(uncachedSiteLocations.length);

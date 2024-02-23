@@ -44,10 +44,10 @@ import 'package:driven_site_locator/site_locator/data/models/google_place_model.
 import 'package:driven_site_locator/site_locator/data/models/site_filter.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/data/services/site_locations_service.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/controller/fuel_gauge_progress_controller.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/fuel_gauge_dial_props.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/use_cases/calculate_fuel_gauge_progress_usecase.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/widgets/fuel_guage_progress_indicator.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/calculate_loading_progress_usecase.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_controller.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_props.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/widgets/sites_loading_progress_indicator.dart';
 import 'package:driven_site_locator/site_locator/modules/cardholder_setup/cardholder_setup_module.dart';
 import 'package:driven_site_locator/site_locator/modules/filters/filter_module.dart';
 import 'package:driven_site_locator/site_locator/modules/location_cache/location_cache_module.dart';
@@ -56,7 +56,7 @@ import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cach
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_fuel_preferences_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialog/enable_location_service_dialog.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog.dart';
 import 'package:driven_site_locator/site_locator/modules/search_locations/search_location_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_components/common_widgets/rounded_button.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/custom_pin.dart';

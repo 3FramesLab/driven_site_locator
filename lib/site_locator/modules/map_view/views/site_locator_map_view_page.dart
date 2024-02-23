@@ -10,7 +10,8 @@ class SiteLocatorMapViewPage extends StatefulWidget {
 
 class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     with WidgetsBindingObserver {
-  final FuelGaugeProgressController fuelGaugeProgressController = Get.find();
+  final SitesLoadingProgressController sitesLoadingProgressController =
+      Get.find();
   final SiteLocatorController siteLocatorController = Get.find();
   final SearchPlacesController searchPlacesController = Get.find();
   final SetUpWizardController setUpWizardController = Get.find();
@@ -109,7 +110,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   List<Widget> _buildMapView() {
     return [
-      if (GetPlatform.isWeb)
+      if (kIsWeb)
         _body(context)
       else
         SiteInfoSlidingPanel(body: _body(context)),
@@ -125,6 +126,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   Future<void> _onRecenterButtonTap() async {
     trackAction(
       AnalyticsTrackActionName.recenterButtonClickedEvent,
+      // adobeCustomTag: AdobeTagProperties.mapView,
     );
     siteLocatorController.canClearSearchTextField = true;
     siteLocatorController.clearSearchPlaceInput();
@@ -167,9 +169,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   Widget _loadingIndicator() {
     if (!siteLocatorController.isShowLoading()) {
-      siteLocatorController.resetFuelGaugeLoadingProgressValue();
+      siteLocatorController.resetSitesLoadingIndicatorProgressValue();
     } else {
-      siteLocatorController.toggleFuelGaugeIndicatorVisibility(visible: true);
+      siteLocatorController.toggleSitesLoadingIndicatorVisibility(
+          visible: true);
     }
     return Container(
       margin: EdgeInsets.zero,
@@ -177,9 +180,9 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         duration: const Duration(milliseconds: 100),
         switchInCurve: Curves.fastLinearToSlowEaseIn,
         switchOutCurve: Curves.fastLinearToSlowEaseIn,
-        child: siteLocatorController.getHastoShowFuelGaugeIndicator()
+        child: siteLocatorController.getHastoShowSitesLoadingIndicator()
             ? Center(
-                child: FuelGuageProgressIndicator(),
+                child: SitesLoadingProgressIndicator(),
               )
             : const SizedBox.shrink(),
       ),

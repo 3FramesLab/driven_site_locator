@@ -28,7 +28,7 @@ class MapPinDescriptionView extends StatelessWidget {
             child: AppUtils.isComdata
                 ? const MapPinWithDescription(
                     mapPinImage: SiteLocatorAssets.pinBgGallonUpFilePathDFC,
-                    mapPinDescription: CardholderSetupConstants.gallonUpSites,
+                    mapPinDescription: SiteLocatorConstants.preferredSites,
                   )
                 : const MapPinWithDescription(
                     mapPinImage:
