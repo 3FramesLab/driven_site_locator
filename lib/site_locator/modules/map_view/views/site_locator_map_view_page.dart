@@ -115,8 +115,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       else
         SiteInfoSlidingPanel(body: _body(context)),
       zoomInOutButton(),
-      // gpsIconButton(),
-      // filterListButtons(),
+      gpsIconButton(),
+      filterListButtons(),
     ];
   }
 

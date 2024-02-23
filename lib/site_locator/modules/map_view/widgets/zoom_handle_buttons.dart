@@ -1,19 +1,16 @@
 import 'package:driven_common/common/driven_dimensions.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
-import 'package:get/get.dart';
 
 class ZoomHandleButtons extends StatelessWidget {
   final Function()? onZoomInIconTap;
   final Function()? onZoomOutIconTap;
-  ZoomHandleButtons({
+
+  const ZoomHandleButtons({
     Key? key,
     this.onZoomInIconTap,
     this.onZoomOutIconTap,
   }) : super(key: key);
-
-  final SiteLocatorController siteLocatorController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +21,31 @@ class ZoomHandleButtons extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: onZoomInIconTap,
-            child: Image.asset(SiteLocatorAssets.zoomInIcon),
+            child: _buildCard(SiteLocatorAssets.zoomInIcon),
           ),
           const SizedBox(height: 14),
           GestureDetector(
             onTap: onZoomOutIconTap,
-            child: Image.asset(SiteLocatorAssets.zoomOutIcon),
+            child: _buildCard(SiteLocatorAssets.zoomOutIcon),
           ),
         ],
+      ),
+    );
+  }
+
+  Card _buildCard(String image) {
+    return Card(
+      elevation: 2,
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        height: 36,
+        width: 36,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Image.asset(image),
       ),
     );
   }
