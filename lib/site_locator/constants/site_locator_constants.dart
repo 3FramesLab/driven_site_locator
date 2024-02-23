@@ -141,6 +141,17 @@ class SiteLocatorConstants {
   static const preferred = 'Preferred';
   static const preferredSites = 'Preferred sites';
 
+
+  // Left Header
+  static const filters = 'Filters';
+  static const routePlanner = 'Route Planner';
+
+  // Apply for fuelman
+  static const applyForFuelman = 'Apply for Fuelman';
+  static const applyForFuelmanUrl =
+      'https://www.fuelman.com/fuel-cards/in-town-fleets/ ';
+  static const openApplyForFuelmanError = 'Could not launch url.';
+
   static const useMyLocation = '''
 You are currently viewing fuel sites in {Nashville, TN}.\n
 To view fuel sites in a different location, use the search bar or enable “sitelocator.fuelman.com” to use your current location.

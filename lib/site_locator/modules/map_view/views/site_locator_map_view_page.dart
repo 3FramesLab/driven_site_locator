@@ -195,6 +195,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
+        applyForFuelman(),
         _loadingIndicator(),
       ],
     );
@@ -277,11 +278,43 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             Flexible(child: searchTextfieldContainer()),
           ],
         )
-      : const SizedBox(height: 30);
+      : const SizedBox(height: 20);
 
   Widget _buildMenuBody() => SiteLocatorMenuPanel(
         body: const SizedBox(
           height: SiteLocatorDimensions.dp100,
         ),
       );
+
+  Widget applyForFuelman() {
+    return Positioned(
+      right: 32,
+      top: 28,
+      child: SizedBox(
+        width: 207,
+        child: RoundedButtonWithChild(
+          onPressed: () => SiteLocatorUtils.launchURL(
+            SiteLocatorConstants.applyForFuelmanUrl,
+            SiteLocatorConstants.openApplyForFuelmanError,
+          ),
+          backgroundColor: SiteLocatorColors.red,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                SiteLocatorConstants.applyForFuelman,
+                style: f16RegularWhite,
+              ),
+              const SizedBox(width: 20),
+              Image.asset(
+                SiteLocatorAssets.fuelmanBrandFilePath,
+                height: SiteLocatorDimensions.dp24,
+                width: SiteLocatorDimensions.dp24,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
