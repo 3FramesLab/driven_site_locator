@@ -17,7 +17,7 @@ class CardInfoBodyLeft extends StatelessWidget {
           Row(
             children: [
               _shopName(),
-              CardInfoFuelPriceFork(siteLocation),
+              // CardInfoFuelPriceFork(siteLocation),
             ],
           ),
           _streetName(),
