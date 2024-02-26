@@ -10,17 +10,14 @@ class CardInfoBodyRight extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.4,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CardInfoFuelPriceFork(siteLocation),
-            const SizedBox(height: 18),
-            _favoriteSection(),
-            _serviceOrTime(),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CardInfoFuelPriceFork(siteLocation),
+          const SizedBox(height: 18),
+          _favoriteSection(),
+          _serviceOrTime(),
+        ],
       ),
     );
   }
