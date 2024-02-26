@@ -10,16 +10,11 @@ class CardInfoBodyLeft extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // width: MediaQuery.of(context).size.width * 0.5,
+      width: MediaQuery.of(context).size.width * 0.5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              _shopName(),
-              CardInfoFuelPriceFork(siteLocation),
-            ],
-          ),
+          _shopName(),
           _streetName(),
           _drivingMiles(),
         ],
