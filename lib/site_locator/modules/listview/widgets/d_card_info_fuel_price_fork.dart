@@ -33,7 +33,7 @@ class CardInfoFuelPriceFork extends StatelessWidget {
 
   Widget _displayPriceItem(String displayText) {
     final double topPadding =
-        SiteInfoUtils.canDisplayBrandLogo(siteLocation) ? 10 : 0;
+        SiteInfoUtils.canDisplayBrandLogo(siteLocation) ? 10 : 10;
     return Container(
       margin: EdgeInsets.only(top: topPadding),
       child: Semantics(
