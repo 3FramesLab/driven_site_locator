@@ -14,10 +14,7 @@ class CardInfoBodyLeft extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: _shopName(),
-          ),
+          _shopName(),
           _streetName(),
           _drivingMiles(),
         ],
