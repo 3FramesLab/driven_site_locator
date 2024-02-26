@@ -226,6 +226,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (isFirstLaunch) {
         await moveCameraPosition(currentLatLngBounds());
       }
+      if (kIsWeb) {
+        resetPrevSelectedMarkerStatus();
+        unawaited(setListViewInitializers());
+      }
       isFirstLaunch = false;
     } on Exception catch (e) {
       Globals().dynatrace.logError(
@@ -1211,7 +1215,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    await fetchNextSetDrivingDistance(nextSet.toList());
+    if (!kIsWeb) {
+      // TODO: Smeet - remove if condition later.
+      await fetchNextSetDrivingDistance(nextSet.toList());
+    }
     listViewItems.addAll(nextSet);
     presentPageIndex(presentPageIndex() + perPageCount());
     isInitialListLoading(false);
