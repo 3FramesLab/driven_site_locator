@@ -14,7 +14,13 @@ class CardInfoBodyLeft extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _shopName(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _shopName(),
+              CardInfoFuelPriceFork(siteLocation),
+            ],
+          ),
           _streetName(),
           _drivingMiles(),
         ],

@@ -38,9 +38,9 @@ class SiteLocationInfoCard extends GetView<SiteLocatorController> {
     if (kIsWeb) {
       return Row(
         children: [
-          Flexible(child: CardInfoBodyLeft(siteLocation)),
+          Expanded(child: CardInfoBodyLeft(siteLocation)),
           const SizedBox(width: 15),
-          Flexible(child: CardInfoBodyRight(siteLocation)),
+          Expanded(child: CardInfoBodyRight(siteLocation)),
         ],
       );
     } else {
