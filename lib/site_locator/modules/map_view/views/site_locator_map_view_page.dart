@@ -114,8 +114,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         _body(context)
       else
         SiteInfoSlidingPanel(body: _body(context)),
-      zoomInOutButton(),
-      gpsIconButton(),
+      _buildRightMapActions(),
       filterListButtons(),
     ];
   }
@@ -323,4 +322,18 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         onZoomInIconTap: _onRecenterButtonTap,
         onZoomOutIconTap: _onRecenterButtonTap,
       );
+
+  Widget _buildRightMapActions() {
+    return Positioned(
+      right: DrivenDimensions.dp16,
+      bottom: siteLocatorController.floatingButtonsBottomPosition(),
+      child: Column(
+        children: [
+          zoomInOutButton(),
+          const SizedBox(height: DrivenDimensions.dp16),
+          gpsIconButton(),
+        ],
+      ),
+    );
+  }
 }

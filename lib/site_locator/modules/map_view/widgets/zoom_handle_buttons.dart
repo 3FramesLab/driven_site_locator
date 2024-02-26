@@ -14,27 +14,24 @@ class ZoomHandleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      right: DrivenDimensions.dp16,
-      bottom: DrivenDimensions.dp60,
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: onZoomInIconTap,
-            child: _buildCard(SiteLocatorAssets.zoomInIcon),
-          ),
-          const SizedBox(height: 14),
-          GestureDetector(
-            onTap: onZoomOutIconTap,
-            child: _buildCard(SiteLocatorAssets.zoomOutIcon),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: onZoomInIconTap,
+          child: _buildCard(SiteLocatorAssets.zoomInIcon),
+        ),
+        const SizedBox(height: DrivenDimensions.dp8),
+        GestureDetector(
+          onTap: onZoomOutIconTap,
+          child: _buildCard(SiteLocatorAssets.zoomOutIcon),
+        ),
+      ],
     );
   }
 
   Card _buildCard(String image) {
     return Card(
+      color: Colors.white,
       elevation: 2,
       child: Container(
         padding: const EdgeInsets.all(6),
@@ -42,7 +39,6 @@ class ZoomHandleButtons extends StatelessWidget {
         width: 36,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Image.asset(image),
