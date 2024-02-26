@@ -15,7 +15,11 @@ class GpsIconButton extends StatelessWidget {
             label: SemanticStrings.gpsIconButton,
             child: GestureDetector(
               onTap: onGpsIconTap,
-              child: Image.asset(SiteLocatorAssets.gpsIcon),
+              child: Image.asset(
+                SiteLocatorAssets.gpsIcon,
+                height: 36,
+                width: 36,
+              ),
             ),
           ),
         ));
