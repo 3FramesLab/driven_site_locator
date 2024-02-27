@@ -167,11 +167,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       print('locationPermission: $locationPermission');
       if (locationPermission != LocationPermission.always &&
           locationPermission != LocationPermission.whileInUse) {
-        unawaited(Get.dialog(
-          EnableLocationServiceDialog(
-              onUseMyLocation: () => onUseMyLocation(locationPermission)),
-          barrierDismissible: false,
-        ));
+        // TODO(siva): revert back
+        // unawaited(Get.dialog(
+        //   EnableLocationServiceDialog(
+        //       onUseMyLocation: () => onUseMyLocation(locationPermission)),
+        //   barrierDismissible: false,
+        // ));
       }
     }
     await subscribeToLocationStream();
