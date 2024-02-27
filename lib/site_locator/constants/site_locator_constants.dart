@@ -141,10 +141,13 @@ class SiteLocatorConstants {
   static const preferred = 'Preferred';
   static const preferredSites = 'Preferred sites';
 
-
   // Left Header
   static const filters = 'Filters';
   static const routePlanner = 'Route Planner';
+
+  static const webLogin = 'Login to Driven for Fuelman Portal';
+  static const downloadFuelmanApp = 'Download Driven for Fuelman App';
+  static const locationPreferences = 'Location Preferences';
 
   // Apply for fuelman
   static const applyForFuelman = 'Apply for Fuelman';
