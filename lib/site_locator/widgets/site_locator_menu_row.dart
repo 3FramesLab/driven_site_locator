@@ -10,6 +10,7 @@ class SiteLocatorMenuRow extends StatelessWidget {
   final Color backgroundColor;
   final String? subTitle;
   final TextStyle subTitleStyle;
+  final bool isForWeb;
 
   const SiteLocatorMenuRow({
     required this.title,
@@ -19,6 +20,7 @@ class SiteLocatorMenuRow extends StatelessWidget {
     this.backgroundColor = DrivenColors.brandPurple,
     this.subTitle,
     this.subTitleStyle = const TextStyle(fontSize: SiteLocatorDimensions.dp16),
+    this.isForWeb = false,
   });
 
   @override
@@ -81,10 +83,12 @@ class SiteLocatorMenuRow extends StatelessWidget {
     return null;
   }
 
-  dynamic _leading() => CircleAvatar(
-        backgroundColor: backgroundColor,
-        child: _icon(),
-      );
+  dynamic _leading() => isForWeb
+      ? _icon()
+      : CircleAvatar(
+          backgroundColor: backgroundColor,
+          child: _icon(),
+        );
 
   Widget? _icon() => imageIcon != null
       ? Image(
