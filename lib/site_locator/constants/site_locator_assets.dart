@@ -69,4 +69,11 @@ class SiteLocatorAssets {
 
   // Top header route icon
   static const routeIcon = '$assetPath/route_icon.png';
+
+  //web app assets
+  static const badge = '$assetPath/badge.png';
+  static const helpCenter = '$assetPath/help_center.png';
+  static const mapPin = '$assetPath/map_pin.png';
+  static const mobilePhone = '$assetPath/mobile_phone.png';
+  static const privacyPolicy = '$assetPath/privacy_policy.png';
 }

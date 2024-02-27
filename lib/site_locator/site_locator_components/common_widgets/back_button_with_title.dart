@@ -15,7 +15,6 @@ class BackButtonWithTitle extends StatelessWidget {
       ),
       margin: const EdgeInsets.only(left: 10),
       padding: const EdgeInsets.only(left: 10, right: 10),
-      width: 90,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: _body(),
