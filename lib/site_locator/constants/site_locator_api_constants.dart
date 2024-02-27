@@ -10,6 +10,8 @@ class SiteLocatorApiConstants {
       DrivenSiteLocator.instance.env[EnvKeys.siteLocationBaseUrl]!;
   static final fuelPricesBaseUrl =
       DrivenSiteLocator.instance.env[EnvKeys.fuelPricesBaseUrl]!;
+  static final fuelmanWebUrl =
+      DrivenSiteLocator.instance.env[EnvKeys.fuelmanWebURL]!;
 
   static final siteLocatorAccessTokenJson = {
     'client_id': DrivenSiteLocator.instance.env[EnvKeys.siteLocatorClientId],
@@ -43,4 +45,5 @@ class EnvKeys {
   static const siteLocatorClientSecret = 'SITE_LOCATOR_CLIENT_SECRET';
   static const googleIosKey = 'GOOGLE_IOS_KEY';
   static const googleAndroidKey = 'GOOGLE_ANDROID_KEY';
+  static const fuelmanWebURL = 'FUELMAN_WEB_URL';
 }

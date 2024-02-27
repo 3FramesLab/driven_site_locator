@@ -60,7 +60,9 @@ class SiteLocatorMenuRow extends StatelessWidget {
   Widget _buildTitle(BuildContext context) {
     Widget titleWidget = Text(
       title,
-      style: Theme.of(context).textTheme.titleMedium,
+      style: isForWeb
+          ? const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)
+          : Theme.of(context).textTheme.titleMedium,
     );
 
     if (subTitle == null) {
@@ -83,10 +85,12 @@ class SiteLocatorMenuRow extends StatelessWidget {
     return null;
   }
 
-  dynamic _leading() => CircleAvatar(
-        backgroundColor: backgroundColor,
-        child: _icon(),
-      );
+  dynamic _leading() => isForWeb
+      ? _icon()
+      : CircleAvatar(
+          backgroundColor: backgroundColor,
+          child: _icon(),
+        );
 
   Widget? _icon() => imageIcon != null
       ? Image(

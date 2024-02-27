@@ -5,14 +5,15 @@ import 'package:driven_site_locator/site_locator/modules/map_view/map_view_modul
 import 'package:driven_site_locator/site_locator/widgets/site_locator_menu_row.dart';
 import 'package:get/get.dart';
 
-class WebDownloadMobileApp extends StatelessWidget {
+class WebDownloadMobileAppCard extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
 
-  WebDownloadMobileApp({super.key});
+  WebDownloadMobileAppCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SiteLocatorMenuRow(
+      isForWeb: true,
       title: _title,
       imageIcon: _icon,
       buttonAction: () {},

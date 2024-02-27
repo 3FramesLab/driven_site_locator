@@ -5,13 +5,14 @@ import 'package:driven_site_locator/site_locator/widgets/site_locator_menu_row.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WebLocationPreferences extends StatelessWidget {
+class WebLocationPreferencesCard extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
-  WebLocationPreferences({super.key});
+  WebLocationPreferencesCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SiteLocatorMenuRow(
+      isForWeb: true,
       title: _title,
       imageIcon: _icon,
       buttonAction: () {},
