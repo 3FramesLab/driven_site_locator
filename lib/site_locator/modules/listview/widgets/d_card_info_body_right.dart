@@ -14,7 +14,7 @@ class CardInfoBodyRight extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CardInfoFuelPriceFork(siteLocation),
-          // const SizedBox(height: 18),
+          const SizedBox(height: 18),
           _favoriteSection(),
           _serviceOrTime(),
         ],
