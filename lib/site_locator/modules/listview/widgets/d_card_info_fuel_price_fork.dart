@@ -32,15 +32,10 @@ class CardInfoFuelPriceFork extends StatelessWidget {
   }
 
   Widget _displayPriceItem(String displayText) {
-    final double topPadding =
-        SiteInfoUtils.canDisplayBrandLogo(siteLocation) && !kIsWeb ? 7 : 0;
-    return Container(
-      margin: EdgeInsets.only(top: topPadding),
-      child: Semantics(
-        container: true,
-        label: SemanticStrings.siteInfoFuelPrice,
-        child: Text(displayText, style: f16BoldBlackDark),
-      ),
+    return Semantics(
+      container: true,
+      label: SemanticStrings.siteInfoFuelPrice,
+      child: Text(displayText, style: f16BoldBlackDark),
     );
   }
 }
