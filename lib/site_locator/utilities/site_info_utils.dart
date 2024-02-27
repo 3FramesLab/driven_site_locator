@@ -204,6 +204,8 @@ class SiteInfoUtils {
   static Widget getServiceWidget(SiteLocation siteLocation) => Visibility(
         visible: siteLocation.locationType?.maintenanceService == Status.Y,
         maintainSize: true,
+        maintainAnimation: true,
+        maintainState: true,
         child: Semantics(
           container: true,
           label: SemanticStrings.siteInfoService,
@@ -217,6 +219,8 @@ class SiteInfoUtils {
   static Widget getTimeWidget(SiteLocation siteLocation) => Visibility(
         visible: _canShowTimeWidget(siteLocation),
         maintainSize: true,
+        maintainAnimation: true,
+        maintainState: true,
         child: Semantics(
           container: true,
           label: SemanticStrings.siteInfoTime,
