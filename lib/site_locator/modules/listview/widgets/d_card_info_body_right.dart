@@ -14,7 +14,6 @@ class CardInfoBodyRight extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CardInfoFuelPriceFork(siteLocation),
-          const SizedBox(height: 18),
           _favoriteSection(),
           _serviceOrTime(),
         ],
@@ -26,21 +25,27 @@ class CardInfoBodyRight extends StatelessWidget {
     return Obx(() {
       final favoriteKey = siteLocation.siteIdentifier?.toString() ??
           SiteLocatorConstants.unknownKey;
+      final topPadding =
+          SiteInfoUtils.canDisplayBrandLogo(siteLocation) ? 8.0 : 18.0;
       return Semantics(
         container: true,
         label: SemanticStrings.siteInfoFavorite,
-        child: SiteInfoDetail(
-          iconData: siteLocatorController.favoriteList.contains(favoriteKey)
-              ? Icons.favorite
-              : Icons.favorite_outline,
-          iconColor: siteLocatorController.favoriteList.contains(favoriteKey)
-              ? DrivenColors.brandPurple
-              : DrivenColors.textColor,
-          description: siteLocatorController.favoriteList.contains(favoriteKey)
-              ? SiteLocatorConstants.favorite
-              : SiteLocatorConstants.addFavorite,
-          onDescriptionTap: () =>
-              siteLocatorController.manageFavorite(favoriteKey),
+        child: Padding(
+          padding: EdgeInsets.only(top: topPadding),
+          child: SiteInfoDetail(
+            iconData: siteLocatorController.favoriteList.contains(favoriteKey)
+                ? Icons.favorite
+                : Icons.favorite_outline,
+            iconColor: siteLocatorController.favoriteList.contains(favoriteKey)
+                ? DrivenColors.brandPurple
+                : DrivenColors.textColor,
+            description:
+                siteLocatorController.favoriteList.contains(favoriteKey)
+                    ? SiteLocatorConstants.favorite
+                    : SiteLocatorConstants.addFavorite,
+            onDescriptionTap: () =>
+                siteLocatorController.manageFavorite(favoriteKey),
+          ),
         ),
       );
     });
