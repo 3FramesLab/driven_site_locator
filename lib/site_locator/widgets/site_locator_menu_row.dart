@@ -83,12 +83,10 @@ class SiteLocatorMenuRow extends StatelessWidget {
     return null;
   }
 
-  dynamic _leading() => isForWeb
-      ? _icon()
-      : CircleAvatar(
-          backgroundColor: backgroundColor,
-          child: _icon(),
-        );
+  dynamic _leading() => CircleAvatar(
+        backgroundColor: backgroundColor,
+        child: _icon(),
+      );
 
   Widget? _icon() => imageIcon != null
       ? Image(
