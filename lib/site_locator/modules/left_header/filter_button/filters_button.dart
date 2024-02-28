@@ -45,7 +45,7 @@ class FiltersButton extends StatelessWidget {
   }
 
   void filterButtonTap() {
-    siteLocatorController.navigateToEnhancedFilter();
+    const EnhancedFilterPage();
   }
 
   Widget get _filterCountBadge => Positioned(
