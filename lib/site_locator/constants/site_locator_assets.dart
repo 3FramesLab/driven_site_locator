@@ -34,6 +34,7 @@ class SiteLocatorAssets {
   static const icUps = '$assetPath/ic_ups.png';
   static const icFedex = '$assetPath/ic_fedex.png';
   static const gpsIcon = '$packagePath/assets/images/ic_gps.png';
+  static const badgeIcon = '$assetPath/badge.png';
 
   // COMDATA ASSET PATHS
 

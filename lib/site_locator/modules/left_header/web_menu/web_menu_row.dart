@@ -21,12 +21,15 @@ class WebMenuRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onRowTap,
-      leading: _icon(),
-      title: Text(
-        title,
-        style: _textStyle,
+    return Padding(
+      padding: const EdgeInsets.only(top: 3,bottom: 3),
+      child: ListTile(
+        onTap: onRowTap,
+        leading: _icon(),
+        title: Text(
+          title,
+          style: _textStyle,
+        ),
       ),
     );
   }

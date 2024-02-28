@@ -26,6 +26,6 @@ class WebHelpCenterCard extends StatelessWidget {
 
   Icon _helpCenterIcon() => const Icon(
         Icons.help_center_outlined,
-        color: SiteLocatorColors.white,
+        color: SiteLocatorColors.black,
       );
 }

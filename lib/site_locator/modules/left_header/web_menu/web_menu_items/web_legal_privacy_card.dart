@@ -27,6 +27,6 @@ class WebLegalPrivacyCard extends StatelessWidget {
 
   Icon _legalPrivacyIcon() => const Icon(
         Icons.policy_outlined,
-        color: SiteLocatorColors.white,
+        color: SiteLocatorColors.black,
       );
 }
