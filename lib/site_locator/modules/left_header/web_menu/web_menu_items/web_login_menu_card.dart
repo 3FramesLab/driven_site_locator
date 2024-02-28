@@ -23,7 +23,7 @@ class WebLoginMenuCard extends StatelessWidget {
 
   String get _title => SiteLocatorConstants.webLogin;
 
-  AssetImage get _icon => const AssetImage(SiteLocatorAssets.badgeIcon);
+  AssetImage get _icon => const AssetImage(SiteLocatorAssets.badge);
 
   Future<void> handleLoginCardTap() async => SiteLocatorUtils.launchURL(
         SiteLocatorApiConstants.fuelmanWebUrl,

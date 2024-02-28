@@ -34,7 +34,6 @@ class SiteLocatorAssets {
   static const icUps = '$assetPath/ic_ups.png';
   static const icFedex = '$assetPath/ic_fedex.png';
   static const gpsIcon = '$packagePath/assets/images/ic_gps.png';
-  static const badgeIcon = '$assetPath/badge.png';
 
   // COMDATA ASSET PATHS
 
@@ -77,4 +76,6 @@ class SiteLocatorAssets {
   static const mapPin = '$assetPath/map_pin.png';
   static const mobilePhone = '$assetPath/mobile_phone.png';
   static const privacyPolicy = '$assetPath/privacy_policy.png';
+  static const appleStore = '$assetPath/apple.png';
+  static const googleStore = '$assetPath/google_play.png';
 }

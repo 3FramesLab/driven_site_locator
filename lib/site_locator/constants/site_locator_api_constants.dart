@@ -35,6 +35,12 @@ class SiteLocatorApiConstants {
   //fuel prices
   static const defaultSysAccountId = '0_0000_3';
   static const defaultFuelPricesApiLimit = 5;
+
+  //mobile app store links
+  static const fuelmanAppGoogleStoreLink =
+      'https://play.google.com/store/apps/details?id=com.fuelman.driven&hl=en&gl=US&pli=1';
+  static const fuelmanAppAppleStoreLink =
+      'https://apps.apple.com/us/app/driven-for-fuelman/id6443817640';
 }
 
 class EnvKeys {
