@@ -1,9 +1,14 @@
 import 'package:driven_common/driven_common_resources_module.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
+import 'package:driven_site_locator/site_locator/modules/filters/filter_module.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FiltersButton extends StatelessWidget {
-  const FiltersButton({Key? key}) : super(key: key);
+  FiltersButton({Key? key}) : super(key: key);
+
+  final SiteLocatorController siteLocatorController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +18,8 @@ class FiltersButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {
           // TODO
+          filterButtonTap();
+          _filterCountBadge;
         },
         style: OutlinedButton.styleFrom(
           shape: const RoundedRectangleBorder(
@@ -36,4 +43,14 @@ class FiltersButton extends StatelessWidget {
       ),
     );
   }
+
+  void filterButtonTap() {
+    siteLocatorController.navigateToEnhancedFilter();
+  }
+
+  Widget get _filterCountBadge => Positioned(
+        right: -1,
+        top: -1,
+        child: SelectedFilterCountBadge(),
+      );
 }
