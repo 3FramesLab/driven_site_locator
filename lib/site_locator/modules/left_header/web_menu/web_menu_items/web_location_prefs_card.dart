@@ -26,10 +26,13 @@ class WebLocationPreferencesCard extends StatelessWidget {
       );
 
   Widget _locationPreferences() => Padding(
-        padding: const EdgeInsets.only(left: 16, top: 3, bottom: 3),
+        padding: const EdgeInsets.only(left: 16, top: 4, bottom: 8),
         child: Row(
           children: [
-            SizedBox(height: 24, child: ShareMyCurrentLocationSwitch()),
+            Transform.scale(
+              scale: 0.8,
+              child: ShareMyCurrentLocationSwitch(),
+            ),
             const SizedBox(width: 10),
             _shareMyLocation(),
           ],

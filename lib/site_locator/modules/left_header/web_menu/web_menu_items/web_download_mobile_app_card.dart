@@ -27,7 +27,7 @@ class WebDownloadMobileAppCard extends StatelessWidget {
       );
 
   Widget _storeIconsRow() => Padding(
-        padding: const EdgeInsets.only(top: 3, bottom: 3),
+        padding: const EdgeInsets.only(left:16,top: 4, bottom: 8),
         child: Row(
           children: [
             _storeIcon(
