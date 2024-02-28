@@ -19,7 +19,7 @@ class FiltersButton extends StatelessWidget {
         onPressed: () {
           // TODO
           filterButtonTap();
-          _filterCountBadge;
+          // _filterCountBadge;
         },
         style: OutlinedButton.styleFrom(
           shape: const RoundedRectangleBorder(
