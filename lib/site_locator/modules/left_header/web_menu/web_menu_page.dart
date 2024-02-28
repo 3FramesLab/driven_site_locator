@@ -31,13 +31,19 @@ class WebMenuPage extends StatelessWidget {
                 visible: repository.isLoginLogoutSettingsEnabled,
                 child: WebLoginMenuCard(),
               ),
-              _divider(),
+              Visibility(
+                visible: repository.isLoginLogoutSettingsEnabled,
+                child: _divider(),
+              ),
               WebDownloadMobileAppCard(),
               _divider(),
               WebLocationPreferencesCard(),
               _divider(),
               const WebHelpCenterCard(),
-              _divider(),
+              Visibility(
+                visible: repository.isLegalPrivacySettingEnabled,
+                child: _divider(),
+              ),
               Visibility(
                 visible: repository.isLegalPrivacySettingEnabled,
                 child: const WebLegalPrivacyCard(),
