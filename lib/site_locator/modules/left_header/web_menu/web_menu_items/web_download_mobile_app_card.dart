@@ -26,21 +26,24 @@ class WebDownloadMobileAppCard extends StatelessWidget {
         ],
       );
 
-  Widget _storeIconsRow() => Row(
-        children: [
-          _storeIcon(
-            SiteLocatorAssets.googleStore,
-            () => _openStoreLink(
-              SiteLocatorApiConstants.fuelmanAppGoogleStoreLink,
+  Widget _storeIconsRow() => Padding(
+        padding: const EdgeInsets.only(top: 3, bottom: 3),
+        child: Row(
+          children: [
+            _storeIcon(
+              SiteLocatorAssets.googleStore,
+              () => _openStoreLink(
+                SiteLocatorApiConstants.fuelmanAppGoogleStoreLink,
+              ),
             ),
-          ),
-          _storeIcon(
-            SiteLocatorAssets.appleStore,
-            () => _openStoreLink(
-              SiteLocatorApiConstants.fuelmanAppAppleStoreLink,
+            _storeIcon(
+              SiteLocatorAssets.appleStore,
+              () => _openStoreLink(
+                SiteLocatorApiConstants.fuelmanAppAppleStoreLink,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
 
   void _openStoreLink(String storeURL) => SiteLocatorUtils.launchURL(

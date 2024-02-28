@@ -25,12 +25,15 @@ class WebLocationPreferencesCard extends StatelessWidget {
         ],
       );
 
-  Widget _locationPreferences() => Row(
-        children: [
-          ShareMyCurrentLocationSwitch(),
-          const SizedBox(width: 10),
-          _shareMyLocation(),
-        ],
+  Widget _locationPreferences() => Padding(
+        padding: const EdgeInsets.only(left: 16, top: 3, bottom: 3),
+        child: Row(
+          children: [
+            SizedBox(height: 24, child: ShareMyCurrentLocationSwitch()),
+            const SizedBox(width: 10),
+            _shareMyLocation(),
+          ],
+        ),
       );
 
   Widget _shareMyLocation() => const Text(
@@ -38,10 +41,10 @@ class WebLocationPreferencesCard extends StatelessWidget {
         style: f14RegularBlack,
       );
 
-  String get _title => SiteLocatorConstants.downloadFuelmanApp;
+  String get _title => SiteLocatorConstants.locationPreferences;
 
   Image get _icon => const Image(
-        image: AssetImage(SiteLocatorAssets.mobilePhone),
+        image: AssetImage(SiteLocatorAssets.mapPin),
         height: SiteLocatorDimensions.dp28,
         width: SiteLocatorDimensions.dp28,
       );
