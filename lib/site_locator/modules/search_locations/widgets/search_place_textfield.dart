@@ -2,8 +2,10 @@ part of search_location_module;
 
 class SearchPlaceTextField extends StatefulWidget {
   final String? currentLocation;
+  final Function(bool) onSearchClick;
 
   const SearchPlaceTextField({
+    required this.onSearchClick,
     super.key,
     this.currentLocation,
   });
@@ -93,8 +95,8 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
     if (searchText.isNotEmpty) {
       if (_isSearchIcon || forceSearch) {
+        widget.onSearchClick(true);
         await _executeSearchPlace(searchText);
-        await siteLocatorController.setListViewInitializers();
       } else if (_isClearIcon) {
         await onClearIconTapped();
       }
