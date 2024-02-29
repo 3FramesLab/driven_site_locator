@@ -38,6 +38,7 @@ class QuickFiltersList extends StatelessWidget {
       siteLocatorController.canShow2CTA(false);
       siteLocatorController.clearSearchPlaceInput();
       await filterController.syncEnhancedFilter(siteFilter);
+      await siteLocatorController.setListViewInitializers();
     }
   }
 
