@@ -8,9 +8,14 @@ import 'package:driven_site_locator/site_locator/site_locator_components/common_
 import 'package:flutter/material.dart';
 
 class WebMenuPage extends StatelessWidget {
+  final Function()? onMenuBackButtonTap;
+
   static final repository = SiteLocatorEntitlementUtils.instance;
 
-  const WebMenuPage({super.key});
+  const WebMenuPage({
+    super.key,
+    this.onMenuBackButtonTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class WebMenuPage extends StatelessWidget {
             children: [
               BackButtonWithTitle(
                 title: 'Menu',
-                onBackButtonPressed: () {},
+                onBackButtonPressed: onMenuBackButtonTap,
               ),
               const SizedBox(height: 15),
               Visibility(

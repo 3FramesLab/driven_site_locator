@@ -4,6 +4,13 @@ import 'package:driven_site_locator/site_locator/modules/left_header/widgets/web
 import 'package:flutter/material.dart';
 
 class TopMenuLogoHeader extends StatelessWidget {
+  final Function()? onMenuIconTap;
+
+  const TopMenuLogoHeader({
+    Key? key,
+    this.onMenuIconTap,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
@@ -11,7 +18,7 @@ class TopMenuLogoHeader extends StatelessWidget {
       children: [
         Visibility(
           visible: _entitlementRepository.isDisplaySettingsEnabled,
-          child: WebHamburgerMenu(),
+          child: WebHamburgerMenu(onMenuIconTap: onMenuIconTap),
         ),
         FuelmanNetworkSitelocatorLogo(),
       ],
