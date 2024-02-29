@@ -12,7 +12,6 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/controllers/site_locator_token_controller.dart';
 import 'package:driven_site_locator/site_locator/data/services/site_locations_service.dart';
 import 'package:driven_site_locator/site_locator/data/services/site_locator_access_token_service.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/controller/fuel_gauge_progress_controller.dart';
 import 'package:driven_site_locator/site_locator/modules/cardholder_setup/cardholder_setup_module.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/painter.dart';
@@ -62,7 +61,7 @@ class CustomPin {
 
   static void bindAdhocDependencies() {
     Get.lazyPut(CardholderSetupController.new);
-    Get.lazyPut(FuelGaugeProgressController.new);
+    // Get.lazyPut(FuelGaugeProgressController.new);
   }
 
   static Future<void> preCache({bool canCacheAllLogos = true}) async {
