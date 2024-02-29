@@ -37,8 +37,8 @@ class WebMenuRow extends StatelessWidget {
   Widget? _icon() => imageIcon != null
       ? Image(
           image: imageIcon!,
-          height: SiteLocatorDimensions.dp24,
-          width: SiteLocatorDimensions.dp24,
+          height: SiteLocatorDimensions.dp28,
+          width: SiteLocatorDimensions.dp28,
         )
       : icon;
 }
