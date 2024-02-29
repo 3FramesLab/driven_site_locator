@@ -32,9 +32,9 @@ class QuickFiltersList extends StatelessWidget {
       // // adobeCustomTag: AdobeTagProperties.mapView,
     );
     siteLocatorController.resetMapViewScreen();
-    await filterController.trackNewlyAddedFilters();
+    siteLocatorController.resetPrevSelectedMarkerStatus();
     await siteLocatorController.setListViewInitializers();
-
+    await filterController.trackNewlyAddedFilters();
     if (!isLoading) {
       siteLocatorController.canShow2CTA(false);
       siteLocatorController.clearSearchPlaceInput();
