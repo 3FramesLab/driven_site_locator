@@ -40,6 +40,7 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
   void _yesButtonTap() {
     trackAction(
       AnalyticsTrackActionName.preferredHomeScreenYesButtonEvent,
+      // adobeCustomTag: AdobeTagProperties.modals,
     );
     DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
       AppStrings.trueText,
@@ -51,6 +52,7 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
         onPressed: () {
           trackAction(
             AnalyticsTrackActionName.preferredHomeScreenNoButtonEvent,
+            // adobeCustomTag: AdobeTagProperties.modals,
           );
           DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
             AppStrings.falseText,

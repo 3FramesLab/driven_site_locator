@@ -20,6 +20,7 @@ class PreferencesFilterMenuCard extends StatelessWidget {
   void navToPreferencesFilterPage() {
     trackAction(
       AnalyticsTrackActionName.menuDrawerPreferencesFiltersLinkClickEvent,
+      // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     siteLocatorController.navigateToEnhancedFilter();
   }

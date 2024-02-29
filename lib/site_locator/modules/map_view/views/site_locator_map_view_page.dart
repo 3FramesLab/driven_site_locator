@@ -10,7 +10,8 @@ class SiteLocatorMapViewPage extends StatefulWidget {
 
 class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     with WidgetsBindingObserver {
-  final FuelGaugeProgressController fuelGaugeProgressController = Get.find();
+  final SitesLoadingProgressController sitesLoadingProgressController =
+      Get.find();
   final SiteLocatorController siteLocatorController = Get.find();
   final SearchPlacesController searchPlacesController = Get.find();
   final SetUpWizardController setUpWizardController = Get.find();
@@ -67,14 +68,18 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
+    if (kIsWeb) {
+      return _bodyContainer(context);
+    } else {
+      return Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+          ),
+          child: _bodyContainer(context),
         ),
-        child: _bodyContainer(context),
-      ),
-    );
+      );
+    }
   }
 
   Widget _bodyContainer(BuildContext context) {
@@ -90,9 +95,13 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   List<Widget> _buildSiteLocatorViewBody() {
-    return setUpWizardController.canShowSetUpWizard()
-        ? _buildSetUpWizardView()
-        : _buildMapView();
+    if (kIsWeb) {
+      return _buildMapView();
+    } else {
+      return setUpWizardController.canShowSetUpWizard()
+          ? _buildSetUpWizardView()
+          : _buildMapView();
+    }
   }
 
   List<Widget> _buildSetUpWizardView() {
@@ -101,7 +110,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   List<Widget> _buildMapView() {
     return [
-      SiteInfoSlidingPanel(body: _body(context)),
+      if (kIsWeb)
+        _body(context)
+      else
+        SiteInfoSlidingPanel(body: _body(context)),
       gpsIconButton(),
       filterListButtons(),
     ];
@@ -114,6 +126,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   Future<void> _onRecenterButtonTap() async {
     trackAction(
       AnalyticsTrackActionName.recenterButtonClickedEvent,
+      // adobeCustomTag: AdobeTagProperties.mapView,
     );
     siteLocatorController.canClearSearchTextField = true;
     siteLocatorController.clearSearchPlaceInput();
@@ -156,9 +169,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   Widget _loadingIndicator() {
     if (!siteLocatorController.isShowLoading()) {
-      siteLocatorController.resetFuelGaugeLoadingProgressValue();
+      siteLocatorController.resetSitesLoadingIndicatorProgressValue();
     } else {
-      siteLocatorController.toggleFuelGaugeIndicatorVisibility(visible: true);
+      siteLocatorController.toggleSitesLoadingIndicatorVisibility(
+          visible: true);
     }
     return Container(
       margin: EdgeInsets.zero,
@@ -166,9 +180,9 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         duration: const Duration(milliseconds: 100),
         switchInCurve: Curves.fastLinearToSlowEaseIn,
         switchOutCurve: Curves.fastLinearToSlowEaseIn,
-        child: siteLocatorController.getHastoShowFuelGaugeIndicator()
+        child: siteLocatorController.getHastoShowSitesLoadingIndicator()
             ? Center(
-                child: FuelGuageProgressIndicator(),
+                child: SitesLoadingProgressIndicator(),
               )
             : const SizedBox.shrink(),
       ),
@@ -181,6 +195,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
+        applyForFuelman(),
         _loadingIndicator(),
       ],
     );
@@ -237,33 +252,69 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget filterListButtons() {
-    return Obx(
-      () => Positioned(
-        left: DrivenDimensions.dp16,
-        bottom: siteLocatorController.floatingButtonsBottomPosition(),
-        child: FloatingMapButtonsContainer(),
-      ),
-    );
+    return !kIsWeb
+        ? Obx(
+            () => Positioned(
+              left: DrivenDimensions.dp16,
+              bottom: siteLocatorController.floatingButtonsBottomPosition(),
+              child: FloatingMapButtonsContainer(),
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
-  Widget menuWithSearchBarContainer() => Row(
-        children: [
-          Visibility(
-            visible: _entitlementRepository.isDisplaySettingsEnabled,
-            child: SiteLocatorMenuIcon(),
-          ),
-          SizedBox(
-            width: _entitlementRepository.isDisplaySettingsEnabled
-                ? SiteLocatorDimensions.dp3
-                : SiteLocatorDimensions.dp10,
-          ),
-          Flexible(child: searchTextfieldContainer()),
-        ],
-      );
+  Widget menuWithSearchBarContainer() => !kIsWeb
+      ? Row(
+          children: [
+            Visibility(
+              visible: _entitlementRepository.isDisplaySettingsEnabled,
+              child: SiteLocatorMenuIcon(),
+            ),
+            SizedBox(
+              width: _entitlementRepository.isDisplaySettingsEnabled
+                  ? SiteLocatorDimensions.dp3
+                  : SiteLocatorDimensions.dp10,
+            ),
+            Flexible(child: searchTextfieldContainer()),
+          ],
+        )
+      : const SizedBox(height: 20);
 
   Widget _buildMenuBody() => SiteLocatorMenuPanel(
         body: const SizedBox(
           height: SiteLocatorDimensions.dp100,
         ),
       );
+
+  Widget applyForFuelman() {
+    return Positioned(
+      right: 32,
+      top: 28,
+      child: SizedBox(
+        width: 207,
+        child: RoundedButtonWithChild(
+          onPressed: () => SiteLocatorUtils.launchURL(
+            SiteLocatorConstants.applyForFuelmanUrl,
+            SiteLocatorConstants.openApplyForFuelmanError,
+          ),
+          backgroundColor: SiteLocatorColors.red,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                SiteLocatorConstants.applyForFuelman,
+                style: f16RegularWhite,
+              ),
+              const SizedBox(width: 20),
+              Image.asset(
+                SiteLocatorAssets.fuelmanBrandFilePath,
+                height: SiteLocatorDimensions.dp24,
+                width: SiteLocatorDimensions.dp24,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

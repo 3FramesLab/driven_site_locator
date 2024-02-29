@@ -101,6 +101,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
         filterList: allEnhancedFilters(),
         siteFilter: siteFilter,
         isChecked: isChecked,
+        selectedFiltersList: selectedSiteFilters,
       ),
     );
     allEnhancedFilters.refresh();
@@ -110,6 +111,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
     } else {
       selectedSiteFilters.remove(siteFilter);
     }
+
     selectedSiteFilters.refresh();
 
     _compareSelectedFilterWithSavedFilter();
@@ -211,6 +213,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
 
   List<SiteFilter> computeNewlyAddedFiltersOnUI() {
     final filtersFromStorage = _fetchFiltersFromStorage();
+
     final existingFiltersOnStorageData =
         List<SiteFilter>.from(filtersFromStorage);
     final selectedFiltersToApply =
@@ -266,6 +269,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
   Future<void> onClearAllClick() async {
     trackAction(
       AnalyticsTrackActionName.enhancedFiltersClearFiltersLinkClickEvent,
+      // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
     );
     selectedSiteFilters.removeWhere((p) => p.key != QuickFilterKeys.favorites);
     selectedSiteFilters.refresh();
@@ -297,6 +301,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
 
       _handleFavoriteQuickFilter(siteFilter);
     } else {
+      _handleServiceTruckStopFilters(siteFilter);
       isFavOptionSelectedLastTime(false);
       final syncEnhancedFilterParams = SyncEnhancedFilterParams(
         selectedQuickFilter: siteFilter,
@@ -308,6 +313,29 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
       storedSiteFilters.clearAndAddAll(_cloneSelectedFiltersIgnoreFavorites);
     }
     applyFilter();
+  }
+
+  void _handleServiceTruckStopFilters(SiteFilter siteFilter) {
+    if (AppUtils.isComdata &&
+        (siteFilter.key == QuickFilterKeys.service ||
+            siteFilter.key == QuickFilterKeys.truckStop)) {
+      final locationTypeSiteFilters = allEnhancedFilters
+          .firstWhere((element) =>
+              element.filterHeader == SiteLocatorConstants.locationTypeHeading)
+          .filterItems;
+      if (siteFilter.key == QuickFilterKeys.truckStop) {
+        final serviceFilter = locationTypeSiteFilters
+            .firstWhere((element) => element.key == QuickFilterKeys.service);
+        serviceFilter.isChecked = false;
+        selectedSiteFilters.remove(serviceFilter);
+      }
+      if (siteFilter.key == QuickFilterKeys.service) {
+        final truckStopFilter = locationTypeSiteFilters
+            .firstWhere((element) => element.key == QuickFilterKeys.truckStop);
+        truckStopFilter.isChecked = false;
+        selectedSiteFilters.remove(truckStopFilter);
+      }
+    }
   }
 
   void _handleFavoriteQuickFilter(SiteFilter favoritesSiteFilter) {

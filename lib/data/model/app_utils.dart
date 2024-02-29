@@ -40,6 +40,7 @@ enum AppFlavor {
   comdata('comdata'),
   fuelman('fuelman'),
   ifleet('ifleet'),
+  fuelmanWeb('fuleman_web'),
   none('none');
 
   final String app;

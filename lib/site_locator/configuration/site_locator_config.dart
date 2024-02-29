@@ -124,7 +124,6 @@ class SiteLocatorConfig {
     // if (json != null) {
     //   configProperties = ConfigPropertiesModel.fromJson(json);
     // }
-
     if (configDataJson != null) {
       configProperties = ConfigPropertiesModel.fromJson(configDataJson);
     }
@@ -205,7 +204,8 @@ class SiteLocatorConfig {
   }
 
   static void _setFuelPriceCacheDuration() {
-    if (configProperties?.fuelPriceCacheDuration[AppUtils.flavor] != null) {
+    if (configProperties?.fuelPriceCacheDuration != null &&
+        configProperties?.fuelPriceCacheDuration[AppUtils.flavor] != null) {
       fuelPriceCacheDuration =
           int.parse(configProperties?.fuelPriceCacheDuration[AppUtils.flavor]);
     }

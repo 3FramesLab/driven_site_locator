@@ -6,8 +6,6 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/data/models/site_filter.dart';
 
 class SiteFilters {
-  // static final EntitlementRepository _entitlementRepository =
-  //     Get.find<EntitlementRepository>();
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
   static List<SiteFilter> quickFiltersList = <SiteFilter>[
@@ -44,7 +42,7 @@ class SiteFilters {
       SiteFilter(
         type: FilterTypeEnum.quickFilter,
         key: QuickFilterKeys.gallonUp,
-        label: QuickFilterLabel.gallonUp,
+        label: QuickFilterLabel.preferred,
         serviceType: ServiceTypeEnum.locationType,
         order: 4,
       ),

@@ -1,9 +1,9 @@
 import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
 
-class CalculateFuelGaugeProgressUseCase
-    extends BaseUseCase<double, CalculateFuelGaugeProgressParam> {
+class CalculateSitesLoadingProgressUseCase
+    extends BaseUseCase<double, CalculateSitesLoadingProgressParam> {
   @override
-  double execute(CalculateFuelGaugeProgressParam param) {
+  double execute(CalculateSitesLoadingProgressParam param) {
     final previousValue = param.previousValue;
     final canShowLoading = param.canShowLoading;
     double resultValue = 0;
@@ -25,11 +25,11 @@ class CalculateFuelGaugeProgressUseCase
   }
 }
 
-class CalculateFuelGaugeProgressParam {
+class CalculateSitesLoadingProgressParam {
   final double previousValue;
   final bool canShowLoading;
 
-  CalculateFuelGaugeProgressParam({
+  CalculateSitesLoadingProgressParam({
     required this.previousValue,
     required this.canShowLoading,
   });

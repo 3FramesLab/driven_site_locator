@@ -11,7 +11,7 @@ class SetUpWizardConstants {
   static const fleetManagerQuickFiltersInfo =
       'Tap the quick filters on top of the screen to display fuel, service, or discount locations.';
   static const cardholderQuickFiltersInfo =
-      'Tap the quick filters on the top of the screen to see fuel, service, or Gallon UP locations.';
+      'Tap the quick filters on the top of the screen to see fuel, service, or Preferred locations.';
   static const favoritesInfo =
       'Tap the "heart" to add a shortcut to your favorite locations.';
   static const nextButtonText = 'Next';

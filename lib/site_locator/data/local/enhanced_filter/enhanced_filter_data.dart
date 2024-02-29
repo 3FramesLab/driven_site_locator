@@ -7,8 +7,6 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/data/models/enhanced_filter_model.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_filter.dart';
 
-// EntitlementRepository _entitlementRepository =
-//     Get.find<EntitlementRepository>();
 final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
 final EnhancedFilterModel _amenities = EnhancedFilterModel(

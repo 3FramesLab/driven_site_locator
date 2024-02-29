@@ -82,7 +82,7 @@ class SiteLocatorConstants {
   static const fuelBrand = 'Fuel Brand';
   static const locationBrand = 'Location Brand';
   static const backToMapLabel = 'Map';
-  static const viewMoreSitesButtonLabel = 'View More Sites';
+
   static const filterButtonLabel = 'Filter';
   static const listViewButtonLabel = 'List';
   static const resetCode = 'RESET_CODE';
@@ -119,7 +119,7 @@ class SiteLocatorConstants {
   static const thresholdDistanceForSitesUpdateInMeters = 1600.0;
   static const gallonUpDisclaimer = [
     'This location is part of the ',
-    'Gallon UP program',
+    'Gallon UP/Preferred program',
     '. ',
     'Fuel at these preferred merchant locations to take advantage of the lowest transaction fees.',
   ];
@@ -138,6 +138,28 @@ class SiteLocatorConstants {
 
   static const updateLocationDistanceInMeters = 100;
   static const thresholdForShowingChangeFiltersDialog = 3;
+  static const preferred = 'Preferred';
+  static const preferredSites = 'Preferred sites';
+
+
+  // Left Header
+  static const filters = 'Filters';
+  static const routePlanner = 'Route Planner';
+
+  // Apply for fuelman
+  static const applyForFuelman = 'Apply for Fuelman';
+  static const applyForFuelmanUrl =
+      'https://www.fuelman.com/fuel-cards/in-town-fleets/ ';
+  static const openApplyForFuelmanError = 'Could not launch url.';
+
+  static const useMyLocation = '''
+You are currently viewing fuel sites in {Nashville, TN}.\n
+To view fuel sites in a different location, use the search bar or enable “sitelocator.fuelman.com” to use your current location.
+''';
+
+  static const useMyLocationButton = 'Use My Current Location';
+  static String continueWithoutUsingMyLocation =
+      'Continue without using my location';
 }
 
 class QuickFilterLabel {
@@ -145,6 +167,7 @@ class QuickFilterLabel {
   static const service = 'Service';
   static const discounts = 'Discount';
   static const gallonUp = 'Gallon UP';
+  static const preferred = 'Preferred';
   static const favorites = 'Favorites';
   static const truckStop = 'truckStop';
 }

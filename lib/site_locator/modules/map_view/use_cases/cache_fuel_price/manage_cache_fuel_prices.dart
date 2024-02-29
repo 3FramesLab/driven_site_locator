@@ -100,9 +100,9 @@ class ManageCacheFuelPrices {
     });
   }
 
-  static void showRetrieveFuelPricesFuelGaugeMessage(
+  static void showRetrieveFuelPricesMessage(
       SiteLocatorController siteLocatorController) {
-    siteLocatorController.fuelGaugeProgressController
+    siteLocatorController.sitesLoadingProgressController
         .setRetrievingFuelPricesMessage(
             isUserAuthenticated: siteLocatorController.isUserAuthenticated);
   }

@@ -2,6 +2,7 @@ library map_view_module;
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:js' as js;
 
 import 'package:cron/cron.dart';
 import 'package:driven_common/common/driven_dimensions.dart';
@@ -43,10 +44,10 @@ import 'package:driven_site_locator/site_locator/data/models/google_place_model.
 import 'package:driven_site_locator/site_locator/data/models/site_filter.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/data/services/site_locations_service.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/controller/fuel_gauge_progress_controller.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/fuel_gauge_dial_props.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/use_cases/calculate_fuel_gauge_progress_usecase.dart';
-import 'package:driven_site_locator/site_locator/fuel_gauge_progress_indicator/widgets/fuel_guage_progress_indicator.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/calculate_loading_progress_usecase.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_controller.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_props.dart';
+import 'package:driven_site_locator/site_locator/loading_progress_indicator/widgets/sites_loading_progress_indicator.dart';
 import 'package:driven_site_locator/site_locator/modules/cardholder_setup/cardholder_setup_module.dart';
 import 'package:driven_site_locator/site_locator/modules/filters/filter_module.dart';
 import 'package:driven_site_locator/site_locator/modules/location_cache/location_cache_module.dart';
@@ -55,12 +56,15 @@ import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cach
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_fuel_preferences_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog.dart';
 import 'package:driven_site_locator/site_locator/modules/search_locations/search_location_module.dart';
+import 'package:driven_site_locator/site_locator/site_locator_components/common_widgets/rounded_button.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/custom_pin.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pin_variant_store.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/site_locator_map.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/use_cases/compute_circle_radius_use_case.dart';
+import 'package:driven_site_locator/site_locator/styles/site_locator_colors.dart';
 import 'package:driven_site_locator/site_locator/use_cases/access_token/get_access_token_for_sites_use_case.dart';
 import 'package:driven_site_locator/site_locator/use_cases/common/get_string_list_from_sp_use_case.dart';
 import 'package:driven_site_locator/site_locator/use_cases/common/store_string_list_into_sp_use_case.dart';
@@ -82,6 +86,7 @@ import 'package:driven_site_locator/site_locator/widgets/dialogs/enhanced_no_loc
 import 'package:driven_site_locator/site_locator/widgets/dialogs/fuel_price_disclaimer_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/no_locations_dialog.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_google_maps_cluster/flutter_google_maps_cluster.dart';

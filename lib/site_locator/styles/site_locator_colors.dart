@@ -10,6 +10,7 @@ class SiteLocatorColors {
   static const darkBlue = Color(0xFF276E8A);
   static const lightBlue = Color(0xFF40B7EC);
   static const grey100 = Color(0xFFF5F5F5);
+  static const red = Color(0xFFda291c);
   static final grey400 = Colors.grey[400];
   static final whiteWithOpacity75 = Colors.white.withOpacity(0.75);
   static final blackWithOpacity75 = Colors.black.withOpacity(0.75);

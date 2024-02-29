@@ -201,31 +201,37 @@ class SiteInfoUtils {
         ),
       );
 
-  static Widget getServiceWidget(SiteLocation siteLocation) =>
-      siteLocation.locationType?.maintenanceService == Status.Y
-          ? Semantics(
-              container: true,
-              label: SemanticStrings.siteInfoService,
-              child: const SiteInfoDetail(
-                iconData: Icons.build_outlined,
-                description: SiteLocatorConstants.service,
-              ),
-            )
-          : const SizedBox();
+  static Widget getServiceWidget(SiteLocation siteLocation) => Visibility(
+        visible: siteLocation.locationType?.maintenanceService == Status.Y,
+        maintainSize: true,
+        maintainAnimation: true,
+        maintainState: true,
+        child: Semantics(
+          container: true,
+          label: SemanticStrings.siteInfoService,
+          child: const SiteInfoDetail(
+            iconData: Icons.build_outlined,
+            description: SiteLocatorConstants.service,
+          ),
+        ),
+      );
 
-  static Widget getTimeWidget(SiteLocation siteLocation) =>
-      _canShowTimeWidget(siteLocation)
-          ? Semantics(
-              container: true,
-              label: SemanticStrings.siteInfoTime,
-              child: SiteInfoDetail(
-                iconData: Icons.access_time_outlined,
-                description: siteLocation.hoursOfOperation!,
-                maxLines: 2,
-                textOverflow: TextOverflow.ellipsis,
-              ),
-            )
-          : const SizedBox();
+  static Widget getTimeWidget(SiteLocation siteLocation) => Visibility(
+        visible: _canShowTimeWidget(siteLocation),
+        maintainSize: true,
+        maintainAnimation: true,
+        maintainState: true,
+        child: Semantics(
+          container: true,
+          label: SemanticStrings.siteInfoTime,
+          child: SiteInfoDetail(
+            iconData: Icons.access_time_outlined,
+            description: siteLocation.hoursOfOperation!,
+            maxLines: 2,
+            textOverflow: TextOverflow.ellipsis,
+          ),
+        ),
+      );
 
   static bool _canShowTimeWidget(SiteLocation siteLocation) =>
       siteLocation.hoursOfOperation != null &&
@@ -237,7 +243,7 @@ class SiteInfoUtils {
         child: DrivenDivider(height: 5, color: Colors.grey[300]),
       );
 
-  static int getFuelGaugePeriodicInterval(int sitesCount) {
+  static int getSitesLoadingPeriodicInterval(int sitesCount) {
     final timeInterval = sitesCount < 100
         ? 300
         : sitesCount < 200

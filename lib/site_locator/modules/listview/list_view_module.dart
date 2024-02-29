@@ -19,6 +19,7 @@ import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/h
 import 'package:driven_site_locator/site_locator/widgets/back_to_map_button.dart';
 import 'package:driven_site_locator/site_locator/widgets/site_info_detail.dart';
 import 'package:driven_site_locator/site_locator/widgets/site_locator_scaffold.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 part 'views/site_locations_list_view_page.dart';
