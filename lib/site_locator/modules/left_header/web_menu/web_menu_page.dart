@@ -40,13 +40,14 @@ class WebMenuPage extends StatelessWidget {
               WebLocationPreferencesCard(),
               _divider(),
               const WebHelpCenterCard(),
-              Visibility(
-                visible: repository.isLegalPrivacySettingEnabled,
-                child: _divider(),
-              ),
+              _divider(),
               Visibility(
                 visible: repository.isLegalPrivacySettingEnabled,
                 child: const WebLegalPrivacyCard(),
+              ),
+              Visibility(
+                visible: repository.isLegalPrivacySettingEnabled,
+                child: _divider(),
               ),
             ],
           ),
