@@ -20,7 +20,7 @@ class PindropImagePathUseCase
               ? SiteLocatorAssets.pinBgGallonUpFilePathDFC
               : SiteLocatorAssets.pinBgNormalFilePathDFC;
         }
-        return pinDropBgPath;
+        return SiteLocatorAssets.getAccuratePath(pinDropBgPath);
 
       // Pin drop type with price banner
       case PinDropImageType.bannerPinDropBg:
@@ -33,20 +33,20 @@ class PindropImagePathUseCase
               ? SiteLocatorAssets.gallonUpPriceBannerPinFilePathDFC
               : SiteLocatorAssets.normalPriceBannerPinFilePathDFC;
         }
-        return bannerPinDropBgPath;
+        return SiteLocatorAssets.getAccuratePath(bannerPinDropBgPath);
 
       // Big Pin drop (selected view)
       case PinDropImageType.bigPinDropBg:
         String bigPinDropBgPath = param.hasDiscount ?? false
-            ? SiteLocatorAssets.pinBgDiscountFilePath
-            : SiteLocatorAssets.pinBgFilePath;
+            ? SiteLocatorAssets.selectedPinBgDiscountFilePath
+            : SiteLocatorAssets.selectedPinBgFilePath;
 
         if (AppUtils.isComdata) {
           bigPinDropBgPath = param.hasGallonUp ?? false
               ? SiteLocatorAssets.pinBgGallonUpFilePathDFC
               : SiteLocatorAssets.pinBgNormalFilePathDFC;
         }
-        return bigPinDropBgPath;
+        return SiteLocatorAssets.getAccuratePath(bigPinDropBgPath);
     }
   }
 }
