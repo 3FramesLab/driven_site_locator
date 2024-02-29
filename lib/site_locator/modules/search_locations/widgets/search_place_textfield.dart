@@ -94,10 +94,10 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     if (searchText.isNotEmpty) {
       if (_isSearchIcon || forceSearch) {
         await _executeSearchPlace(searchText);
+        await siteLocatorController.setListViewInitializers();
       } else if (_isClearIcon) {
         await onClearIconTapped();
       }
-      await siteLocatorController.setListViewInitializers();
     }
   }
 
@@ -105,7 +105,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     siteLocatorController.getSearchTrackAction();
     searchPlacesController.searchIconName(SiteLocatorConstants.clear);
     searchPlacesController.searchText = searchText;
-    if (Get.currentRoute == SiteLocatorRoutes.searchPlaceResultsView) {
+    if (Get.currentRoute != SiteLocatorRoutes.searchPlaceResultsView) {
       await searchPlacesController.getPlacesResults();
     } else {
       _goToResultPage();
