@@ -70,6 +70,7 @@ flutter:
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:
+    - assets/site_locator/web/
     - assets/images/
     - assets/images/2.0x/
     - assets/images/3.0x/
