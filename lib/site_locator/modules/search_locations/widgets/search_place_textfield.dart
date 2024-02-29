@@ -97,6 +97,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
       } else if (_isClearIcon) {
         await onClearIconTapped();
       }
+      await siteLocatorController.setListViewInitializers();
     }
   }
 
