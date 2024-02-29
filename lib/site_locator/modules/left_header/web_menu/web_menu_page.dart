@@ -2,7 +2,7 @@ import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_download_mobile_app_card.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_help_center_card.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_legal_privacy_card.dart';
-import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_location_prefs_card.dart';
+import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_location_preferences_card.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_login_menu_card.dart';
 import 'package:driven_site_locator/site_locator/site_locator_components/common_widgets/back_button_with_title.dart';
 import 'package:flutter/material.dart';

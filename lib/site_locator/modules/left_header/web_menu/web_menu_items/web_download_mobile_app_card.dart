@@ -18,7 +18,7 @@ class WebDownloadMobileAppCard extends StatelessWidget {
   }
 
   Widget expandedListTile() => ExpansionTile(
-        title: Text(_title, style: _textStyle),
+        title: Text(_title, style: f16SemiboldBlackDark),
         leading: _icon,
         collapsedIconColor: Colors.black,
         children: [
@@ -27,7 +27,7 @@ class WebDownloadMobileAppCard extends StatelessWidget {
       );
 
   Widget _storeIconsRow() => Padding(
-        padding: const EdgeInsets.only(left:16,top: 4, bottom: 8),
+        padding: const EdgeInsets.only(left: 16, top: 4, bottom: 8),
         child: Row(
           children: [
             _storeIcon(
@@ -62,9 +62,6 @@ class WebDownloadMobileAppCard extends StatelessWidget {
       );
 
   String get _title => SiteLocatorConstants.downloadFuelmanApp;
-
-  TextStyle get _textStyle =>
-      const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 
   Image get _icon => const Image(
         image: AssetImage(SiteLocatorAssets.mobilePhone),

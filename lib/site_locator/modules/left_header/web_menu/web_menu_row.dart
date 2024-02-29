@@ -22,26 +22,23 @@ class WebMenuRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 3,bottom: 3),
+      padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: ListTile(
         onTap: onRowTap,
         leading: _icon(),
         title: Text(
           title,
-          style: _textStyle,
+          style: f16SemiboldBlackDark,
         ),
       ),
     );
   }
 
-  TextStyle get _textStyle =>
-      const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
-
   Widget? _icon() => imageIcon != null
       ? Image(
           image: imageIcon!,
-          height: SiteLocatorDimensions.dp28,
-          width: SiteLocatorDimensions.dp28,
+          height: SiteLocatorDimensions.dp24,
+          width: SiteLocatorDimensions.dp24,
         )
       : icon;
 }
