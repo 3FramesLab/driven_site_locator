@@ -26,7 +26,7 @@ class WebMenuPage extends StatelessWidget {
                 title: 'Menu',
                 onBackButtonPressed: () {},
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               Visibility(
                 visible: repository.isLoginLogoutSettingsEnabled,
                 child: WebLoginMenuCard(),

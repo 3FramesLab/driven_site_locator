@@ -16,13 +16,17 @@ class WebLocationPreferencesCard extends StatelessWidget {
     return expandedListTile();
   }
 
-  Widget expandedListTile() => ExpansionTile(
-        title: Text(_title, style: f16SemiboldBlack),
-        leading: _icon,
-        collapsedIconColor: Colors.black,
-        children: [
-          _locationPreferences(),
-        ],
+  Widget expandedListTile() => Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
+        child: ExpansionTile(
+          title: Text(_title, style: f16SemiboldBlack),
+          leading: _icon,
+          collapsedIconColor: Colors.black,
+          iconColor: Colors.black,
+          children: [
+            _locationPreferences(),
+          ],
+        ),
       );
 
   Widget _locationPreferences() => Padding(

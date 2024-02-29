@@ -17,13 +17,17 @@ class WebDownloadMobileAppCard extends StatelessWidget {
     return expandedListTile();
   }
 
-  Widget expandedListTile() => ExpansionTile(
-        title: Text(_title, style: f16SemiboldBlackDark),
-        leading: _icon,
-        collapsedIconColor: Colors.black,
-        children: [
-          _storeIconsRow(),
-        ],
+  Widget expandedListTile() => Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
+        child: ExpansionTile(
+          title: Text(_title, style: f16SemiboldBlackDark),
+          leading: _icon,
+          collapsedIconColor: Colors.black,
+          iconColor: Colors.black,
+          children: [
+            _storeIconsRow(),
+          ],
+        ),
       );
 
   Widget _storeIconsRow() => Padding(
