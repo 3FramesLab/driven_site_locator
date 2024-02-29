@@ -12,13 +12,18 @@ class FiltersButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Stack(
+      children: [filterButton(), _filterCountBadge],
+    );
+  }
+
+  Container filterButton() {
     return Container(
       height: 40,
       width: 158,
       child: OutlinedButton(
         onPressed: () {
           // TODO
-          filterButtonTap();
           // _filterCountBadge;
         },
         style: OutlinedButton.styleFrom(
@@ -42,10 +47,6 @@ class FiltersButton extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void filterButtonTap() {
-    const EnhancedFilterPage();
   }
 
   Widget get _filterCountBadge => Positioned(
