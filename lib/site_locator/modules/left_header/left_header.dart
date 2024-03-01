@@ -37,7 +37,7 @@ class LeftHeader extends StatelessWidget {
           const SearchPlaceTextField(),
           const SizedBox(height: SiteLocatorDimensions.dp24),
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
-            const FiltersButton()
+            FiltersButton()
           ] else ...[
             const RoutePlannerButton(),
           ],

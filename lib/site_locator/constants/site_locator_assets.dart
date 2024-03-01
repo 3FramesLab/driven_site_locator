@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 class SiteLocatorAssets {
   static const packagePath = 'packages/driven_site_locator';
-  static const assetPath = '$packagePath/assets/site_locator';
+  static const interimAssetPath = '$packagePath/assets/site_locator';
+  static const assetPath = kIsWeb ? '$interimAssetPath/web' : interimAssetPath;
 
 // assets/packages/driven_site_locator/assets/site_locator/loginIcon
   // static const assetJsonPath = 'assets/site_locator';
@@ -8,10 +11,17 @@ class SiteLocatorAssets {
   static const fuelmanBrandFilePath = '$assetPath/site-fuelman-logo.png';
   static const pinBgFilePath = '$assetPath/white-pin-drop.png';
   static const pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
+
+  static const selectedPinBgFilePath = '$assetPath/white-pin-drop-selected.png';
+  static const selectedPinBgDiscountFilePath =
+      '$assetPath/yellow-pin-drop-selected.png';
+
   static const normalPriceBannerPinFilePath = '$assetPath/regular-marker.png';
   static const discountPriceBannerPinFilePath =
       '$assetPath/discount-marker.png';
   static const fuelManBrandLogo = '$assetPath/site-fuelman-logo.png';
+  static const selectedFuelManBrandLogo =
+      '$assetPath/site-fuelman-logo-big.png';
   static const double logoSize = 40;
   static const discountPriceBannerMapPinFilePath =
       '$assetPath/discount_marker.png';
@@ -70,6 +80,7 @@ class SiteLocatorAssets {
   // Top header route icon
   static const routeIcon = '$assetPath/route_icon.png';
 
+
   //web app assets
   static const badge = '$assetPath/badge.png';
   static const helpCenter = '$assetPath/help_center.png';
@@ -78,4 +89,9 @@ class SiteLocatorAssets {
   static const privacyPolicy = '$assetPath/privacy_policy.png';
   static const appleStore = '$assetPath/apple.png';
   static const googleStore = '$assetPath/google_play.png';
+
+  static String getAccuratePath(String path) {
+    return path;
+  }
+
 }
