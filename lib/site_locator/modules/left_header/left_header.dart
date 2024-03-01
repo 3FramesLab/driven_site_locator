@@ -7,6 +7,7 @@ import 'package:driven_site_locator/site_locator/modules/search_locations/search
 import 'package:flutter/material.dart';
 
 class LeftHeader extends StatelessWidget {
+  final Function()? onMenuIconTap;
   final double padding;
   final Function(bool) onSearchClick;
 
@@ -14,6 +15,7 @@ class LeftHeader extends StatelessWidget {
     required this.onSearchClick,
     Key? key,
     this.padding = SiteLocatorDimensions.dp16,
+    this.onMenuIconTap,
   }) : super(key: key);
 
   @override
@@ -33,11 +35,13 @@ class LeftHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          TopMenuLogoHeader(),
+          TopMenuLogoHeader(onMenuIconTap: onMenuIconTap),
           SearchPlaceTextField(onSearchClick: onSearchClick),
+          TopMenuLogoHeader(onMenuIconTap: onMenuIconTap),
+          const SearchPlaceTextField(),
           const SizedBox(height: SiteLocatorDimensions.dp24),
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
-            const FiltersButton()
+            FiltersButton()
           ] else ...[
             const RoutePlannerButton(),
           ],
