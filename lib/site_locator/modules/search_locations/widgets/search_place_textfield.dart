@@ -2,12 +2,12 @@ part of search_location_module;
 
 class SearchPlaceTextField extends StatefulWidget {
   final String? currentLocation;
-  final Function(bool)? onSearchClick;
+  final Function()? onSearchIconTap;
 
   const SearchPlaceTextField({
-    this.onSearchClick,
-    super.key,
+    this.onSearchIconTap,
     this.currentLocation,
+    super.key,
   });
 
   @override
@@ -95,8 +95,8 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
     if (searchText.isNotEmpty) {
       if (_isSearchIcon || forceSearch) {
-        if (widget.onSearchClick != null) {
-          widget.onSearchClick!(true);
+        if (widget.onSearchIconTap != null) {
+          widget.onSearchIconTap!();
         }
         await _executeSearchPlace(searchText);
       } else if (_isClearIcon) {
