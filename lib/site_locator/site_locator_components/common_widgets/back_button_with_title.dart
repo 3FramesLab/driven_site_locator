@@ -30,13 +30,13 @@ class BackButtonWithTitle extends StatelessWidget {
             children: [
               const Icon(
                 Icons.arrow_back_ios_outlined,
-                size: 20,
+                size: 24,
                 color: Colors.black,
               ),
               const SizedBox(width: 20),
               Text(
                 title ?? '',
-                style: f16BoldBlackDark,
+                style: f24ExtraboldBlackDark,
               ),
             ],
           ),
