@@ -80,18 +80,16 @@ class SiteLocatorAssets {
   // Top header route icon
   static const routeIcon = '$assetPath/route_icon.png';
 
-
   //web app assets
-  static const badge = '$assetPath/badge.png';
-  static const helpCenter = '$assetPath/help_center.png';
-  static const mapPin = '$assetPath/map_pin.png';
-  static const mobilePhone = '$assetPath/mobile_phone.png';
-  static const privacyPolicy = '$assetPath/privacy_policy.png';
-  static const appleStore = '$assetPath/apple.png';
-  static const googleStore = '$assetPath/google_play.png';
+  static const badge = '$interimAssetPath/badge.png';
+  static const helpCenter = '$interimAssetPath/help_center.png';
+  static const mapPin = '$interimAssetPath/map_pin.png';
+  static const mobilePhone = '$interimAssetPath/mobile_phone.png';
+  static const privacyPolicy = '$interimAssetPath/privacy_policy.png';
+  static const appleStore = '$interimAssetPath/apple.png';
+  static const googleStore = '$interimAssetPath/google_play.png';
 
   static String getAccuratePath(String path) {
     return path;
   }
-
 }
