@@ -10,6 +10,8 @@ class SiteLocatorApiConstants {
       DrivenSiteLocator.instance.env[EnvKeys.siteLocationBaseUrl]!;
   static final fuelPricesBaseUrl =
       DrivenSiteLocator.instance.env[EnvKeys.fuelPricesBaseUrl]!;
+  static final fuelmanWebUrl =
+      DrivenSiteLocator.instance.env[EnvKeys.fuelmanWebURL]!;
 
   static final siteLocatorAccessTokenJson = {
     'client_id': DrivenSiteLocator.instance.env[EnvKeys.siteLocatorClientId],
@@ -33,6 +35,12 @@ class SiteLocatorApiConstants {
   //fuel prices
   static const defaultSysAccountId = '0_0000_3';
   static const defaultFuelPricesApiLimit = 5;
+
+  //mobile app store links
+  static const fuelmanAppGoogleStoreLink =
+      'https://play.google.com/store/apps/details?id=com.fuelman.driven&hl=en&gl=US&pli=1';
+  static const fuelmanAppAppleStoreLink =
+      'https://apps.apple.com/us/app/driven-for-fuelman/id6443817640';
 }
 
 class EnvKeys {
@@ -43,4 +51,5 @@ class EnvKeys {
   static const siteLocatorClientSecret = 'SITE_LOCATOR_CLIENT_SECRET';
   static const googleIosKey = 'GOOGLE_IOS_KEY';
   static const googleAndroidKey = 'GOOGLE_ANDROID_KEY';
+  static const fuelmanWebURL = 'FUELMAN_WEB_URL';
 }
