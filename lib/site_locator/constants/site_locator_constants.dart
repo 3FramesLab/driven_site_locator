@@ -164,6 +164,8 @@ To view fuel sites in a different location, use the search bar or enable “site
   static const useMyLocationButton = 'Use My Current Location';
   static String continueWithoutUsingMyLocation =
       'Continue without using my location';
+
+  static String menu = 'Menu';
 }
 
 class QuickFilterLabel {

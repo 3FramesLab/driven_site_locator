@@ -1,4 +1,5 @@
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_download_mobile_app_card.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_help_center_card.dart';
 import 'package:driven_site_locator/site_locator/modules/left_header/web_menu/web_menu_items/web_legal_privacy_card.dart';
@@ -28,7 +29,7 @@ class WebMenuPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BackButtonWithTitle(
-                title: 'Menu',
+                title: SiteLocatorConstants.menu,
                 onBackButtonPressed: onMenuBackButtonTap,
               ),
               const SizedBox(height: 15),

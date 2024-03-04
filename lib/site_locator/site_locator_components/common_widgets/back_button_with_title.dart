@@ -13,8 +13,6 @@ class BackButtonWithTitle extends StatelessWidget {
         color: Colors.white70,
         borderRadius: BorderRadius.all(Radius.circular(45)),
       ),
-      margin: const EdgeInsets.only(left: 10),
-      padding: const EdgeInsets.only(left: 10, right: 10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: _body(),
@@ -25,18 +23,19 @@ class BackButtonWithTitle extends StatelessWidget {
   Widget _body() => GestureDetector(
         onTap: onBackButtonPressed,
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding:
+              const EdgeInsets.only(left: 16, top: 10, bottom: 10, right: 16),
           child: Row(
             children: [
               const Icon(
                 Icons.arrow_back_ios_outlined,
-                size: 20,
+                size: 24,
                 color: Colors.black,
               ),
               const SizedBox(width: 20),
               Text(
                 title ?? '',
-                style: f16BoldBlackDark,
+                style: f24ExtraboldBlackDark,
               ),
             ],
           ),
