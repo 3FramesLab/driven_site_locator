@@ -319,8 +319,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   Widget zoomInOutButton() => ZoomHandleButtons(
-        onZoomInIconTap: _onRecenterButtonTap,
-        onZoomOutIconTap: _onRecenterButtonTap,
+        onZoomInIconTap: _onZoonInButtonTap,
+        onZoomOutIconTap: _onZoomOutButtonTap,
       );
 
   Widget _buildRightMapActions() {
@@ -334,6 +334,18 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           gpsIconButton(),
         ],
       ),
+    );
+  }
+
+  void _onZoonInButtonTap() {
+    siteLocatorController.googleMapController?.animateCamera(
+      CameraUpdate.zoomIn(),
+    );
+  }
+
+  void _onZoomOutButtonTap() {
+    siteLocatorController.googleMapController?.animateCamera(
+      CameraUpdate.zoomOut(),
     );
   }
 }
