@@ -17,8 +17,6 @@ class SearchPlaceResultsView extends StatelessWidget {
             children: [
               backButton(),
               const SizedBox(height: 5),
-              _searchTextField(),
-              const SizedBox(height: 20),
               const SearchPlacesListView(),
             ],
           ),

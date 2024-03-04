@@ -53,14 +53,14 @@ class SearchPlaceListItem extends StatelessWidget {
   Text _searchResultSecondaryText() => Text(
         searchPlacesController
                 .placesList[rowIndex].structuredFormatting?.secondaryText ??
-            '',
+            'test',
         style: f14RegularGrey,
       );
 
   Text _searchResultMainText() => Text(
         searchPlacesController
                 .placesList[rowIndex].structuredFormatting?.mainText ??
-            '',
+            'sasas',
         style: f16SemiboldBlack,
       );
 
