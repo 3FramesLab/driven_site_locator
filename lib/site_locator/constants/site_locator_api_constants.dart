@@ -19,8 +19,11 @@ class SiteLocatorApiConstants {
         DrivenSiteLocator.instance.env[EnvKeys.siteLocatorClientSecret],
     'grant_type': 'client_credentials'
   };
-  static final googleAPIKey = DrivenSiteLocator.instance
-      .env[Platform.isIOS ? EnvKeys.googleIosKey : EnvKeys.googleAndroidKey];
+  // static final googleAPIKey = DrivenSiteLocator.instance
+  //     .env[Platform.isIOS ? EnvKeys.googleIosKey : EnvKeys.googleAndroidKey];
+
+  static final googleAPIKey =
+      DrivenSiteLocator.instance.env[EnvKeys.googleAndroidKey];
   static const radiusForFetchingPlaces = 5000; //in meters
   static const componentsForFetchingPlaces =
       'country:us'; //restricting other country data
