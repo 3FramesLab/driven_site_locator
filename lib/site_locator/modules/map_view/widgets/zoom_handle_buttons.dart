@@ -2,6 +2,8 @@ import 'package:driven_common/common/driven_dimensions.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 
+import '../../../constants/semantic_strings.dart';
+
 class ZoomHandleButtons extends StatelessWidget {
   final Function()? onZoomInIconTap;
   final Function()? onZoomOutIconTap;
@@ -16,14 +18,20 @@ class ZoomHandleButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GestureDetector(
-          onTap: onZoomInIconTap,
-          child: _buildCard(SiteLocatorAssets.zoomInIcon),
+        Semantics(
+          label: SemanticStrings.zoomIn,
+          child: GestureDetector(
+            onTap: onZoomInIconTap,
+            child: _buildCard(SiteLocatorAssets.zoomInIcon),
+          ),
         ),
         const SizedBox(height: DrivenDimensions.dp8),
-        GestureDetector(
-          onTap: onZoomOutIconTap,
-          child: _buildCard(SiteLocatorAssets.zoomOutIcon),
+        Semantics(
+          label: SemanticStrings.zoomOut,
+          child: GestureDetector(
+            onTap: onZoomOutIconTap,
+            child: _buildCard(SiteLocatorAssets.zoomOutIcon),
+          ),
         ),
       ],
     );

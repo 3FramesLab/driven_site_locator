@@ -39,4 +39,6 @@ class SemanticStrings {
   static const siteInfoPhoneNumber = 'site-info-phone-number';
   static const siteInfoDirectionsButton = 'site-info-directions-button';
   static const siteInfoCallButton = 'site-info-call-button';
+  static const zoomIn = 'zoom_in';
+  static const zoomOut = 'zoom_out';
 }
