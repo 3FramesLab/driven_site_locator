@@ -35,7 +35,6 @@ class LeftHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          TopMenuLogoHeader(onMenuIconTap: onMenuIconTap),
           SearchPlaceTextField(onSearchIconTap: onSearchIconTap),
           const SizedBox(height: SiteLocatorDimensions.dp24),
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
