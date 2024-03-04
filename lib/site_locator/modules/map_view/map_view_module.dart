@@ -57,6 +57,7 @@ import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cach
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_fuel_preferences_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/widgets/zoom_handle_buttons.dart';
 import 'package:driven_site_locator/site_locator/modules/search_locations/search_location_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_components/common_widgets/rounded_button.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/custom_pin.dart';

@@ -80,6 +80,11 @@ class SiteLocatorAssets {
   // Top header route icon
   static const routeIcon = '$assetPath/route_icon.png';
 
+
+  // Zoom In/Out icon
+  static const zoomInIcon = '$assetPath/zoom_in_icon.png';
+  static const zoomOutIcon = '$assetPath/zoom_out_icon.png';
+
   //web app assets
   static const badge = '$interimAssetPath/badge.png';
   static const helpCenter = '$interimAssetPath/help_center.png';
@@ -92,4 +97,5 @@ class SiteLocatorAssets {
   static String getAccuratePath(String path) {
     return path;
   }
+
 }
