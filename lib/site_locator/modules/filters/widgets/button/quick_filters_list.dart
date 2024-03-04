@@ -32,14 +32,16 @@ class QuickFiltersList extends StatelessWidget {
       // // adobeCustomTag: AdobeTagProperties.mapView,
     );
     siteLocatorController.resetMapViewScreen();
-    // await filterController.trackNewlyAddedFilters();
-    await siteLocatorController.setListViewInitializers();
-
     if (!isLoading) {
       siteLocatorController.canShow2CTA(false);
       siteLocatorController.clearSearchPlaceInput();
       await filterController.syncEnhancedFilter(siteFilter);
     }
+    SiteLocatorUtils.hideKeyboard();
+    siteLocatorController.closeLocationInfoPanel();
+    siteLocatorController.clearSearchPlaceInput();
+    siteLocatorController.resetPrevSelectedMarkerStatus();
+    await siteLocatorController.setListViewInitializers();
   }
 
   Widget get _divider => const SizedBox(width: 8);
