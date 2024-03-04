@@ -141,10 +141,14 @@ class SiteLocatorConstants {
   static const preferred = 'Preferred';
   static const preferredSites = 'Preferred sites';
 
-
   // Left Header
   static const filters = 'Filters';
   static const routePlanner = 'Route Planner';
+
+  static const webLogin = 'Login to Driven for Fuelman Portal';
+  static const downloadFuelmanApp = 'Download Driven for Fuelman App';
+  static const locationPreferences = 'Location Preferences';
+  static const shareMyCurrentLocation = 'Share my current location';
 
   // Apply for fuelman
   static const applyForFuelman = 'Apply for Fuelman';
@@ -160,6 +164,8 @@ To view fuel sites in a different location, use the search bar or enable “site
   static const useMyLocationButton = 'Use My Current Location';
   static String continueWithoutUsingMyLocation =
       'Continue without using my location';
+
+  static String menu = 'Menu';
 }
 
 class QuickFilterLabel {

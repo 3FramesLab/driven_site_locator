@@ -1,7 +1,9 @@
 import 'dart:ui' as ui;
 
 import 'package:driven_site_locator/data/model/app_utils.dart';
+import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pindrop_design.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MarkerPainter extends CustomPainter {
@@ -19,41 +21,21 @@ class MarkerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Color priceTextColor = site.hasDiscount ? Colors.black : Colors.white;
-    // DFC Asset updates
-    if (AppUtils.isComdata) {
-      priceTextColor = site.hasGallonUp ? Colors.white : Colors.black;
-    }
-    final textStyle = TextStyle(
-      color: priceTextColor,
-      fontFamily: 'OpenSans',
-      fontSize: (price != null && price!.length < 5) ? 28 : 24,
-      fontWeight: FontWeight.bold,
-    );
-
-    final double markerImageWidth = price != null ? 230 : 73;
+    final markerImageWidth = PindropDesign.getMarkerImageWidth(site);
     final Paint paint = Paint();
-
     canvas.drawImage(priceTagImage, Offset.zero, paint);
-    double ofX, ofY;
-    ofX = (markerImageWidth - brandLogoImage.width) - 20;
-    ofY = 12;
-    double logoAlignX = site.price != null ? ofX : ofX + 20;
 
-    if (AppUtils.isComdata) {
-      // DFC Asset updates
-      logoAlignX = site.price != null ? ofX + 2 : ofX + 20;
-    }
-    final double logoAlignY = site.hasDiscount
-        ? ofY + 5
-        : site.price != null
-            ? ofY + 4
-            : ofY + 5;
-
-    canvas.drawImage(brandLogoImage, Offset(logoAlignX, logoAlignY), paint);
+    final brandLogoAlignment = PindropDesign.getLogoAlignment(
+      site: site,
+      markerImageWidth: markerImageWidth,
+      brandLogoImage: brandLogoImage,
+    );
+    canvas.drawImage(brandLogoImage,
+        Offset(brandLogoAlignment.offsetX, brandLogoAlignment.offsetY), paint);
 
     // if Price available then paint the price banner
     if (price != null) {
+      final textStyle = PindropDesign.getPriceStyle(site);
       final textSpan = TextSpan(
         text: '\$$price',
         style: textStyle,
@@ -73,9 +55,10 @@ class MarkerPainter extends CustomPainter {
         adjustTop = 10;
       }
       final xAdjuster = (price != null && price!.length < 5) ? adjustLeft : 12;
-      final dx = (((size.width) - textPainter.width) * 0.5) - xAdjuster;
-      final dy = ((size.height - textPainter.height) * 0.6) - adjustTop;
-
+      double dx = (((size.width) - textPainter.width) * 0.5) - xAdjuster;
+      double dy = ((size.height - textPainter.height) * 0.6) - adjustTop;
+      dx = kIsWeb ? (site.hasDiscount ? dx + 4 : dx + 1) : dx;
+      dy = kIsWeb ? (site.hasDiscount ? dy + 3 : dy + 3) : dy;
       final offset = Offset(dx, dy);
       textPainter.paint(canvas, offset);
     }
@@ -102,13 +85,12 @@ class SelectedMarkerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const double markerImageWidth = 134;
     final Paint paint = Paint();
     canvas.drawImage(priceTagImage, Offset.zero, paint);
-    double ofX, ofY;
-    ofX = (markerImageWidth - brandLogoImage.width) - 22;
-    ofY = 23;
-    canvas.drawImage(brandLogoImage, Offset(ofX, ofY), paint);
+    final logoAlignment =
+        PindropDesign.getSelectedLogoAlignment(brandLogoImage);
+    canvas.drawImage(brandLogoImage,
+        Offset(logoAlignment.offsetX, logoAlignment.offsetY), paint);
   }
 
   @override

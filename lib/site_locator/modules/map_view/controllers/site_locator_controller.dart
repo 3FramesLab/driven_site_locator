@@ -167,11 +167,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       print('locationPermission: $locationPermission');
       if (locationPermission != LocationPermission.always &&
           locationPermission != LocationPermission.whileInUse) {
-        unawaited(Get.dialog(
-          EnableLocationServiceDialog(
-              onUseMyLocation: () => onUseMyLocation(locationPermission)),
-          barrierDismissible: false,
-        ));
+        // TODO(siva): revert back
+        // unawaited(Get.dialog(
+        //   EnableLocationServiceDialog(
+        //       onUseMyLocation: () => onUseMyLocation(locationPermission)),
+        //   barrierDismissible: false,
+        // ));
       }
     }
     await subscribeToLocationStream();
@@ -225,6 +226,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await handleSiteLocationResponse();
       if (isFirstLaunch) {
         await moveCameraPosition(currentLatLngBounds());
+      }
+      if (kIsWeb) {
+        resetPrevSelectedMarkerStatus();
+        unawaited(setListViewInitializers());
       }
       isFirstLaunch = false;
     } on Exception catch (e) {
@@ -1211,7 +1216,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    await fetchNextSetDrivingDistance(nextSet.toList());
+    if (!kIsWeb) {
+      // TODO: Smeet - remove if condition later.
+      await fetchNextSetDrivingDistance(nextSet.toList());
+    }
     listViewItems.addAll(nextSet);
     presentPageIndex(presentPageIndex() + perPageCount());
     isInitialListLoading(false);
@@ -2017,4 +2025,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   // Cluster end region
+
+  //web app
+  // ignore: avoid_positional_boolean_parameters
+  void onToggleShareMyCurrentLocation(bool value) {
+    shareMyCurrentLocationStatus(value);
+  }
 }

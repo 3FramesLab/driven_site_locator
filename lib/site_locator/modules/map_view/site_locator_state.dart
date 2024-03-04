@@ -170,4 +170,6 @@ mixin SiteLocatorState {
   FuelPreferenceType selectedCardFuelPreferenceType = FuelPreferenceType.both;
 
   bool isComingFromRecenter = false;
+
+  RxBool shareMyCurrentLocationStatus = false.obs;
 }
