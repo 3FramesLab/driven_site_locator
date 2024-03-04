@@ -20,10 +20,10 @@ class SiteLocatorApiConstants {
         DrivenSiteLocator.instance.env[EnvKeys.siteLocatorClientSecret],
     'grant_type': 'client_credentials'
   };
-  static final googleAPIKey = DrivenSiteLocator.instance.env[Platform.isIOS
-      ? EnvKeys.googleIosKey
-      : kIsWeb
-          ? EnvKeys.googleWebKey
+  static final googleAPIKey = DrivenSiteLocator.instance.env[kIsWeb
+      ? EnvKeys.googleWebKey
+      : Platform.isIOS
+          ? EnvKeys.googleIosKey
           : EnvKeys.googleAndroidKey];
 
   static const radiusForFetchingPlaces = 5000; //in meters
