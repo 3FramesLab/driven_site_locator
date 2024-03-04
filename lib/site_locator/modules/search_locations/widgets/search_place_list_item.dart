@@ -18,15 +18,21 @@ class SearchPlaceListItem extends StatelessWidget {
           onTap: _onPlaceItemTapped,
           child: Container(
             color: SiteInfoUtils.getCardBgColor(rowIndex),
-            child: Row(
-              children: [
-                _placeDetailsView(),
-                // _rightArrowIcon(),
-              ],
-            ),
+            child: kIsWeb
+                ? _buildWebSearchPlacesListRow()
+                : _buildMobileSearchPlacesListRow(),
           ),
         ),
       );
+
+  Row _buildMobileSearchPlacesListRow() {
+    return Row(
+      children: [
+        _placeDetailsView(),
+        _rightArrowIcon(),
+      ],
+    );
+  }
 
   Future<dynamic> _onPlaceItemTapped() {
     siteLocatorController.clearMilesCachedData();
@@ -34,32 +40,37 @@ class SearchPlaceListItem extends StatelessWidget {
         .getLatLngForSelectedPlace(searchPlacesController.placesList[rowIndex]);
   }
 
-  Widget _placeDetailsView() => Container(
+  Expanded _placeDetailsView() => Expanded(
+        flex: 9,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _searchResultMainText(),
-              const SizedBox(height: 5),
-              _searchResultSecondaryText()
-            ],
-          ),
+          child: _buildPlacesDetailsColumn(),
         ),
       );
+
+  Column _buildPlacesDetailsColumn() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _searchResultMainText(),
+        const SizedBox(height: 5),
+        _searchResultSecondaryText()
+      ],
+    );
+  }
 
   Text _searchResultSecondaryText() => Text(
         searchPlacesController
                 .placesList[rowIndex].structuredFormatting?.secondaryText ??
-            'test',
+            '',
         style: f14RegularGrey,
       );
 
   Text _searchResultMainText() => Text(
         searchPlacesController
                 .placesList[rowIndex].structuredFormatting?.mainText ??
-            'sasas',
+            '',
         style: f16SemiboldBlack,
       );
 
@@ -72,4 +83,15 @@ class SearchPlaceListItem extends StatelessWidget {
           ),
         ),
       );
+
+  Widget _buildWebSearchPlacesListRow() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildPlacesDetailsColumn(),
+        _rightArrowIcon(),
+      ],
+    );
+  }
 }
