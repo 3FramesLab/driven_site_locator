@@ -17,6 +17,8 @@ class SearchPlaceResultsView extends StatelessWidget {
             children: [
               backButton(),
               const SizedBox(height: 5),
+              _searchTextField(),
+              const SizedBox(height: 20),
               const SearchPlacesListView(),
             ],
           ),
@@ -25,8 +27,9 @@ class SearchPlaceResultsView extends StatelessWidget {
     );
   }
 
-  Widget _searchTextField() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
+  Widget _searchTextField() => Container(
+        width: 375,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SearchPlaceTextField(
           currentLocation: _getLatLngAsString(),
         ),
