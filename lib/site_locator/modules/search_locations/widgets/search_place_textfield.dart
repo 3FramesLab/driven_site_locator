@@ -95,12 +95,12 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
     if (searchText.isNotEmpty) {
       if (_isSearchIcon || forceSearch) {
-        if (widget.onSearchIconTap != null) {
-          widget.onSearchIconTap!();
-        }
         await _executeSearchPlace(searchText);
       } else if (_isClearIcon) {
         await onClearIconTapped();
+      }
+      if (widget.onSearchIconTap != null) {
+        widget.onSearchIconTap!();
       }
     }
   }
