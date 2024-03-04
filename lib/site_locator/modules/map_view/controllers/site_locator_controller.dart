@@ -1279,7 +1279,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   List<SiteLocation> getSiteLocationsForListView() => List.from(
-        siteLocationDisplayData,
+        selectedSiteFilters.isNotEmpty
+            ? filteredSiteLocationsList
+            : siteLocations ?? <SiteLocation>[],
       );
 
   void showNoMatchingLocationDialog() {
