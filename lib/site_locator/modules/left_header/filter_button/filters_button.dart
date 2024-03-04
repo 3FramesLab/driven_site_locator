@@ -24,7 +24,6 @@ class FiltersButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {
           // TODO
-          // _filterCountBadge;
         },
         style: OutlinedButton.styleFrom(
           shape: const RoundedRectangleBorder(
