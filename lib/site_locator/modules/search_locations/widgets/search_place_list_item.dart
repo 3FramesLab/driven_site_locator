@@ -21,7 +21,7 @@ class SearchPlaceListItem extends StatelessWidget {
             child: Row(
               children: [
                 _placeDetailsView(),
-                _rightArrowIcon(),
+                // _rightArrowIcon(),
               ],
             ),
           ),
@@ -34,8 +34,7 @@ class SearchPlaceListItem extends StatelessWidget {
         .getLatLngForSelectedPlace(searchPlacesController.placesList[rowIndex]);
   }
 
-  Expanded _placeDetailsView() => Expanded(
-        flex: 9,
+  Widget _placeDetailsView() => Container(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
           child: Column(
