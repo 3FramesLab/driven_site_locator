@@ -27,8 +27,8 @@ class SearchPlacesController extends GetxController with SearchLocationState {
           currentLocation,
         ),
       );
-      print(placesResponse);
       placesList(placesResponse?.predictions ?? []);
+      print(placesList);
     } catch (_) {
       Globals().dynatrace.logError(
             name: DynatraceErrorMessages.placesAPIErrorName,
