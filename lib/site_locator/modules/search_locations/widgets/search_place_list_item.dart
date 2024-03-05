@@ -42,21 +42,20 @@ class SearchPlaceListItem extends StatelessWidget {
 
   Expanded _placeDetailsView() => Expanded(
         flex: 9,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-          child: _buildPlacesDetailsColumn(),
-        ),
+        child: _buildPlacesDetailsColumn(),
       );
 
-  Column _buildPlacesDetailsColumn() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _searchResultMainText(),
-        const SizedBox(height: 5),
-        _searchResultSecondaryText()
-      ],
+  Widget _buildPlacesDetailsColumn() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _searchResultMainText(),
+          const SizedBox(height: 5),
+          _searchResultSecondaryText()
+        ],
+      ),
     );
   }
 
@@ -90,7 +89,11 @@ class SearchPlaceListItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildPlacesDetailsColumn(),
-        _rightArrowIcon(),
+        Icon(
+          Icons.chevron_right,
+          size: 26,
+        )
+        // _rightArrowIcon(),
       ],
     );
   }
