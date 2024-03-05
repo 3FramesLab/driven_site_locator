@@ -18,15 +18,21 @@ class SearchPlaceListItem extends StatelessWidget {
           onTap: _onPlaceItemTapped,
           child: Container(
             color: SiteInfoUtils.getCardBgColor(rowIndex),
-            child: Row(
-              children: [
-                _placeDetailsView(),
-                _rightArrowIcon(),
-              ],
-            ),
+            child: kIsWeb
+                ? _buildWebSearchPlacesListRow()
+                : _buildMobileSearchPlacesListRow(),
           ),
         ),
       );
+
+  Row _buildMobileSearchPlacesListRow() {
+    return Row(
+      children: [
+        _placeDetailsView(),
+        _rightArrowIcon(),
+      ],
+    );
+  }
 
   Future<dynamic> _onPlaceItemTapped() {
     siteLocatorController.clearMilesCachedData();
@@ -36,19 +42,22 @@ class SearchPlaceListItem extends StatelessWidget {
 
   Expanded _placeDetailsView() => Expanded(
         flex: 9,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _searchResultMainText(),
-              const SizedBox(height: 5),
-              _searchResultSecondaryText()
-            ],
-          ),
-        ),
+        child: _buildPlacesDetailsColumn(),
       );
+
+  Widget _buildPlacesDetailsColumn() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _searchResultMainText(),
+          const SizedBox(height: 5),
+          _searchResultSecondaryText()
+        ],
+      ),
+    );
+  }
 
   Text _searchResultSecondaryText() => Text(
         searchPlacesController
@@ -73,4 +82,19 @@ class SearchPlaceListItem extends StatelessWidget {
           ),
         ),
       );
+
+  Widget _buildWebSearchPlacesListRow() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildPlacesDetailsColumn(),
+        Icon(
+          Icons.chevron_right,
+          size: 26,
+        )
+        // _rightArrowIcon(),
+      ],
+    );
+  }
 }

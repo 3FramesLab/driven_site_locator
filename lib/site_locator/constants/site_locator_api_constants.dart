@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:driven_site_locator/driven_site_locator.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SiteLocatorApiConstants {
   //site-locator url's
@@ -19,8 +20,12 @@ class SiteLocatorApiConstants {
         DrivenSiteLocator.instance.env[EnvKeys.siteLocatorClientSecret],
     'grant_type': 'client_credentials'
   };
-  static final googleAPIKey = DrivenSiteLocator.instance
-      .env[Platform.isIOS ? EnvKeys.googleIosKey : EnvKeys.googleAndroidKey];
+  static final googleAPIKey = DrivenSiteLocator.instance.env[kIsWeb
+      ? EnvKeys.googleWebKey
+      : Platform.isIOS
+          ? EnvKeys.googleIosKey
+          : EnvKeys.googleAndroidKey];
+
   static const radiusForFetchingPlaces = 5000; //in meters
   static const componentsForFetchingPlaces =
       'country:us'; //restricting other country data
@@ -51,5 +56,6 @@ class EnvKeys {
   static const siteLocatorClientSecret = 'SITE_LOCATOR_CLIENT_SECRET';
   static const googleIosKey = 'GOOGLE_IOS_KEY';
   static const googleAndroidKey = 'GOOGLE_ANDROID_KEY';
+  static const googleWebKey = 'GOOGLE_WEB_KEY';
   static const fuelmanWebURL = 'FUELMAN_WEB_URL';
 }

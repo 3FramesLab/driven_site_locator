@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 
 class LeftHeader extends StatelessWidget {
   final Function()? onMenuIconTap;
+  final Function()? onSearchIconTap;
   final double padding;
 
   const LeftHeader({
+    required this.onSearchIconTap,
     Key? key,
     this.padding = SiteLocatorDimensions.dp16,
     this.onMenuIconTap,
@@ -33,8 +35,7 @@ class LeftHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          TopMenuLogoHeader(onMenuIconTap: onMenuIconTap),
-          const SearchPlaceTextField(),
+          SearchPlaceTextField(onSearchIconTap: onSearchIconTap),
           const SizedBox(height: SiteLocatorDimensions.dp24),
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
             FiltersButton()
