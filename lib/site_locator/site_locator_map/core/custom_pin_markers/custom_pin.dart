@@ -470,7 +470,7 @@ class CustomPin {
     textPainter.text = TextSpan(
         text: text,
         style: kIsWeb
-            ? f14BoldWhite.copyWith(fontWeight: FontWeight.w600)
+            ? f13BoldWhite.copyWith(fontWeight: FontWeight.w600)
             : f26BoldWhite.copyWith(fontWeight: FontWeight.w600));
 
     textPainter.layout();
