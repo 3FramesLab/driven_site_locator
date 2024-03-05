@@ -114,7 +114,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         _body(context)
       else
         SiteInfoSlidingPanel(body: _body(context)),
-      gpsIconButton(),
+      _buildRightMapActions(),
       filterListButtons(),
     ];
   }
@@ -315,6 +315,37 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           ),
         ),
       ),
+    );
+  }
+
+  Widget zoomInOutButton() => ZoomHandleButtons(
+        onZoomInIconTap: _onZoonInButtonTap,
+        onZoomOutIconTap: _onZoomOutButtonTap,
+      );
+
+  Widget _buildRightMapActions() {
+    return Positioned(
+      right: DrivenDimensions.dp16,
+      bottom: siteLocatorController.floatingButtonsBottomPosition(),
+      child: Column(
+        children: [
+          zoomInOutButton(),
+          const SizedBox(height: DrivenDimensions.dp16),
+          gpsIconButton(),
+        ],
+      ),
+    );
+  }
+
+  void _onZoonInButtonTap() {
+    siteLocatorController.googleMapController?.animateCamera(
+      CameraUpdate.zoomIn(),
+    );
+  }
+
+  void _onZoomOutButtonTap() {
+    siteLocatorController.googleMapController?.animateCamera(
+      CameraUpdate.zoomOut(),
     );
   }
 }

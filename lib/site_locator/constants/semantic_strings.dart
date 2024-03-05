@@ -40,5 +40,10 @@ class SemanticStrings {
   static const siteInfoDirectionsButton = 'site-info-directions-button';
   static const siteInfoCallButton = 'site-info-call-button';
 
+  static const zoomIn = 'zoom_in';
+  static const zoomOut = 'zoom_out';
+
+
   static const shareMyCurrentLocationSwitch = 'share-my-current-location-switch';
+
 }
