@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FiltersButton extends StatelessWidget {
-  FiltersButton({Key? key}) : super(key: key);
+  final Function()? onFilterButtonTap;
+
+  FiltersButton({
+    this.onFilterButtonTap,
+    Key? key,
+  }) : super(key: key);
 
   final SiteLocatorController siteLocatorController = Get.find();
 
@@ -22,14 +27,10 @@ class FiltersButton extends StatelessWidget {
       height: 40,
       width: 158,
       child: OutlinedButton(
-        onPressed: () {
-          // TODO
-        },
+        onPressed: () => onFilterButtonTap,
         style: OutlinedButton.styleFrom(
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          )),
+              borderRadius: BorderRadius.all(Radius.circular(50))),
           foregroundColor: Colors.black,
           side: const BorderSide(width: 2),
         ),
