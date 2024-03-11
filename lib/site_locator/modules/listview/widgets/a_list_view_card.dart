@@ -35,7 +35,7 @@ class SiteLocationInfoCard extends GetView<SiteLocatorController> {
   }
 
   Widget _cardInfoBody(BuildContext context) {
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       return Row(
         children: [
           Expanded(child: CardInfoBodyLeft(siteLocation)),

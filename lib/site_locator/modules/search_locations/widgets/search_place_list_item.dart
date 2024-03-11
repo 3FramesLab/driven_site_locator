@@ -18,7 +18,7 @@ class SearchPlaceListItem extends StatelessWidget {
           onTap: _onPlaceItemTapped,
           child: Container(
             color: SiteInfoUtils.getCardBgColor(rowIndex),
-            child: kIsWeb
+            child: WebGlobals.kIsWeb
                 ? _buildWebSearchPlacesListRow()
                 : _buildMobileSearchPlacesListRow(),
           ),

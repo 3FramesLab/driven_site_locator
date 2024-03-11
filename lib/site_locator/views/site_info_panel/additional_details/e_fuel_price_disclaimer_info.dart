@@ -37,7 +37,7 @@ class FuelPriceDisclaimerInfo extends StatelessWidget {
         _disclaimerInfoText(),
       ];
 
-  Widget _infoIcon() => const Image(
+  Widget _infoIcon() => Image(
         image: AssetImage(SiteLocatorAssets.fuelPriceDisclaimerInfoIcon),
         height: SiteLocatorDimensions.dp20,
         width: SiteLocatorDimensions.dp20,

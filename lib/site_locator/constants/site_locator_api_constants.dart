@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/driven_site_locator.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SiteLocatorApiConstants {
   //site-locator url's
@@ -20,7 +20,7 @@ class SiteLocatorApiConstants {
         DrivenSiteLocator.instance.env[EnvKeys.siteLocatorClientSecret],
     'grant_type': 'client_credentials'
   };
-  static final googleAPIKey = DrivenSiteLocator.instance.env[kIsWeb
+  static final googleAPIKey = DrivenSiteLocator.instance.env[WebGlobals.kIsWeb
       ? EnvKeys.googleWebKey
       : Platform.isIOS
           ? EnvKeys.googleIosKey

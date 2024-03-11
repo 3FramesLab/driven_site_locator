@@ -76,7 +76,7 @@ class SiteLocationsService extends GetxService {
   }
 
   Future<List<dynamic>> getBackupBrandLogoUrlsFromAssets() async {
-    const jsonPath = SiteLocatorAssets.backupBrandLogoUrlsPath;
+    final jsonPath = SiteLocatorAssets.backupBrandLogoUrlsPath;
     final jsonEncode = await rootBundle.load(jsonPath);
     return json.decode(utf8.decode(jsonEncode.buffer.asUint8List()));
   }

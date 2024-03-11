@@ -1,6 +1,7 @@
 library list_view_module;
 
 import 'package:driven_common/shimmers/shimmer_module.dart';
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';

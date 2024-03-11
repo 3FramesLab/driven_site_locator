@@ -9,6 +9,7 @@ import 'package:driven_common/common/driven_dimensions.dart';
 import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/config/site_locator_navigation.dart';
 import 'package:driven_site_locator/config/site_locator_routes.dart';
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
 import 'package:driven_site_locator/constants/api_return_status.dart';
 import 'package:driven_site_locator/constants/app_strings.dart';

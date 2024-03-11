@@ -2,7 +2,7 @@ import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 
 class SitesLoadingProgressProps {
-  static const String fuelPumpIconPath =
+  static final String fuelPumpIconPath =
       '${SiteLocatorAssets.assetPath}/fuel_pump_icon.png';
   static const String findingFuelLocationMessage = 'Finding Fueling Locations';
   static const String retrievingFuelPricesUnAuthMessage =

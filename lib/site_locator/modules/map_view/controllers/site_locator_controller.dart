@@ -226,7 +226,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (isFirstLaunch) {
         await moveCameraPosition(currentLatLngBounds());
       }
-      if (kIsWeb) {
+      if (WebGlobals.kIsWeb) {
         resetPrevSelectedMarkerStatus();
         unawaited(setListViewInitializers());
       }
@@ -744,7 +744,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       canRecenterMapViewOnLocationChange = false;
     }
     forceResetCanRecenterMapView = false;
-    if (!kIsWeb && Platform.isIOS) {
+    if (!WebGlobals.kIsWeb && Platform.isIOS) {
       if (backFromWelcomeToMapView()) {
         backFromWelcomeToMapView(false);
       } else {
@@ -1215,7 +1215,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    if (!kIsWeb) {
+    if (!WebGlobals.kIsWeb) {
       // TODO: Smeet - remove if condition later.
       await fetchNextSetDrivingDistance(nextSet.toList());
     }

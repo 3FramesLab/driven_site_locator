@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
@@ -17,8 +18,8 @@ class PindropDesign {
       color: priceTextColor,
       fontFamily: DrivenFonts.avertaFontFamily,
       fontSize: (price != null && price.length < 5)
-          ? (kIsWeb ? 12 : 28)
-          : (kIsWeb ? 10 : 24),
+          ? (WebGlobals.kIsWeb ? 12 : 28)
+          : (WebGlobals.kIsWeb ? 10 : 24),
       fontWeight: FontWeight.w600,
     );
   }
@@ -26,7 +27,7 @@ class PindropDesign {
   static double getMarkerImageWidth(Site site) {
     final price = site.price;
     double markerImageWidth = price != null ? 230 : 73;
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       final double pinWidth = site.hasDiscount ? 100.0 : 85.0;
       markerImageWidth = price != null ? pinWidth : 39;
     }
@@ -38,7 +39,7 @@ class PindropDesign {
     required double markerImageWidth,
     required ui.Image brandLogoImage,
   }) {
-    const sizingFactor = kIsWeb ? 2 : 1;
+    final sizingFactor = WebGlobals.kIsWeb ? 2 : 1;
     double ofX, ofY;
     ofX = (markerImageWidth - brandLogoImage.width) - 20;
     ofY = 12 / sizingFactor;
@@ -48,7 +49,7 @@ class PindropDesign {
       // DFC Asset updates
       logoAlignX = site.price != null ? ofX + 2 : ofX + 20;
     }
-    double logoAlignY = kIsWeb
+    double logoAlignY = WebGlobals.kIsWeb
         ? 4
         : site.hasDiscount
             ? ofY + 5
@@ -56,7 +57,7 @@ class PindropDesign {
                 ? ofY + 4
                 : ofY + 5;
 
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       if (site.hasDiscount) {
         logoAlignX =
             site.price != null ? (logoAlignX + 15) : (logoAlignX - 5) + 0.5;
@@ -76,12 +77,12 @@ class PindropDesign {
   static LogoAlignment getSelectedLogoAlignment(
     ui.Image brandLogoImage,
   ) {
-    const double markerImageWidth = kIsWeb ? 64 : 134;
+    final double markerImageWidth = WebGlobals.kIsWeb ? 64 : 134;
 
     double offsetX, offsetY;
     offsetX = (markerImageWidth - brandLogoImage.width) - 22;
     offsetY = 23;
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       offsetX = offsetX + 16;
       offsetY = offsetY - 17.5;
     }

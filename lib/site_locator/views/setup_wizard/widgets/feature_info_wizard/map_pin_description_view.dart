@@ -18,7 +18,7 @@ class MapPinDescriptionView extends StatelessWidget {
                     mapPinImage: SiteLocatorAssets.pinBgNormalFilePathDFC,
                     mapPinDescription: CardholderSetupConstants.regularSites,
                   )
-                : const MapPinWithDescription(
+                : MapPinWithDescription(
                     mapPinImage:
                         SiteLocatorAssets.discountPriceBannerMapPinFilePath,
                     mapPinDescription: SetUpWizardConstants.sitesWithDiscounts,
@@ -30,14 +30,14 @@ class MapPinDescriptionView extends StatelessWidget {
                     mapPinImage: SiteLocatorAssets.pinBgGallonUpFilePathDFC,
                     mapPinDescription: SiteLocatorConstants.preferredSites,
                   )
-                : const MapPinWithDescription(
+                : MapPinWithDescription(
                     mapPinImage:
                         SiteLocatorAssets.networkFeePriceBannerMapPinFilePath,
                     mapPinDescription:
                         SetUpWizardConstants.sitesWithOutDiscounts,
                   )),
         separator(),
-        const Expanded(
+        Expanded(
           child: MapPinWithDescription(
             mapPinImage: SiteLocatorAssets.clusterMapPinFilePath,
             mapPinDescription: SetUpWizardConstants.manySitesClustered,

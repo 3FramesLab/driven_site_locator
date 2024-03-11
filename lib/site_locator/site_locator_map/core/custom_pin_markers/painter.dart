@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pindrop_design.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
@@ -57,8 +58,8 @@ class MarkerPainter extends CustomPainter {
       final xAdjuster = (price != null && price!.length < 5) ? adjustLeft : 12;
       double dx = (((size.width) - textPainter.width) * 0.5) - xAdjuster;
       double dy = ((size.height - textPainter.height) * 0.6) - adjustTop;
-      dx = kIsWeb ? (site.hasDiscount ? dx + 4 : dx + 1) : dx;
-      dy = kIsWeb ? (site.hasDiscount ? dy + 3 : dy + 3) : dy;
+      dx = WebGlobals.kIsWeb ? (site.hasDiscount ? dx + 4 : dx + 1) : dx;
+      dy = WebGlobals.kIsWeb ? (site.hasDiscount ? dy + 3 : dy + 3) : dy;
       final offset = Offset(dx, dy);
       textPainter.paint(canvas, offset);
     }

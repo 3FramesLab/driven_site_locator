@@ -12,7 +12,7 @@ class PreferencesFilterMenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SiteLocatorMenuRow(
       title: SiteLocatorConstants.preferencesFilters,
-      imageIcon: const AssetImage(SiteLocatorAssets.preferencesFilterIcon),
+      imageIcon: AssetImage(SiteLocatorAssets.preferencesFilterIcon),
       buttonAction: navToPreferencesFilterPage,
     );
   }

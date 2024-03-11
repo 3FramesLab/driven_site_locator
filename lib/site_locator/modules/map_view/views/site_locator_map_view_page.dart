@@ -68,7 +68,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       return _bodyContainer(context);
     } else {
       return Scaffold(
@@ -95,7 +95,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   List<Widget> _buildSiteLocatorViewBody() {
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       return _buildMapView();
     } else {
       return setUpWizardController.canShowSetUpWizard()
@@ -110,7 +110,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   List<Widget> _buildMapView() {
     return [
-      if (kIsWeb)
+      if (WebGlobals.kIsWeb)
         _body(context)
       else
         SiteInfoSlidingPanel(body: _body(context)),
@@ -252,7 +252,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget filterListButtons() {
-    return !kIsWeb
+    return !WebGlobals.kIsWeb
         ? Obx(
             () => Positioned(
               left: DrivenDimensions.dp16,
@@ -263,7 +263,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         : const SizedBox.shrink();
   }
 
-  Widget menuWithSearchBarContainer() => !kIsWeb
+  Widget menuWithSearchBarContainer() => !WebGlobals.kIsWeb
       ? Row(
           children: [
             Visibility(

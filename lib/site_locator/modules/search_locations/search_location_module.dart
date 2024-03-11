@@ -2,6 +2,7 @@ library search_location_module;
 
 import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/config/site_locator_routes.dart';
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/use_cases/base_future_usecase.dart';
 import 'package:driven_site_locator/data/use_cases/base_usecase.dart';

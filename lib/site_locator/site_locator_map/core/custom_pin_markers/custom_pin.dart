@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:driven_common/globals.dart';
+import 'package:driven_site_locator/config/web_globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
@@ -214,7 +215,7 @@ class CustomPin {
     //     await rootBundle.load(SiteLocatorConfig.defaultBrandLogoPath);
     ByteData defaultLogoByteData =
         await rootBundle.load(SiteLocatorConfig.defaultBrandLogoPath);
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       defaultLogoByteData =
           await rootBundle.load(SiteLocatorAssets.selectedFuelManBrandLogo);
     }
@@ -423,7 +424,7 @@ class CustomPin {
 
   /// Paints the Cluster Count Text
   static Future<ui.Image> _getClusterImage() async {
-    const logoBgPath = SiteLocatorAssets.icClusterMarker;
+    final logoBgPath = SiteLocatorAssets.icClusterMarker;
     final ByteData bigPinBgByteData = await rootBundle.load(logoBgPath);
 
     final Uint8List assetImageByteData = bigPinBgByteData.buffer.asUint8List();
@@ -443,8 +444,8 @@ class CustomPin {
     final PictureRecorder pictureRecorder = PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
 
-    final int sizeWidth = kIsWeb ? 100 : sizeParam;
-    final int sizeHeight = kIsWeb ? 47 : sizeParam;
+    final int sizeWidth = WebGlobals.kIsWeb ? 100 : sizeParam;
+    final int sizeHeight = WebGlobals.kIsWeb ? 47 : sizeParam;
 
     if (site == null) {
       canvas.drawImage(clusterImage, Offset.zero, Paint());
@@ -469,7 +470,7 @@ class CustomPin {
     final textPainter = TextPainter(textDirection: TextDirection.ltr);
     textPainter.text = TextSpan(
         text: text,
-        style: kIsWeb
+        style: WebGlobals.kIsWeb
             ? f13BoldWhite.copyWith(fontWeight: FontWeight.w600)
             : f26BoldWhite.copyWith(fontWeight: FontWeight.w600));
 
@@ -477,7 +478,7 @@ class CustomPin {
     double dx = (clusterImage.width - textPainter.width) * 0.1;
     double dy = (clusterImage.width - textPainter.height) * 0.17;
 
-    if (kIsWeb) {
+    if (WebGlobals.kIsWeb) {
       dx = dx + 8;
       dy = dy;
     }

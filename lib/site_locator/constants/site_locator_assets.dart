@@ -1,48 +1,49 @@
-import 'package:flutter/foundation.dart';
+import 'package:driven_site_locator/config/web_globals.dart';
 
 class SiteLocatorAssets {
   static const packagePath = 'packages/driven_site_locator';
   static const interimAssetPath = '$packagePath/assets/site_locator';
-  static const assetPath = kIsWeb ? '$interimAssetPath/web' : interimAssetPath;
+  static final assetPath =
+      WebGlobals.kIsWeb ? '$interimAssetPath/web' : interimAssetPath;
 
 // assets/packages/driven_site_locator/assets/site_locator/loginIcon
   // static const assetJsonPath = 'assets/site_locator';
 
-  static const fuelmanBrandFilePath = '$assetPath/site-fuelman-logo.png';
-  static const pinBgFilePath = '$assetPath/white-pin-drop.png';
-  static const pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
+  static final fuelmanBrandFilePath = '$assetPath/site-fuelman-logo.png';
+  static final pinBgFilePath = '$assetPath/white-pin-drop.png';
+  static final pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
 
-  static const selectedPinBgFilePath = '$assetPath/white-pin-drop-selected.png';
-  static const selectedPinBgDiscountFilePath =
+  static final selectedPinBgFilePath = '$assetPath/white-pin-drop-selected.png';
+  static final selectedPinBgDiscountFilePath =
       '$assetPath/yellow-pin-drop-selected.png';
 
-  static const normalPriceBannerPinFilePath = '$assetPath/regular-marker.png';
-  static const discountPriceBannerPinFilePath =
+  static final normalPriceBannerPinFilePath = '$assetPath/regular-marker.png';
+  static final discountPriceBannerPinFilePath =
       '$assetPath/discount-marker.png';
-  static const fuelManBrandLogo = '$assetPath/site-fuelman-logo.png';
-  static const selectedFuelManBrandLogo =
+  static final fuelManBrandLogo = '$assetPath/site-fuelman-logo.png';
+  static final selectedFuelManBrandLogo =
       '$assetPath/site-fuelman-logo-big.png';
   static const double logoSize = 40;
-  static const discountPriceBannerMapPinFilePath =
+  static final discountPriceBannerMapPinFilePath =
       '$assetPath/discount_marker.png';
-  static const networkFeePriceBannerMapPinFilePath =
+  static final networkFeePriceBannerMapPinFilePath =
       '$assetPath/network_fee_marker.png';
-  static const clusterMapPinFilePath = '$assetPath/cluster_marker.png';
+  static final clusterMapPinFilePath = '$assetPath/cluster_marker.png';
 
-  static const iFleetBrandFilePath = '$assetPath/site-ifleet-logo.png';
+  static final iFleetBrandFilePath = '$assetPath/site-ifleet-logo.png';
   static const radioButtonOff = '$packagePath/assets/images/radioButtonOff.png';
   static const radioButtonOn =
       '$packagePath/assets/images/radioButtonSelected.png';
   static const radioButtonDisabled =
       '$packagePath/assets/images/radioButtonDisabled.png';
-  static const backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
-  static const fuelPriceDisclaimerInfoIcon =
+  static final backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
+  static final fuelPriceDisclaimerInfoIcon =
       '$assetPath/fuel_price_disclaimer_info_icon.png';
-  static const loginIcon = '$assetPath/loginIcon.png';
-  static const logoutIcon = '$assetPath/logoutIcon.png';
-  static const preferencesFilterIcon = '$assetPath/preferencesFilterIcon.png';
-  static const icUps = '$assetPath/ic_ups.png';
-  static const icFedex = '$assetPath/ic_fedex.png';
+  static final loginIcon = '$assetPath/loginIcon.png';
+  static final logoutIcon = '$assetPath/logoutIcon.png';
+  static final preferencesFilterIcon = '$assetPath/preferencesFilterIcon.png';
+  static final icUps = '$assetPath/ic_ups.png';
+  static final icFedex = '$assetPath/ic_fedex.png';
   static const gpsIcon = '$packagePath/assets/images/ic_gps.png';
 
   // COMDATA ASSET PATHS
@@ -71,14 +72,14 @@ class SiteLocatorAssets {
   static const exitSign = '$packagePath/assets/images/exit_sign.png';
 
   // Clusters
-  static const icClusterMarker = '$assetPath/ic_cluster_marker.png';
+  static final icClusterMarker = '$assetPath/ic_cluster_marker.png';
 
   // Card holder setup page
-  static const cardHolderSetupPageStepThree =
+  static final cardHolderSetupPageStepThree =
       '$assetPath/cardholder_setup_page_step_three.png';
 
   // Top header route icon
-  static const routeIcon = '$assetPath/route_icon.png';
+  static final routeIcon = '$assetPath/route_icon.png';
 
   // Zoom In/Out icon
   static const zoomInIcon = '$interimAssetPath/zoom_in_icon.png';
