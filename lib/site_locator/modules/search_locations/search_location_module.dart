@@ -22,14 +22,23 @@ import 'package:driven_site_locator/site_locator/utilities/site_locator_utils.da
 import 'package:driven_site_locator/site_locator/widgets/common/custom_card_with_shadow.dart';
 import 'package:driven_site_locator/site_locator/widgets/site_locator_scaffold.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 part 'controllers/search_places_controller.dart';
+
 part 'search_location_state.dart';
+
 part 'use_cases/get_places_results_use_case.dart';
+
 part 'use_cases/get_places_url_use_case.dart';
+
 part 'use_cases/get_selected_place_lat_lng_use_case.dart';
+
 part 'widgets/search_place_list_item.dart';
+
 part 'widgets/search_place_list_view.dart';
+
 part 'widgets/search_place_results_view.dart';
+
 part 'widgets/search_place_textfield.dart';

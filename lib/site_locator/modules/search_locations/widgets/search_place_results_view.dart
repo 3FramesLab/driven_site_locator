@@ -3,8 +3,12 @@ part of search_location_module;
 class SearchPlaceResultsView extends StatelessWidget {
   final SearchPlacesController searchPlacesController = Get.find();
   final SiteLocatorController siteLocatorController = Get.find();
+  final Function()? onClearIconTap;
 
-  SearchPlaceResultsView({super.key});
+  SearchPlaceResultsView({
+    this.onClearIconTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +31,12 @@ class SearchPlaceResultsView extends StatelessWidget {
     );
   }
 
-  Widget _searchTextField() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
+  Widget _searchTextField() => Container(
+        width: 375,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SearchPlaceTextField(
           currentLocation: _getLatLngAsString(),
+          onSearchIconTap: onClearIconTap,
         ),
       );
 

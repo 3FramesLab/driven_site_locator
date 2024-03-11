@@ -12,7 +12,6 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/controllers/site_locator_token_controller.dart';
 import 'package:driven_site_locator/site_locator/data/services/site_locations_service.dart';
 import 'package:driven_site_locator/site_locator/data/services/site_locator_access_token_service.dart';
-import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_controller.dart';
 import 'package:driven_site_locator/site_locator/modules/cardholder_setup/cardholder_setup_module.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/painter.dart';
@@ -62,7 +61,7 @@ class CustomPin {
 
   static void bindAdhocDependencies() {
     Get.lazyPut(CardholderSetupController.new);
-    Get.lazyPut(SitesLoadingProgressController.new);
+    // Get.lazyPut(FuelGaugeProgressController.new);
   }
 
   static Future<void> preCache({bool canCacheAllLogos = true}) async {
@@ -72,7 +71,7 @@ class CustomPin {
     defaultBrandLogoSmall =
         await defaultLogo(BrandLogoSize.small, BrandLogoSize.small);
     defaultBrandLogoBig =
-        await defaultLogo(BrandLogoSize.big, BrandLogoSize.big);
+        await defaultLogoBig(BrandLogoSize.big, BrandLogoSize.big);
     normalPinBg = await pinDropImageBg(hasDiscount: false);
     discountPinBg = await pinDropImageBg(hasDiscount: true);
     normalBannerPinBg = await bannerPinImageBg(hasDiscount: false);
@@ -210,6 +209,25 @@ class CustomPin {
     return bytesToResizedImage(defaultLogoByteData, width, height);
   }
 
+  static Future<ui.Image> defaultLogoBig(int width, int height) async {
+    // ByteData defaultLogoByteData =
+    //     await rootBundle.load(SiteLocatorConfig.defaultBrandLogoPath);
+    ByteData defaultLogoByteData =
+        await rootBundle.load(SiteLocatorConfig.defaultBrandLogoPath);
+    if (kIsWeb) {
+      defaultLogoByteData =
+          await rootBundle.load(SiteLocatorAssets.selectedFuelManBrandLogo);
+    }
+
+    // DFC Asset updates
+    if (AppUtils.isComdata) {
+      defaultLogoByteData = await rootBundle
+          .load(SiteLocatorConfig.defaultComdataSiteBrandLogoPath);
+    }
+
+    return bytesToResizedImage(defaultLogoByteData, width, height);
+  }
+
   static Future<ui.Image> pinDropImageBg(
       {bool? hasDiscount, bool? hasGallonUp}) async {
     final param = PindropImagePathUseCaseParam(
@@ -221,7 +239,8 @@ class CustomPin {
 
     final Uint8List assetImageByteData = imageByteData.buffer.asUint8List();
     final codec = await ui.instantiateImageCodec(
-      assetImageByteData.buffer.asUint8List(),
+      // assetImageByteData.buffer.asUint8List(),
+      assetImageByteData,
       targetWidth: PinDropSize.width,
       targetHeight: PinDropSize.height,
     );
@@ -241,7 +260,8 @@ class CustomPin {
 
     final Uint8List bgImageByteData = bgBannerByte.buffer.asUint8List();
     final codec = await ui.instantiateImageCodec(
-      bgImageByteData.buffer.asUint8List(),
+      // bgImageByteData.buffer.asUint8List(),
+      bgImageByteData,
       targetWidth: PinDropBannerSize.width,
       targetHeight: PinDropBannerSize.height,
     );
@@ -262,7 +282,8 @@ class CustomPin {
 
     final Uint8List assetImageByteData = bigPinBgByteData.buffer.asUint8List();
     final codec = await ui.instantiateImageCodec(
-      assetImageByteData.buffer.asUint8List(),
+      // assetImageByteData.buffer.asUint8List(),
+      assetImageByteData,
       targetWidth: PinDropBigSize.width,
       targetHeight: PinDropBigSize.height,
     );
@@ -280,10 +301,10 @@ class CustomPin {
 
     ui.Image? logoResized;
     ui.Image brandLogoToBePassed;
+
     if (hasBrandLogoIdentifier(shopBrandLogoIdentifier)) {
       final ui.Image? cachedItem =
           brandLogosImageCacheStore[site.brandLogoIdentifier];
-
       if (cachedItem != null) {
         final pngByteData =
             await cachedItem.toByteData(format: ImageByteFormat.png);
@@ -415,12 +436,15 @@ class CustomPin {
   }
 
   static Future<BitmapDescriptor> getMarkerBitmap(
-    int size, {
+    int sizeParam, {
     String? text,
     Site? site,
   }) async {
     final PictureRecorder pictureRecorder = PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
+
+    final int sizeWidth = kIsWeb ? 100 : sizeParam;
+    final int sizeHeight = kIsWeb ? 47 : sizeParam;
 
     if (site == null) {
       canvas.drawImage(clusterImage, Offset.zero, Paint());
@@ -428,13 +452,14 @@ class CustomPin {
         canvas,
         Colors.white,
         text != null ? _getClusterCount(text) : '',
-        size,
+        sizeWidth,
       );
     } else {
       return normalMarker(site);
     }
 
-    final img = await pictureRecorder.endRecording().toImage(size, size);
+    final img =
+        await pictureRecorder.endRecording().toImage(sizeWidth, sizeHeight);
     final data = await img.toByteData(format: ImageByteFormat.png) as ByteData;
 
     return BitmapDescriptor.fromBytes(data.buffer.asUint8List());
@@ -443,13 +468,19 @@ class CustomPin {
   static void _paintText(Canvas canvas, Color color, String text, int size) {
     final textPainter = TextPainter(textDirection: TextDirection.ltr);
     textPainter.text = TextSpan(
-      text: text,
-      style: f26BoldWhite,
-    );
+        text: text,
+        style: kIsWeb
+            ? f13BoldWhite.copyWith(fontWeight: FontWeight.w600)
+            : f26BoldWhite.copyWith(fontWeight: FontWeight.w600));
 
     textPainter.layout();
-    final dx = (clusterImage.width - textPainter.width) * 0.1;
-    final dy = (clusterImage.width - textPainter.height) * 0.17;
+    double dx = (clusterImage.width - textPainter.width) * 0.1;
+    double dy = (clusterImage.width - textPainter.height) * 0.17;
+
+    if (kIsWeb) {
+      dx = dx + 8;
+      dy = dy;
+    }
     textPainter.paint(
       canvas,
       Offset(dx, dy),
@@ -468,24 +499,35 @@ class CustomPin {
 class BrandLogoSize {
   static int small = 55;
   static int big = 90;
+
+  // static int small = 30;
+  // static int big = 52;
 }
 
 class PinDropSize {
   static int width = 90;
   static int height = 105;
+  // static int width = 45;
+  // static int height = 52;
 }
 
 class PinDropBigSize {
   static int width = 134;
   static int height = 156;
+  // static int width = 67;
+  // static int height = 78;
 }
 
 class PinDropBannerSize {
   static int width = 230;
   static int height = 105;
+  // static int width = 115;
+  // static int height = 52;
 }
 
 class ClusterSize {
   static int width = 200;
   static int height = 101;
+  // static int width = 75;
+  // static int height = 50;
 }

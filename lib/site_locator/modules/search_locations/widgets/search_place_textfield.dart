@@ -2,10 +2,12 @@ part of search_location_module;
 
 class SearchPlaceTextField extends StatefulWidget {
   final String? currentLocation;
+  final Function()? onSearchIconTap;
 
   const SearchPlaceTextField({
-    super.key,
+    this.onSearchIconTap,
     this.currentLocation,
+    super.key,
   });
 
   @override
@@ -93,8 +95,14 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
     if (searchText.isNotEmpty) {
       if (_isSearchIcon || forceSearch) {
+        if (widget.onSearchIconTap != null) {
+          widget.onSearchIconTap!();
+        }
         await _executeSearchPlace(searchText);
       } else if (_isClearIcon) {
+        if (widget.onSearchIconTap != null) {
+          widget.onSearchIconTap!();
+        }
         await onClearIconTapped();
       }
     }
@@ -104,7 +112,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     siteLocatorController.getSearchTrackAction();
     searchPlacesController.searchIconName(SiteLocatorConstants.clear);
     searchPlacesController.searchText = searchText;
-    if (Get.currentRoute == SiteLocatorRoutes.searchPlaceResultsView) {
+    if (Get.currentRoute != SiteLocatorRoutes.searchPlaceResultsView) {
       await searchPlacesController.getPlacesResults();
     } else {
       _goToResultPage();
