@@ -27,7 +27,7 @@ class FiltersButton extends StatelessWidget {
       height: 40,
       width: 158,
       child: OutlinedButton(
-        onPressed: () => onFilterButtonTap,
+        onPressed: () => onFilterButtonTap!(),
         style: OutlinedButton.styleFrom(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(50))),
