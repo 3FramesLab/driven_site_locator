@@ -94,7 +94,7 @@ packages:
     description:
       path: "."
       ref: "feature/fix-sitelocator-api-cors"
-      resolved-ref: "66f39d03b73e2529b0a165d8970615b95eef4e65"
+      resolved-ref: b7571418da0aa23d7be7fcbc9db3c96e44b1a128
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"
