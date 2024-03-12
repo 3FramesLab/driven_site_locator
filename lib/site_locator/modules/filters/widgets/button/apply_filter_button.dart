@@ -1,9 +1,14 @@
 part of filter_module;
 
 class ApplyFilterButton extends StatelessWidget {
+  final Function()? onFilterBackButtonTap;
+
   final EnhancedFilterController filterController = Get.find();
 
-  ApplyFilterButton({Key? key}) : super(key: key);
+  ApplyFilterButton({
+    this.onFilterBackButtonTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +27,17 @@ class ApplyFilterButton extends StatelessWidget {
       );
 
   Future<void> _applyFilterTap() async {
-    trackAction(
-      AnalyticsTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
-      // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
-    );
+    if (kIsWeb) {
+      if (onFilterBackButtonTap != null) {
+        onFilterBackButtonTap!();
+      }
+    } else {
+      trackAction(
+        AnalyticsTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
+        // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
+      );
+    }
+
     await filterController.onApplyFilterClick();
   }
 }

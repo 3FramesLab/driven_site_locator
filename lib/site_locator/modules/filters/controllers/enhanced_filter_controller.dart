@@ -162,9 +162,11 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
 
     _resetApplyAndClearButtonState();
     storedSiteFilters.clearAndAddAll(_cloneSelectedFiltersIgnoreFavorites);
-    Get.back(result: {
-      SiteLocatorRouteArguments.isEnhanceFilterApplied: true,
-    });
+    if (!kIsWeb) {
+      Get.back(result: {
+        SiteLocatorRouteArguments.isEnhanceFilterApplied: true,
+      });
+    }
     initData();
 
     applyFilter();
