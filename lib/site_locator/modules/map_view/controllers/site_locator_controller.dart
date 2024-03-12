@@ -114,6 +114,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     final permissionStatus = await Geolocator.checkPermission();
     if (permissionStatus == LocationPermission.always ||
         permissionStatus == LocationPermission.whileInUse) {
+      shareMyCurrentLocationStatus(true);
       const LocationSettings locationSettings = LocationSettings(
         accuracy: LocationAccuracy.high,
         distanceFilter: SiteLocatorConstants.updateLocationDistanceInMeters,
@@ -124,6 +125,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         currentLocation(LatLng(position.latitude, position.longitude));
         await validateAndRecenterMapView();
       });
+    } else {
+      shareMyCurrentLocationStatus(false);
     }
   }
 
@@ -162,29 +165,30 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         value: true,
       );
     } else if (GetPlatform.isWeb) {
-      final LocationPermission locationPermission =
-          await Geolocator.checkPermission();
-      print('locationPermission: $locationPermission');
-      if (locationPermission != LocationPermission.always &&
-          locationPermission != LocationPermission.whileInUse) {
-        unawaited(Get.dialog(
-          EnableLocationServiceDialog(
-              onUseMyLocation: () => onUseMyLocation(locationPermission)),
-          barrierDismissible: false,
-        ));
-      }
+      await handleLocationPermissionDialog();
     }
     await subscribeToLocationStream();
   }
 
+  Future<void> handleLocationPermissionDialog() async {
+    final LocationPermission locationPermission =
+        await Geolocator.checkPermission();
+    final showLocationPermission = await Get.dialog(
+      EnableLocationServiceDialog(
+          onUseMyLocation: () => onUseMyLocation(locationPermission)),
+      barrierDismissible: false,
+    );
+    if (showLocationPermission != null && showLocationPermission) {
+      // if (locationPermission == LocationPermission.deniedForever) {
+      //   // should enable service from web browser settings.
+      // } else {
+      await Geolocator.requestPermission();
+      // }
+    }
+  }
+
   Future<void> onUseMyLocation(LocationPermission locationPermission) async {
-    Get.back();
-    // if (locationPermission == LocationPermission.deniedForever) {
-    //   // should enable service from web browser settings.
-    // } else {
-    await Geolocator.requestPermission();
-    await subscribeToLocationStream();
-    // }
+    Get.back(result: true);
   }
 
   Future<String> getAccessTokenForSites() async =>
@@ -2029,7 +2033,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   //web app
   // ignore: avoid_positional_boolean_parameters
-  void onToggleShareMyCurrentLocation(bool value) {
-    shareMyCurrentLocationStatus(value);
+  Future<void> onToggleShareMyCurrentLocation(bool shareMyLocation) async {
+    shareMyCurrentLocationStatus(shareMyLocation);
+    final permissionStatus = await Geolocator.checkPermission();
+    if (shareMyLocation && permissionStatus != LocationPermission.always ||
+        permissionStatus != LocationPermission.whileInUse) {
+      await Geolocator.requestPermission();
+      await subscribeToLocationStream();
+      await updateCurrentLatLngBoundsOnReCenter();
+      await getSiteLocationsData();
+    }
   }
 }
