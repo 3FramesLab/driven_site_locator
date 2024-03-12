@@ -102,7 +102,7 @@ packages:
     description:
       path: "."
       ref: "feature/fix-sitelocator-api-cors"
-      resolved-ref: "949b1f11a2c66282f6a503df9cd77f84e4413499"
+      resolved-ref: "66f39d03b73e2529b0a165d8970615b95eef4e65"
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"
@@ -117,10 +117,10 @@ packages:
     dependency: transitive
     description:
       name: dynatrace_flutter_plugin
-      sha256: b7aa4f42a13f109369189dc911f35fede2c7c7fe086e4a1ebe9463f2422ef11a
+      sha256: "3f42960ac1c14f63c65d18f11586599221bfb0ab2e40d2b74f5a3040d5adf0e9"
       url: "https://pub.dev"
     source: hosted
-    version: "3.283.1"
+    version: "3.285.1"
   equatable:
     dependency: transitive
     description:
