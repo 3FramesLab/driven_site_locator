@@ -111,9 +111,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> subscribeToLocationStream() async {
-    final permissionStatus = await Geolocator.checkPermission();
-    if (permissionStatus == LocationPermission.always ||
-        permissionStatus == LocationPermission.whileInUse) {
+    if (await isLocationPermissionGranted()) {
       shareMyCurrentLocationStatus(true);
       const LocationSettings locationSettings = LocationSettings(
         accuracy: LocationAccuracy.high,
@@ -2040,8 +2038,18 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         permissionStatus != LocationPermission.whileInUse) {
       await Geolocator.requestPermission();
       await subscribeToLocationStream();
-      await updateCurrentLatLngBoundsOnReCenter();
-      await getSiteLocationsData();
+      if (await isLocationPermissionGranted()) {
+        await updateCurrentLatLngBoundsOnReCenter();
+        await getSiteLocationsData();
+      } else {
+        await locationStreamSubscription?.cancel();
+      }
     }
+  }
+
+  Future<bool> isLocationPermissionGranted() async {
+    final permissionStatus = await Geolocator.checkPermission();
+    return permissionStatus == LocationPermission.always ||
+        permissionStatus == LocationPermission.whileInUse;
   }
 }
