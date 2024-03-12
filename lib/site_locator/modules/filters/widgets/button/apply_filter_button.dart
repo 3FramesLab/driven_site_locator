@@ -12,11 +12,22 @@ class ApplyFilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: _applyFilterButton,
-    );
+    return _buildApplyFilterButton();
   }
+
+  Widget _buildApplyFilterButton() {
+    return kIsWeb
+        ? Container(
+            width: 375,
+            child: _buildButton,
+          )
+        : _buildButton;
+  }
+
+  Padding get _buildButton => Padding(
+        padding: const EdgeInsets.all(16),
+        child: _applyFilterButton,
+      );
 
   Widget get _applyFilterButton => Obx(
         () => PrimaryButton(
