@@ -162,9 +162,11 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
 
     _resetApplyAndClearButtonState();
     storedSiteFilters.clearAndAddAll(_cloneSelectedFiltersIgnoreFavorites);
-    Get.back(result: {
-      SiteLocatorRouteArguments.isEnhanceFilterApplied: true,
-    });
+    if (!kIsWeb) {
+      Get.back(result: {
+        SiteLocatorRouteArguments.isEnhanceFilterApplied: true,
+      });
+    }
     initData();
 
     applyFilter();
@@ -275,6 +277,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
     selectedSiteFilters.refresh();
     _validateMapPinsReGenerationOnClearAll();
     await clearAllFiltersUseCase.execute();
+    await siteLocatorController.setListViewInitializers();
     isFilterStatusChange(false);
     siteLocatorController.selectedSiteFilters
         .removeWhere((p) => p.key != QuickFilterKeys.favorites);

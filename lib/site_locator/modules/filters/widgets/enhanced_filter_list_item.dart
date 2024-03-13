@@ -13,13 +13,26 @@ class EnhancedFilterListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: _themeData(context),
-      child: ExpansionTile(
-        key: PageStorageKey(enhancedFilter.filterHeader),
-        maintainState: true,
-        title: _titleText,
-        onExpansionChanged: (value) => onExpansionChanged(isExpand: value),
-        children: _buildExpansionContent,
-      ),
+      child: _buildContainer(),
+    );
+  }
+
+  Widget _buildContainer() {
+    return kIsWeb
+        ? Container(
+            width: 375,
+            child: _expansionTile(),
+          )
+        : _expansionTile();
+  }
+
+  ExpansionTile _expansionTile() {
+    return ExpansionTile(
+      key: PageStorageKey(enhancedFilter.filterHeader),
+      maintainState: true,
+      title: _titleText,
+      onExpansionChanged: (value) => onExpansionChanged(isExpand: value),
+      children: _buildExpansionContent,
     );
   }
 
@@ -34,7 +47,9 @@ class EnhancedFilterListItem extends StatelessWidget {
     }
   }
 
-  Widget get _titleText => Text(enhancedFilter.filterHeader);
+  Widget get _titleText => kIsWeb
+      ? Align(child: Text(enhancedFilter.filterHeader))
+      : Text(enhancedFilter.filterHeader);
 
   List<Widget> get _buildExpansionContent {
     if (enhancedFilter.serviceType == ServiceTypeEnum.fuelBrand) {

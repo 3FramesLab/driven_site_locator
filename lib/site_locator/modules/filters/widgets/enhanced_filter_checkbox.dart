@@ -13,20 +13,37 @@ class EnhancedFilterCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
+    return _buildContainer();
+  }
+
+  Widget _buildContainer() {
+    return kIsWeb
+        ? Container(
+            width: 375,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: _buildDrivenCheckbox(),
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: _buildDrivenCheckbox(),
+          );
+  }
+
+  DrivenCheckbox _buildDrivenCheckbox() {
+    return DrivenCheckbox(
+      textWidget: Text(
+        filter.label,
+        style: f14RegularBlack,
       ),
-      child: DrivenCheckbox(
-        textWidget: Text(
-          filter.label,
-          style: f14RegularBlack,
-        ),
-        value: filter.isChecked,
-        onChanged: (value) => onCheckboxChanged(isChecked: value),
-        onTap: onCheckboxTitleClick,
-      ),
+      value: filter.isChecked,
+      onChanged: (value) => onCheckboxChanged(isChecked: value),
+      onTap: onCheckboxTitleClick,
     );
   }
 
