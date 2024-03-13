@@ -49,6 +49,8 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
   Widget get _scrollView => Expanded(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment:
+                kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
             children: [
               _backButton,
               BadgeView(),
