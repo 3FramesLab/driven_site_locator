@@ -40,7 +40,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
       siteLocatorController.show2CTAButton(show2CTA: true);
 
-      if (!kIsWeb) {
+      if (!WebGlobals.kIsWeb) {
         await Future.delayed(const Duration(milliseconds: 500), () async {
           await siteLocatorController.updateFullMapViewSitesData();
         });

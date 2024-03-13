@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "app_settings",
-      "rootUri": "file:///C:/Users/3frames/AppData/Local/Pub/Cache/hosted/pub.dev/app_settings-4.3.1",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/app_settings-4.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -638,7 +638,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-03-12T08:18:30.291669Z",
+  "generated": "2024-03-13T09:06:14.018715Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

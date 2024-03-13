@@ -47,7 +47,6 @@ class DrivenSiteLocator {
     Map<String, dynamic>? configDataJson,
     AppFlavor flavor = AppFlavor.none,
   }) async {
-    await PreferenceUtils.init();
     setAppFlavor(flavor);
     SiteLocatorEntitlementUtils.instance.siteLocatorEntitlementRepository =
         siteLocatorEntitlementRepository;
