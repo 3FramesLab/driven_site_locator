@@ -347,6 +347,7 @@ class EnhancedFilterConstants {
 
 class SiteLocatorWidgetKeys {
   static const fuelBrandFilterList = 'fuel_brand_list_key';
+  static const fuelBrandFilterSearchField = 'fuel_brand_search_field_key';
 }
 
 class SitesLocationCacheConstants {
