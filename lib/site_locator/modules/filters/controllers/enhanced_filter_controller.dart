@@ -269,10 +269,6 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
       );
 
   Future<void> onClearAllClick() async {
-    trackAction(
-      AnalyticsTrackActionName.enhancedFiltersClearFiltersLinkClickEvent,
-      // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
-    );
     selectedSiteFilters.removeWhere((p) => p.key != QuickFilterKeys.favorites);
     selectedSiteFilters.refresh();
     _validateMapPinsReGenerationOnClearAll();
@@ -284,6 +280,14 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
     storedSiteFilters.clearAndAddAll([]);
     clearList();
     isClearAllClick = true;
+    if (kIsWeb) {
+      await siteLocatorController.filterSiteLocations();
+    } else {
+      trackAction(
+        AnalyticsTrackActionName.enhancedFiltersClearFiltersLinkClickEvent,
+        // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
+      );
+    }
   }
 
   void _validateMapPinsReGenerationOnClearAll() {
