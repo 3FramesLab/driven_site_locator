@@ -235,6 +235,9 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
     try {
       siteLocatorController.selectedSiteFilters = _cloneSelectedFilters;
       siteLocatorController.filterSiteLocations();
+      if (kIsWeb) {
+        siteLocatorController.setListViewInitializers();
+      }
       siteLocatorController.canShow2CTA(false);
       siteLocatorController.show2CTAButton(
           show2CTA: siteLocatorController.canShow2CTA());
