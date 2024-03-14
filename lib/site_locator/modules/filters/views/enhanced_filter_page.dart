@@ -49,6 +49,8 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
   Widget get _scrollView => Expanded(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment:
+                kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
             children: [
               _backButton,
               BadgeView(),
@@ -69,15 +71,15 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
   Widget get _filterList => EnhancedFilterListView();
 
   Future<bool> _popPage() {
+    trackAction(
+      AnalyticsTrackActionName.enhancedFiltersBackLinkClickEvent,
+      // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
+    );
     if (kIsWeb) {
       if (widget.onFilterBackButtonTap != null) {
         widget.onFilterBackButtonTap!();
       }
     } else {
-      trackAction(
-        AnalyticsTrackActionName.enhancedFiltersBackLinkClickEvent,
-        // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
-      );
       Get.back(
         result: {
           SiteLocatorRouteArguments.enhancedFilterClearStatus:

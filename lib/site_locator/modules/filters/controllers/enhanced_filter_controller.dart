@@ -284,6 +284,9 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
     storedSiteFilters.clearAndAddAll([]);
     clearList();
     isClearAllClick = true;
+    if (kIsWeb) {
+      await siteLocatorController.filterSiteLocations();
+    }
   }
 
   void _validateMapPinsReGenerationOnClearAll() {

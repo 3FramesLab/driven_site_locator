@@ -20,6 +20,8 @@ class _FuelBrandSearchFieldState extends State<FuelBrandSearchField> {
         }
       },
       child: TextField(
+        key: const PageStorageKey(
+            SiteLocatorWidgetKeys.fuelBrandFilterSearchField),
         scrollPadding: const EdgeInsets.only(bottom: 250),
         textInputAction: TextInputAction.search,
         controller: _filterController.fuelBrandTextController,

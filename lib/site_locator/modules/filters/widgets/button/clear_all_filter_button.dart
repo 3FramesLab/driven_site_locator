@@ -22,10 +22,10 @@ class ClearAllFilterButton extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 16),
         child: ClickableText(
           onTap: () {
+            filterController.onClearAllClick();
             if (kIsWeb && onFilterBackButtonTap != null) {
               onFilterBackButtonTap!();
             }
-            filterController.onClearAllClick();
           },
           title: EnhancedFilterConstants.clearAll,
         ),
