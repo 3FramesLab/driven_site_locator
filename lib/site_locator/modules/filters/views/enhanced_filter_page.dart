@@ -1,7 +1,12 @@
 part of filter_module;
 
 class EnhancedFilterPage extends StatefulWidget {
-  const EnhancedFilterPage({Key? key}) : super(key: key);
+  final Function()? onFilterBackButtonTap;
+
+  const EnhancedFilterPage({
+    this.onFilterBackButtonTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<EnhancedFilterPage> createState() => _EnhancedFilterPageState();
@@ -30,18 +35,22 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
   }
 
   Widget get _bodyContent => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment:
+            kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
           _scrollView,
-          ApplyFilterButton(),
-          ClearAllFilterButton(),
+          ApplyFilterButton(
+              onFilterBackButtonTap: widget.onFilterBackButtonTap),
+          ClearAllFilterButton(
+              onFilterBackButtonTap: widget.onFilterBackButtonTap),
         ],
       );
 
   Widget get _scrollView => Expanded(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:
+                kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
             children: [
               _backButton,
               BadgeView(),
@@ -56,6 +65,7 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
         child: DrivenBackButton(
           onPressed: _popPage,
           mainAxisSize: MainAxisSize.min,
+          buttonLabelText: SiteLocatorConstants.filters,
         ),
       );
 
@@ -66,12 +76,19 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
       AnalyticsTrackActionName.enhancedFiltersBackLinkClickEvent,
       // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
     );
-    Get.back(
-      result: {
-        SiteLocatorRouteArguments.enhancedFilterClearStatus:
-            filterController.isClearAllClick,
-      },
-    );
+    if (kIsWeb) {
+      if (widget.onFilterBackButtonTap != null) {
+        widget.onFilterBackButtonTap!();
+      }
+    } else {
+      Get.back(
+        result: {
+          SiteLocatorRouteArguments.enhancedFilterClearStatus:
+              filterController.isClearAllClick,
+        },
+      );
+    }
+
     filterController.clearList();
     return Future.value(false);
   }
