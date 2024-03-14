@@ -286,6 +286,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
     isClearAllClick = true;
     if (kIsWeb) {
       await siteLocatorController.filterSiteLocations();
+      await siteLocatorController.setListViewInitializers();
     }
   }
 
