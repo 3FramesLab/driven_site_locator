@@ -65,6 +65,7 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
         child: DrivenBackButton(
           onPressed: _popPage,
           mainAxisSize: MainAxisSize.min,
+          buttonLabelText: SiteLocatorConstants.filters,
         ),
       );
 
