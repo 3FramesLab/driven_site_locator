@@ -169,23 +169,22 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> handleLocationPermissionDialog() async {
-    final LocationPermission locationPermission =
-        await Geolocator.checkPermission();
-    final showLocationPermission = await Get.dialog(
-      EnableLocationServiceDialog(
-          onUseMyLocation: () => onUseMyLocation(locationPermission)),
-      barrierDismissible: false,
-    );
-    if (showLocationPermission != null && showLocationPermission) {
-      // if (locationPermission == LocationPermission.deniedForever) {
-      //   // should enable service from web browser settings.
-      // } else {
-      await Geolocator.requestPermission();
-      // }
+    if (!(await isLocationPermissionGranted())) {
+      final showLocationPermission = await Get.dialog(
+        EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
+        barrierDismissible: false,
+      );
+      if (showLocationPermission != null && showLocationPermission) {
+        // if (locationPermission == LocationPermission.deniedForever) {
+        //   // should enable service from web browser settings.
+        // } else {
+        await Geolocator.requestPermission();
+        // }
+      }
     }
   }
 
-  Future<void> onUseMyLocation(LocationPermission locationPermission) async {
+  Future<void> onUseMyLocation() async {
     Get.back(result: true);
   }
 
@@ -1217,10 +1216,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    if (!kIsWeb) {
-      // TODO: Smeet - remove if condition later.
-      await fetchNextSetDrivingDistance(nextSet.toList());
-    }
+    await fetchNextSetDrivingDistance(nextSet.toList());
     listViewItems.addAll(nextSet);
     presentPageIndex(presentPageIndex() + perPageCount());
     isInitialListLoading(false);
