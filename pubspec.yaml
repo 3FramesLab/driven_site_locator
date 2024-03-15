@@ -28,7 +28,7 @@ dependencies:
       ref: main
       version: ^0.0.6
   gauge_indicator: ^0.4.3
-  geolocator: ^9.0.2
+  geolocator: ^11.0.0
   get: ^4.6.5
   google_maps_flutter: ^2.2.3
   http: ^0.13.3
