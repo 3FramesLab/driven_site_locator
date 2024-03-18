@@ -1267,7 +1267,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       final nextEndRange = getNextListEndRange();
       final nextSet = originalItems.getRange(presentPageIndex(), nextEndRange);
       loadMoreSitesOnScroll(false);
-      await fetchNextSetDrivingDistance(nextSet.toList());
+      // TODO(siva): need to remove after CORS issue resolved
+      if (!kIsWeb) {
+        await fetchNextSetDrivingDistance(nextSet.toList());
+      }
       listViewItems.addAll(nextSet);
       presentPageIndex(presentPageIndex() + perPageCount());
       isViewMoreLoading(false);
