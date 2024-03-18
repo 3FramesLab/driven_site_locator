@@ -29,6 +29,7 @@ class SiteInfoPanelContent extends GetView<SiteLocatorController> {
           final selectedSiteLocation = controller.selectedSiteLocation();
           return ListView(
             controller: scrollController,
+            shrinkWrap: true,
             children: <Widget>[
               PanelHandle(),
               SiteInfoHeaderBanner(selectedSiteLocation),

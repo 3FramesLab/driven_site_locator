@@ -37,7 +37,7 @@ class SiteLocatorAssets {
       '$packagePath/assets/images/radioButtonDisabled.png';
   static const backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
   static const fuelPriceDisclaimerInfoIcon =
-      '$assetPath/fuel_price_disclaimer_info_icon.png';
+      '$interimAssetPath/fuel_price_disclaimer_info_icon.png';
   static const loginIcon = '$assetPath/loginIcon.png';
   static const logoutIcon = '$assetPath/logoutIcon.png';
   static const preferencesFilterIcon = '$assetPath/preferencesFilterIcon.png';
