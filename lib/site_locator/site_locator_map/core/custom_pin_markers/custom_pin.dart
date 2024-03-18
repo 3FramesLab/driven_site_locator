@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/dynatrace_utils/dynatrace_utils.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
@@ -124,10 +125,11 @@ class CustomPin {
       if (e is ErrorResponse) {
         errorMessage = e.errorSummary ?? errorMessage;
       }
-      Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.getBrandLogosErrorValue,
-            value: errorMessage,
-          );
+
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.getBrandLogosErrorValue,
+        value: errorMessage,
+      );
     }
     processCachingBrandLogos(urlStoreList);
   }

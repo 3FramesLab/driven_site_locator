@@ -11,38 +11,19 @@ class FuelBrandFilterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment:
-          kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _fuelBrandSearchField,
-        _buildFuelBrandListViewContainer(),
+        _fuelBrandListView,
         _showOrHideText,
       ],
     );
   }
 
-  Widget _buildFuelBrandListViewContainer() {
-    return kIsWeb
-        ? Container(
-            width: 375,
-            child: _fuelBrandListView,
-          )
-        : _fuelBrandListView;
-  }
-
-  Widget get _fuelBrandSearchField => kIsWeb
-      ? Container(
-          width: 350,
-          child: _buildSearchFieldWithPadding(),
-        )
-      : _buildSearchFieldWithPadding();
-
-  Padding _buildSearchFieldWithPadding() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: DrivenDimensions.dp16),
-      child: FuelBrandSearchField(),
-    );
-  }
+  Widget get _fuelBrandSearchField => const Padding(
+        padding: EdgeInsets.symmetric(horizontal: DrivenDimensions.dp16),
+        child: FuelBrandSearchField(),
+      );
 
   Widget get _fuelBrandListView => siteFilters.isEmpty
       ? _searchCriteriaNotFound
@@ -53,26 +34,13 @@ class FuelBrandFilterView extends StatelessWidget {
           children: _filterList,
         );
 
-  Widget get _showOrHideText => _buildShowMoreContainer();
-
-  Widget _buildShowMoreContainer() {
-    return kIsWeb
-        ? Container(
-            width: 375,
-            child: _buildShowMoreBrands(),
-          )
-        : _buildShowMoreBrands();
-  }
-
-  Padding _buildShowMoreBrands() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: DrivenDimensions.dp16,
-        vertical: DrivenDimensions.dp4,
-      ),
-      child: ShowMoreFuelBrands(),
-    );
-  }
+  Widget get _showOrHideText => Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: DrivenDimensions.dp16,
+          vertical: DrivenDimensions.dp4,
+        ),
+        child: ShowMoreFuelBrands(),
+      );
 
   List<Widget> get _filterList => siteFilters
       .map(

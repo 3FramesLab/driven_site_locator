@@ -23,7 +23,7 @@ class SearchPlaceResultsView extends StatelessWidget {
               const SizedBox(height: 5),
               _searchTextField(),
               const SizedBox(height: 20),
-              SearchPlacesListView(onResetTap: onClearIconTap),
+              const SearchPlacesListView(),
             ],
           ),
         ),

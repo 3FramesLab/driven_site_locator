@@ -111,8 +111,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> subscribeToLocationStream() async {
-    if (await isLocationPermissionGranted()) {
-      shareMyCurrentLocationStatus(true);
+    final permissionStatus = await Geolocator.checkPermission();
+    if (permissionStatus == LocationPermission.always ||
+        permissionStatus == LocationPermission.whileInUse) {
       const LocationSettings locationSettings = LocationSettings(
         accuracy: LocationAccuracy.high,
         distanceFilter: SiteLocatorConstants.updateLocationDistanceInMeters,
@@ -123,8 +124,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         currentLocation(LatLng(position.latitude, position.longitude));
         await validateAndRecenterMapView();
       });
-    } else {
-      shareMyCurrentLocationStatus(false);
     }
   }
 
@@ -163,29 +162,30 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         value: true,
       );
     } else if (GetPlatform.isWeb) {
-      await handleLocationPermissionDialog();
+      final LocationPermission locationPermission =
+          await Geolocator.checkPermission();
+      print('locationPermission: $locationPermission');
+      if (locationPermission != LocationPermission.always &&
+          locationPermission != LocationPermission.whileInUse) {
+        // TODO(siva): revert back
+        // unawaited(Get.dialog(
+        //   EnableLocationServiceDialog(
+        //       onUseMyLocation: () => onUseMyLocation(locationPermission)),
+        //   barrierDismissible: false,
+        // ));
+      }
     }
     await subscribeToLocationStream();
   }
 
-  Future<void> handleLocationPermissionDialog() async {
-    if (!(await isLocationPermissionGranted())) {
-      final showLocationPermission = await Get.dialog(
-        EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
-        barrierDismissible: false,
-      );
-      if (showLocationPermission != null && showLocationPermission) {
-        // if (locationPermission == LocationPermission.deniedForever) {
-        //   // should enable service from web browser settings.
-        // } else {
-        await Geolocator.requestPermission();
-        // }
-      }
-    }
-  }
-
-  Future<void> onUseMyLocation() async {
-    Get.back(result: true);
+  Future<void> onUseMyLocation(LocationPermission locationPermission) async {
+    Get.back();
+    // if (locationPermission == LocationPermission.deniedForever) {
+    //   // should enable service from web browser settings.
+    // } else {
+    await Geolocator.requestPermission();
+    await subscribeToLocationStream();
+    // }
   }
 
   Future<String> getAccessTokenForSites() async =>
@@ -233,11 +233,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
       isFirstLaunch = false;
     } on Exception catch (e) {
-      Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.getSitesAPIErrorName,
-            value: DynatraceErrorMessages.getSitesAPIErrorValue,
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.getSitesAPIErrorName,
+        value: DynatraceErrorMessages.getSitesAPIErrorValue,
+        reason: e.toString(),
+      );
     }
   }
 
@@ -250,12 +250,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       final jsonData = getJsonBodyData();
       await getSitesData(jsonData, accessToken);
     } on Exception catch (e) {
-      Globals().dynatrace.logError(
-            name:
-                'error in site locator controller fetching site data from api',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error in site locator controller fetching site data from api',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -596,11 +595,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isMapPinTapped = false;
     } catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error in site locator controller bounds change',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+
+      DynatraceUtils.logError(
+        name: 'error in site locator controller bounds change',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -644,11 +644,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       canRecenterMapViewOnLocationChange = true;
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error: on recenter button tap',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+
+      DynatraceUtils.logError(
+        name: 'error: on recenter button tap',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -840,11 +841,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             .then((_) => openLocationInfoPanel()));
       }
     } catch (e) {
-      Globals().dynatrace.logError(
-            name: 'error occurred on marker tap',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error occurred on marker tap',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1158,11 +1159,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isInitialListLoading(false);
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error while filter site locations',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+
+      DynatraceUtils.logError(
+        name: 'error while filter site locations',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1216,8 +1218,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         : originalItems.length);
     final nextSet = originalItems.getRange(
         presentPageIndex(), presentPageIndex() + perPageCount());
-    // TODO(siva): need to remove after CORS issue resolved
     if (!kIsWeb) {
+      // TODO: Smeet - remove if condition later.
       await fetchNextSetDrivingDistance(nextSet.toList());
     }
     listViewItems.addAll(nextSet);
@@ -1270,10 +1272,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       final nextEndRange = getNextListEndRange();
       final nextSet = originalItems.getRange(presentPageIndex(), nextEndRange);
       loadMoreSitesOnScroll(false);
-      // TODO(siva): need to remove after CORS issue resolved
-      if (!kIsWeb) {
-        await fetchNextSetDrivingDistance(nextSet.toList());
-      }
+      await fetchNextSetDrivingDistance(nextSet.toList());
       listViewItems.addAll(nextSet);
       presentPageIndex(presentPageIndex() + perPageCount());
       isViewMoreLoading(false);
@@ -1363,11 +1362,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isInitialListLoading(false);
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error while expand search radius',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+
+      DynatraceUtils.logError(
+        name: 'error while expand search radius',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1466,10 +1466,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await _updateListPageIfNecessary();
     } catch (_) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.geoCodingAPIErrorName,
-            value: DynatraceErrorMessages.geoCodingAPIErrorValue,
-          );
+
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.geoCodingAPIErrorName,
+        value: DynatraceErrorMessages.geoCodingAPIErrorValue,
+      );
     }
     isShowLoading(false);
     isInitialListLoading(false);
@@ -1635,11 +1636,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } on Exception catch (e) {
       isShowLoading(false);
 
-      Globals().dynatrace.logError(
-            name: 'Error in site locator controller at initial load data',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'Error in site locator controller at initial load data',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -2033,25 +2034,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   //web app
   // ignore: avoid_positional_boolean_parameters
-  Future<void> onToggleShareMyCurrentLocation(bool shareMyLocation) async {
-    shareMyCurrentLocationStatus(shareMyLocation);
-    final permissionStatus = await Geolocator.checkPermission();
-    if (shareMyLocation && permissionStatus != LocationPermission.always ||
-        permissionStatus != LocationPermission.whileInUse) {
-      await Geolocator.requestPermission();
-      await subscribeToLocationStream();
-      if (await isLocationPermissionGranted()) {
-        await updateCurrentLatLngBoundsOnReCenter();
-        await getSiteLocationsData();
-      } else {
-        await locationStreamSubscription?.cancel();
-      }
-    }
-  }
-
-  Future<bool> isLocationPermissionGranted() async {
-    final permissionStatus = await Geolocator.checkPermission();
-    return permissionStatus == LocationPermission.always ||
-        permissionStatus == LocationPermission.whileInUse;
+  void onToggleShareMyCurrentLocation(bool value) {
+    shareMyCurrentLocationStatus(value);
   }
 }

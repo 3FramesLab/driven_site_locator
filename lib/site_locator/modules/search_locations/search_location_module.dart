@@ -1,11 +1,11 @@
 library search_location_module;
 
-import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/config/site_locator_routes.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/use_cases/base_future_usecase.dart';
 import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/dynatrace_utils/dynatrace_utils.dart';
 import 'package:driven_site_locator/site_locator/constants/semantic_strings.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_api_constants.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';

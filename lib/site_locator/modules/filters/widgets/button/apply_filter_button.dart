@@ -1,33 +1,17 @@
 part of filter_module;
 
 class ApplyFilterButton extends StatelessWidget {
-  final Function()? onFilterBackButtonTap;
-
   final EnhancedFilterController filterController = Get.find();
 
-  ApplyFilterButton({
-    this.onFilterBackButtonTap,
-    Key? key,
-  }) : super(key: key);
+  ApplyFilterButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _buildApplyFilterButton();
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: _applyFilterButton,
+    );
   }
-
-  Widget _buildApplyFilterButton() {
-    return kIsWeb
-        ? Container(
-            width: 375,
-            child: _buildButton,
-          )
-        : _buildButton;
-  }
-
-  Padding get _buildButton => Padding(
-        padding: const EdgeInsets.all(16),
-        child: _applyFilterButton,
-      );
 
   Widget get _applyFilterButton => Obx(
         () => PrimaryButton(
@@ -38,17 +22,10 @@ class ApplyFilterButton extends StatelessWidget {
       );
 
   Future<void> _applyFilterTap() async {
-    if (kIsWeb) {
-      if (onFilterBackButtonTap != null) {
-        onFilterBackButtonTap!();
-      }
-    } else {
-      trackAction(
-        AnalyticsTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
-        // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
-      );
-    }
-
+    trackAction(
+      AnalyticsTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
+      // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
+    );
     await filterController.onApplyFilterClick();
   }
 }

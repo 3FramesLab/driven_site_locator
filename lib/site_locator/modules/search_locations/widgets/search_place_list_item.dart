@@ -4,11 +4,9 @@ class SearchPlaceListItem extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
   final SearchPlacesController searchPlacesController = Get.find();
   final int rowIndex;
-  final Function()? onResetViewTap;
 
   SearchPlaceListItem({
     required this.rowIndex,
-    this.onResetViewTap,
     super.key,
   });
 
@@ -38,9 +36,6 @@ class SearchPlaceListItem extends StatelessWidget {
 
   Future<dynamic> _onPlaceItemTapped() {
     siteLocatorController.clearMilesCachedData();
-    if (onResetViewTap != null) {
-      onResetViewTap!();
-    }
     return siteLocatorController
         .getLatLngForSelectedPlace(searchPlacesController.placesList[rowIndex]);
   }

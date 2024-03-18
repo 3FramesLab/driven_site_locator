@@ -40,11 +40,9 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
       siteLocatorController.show2CTAButton(show2CTA: true);
 
-      if (!kIsWeb) {
-        await Future.delayed(const Duration(milliseconds: 500), () async {
-          await siteLocatorController.updateFullMapViewSitesData();
-        });
-      }
+      await Future.delayed(const Duration(milliseconds: 500), () async {
+        await siteLocatorController.updateFullMapViewSitesData();
+      });
     });
     super.initState();
     WidgetsBinding.instance.addObserver(this);
@@ -328,15 +326,11 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   Widget _buildRightMapActions() {
     return Positioned(
       right: DrivenDimensions.dp16,
-      bottom: kIsWeb
-          ? siteLocatorController.staticBottomSpacing
-          : siteLocatorController.floatingButtonsBottomPosition(),
+      bottom: siteLocatorController.floatingButtonsBottomPosition(),
       child: Column(
         children: [
-          if (kIsWeb) ...[
-            zoomInOutButton(),
-            const SizedBox(height: DrivenDimensions.dp16),
-          ],
+          zoomInOutButton(),
+          const SizedBox(height: DrivenDimensions.dp16),
           gpsIconButton(),
         ],
       ),

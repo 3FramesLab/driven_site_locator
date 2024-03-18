@@ -9,15 +9,13 @@ import 'package:flutter/material.dart';
 class LeftHeader extends StatelessWidget {
   final Function()? onMenuIconTap;
   final Function()? onSearchIconTap;
-  final Function()? onFilterButtonTap;
   final double padding;
 
   const LeftHeader({
-    this.onSearchIconTap,
-    this.onMenuIconTap,
-    this.onFilterButtonTap,
-    this.padding = SiteLocatorDimensions.dp16,
+    required this.onSearchIconTap,
     Key? key,
+    this.padding = SiteLocatorDimensions.dp16,
+    this.onMenuIconTap,
   }) : super(key: key);
 
   @override
@@ -40,7 +38,7 @@ class LeftHeader extends StatelessWidget {
           SearchPlaceTextField(onSearchIconTap: onSearchIconTap),
           const SizedBox(height: SiteLocatorDimensions.dp24),
           if (_entitlementRepository.isEnhancedFilterEnabled) ...[
-            FiltersButton(onFilterButtonTap: onFilterButtonTap)
+            FiltersButton()
           ] else ...[
             const RoutePlannerButton(),
           ],
