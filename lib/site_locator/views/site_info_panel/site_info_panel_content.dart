@@ -76,13 +76,20 @@ class SiteInfoPanelContent extends GetView<SiteLocatorController> {
 
   Widget _buildPanelHeader() => kIsWeb ? _backButton : PanelHandle();
 
-  Widget get _backButton => Padding(
-        padding: const EdgeInsets.all(16),
-        child: DrivenBackButton(
-          onPressed: onSiteInfoTap!(),
-          mainAxisSize: MainAxisSize.min,
-          color: DrivenColors.black,
-          buttonLabelText: SiteLocatorConstants.locationDetails,
+  Widget get _backButton => Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: DrivenBackButton(
+            onPressed: () {
+              if (onSiteInfoTap != null) {
+                onSiteInfoTap!();
+              }
+            },
+            mainAxisSize: MainAxisSize.min,
+            color: DrivenColors.black,
+            buttonLabelText: SiteLocatorConstants.locationDetails,
+          ),
         ),
       );
 }
