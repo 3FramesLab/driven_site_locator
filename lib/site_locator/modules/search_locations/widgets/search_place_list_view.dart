@@ -1,7 +1,12 @@
 part of search_location_module;
 
 class SearchPlacesListView extends StatefulWidget {
-  const SearchPlacesListView({super.key});
+  final Function()? onResetTap;
+
+  const SearchPlacesListView({
+    this.onResetTap,
+    super.key,
+  });
 
   @override
   State<SearchPlacesListView> createState() => _SearchPlacesListViewState();
@@ -33,7 +38,10 @@ class _SearchPlacesListViewState extends State<SearchPlacesListView> {
 
   Widget get _placeList => Expanded(
         child: ListView.builder(
-          itemBuilder: (context, index) => SearchPlaceListItem(rowIndex: index),
+          itemBuilder: (context, index) => SearchPlaceListItem(
+            rowIndex: index,
+            onResetViewTap: widget.onResetTap,
+          ),
           itemCount: searchPlacesController.placesList.length,
         ),
       );
