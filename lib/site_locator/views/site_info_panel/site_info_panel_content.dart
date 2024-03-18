@@ -11,13 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SiteInfoPanelContent extends GetView<SiteLocatorController> {
-  const SiteInfoPanelContent(
-    this.scrollController, {
+  const SiteInfoPanelContent({
+    this.scrollController,
     this.showExtraData = false,
   });
 
-  final ScrollController scrollController;
-  final bool showExtraData;
+  final ScrollController? scrollController;
+  final bool? showExtraData;
 
   @override
   Widget build(BuildContext context) {

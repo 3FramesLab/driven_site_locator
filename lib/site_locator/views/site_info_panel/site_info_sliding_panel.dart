@@ -37,7 +37,7 @@ class SiteInfoSlidingPanel extends StatelessWidget {
   }
 
   Widget _panelBuilder(ScrollController controller) => SiteInfoPanelContent(
-        controller,
+        scrollController: controller,
         showExtraData: showExtraData,
       );
 }

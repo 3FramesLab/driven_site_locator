@@ -921,8 +921,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     await getMiles(selectedSiteLocation()).then((_) {
       milesDisplay(displayMiles(selectedSiteLocation()));
     });
-    setFloatingButtonsVisibility(buttonsVisibility: false);
-    unawaited(locationPanelController.open());
+    if (kIsWeb) {
+      onListViewSiteInfoDetailsTap?.call();
+    } else {
+      setFloatingButtonsVisibility(buttonsVisibility: false);
+      unawaited(locationPanelController.open());
+    }
   }
 
   void mapFullViewInitStatus() {

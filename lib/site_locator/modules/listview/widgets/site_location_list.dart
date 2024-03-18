@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SiteLocationList extends StatefulWidget {
-  SiteLocationList({super.key});
+  final Function()? onListViewSiteInfoDetailsTap;
+  const SiteLocationList({super.key, this.onListViewSiteInfoDetailsTap});
 
   @override
   State<SiteLocationList> createState() => _SiteLocationListState();
@@ -21,6 +22,8 @@ class _SiteLocationListState extends State<SiteLocationList> {
   @override
   void initState() {
     super.initState();
+    controller.onListViewSiteInfoDetailsTap =
+        widget.onListViewSiteInfoDetailsTap;
     listScrollcontroller = ScrollController()
       ..addListener(listViewScrollEventListener);
   }
