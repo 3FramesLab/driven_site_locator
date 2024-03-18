@@ -328,11 +328,15 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   Widget _buildRightMapActions() {
     return Positioned(
       right: DrivenDimensions.dp16,
-      bottom: siteLocatorController.floatingButtonsBottomPosition(),
+      bottom: kIsWeb
+          ? siteLocatorController.staticBottomSpacing
+          : siteLocatorController.floatingButtonsBottomPosition(),
       child: Column(
         children: [
-          zoomInOutButton(),
-          const SizedBox(height: DrivenDimensions.dp16),
+          if (kIsWeb) ...[
+            zoomInOutButton(),
+            const SizedBox(height: DrivenDimensions.dp16),
+          ],
           gpsIconButton(),
         ],
       ),
