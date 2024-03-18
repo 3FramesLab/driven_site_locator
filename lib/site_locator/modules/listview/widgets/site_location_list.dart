@@ -7,7 +7,13 @@ import 'package:get/get.dart';
 
 class SiteLocationList extends StatefulWidget {
   final Function()? onListViewSiteInfoDetailsTap;
-  const SiteLocationList({super.key, this.onListViewSiteInfoDetailsTap});
+  final Function()? onListViewSiteInfoDetailsBackTap;
+
+  const SiteLocationList({
+    super.key,
+    this.onListViewSiteInfoDetailsTap,
+    this.onListViewSiteInfoDetailsBackTap,
+  });
 
   @override
   State<SiteLocationList> createState() => _SiteLocationListState();
@@ -24,6 +30,8 @@ class _SiteLocationListState extends State<SiteLocationList> {
     super.initState();
     controller.onListViewSiteInfoDetailsTap =
         widget.onListViewSiteInfoDetailsTap;
+    controller.onListViewSiteInfoDetailsBackTap =
+        widget.onListViewSiteInfoDetailsBackTap;
     listScrollcontroller = ScrollController()
       ..addListener(listViewScrollEventListener);
   }

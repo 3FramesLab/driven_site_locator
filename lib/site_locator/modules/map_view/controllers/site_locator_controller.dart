@@ -23,9 +23,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isSitesLoadingTimerInitiated(true);
     sitesLoadingPeriodicTimer =
         Timer.periodic(const Duration(milliseconds: 1000), (t) {
-      sitesLoadingPeriodicTimer = t;
-      _cancelLoadingTimerOnSafeThreshold(getSitesLoadingProgress());
-    });
+          sitesLoadingPeriodicTimer = t;
+          _cancelLoadingTimerOnSafeThreshold(getSitesLoadingProgress());
+        });
   }
 
   void _cancelLoadingPeriodicTimer() {
@@ -34,7 +34,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   void fetchSitesScheduler() {
     const cronFormat =
-        '${SitesLocationCacheConstants.thresholdMinute} ${SitesLocationCacheConstants.thresholdHour} * * *';
+        '${SitesLocationCacheConstants
+        .thresholdMinute} ${SitesLocationCacheConstants.thresholdHour} * * *';
     Cron().schedule(Schedule.parse(cronFormat), () async {
       await getSiteLocationsData(forceApiCall: true);
     });
@@ -49,7 +50,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       );
       debounce(
         currentLatLngBounds,
-        (_) => onLatLngBoundsChange(),
+            (_) => onLatLngBoundsChange(),
         time: const Duration(
           seconds: SiteLocatorConstants.mapDebounceTimeInSeconds,
         ),
@@ -120,9 +121,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       locationStreamSubscription =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((position) async {
-        currentLocation(LatLng(position.latitude, position.longitude));
-        await validateAndRecenterMapView();
-      });
+            currentLocation(LatLng(position.latitude, position.longitude));
+            await validateAndRecenterMapView();
+          });
     } else {
       shareMyCurrentLocationStatus(false);
     }
@@ -201,7 +202,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         northeast: currentLatLngBounds().northeast,
       );
       final fetchSitesFromRemote =
-          await locationCacheUtils.shouldFetchSitesFromRemote(
+      await locationCacheUtils.shouldFetchSitesFromRemote(
         newCenterLocation,
         SiteLocatorConfig.defaultMapRadius,
       );
@@ -234,10 +235,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isFirstLaunch = false;
     } on Exception catch (e) {
       Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.getSitesAPIErrorName,
-            value: DynatraceErrorMessages.getSitesAPIErrorValue,
-            reason: e.toString(),
-          );
+        name: DynatraceErrorMessages.getSitesAPIErrorName,
+        value: DynatraceErrorMessages.getSitesAPIErrorValue,
+        reason: e.toString(),
+      );
     }
   }
 
@@ -251,16 +252,16 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await getSitesData(jsonData, accessToken);
     } on Exception catch (e) {
       Globals().dynatrace.logError(
-            name:
-                'error in site locator controller fetching site data from api',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name:
+        'error in site locator controller fetching site data from api',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
-  Future<void> getSitesData(
-      Map<String, dynamic> jsonData, String accessToken) async {
+  Future<void> getSitesData(Map<String, dynamic> jsonData,
+      String accessToken) async {
     filteredSiteLocationsList.clear();
     sitesLoadingProgressController.setFindingSiteLocationsMessage();
     initiateSitesLoadingProgressValue();
@@ -303,10 +304,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isSitesLoadingTimerInitiated(true);
     Timer.periodic(
         Duration(milliseconds: SitesLoadingProgressProps.stepUpPeriodicTimer),
-        (t) {
-      sitesLoadingPeriodicTimer = t;
-      stepUpSitesLoadingCyclicValue();
-    });
+            (t) {
+          sitesLoadingPeriodicTimer = t;
+          stepUpSitesLoadingCyclicValue();
+        });
   }
 
   void relaySitesLoadingProgressValue(List<SiteLocation>? siteLocations) {
@@ -401,13 +402,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> _getAndUpdateFuelPreferenceType() async {
     fuelPreferencesList =
-        await getFuelPreferencesUseCase.execute(GetFuelPreferencesParams(
+    await getFuelPreferencesUseCase.execute(GetFuelPreferencesParams(
       fuelPreferencesList,
       isUserAuthenticated: isUserAuthenticated,
     ));
     if (fuelPreferencesList.isNotEmpty) {
       selectedCardFuelPreferenceType =
-          await getSelectedCardFuelPrefTypeUseCase.execute(
+      await getSelectedCardFuelPrefTypeUseCase.execute(
         GetSelectedCardFuelPrefTypeParams(
             fuelPreferencesList: fuelPreferencesList),
       );
@@ -491,12 +492,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
     final noLocationsErrorModalTimer = Timer(
         const Duration(seconds: SiteLocatorConstants.noLocationsErrorModalTime),
-        () {
-      isShowingErrorModal = false;
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
-    });
+            () {
+          isShowingErrorModal = false;
+          if (Get.isDialogOpen ?? false) {
+            Get.back();
+          }
+        });
 
     if (!isShowingErrorModal) {
       isShowingErrorModal = true;
@@ -505,7 +506,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         NoLocationsDialog(errorMessage: locationsErrorMessage),
         barrierDismissible: true,
       ).then(
-        (_) {
+            (_) {
           noLocationsErrorModalTimer.cancel();
           isShowingErrorModal = false;
         },
@@ -516,7 +517,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Map<String, dynamic> getJsonBodyData() {
     final Map<String, dynamic> jsonData = {
       'bounds':
-          '${currentLatLngBounds().southwest.latitude},${currentLatLngBounds().southwest.longitude},${currentLatLngBounds().northeast.latitude},${currentLatLngBounds().northeast.longitude}',
+      '${currentLatLngBounds().southwest.latitude},${currentLatLngBounds()
+          .southwest.longitude},${currentLatLngBounds().northeast
+          .latitude},${currentLatLngBounds().northeast.longitude}',
     };
     return SiteLocatorConfig.addQueryParams(jsonData);
   }
@@ -543,6 +546,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   LatLngBounds? tempLatLngBounds;
+
   bool get isZoomLevelBelowThreshold =>
       previousZoomLevel != null && previousZoomLevel! < 10.5;
 
@@ -578,8 +582,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
           northeast: currentLatLngBounds().northeast,
         );
         final isAwayFromLastSavedLocation =
-            await validateLastSavedCenterLocationUseCase
-                .execute(newCenterLocation);
+        await validateLastSavedCenterLocationUseCase
+            .execute(newCenterLocation);
 
         await applyClustering();
 
@@ -597,10 +601,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } catch (e) {
       isShowLoading(false);
       Globals().dynatrace.logError(
-            name: 'error in site locator controller bounds change',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name: 'error in site locator controller bounds change',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -645,10 +649,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } on Exception catch (e) {
       isShowLoading(false);
       Globals().dynatrace.logError(
-            name: 'error: on recenter button tap',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name: 'error: on recenter button tap',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -712,9 +716,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> moveCameraPosition(LatLngBounds newPosition) async {
     Future.delayed(
       const Duration(milliseconds: 200),
-      () => googleMapController?.moveCamera(
-        CameraUpdate.newLatLngBounds(newPosition, mapPadding),
-      ),
+          () =>
+          googleMapController?.moveCamera(
+            CameraUpdate.newLatLngBounds(newPosition, mapPadding),
+          ),
     );
   }
 
@@ -774,7 +779,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         (visibleRegion.northeast.latitude + visibleRegion.southwest.latitude) /
             2,
         (visibleRegion.northeast.longitude +
-                visibleRegion.southwest.longitude) /
+            visibleRegion.southwest.longitude) /
             2,
       );
     }
@@ -792,8 +797,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     return true;
   }
 
-  List<Marker> generateMarkerList(
-          List<MarkerDetails> detailsList, String selectedKey) =>
+  List<Marker> generateMarkerList(List<MarkerDetails> detailsList,
+      String selectedKey) =>
       generateMarkersUseCase.execute(
         GenerateMarkersParams(
           markerDetailsList: detailsList,
@@ -835,16 +840,22 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         closeLocationInfoPanel();
         clearSearchPlaceInput();
       } else {
-        showOpacity(false);
-        unawaited(setSelectedLocation(item.site.id)
-            .then((_) => openLocationInfoPanel()));
+        if (kIsWeb) {
+          unawaited(setSelectedLocation(item.site.id)
+              .then((_) => openSiteInfoFullView(selectedSiteLocation())));
+        }
+        else {
+          showOpacity(false);
+          unawaited(setSelectedLocation(item.site.id)
+              .then((_) => openLocationInfoPanel()));
+        }
       }
     } catch (e) {
       Globals().dynatrace.logError(
-            name: 'error occurred on marker tap',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name: 'error occurred on marker tap',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -860,11 +871,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  void updateMapPinMarker(
-    RxList<Marker> markersList,
-    MarkerDetails markerDetails, {
-    bool isShowBigIcon = false,
-  }) {
+  void updateMapPinMarker(RxList<Marker> markersList,
+      MarkerDetails markerDetails, {
+        bool isShowBigIcon = false,
+      }) {
     updateMarkerIconUseCase.execute(
       UpdateMarkerIconParams(
         markersList: markersList,
@@ -1008,7 +1018,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> cachingDrivingDistance(List<SiteLocation> siteLocations) async {
     final latLngList = getLangList(siteLocations);
     final slicedLatLng =
-        sliceLatLngCount(latLngList, count: latLngList.length > 10 ? 10 : null);
+    sliceLatLngCount(latLngList, count: latLngList.length > 10 ? 10 : null);
     final destinationsParamValues = formatLatLngParams(latLngList);
     final originsParamValue = formatLatLngKey(
       currentLocation().latitude,
@@ -1025,8 +1035,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isViewMoreLoading(false);
   }
 
-  Future<void> processMilesCache(
-      List<String> slicedLatLng, DistanceMatrix? distanceMatrix) async {
+  Future<void> processMilesCache(List<String> slicedLatLng,
+      DistanceMatrix? distanceMatrix) async {
     final Map<String, double> milesDataMap = milesDataCache();
     for (int keyIndex = 0; keyIndex < slicedLatLng.length; keyIndex++) {
       final latLngListKey = slicedLatLng[keyIndex];
@@ -1053,8 +1063,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     final int countToSlice = count ?? 10;
     return (latlngList.length <= 10)
         ? count != null
-            ? latlngList.sublist(0, count)
-            : latlngList
+        ? latlngList.sublist(0, count)
+        : latlngList
         : latlngList.sublist(0, countToSlice);
   }
 
@@ -1141,9 +1151,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     await updateFavoriteList(favoriteList);
   }
 
-  List<String> getFavoriteList() => favoriteList(PreferenceUtils.getStringList(
-      SiteLocatorConstants.favoriteSiteListStorageKey,
-      defaultValue: []));
+  List<String> getFavoriteList() =>
+      favoriteList(PreferenceUtils.getStringList(
+          SiteLocatorConstants.favoriteSiteListStorageKey,
+          defaultValue: []));
 
   Future<void> updateFavoriteList(List<String> favoriteList) async =>
       PreferenceUtils.setStringList(
@@ -1163,16 +1174,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } on Exception catch (e) {
       isShowLoading(false);
       Globals().dynatrace.logError(
-            name: 'error while filter site locations',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name: 'error while filter site locations',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
   Future<void> _filterMapPins(
-    List<SiteLocation> filteredSiteLocationsList,
-  ) async {
+      List<SiteLocation> filteredSiteLocationsList,) async {
     if (isGenerateMapPinsOnFiltering) {
       await processSiteLocations(siteLocations ?? []);
       isGenerateMapPinsOnFiltering = false;
@@ -1186,7 +1196,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<List<Marker>> filterMarkers(List<Marker> rawMarkersList,
-          List<SiteLocation> filteredSiteLocationsList) async =>
+      List<SiteLocation> filteredSiteLocationsList) async =>
       filterMarkersUseCase.execute(
         FilterMarkersParams(
           rawMarkersList: rawMarkersList,
@@ -1232,8 +1242,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   bool canFireListViewScrollHandler(ScrollController listScrollcontroller) =>
       (listScrollcontroller.hasClients)
           ? listScrollcontroller.offset >=
-                  listScrollcontroller.position.maxScrollExtent &&
-              loadMoreSitesOnScroll()
+          listScrollcontroller.position.maxScrollExtent &&
+          loadMoreSitesOnScroll()
           : false;
 
   bool canFireListViewShowMorelHandler() {
@@ -1285,7 +1295,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  List<SiteLocation> getSiteLocationsForListView() => List.from(
+  List<SiteLocation> getSiteLocationsForListView() =>
+      List.from(
         selectedSiteFilters.isNotEmpty
             ? filteredSiteLocationsList
             : siteLocations ?? <SiteLocation>[],
@@ -1308,7 +1319,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   bool canShowEnhancedNoLocationDialog() {
     final canShowFlag = Get.currentRoute ==
-            SiteLocatorRoutes.siteLocatorMapView ||
+        SiteLocatorRoutes.siteLocatorMapView ||
         Get.currentRoute == SiteLocatorRoutes.siteLocationsListView ||
         // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage ||
         // (Get.currentRoute == SiteLocatorRoutes.dashboard &&
@@ -1368,10 +1379,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } on Exception catch (e) {
       isShowLoading(false);
       Globals().dynatrace.logError(
-            name: 'error while expand search radius',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name: 'error while expand search radius',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1419,7 +1430,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   bool _isPanelOpenedToFullView(double pos) =>
       locationPanelController.isPanelOpen ||
-      (!locationPanelController.isPanelOpen && pos > 0.6);
+          (!locationPanelController.isPanelOpen && pos > 0.6);
 
   void _setFullViewStatus() {
     trackAction(
@@ -1471,25 +1482,32 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } catch (_) {
       isShowLoading(false);
       Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.geoCodingAPIErrorName,
-            value: DynatraceErrorMessages.geoCodingAPIErrorValue,
-          );
+        name: DynatraceErrorMessages.geoCodingAPIErrorName,
+        value: DynatraceErrorMessages.geoCodingAPIErrorValue,
+      );
     }
     isShowLoading(false);
     isInitialListLoading(false);
   }
 
-  double getMapHeight(BuildContext context) => isUserAuthenticated
-      ? MediaQuery.of(context).size.height -
+  double getMapHeight(BuildContext context) =>
+      isUserAuthenticated
+          ? MediaQuery
+          .of(context)
+          .size
+          .height -
           DrivenSiteLocator.instance.getBottomNavBarHeight() -
           safeAreaPadding
-      : MediaQuery.of(context).size.height;
+          : MediaQuery
+          .of(context)
+          .size
+          .height;
 
   double panelMaxHeight(BuildContext context) {
     final deviceMedia = MediaQuery.of(context);
     final deviceEdgePadding = _isAuthenticatedMapView
         ? DrivenSiteLocator.instance.getBottomNavBarHeight() +
-            deviceMedia.padding.top
+        deviceMedia.padding.top
         : deviceMedia.padding.top;
     final deviceHeight = deviceMedia.size.height;
     return deviceHeight - deviceEdgePadding;
@@ -1522,7 +1540,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       SiteLocatorRoutes.siteLocatorMapView,
       arguments: {'currentUserLocation': currentLocation},
     )?.then(
-      (_) async {
+          (_) async {
         await onReCenterButtonClicked();
       },
     );
@@ -1581,7 +1599,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   // TODO(Smeet): check implementation.
   bool get inFullMapViewScreen =>
       Get.currentRoute == SiteLocatorRoutes.siteLocatorMapView ||
-      DrivenSiteLocator.instance.getIsCardholderFullMapScreen();
+          DrivenSiteLocator.instance.getIsCardholderFullMapScreen();
 
   void closeSiteLocatorMenuPanel() {
     if (menuPanelController.isAttached) {
@@ -1640,10 +1658,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isShowLoading(false);
 
       Globals().dynatrace.logError(
-            name: 'Error in site locator controller at initial load data',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+        name: 'Error in site locator controller at initial load data',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1679,7 +1697,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> updateSitesWithFuelPricesOnWalletCardChange() async {
     isShowLoading(true);
     selectedCardFuelPreferenceType =
-        await getSelectedCardFuelPrefTypeUseCase.execute(
+    await getSelectedCardFuelPrefTypeUseCase.execute(
       GetSelectedCardFuelPrefTypeParams(
           fuelPreferencesList: fuelPreferencesList),
     );
@@ -1778,7 +1796,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     );
   }
 
-  void trackMapClick() => trackAction(
+  void trackMapClick() =>
+      trackAction(
         AnalyticsTrackActionName.mapClick,
         // adobeCustomTag: AdobeTagProperties.welcome,
       );
@@ -1866,11 +1885,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> _generateClusterData(List<Marker> markers) async {
     final _mapMarkers = markers.map((marker) {
       final int row =
-          ((marker.position.latitude + 90) ~/ gridManager.gridCellSize)
-              .clamp(0, gridManager.rowCount - 1);
+      ((marker.position.latitude + 90) ~/ gridManager.gridCellSize)
+          .clamp(0, gridManager.rowCount - 1);
       final int column =
-          ((marker.position.longitude + 180) ~/ gridManager.gridCellSize)
-              .clamp(0, gridManager.columnCount - 1);
+      ((marker.position.longitude + 180) ~/ gridManager.gridCellSize)
+          .clamp(0, gridManager.columnCount - 1);
       return MapMarker(
         id: marker.markerId.value,
         position: marker.position,
@@ -1889,7 +1908,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       /// cluster is disable then density is 999999, so no cluster will be
       /// display on the map.
       clusterDensity:
-          isClusterEnabled ? SiteLocatorConfig.defaultClusterDensity : 999999,
+      isClusterEnabled ? SiteLocatorConfig.defaultClusterDensity : 999999,
       points: _mapMarkers,
       // ignore: avoid_types_on_closure_parameters
       createCluster: (BaseCluster? cluster, double? lng, double? lat) {

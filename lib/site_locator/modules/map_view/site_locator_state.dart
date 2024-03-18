@@ -173,4 +173,5 @@ mixin SiteLocatorState {
 
   RxBool shareMyCurrentLocationStatus = false.obs;
   Function()? onListViewSiteInfoDetailsTap;
+  Function()? onListViewSiteInfoDetailsBackTap;
 }
