@@ -811,7 +811,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     closeSiteLocatorMenuPanel();
   }
 
-  Future<void> onMarkerTap(MarkerDetails item) async {
+  Future<void> onMarkerTap(MarkerDetails item,
+      {bool isComingFromDetailsTap = false}) async {
     try {
       trackAction(
         AnalyticsTrackActionName.locationPinClickedEvent,
@@ -841,12 +842,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         clearSearchPlaceInput();
       } else {
         if (kIsWeb) {
-          unawaited(setSelectedLocation(item.site.id)
-              .then((_) => openSiteInfoFullView(selectedSiteLocation())));
+          _handleSiteInfoFullViewOnMarkerTapForWeb(
+              isComingFromDetailsTap, item);
         } else {
           showOpacity(false);
-          unawaited(setSelectedLocation(item.site.id)
-              .then((_) => openLocationInfoPanel()));
+          unawaited(
+            setSelectedLocation(item.site.id).then(
+              (_) => openLocationInfoPanel(),
+            ),
+          );
         }
       }
     } catch (e) {
@@ -855,6 +859,20 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             value: e.toString(),
             reason: e.toString(),
           );
+    }
+  }
+
+  void _handleSiteInfoFullViewOnMarkerTapForWeb(
+      bool isComingFromDetailsTap, MarkerDetails item) {
+    if (!isComingFromDetailsTap) {
+      unawaited(
+        setSelectedLocation(item.site.id).then(
+          (_) => openSiteInfoFullView(
+            selectedSiteLocation(),
+            isComingFromMapPin: true,
+          ),
+        ),
+      );
     }
   }
 
@@ -922,7 +940,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     setFloatingButtonsVisibility(buttonsVisibility: false);
   }
 
-  Future<void> openSiteInfoFullView(SiteLocation siteLocation) async {
+  Future<void> openSiteInfoFullView(SiteLocation siteLocation,
+      {bool isComingFromMapPin = false}) async {
     isShownRemainingFullSiteInfo(true);
     isSiteInfoFullViewed(true);
     showFullViewExtraData(true);
@@ -932,10 +951,23 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       milesDisplay(displayMiles(selectedSiteLocation()));
     });
     if (kIsWeb) {
+      if (!isComingFromMapPin) {
+        await updateMarkerOnDetailsTap(siteLocation);
+      }
       onListViewSiteInfoDetailsTap?.call();
     } else {
       setFloatingButtonsVisibility(buttonsVisibility: false);
       unawaited(locationPanelController.open());
+    }
+  }
+
+  Future<void> updateMarkerOnDetailsTap(SiteLocation siteLocation) async {
+    final site = siteHashmap[
+        LatLng(siteLocation.siteLatitude!, siteLocation.siteLongitude!)];
+
+    final markerDetails = await PinVariantStore.getMarkerDetails(site);
+    if (markerDetails != null) {
+      await onMarkerTap(markerDetails, isComingFromDetailsTap: true);
     }
   }
 
