@@ -91,7 +91,7 @@ class CustomPin {
       selectedPinBgForDiscountPrice = await getBigPinBgImage(hasGallonUp: true);
     }
 
-    if (canCacheAllLogos) {
+    if (canCacheAllLogos && !kIsWeb) {
       await preCacheAllBrandLogos();
       trackDuration(cacheStartingTime);
     }
