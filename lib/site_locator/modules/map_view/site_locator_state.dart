@@ -172,4 +172,6 @@ mixin SiteLocatorState {
   bool isComingFromRecenter = false;
 
   RxBool shareMyCurrentLocationStatus = false.obs;
+  Function()? onListViewSiteInfoDetailsTap;
+  Function()? onListViewSiteInfoDetailsBackTap;
 }

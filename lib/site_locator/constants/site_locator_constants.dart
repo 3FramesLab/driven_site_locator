@@ -166,6 +166,7 @@ To view fuel sites in a different location, use the search bar or enable “site
       'Continue without using my location';
 
   static String menu = 'Menu';
+  static String locationDetails = 'Location details';
 }
 
 class QuickFilterLabel {
