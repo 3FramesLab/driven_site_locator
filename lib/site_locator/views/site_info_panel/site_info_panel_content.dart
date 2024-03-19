@@ -1,23 +1,28 @@
 import 'package:driven_site_locator/data/model/app_utils.dart';
+import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
+import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pin_variant_store.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/additional_details/a_additional_details_container.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/a_panel_handle.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/b_site_info_header_banner.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/f_site_info_short_actions.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/g_site_info_show_more_arrow.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/half_view_flavor_contents/site_info_half_view_contents.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class SiteInfoPanelContent extends GetView<SiteLocatorController> {
-  const SiteInfoPanelContent(
-    this.scrollController, {
+  const SiteInfoPanelContent({
+    this.scrollController,
     this.showExtraData = false,
+    this.onSiteInfoTap,
   });
 
-  final ScrollController scrollController;
-  final bool showExtraData;
+  final ScrollController? scrollController;
+  final bool? showExtraData;
+  final Function()? onSiteInfoTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +34,9 @@ class SiteInfoPanelContent extends GetView<SiteLocatorController> {
           final selectedSiteLocation = controller.selectedSiteLocation();
           return ListView(
             controller: scrollController,
+            shrinkWrap: true,
             children: <Widget>[
-              PanelHandle(),
+              _buildPanelHeader(),
               SiteInfoHeaderBanner(selectedSiteLocation),
               Container(
                 padding: const EdgeInsets.only(
@@ -67,5 +73,23 @@ class SiteInfoPanelContent extends GetView<SiteLocatorController> {
         curve: Curves.ease,
         duration: const Duration(milliseconds: 800),
         child: AdditionalDetailsContainer(selectedSiteLocation),
+      );
+
+  Widget _buildPanelHeader() => kIsWeb ? _backButton : PanelHandle();
+
+  Widget get _backButton => Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: DrivenBackButton(
+            onPressed: () {
+              controller.resetMarkers(PinVariantStore.statusList);
+              onSiteInfoTap?.call();
+            },
+            mainAxisSize: MainAxisSize.min,
+            color: DrivenColors.black,
+            buttonLabelText: SiteLocatorConstants.locationDetails,
+          ),
+        ),
       );
 }

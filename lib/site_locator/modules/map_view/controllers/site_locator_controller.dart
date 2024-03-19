@@ -543,6 +543,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   LatLngBounds? tempLatLngBounds;
+
   bool get isZoomLevelBelowThreshold =>
       previousZoomLevel != null && previousZoomLevel! < 10.5;
 
@@ -810,7 +811,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     closeSiteLocatorMenuPanel();
   }
 
-  Future<void> onMarkerTap(MarkerDetails item) async {
+  Future<void> onMarkerTap(MarkerDetails item,
+      {bool isComingFromDetailsTap = false}) async {
     try {
       trackAction(
         AnalyticsTrackActionName.locationPinClickedEvent,
@@ -832,12 +834,24 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       markers.refresh();
 
       if (selectedMapPinKey == SiteLocatorConstants.resetCode) {
-        closeLocationInfoPanel();
+        if (kIsWeb) {
+          onListViewSiteInfoDetailsBackTap?.call();
+        } else {
+          closeLocationInfoPanel();
+        }
         clearSearchPlaceInput();
       } else {
-        showOpacity(false);
-        unawaited(setSelectedLocation(item.site.id)
-            .then((_) => openLocationInfoPanel()));
+        if (kIsWeb) {
+          _handleSiteInfoFullViewOnMarkerTapForWeb(
+              isComingFromDetailsTap, item);
+        } else {
+          showOpacity(false);
+          unawaited(
+            setSelectedLocation(item.site.id).then(
+              (_) => openLocationInfoPanel(),
+            ),
+          );
+        }
       }
     } catch (e) {
       Globals().dynatrace.logError(
@@ -845,6 +859,20 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             value: e.toString(),
             reason: e.toString(),
           );
+    }
+  }
+
+  void _handleSiteInfoFullViewOnMarkerTapForWeb(
+      bool isComingFromDetailsTap, MarkerDetails item) {
+    if (!isComingFromDetailsTap) {
+      unawaited(
+        setSelectedLocation(item.site.id).then(
+          (_) => openSiteInfoFullView(
+            selectedSiteLocation(),
+            isComingFromMapPin: true,
+          ),
+        ),
+      );
     }
   }
 
@@ -912,7 +940,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     setFloatingButtonsVisibility(buttonsVisibility: false);
   }
 
-  Future<void> openSiteInfoFullView(SiteLocation siteLocation) async {
+  Future<void> openSiteInfoFullView(SiteLocation siteLocation,
+      {bool isComingFromMapPin = false}) async {
     isShownRemainingFullSiteInfo(true);
     isSiteInfoFullViewed(true);
     showFullViewExtraData(true);
@@ -921,8 +950,25 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     await getMiles(selectedSiteLocation()).then((_) {
       milesDisplay(displayMiles(selectedSiteLocation()));
     });
-    setFloatingButtonsVisibility(buttonsVisibility: false);
-    unawaited(locationPanelController.open());
+    if (kIsWeb) {
+      if (!isComingFromMapPin) {
+        await updateMarkerOnDetailsTap(siteLocation);
+      }
+      onListViewSiteInfoDetailsTap?.call();
+    } else {
+      setFloatingButtonsVisibility(buttonsVisibility: false);
+      unawaited(locationPanelController.open());
+    }
+  }
+
+  Future<void> updateMarkerOnDetailsTap(SiteLocation siteLocation) async {
+    final site = siteHashmap[
+        LatLng(siteLocation.siteLatitude!, siteLocation.siteLongitude!)];
+
+    final markerDetails = await PinVariantStore.getMarkerDetails(site);
+    if (markerDetails != null) {
+      await onMarkerTap(markerDetails, isComingFromDetailsTap: true);
+    }
   }
 
   void mapFullViewInitStatus() {

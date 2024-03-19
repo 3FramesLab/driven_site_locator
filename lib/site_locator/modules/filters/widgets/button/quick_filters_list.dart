@@ -39,6 +39,9 @@ class QuickFiltersList extends StatelessWidget {
     }
     SiteLocatorUtils.hideKeyboard();
     siteLocatorController.closeLocationInfoPanel();
+    if (kIsWeb) {
+      siteLocatorController.onListViewSiteInfoDetailsBackTap?.call();
+    }
     siteLocatorController.clearSearchPlaceInput();
     siteLocatorController.resetPrevSelectedMarkerStatus();
     await siteLocatorController.setListViewInitializers();

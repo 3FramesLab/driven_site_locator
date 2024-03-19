@@ -82,6 +82,10 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
             if (!currentFocus.hasPrimaryFocus &&
                 currentFocus.focusedChild != null) {
               currentFocus.focusedChild?.unfocus();
+              if (kIsWeb) {
+                widget.siteLocatorController.onListViewSiteInfoDetailsBackTap
+                    ?.call();
+              }
             }
             widget.siteLocatorController
                 .resetMarkers(PinVariantStore.statusList);
