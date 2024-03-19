@@ -62,11 +62,11 @@ class UpdateSiteLocationsFuelPricesUseCase
           ?.processSiteLocations(siteLocatorController?.siteLocations ?? []);
       await siteLocatorController?.validateSiteLocationWithFilters();
     } on Exception catch (e) {
-      Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.getFuelPricesAPIErrorName,
-            value: DynatraceErrorMessages.getFuelPricesAPIErrorValue,
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.getFuelPricesAPIErrorName,
+        value: DynatraceErrorMessages.getFuelPricesAPIErrorValue,
+        reason: e.toString(),
+      );
     }
   }
 

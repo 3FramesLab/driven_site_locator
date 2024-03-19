@@ -233,11 +233,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
       isFirstLaunch = false;
     } on Exception catch (e) {
-      Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.getSitesAPIErrorName,
-            value: DynatraceErrorMessages.getSitesAPIErrorValue,
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.getSitesAPIErrorName,
+        value: DynatraceErrorMessages.getSitesAPIErrorValue,
+        reason: e.toString(),
+      );
     }
   }
 
@@ -250,12 +250,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       final jsonData = getJsonBodyData();
       await getSitesData(jsonData, accessToken);
     } on Exception catch (e) {
-      Globals().dynatrace.logError(
-            name:
-                'error in site locator controller fetching site data from api',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error in site locator controller fetching site data from api',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -597,11 +596,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isMapPinTapped = false;
     } catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error in site locator controller bounds change',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error in site locator controller bounds change',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -645,11 +644,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       canRecenterMapViewOnLocationChange = true;
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error: on recenter button tap',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error: on recenter button tap',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -854,11 +853,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         }
       }
     } catch (e) {
-      Globals().dynatrace.logError(
-            name: 'error occurred on marker tap',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error occurred on marker tap',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1204,11 +1203,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isInitialListLoading(false);
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error while filter site locations',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error while filter site locations',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1409,11 +1408,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isInitialListLoading(false);
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error while expand search radius',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error while expand search radius',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
@@ -1512,10 +1511,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await _updateListPageIfNecessary();
     } catch (_) {
       isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: DynatraceErrorMessages.geoCodingAPIErrorName,
-            value: DynatraceErrorMessages.geoCodingAPIErrorValue,
-          );
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.geoCodingAPIErrorName,
+        value: DynatraceErrorMessages.geoCodingAPIErrorValue,
+      );
     }
     isShowLoading(false);
     isInitialListLoading(false);
@@ -1681,11 +1680,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } on Exception catch (e) {
       isShowLoading(false);
 
-      Globals().dynatrace.logError(
-            name: 'Error in site locator controller at initial load data',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'Error in site locator controller at initial load data',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 

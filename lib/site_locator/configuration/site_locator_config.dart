@@ -4,6 +4,7 @@ import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/dynatrace_utils/dynatrace_utils.dart';
 import 'package:driven_site_locator/site_locator/configuration/fuel_brands_configuration/fuel_brands_source.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_discount.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_fuels.dart';
@@ -109,11 +110,11 @@ class SiteLocatorConfig {
         await CustomPin.initEvents(setup: setup, canCacheAllLogos: setup);
       }
     } catch (e) {
-      Globals().dynatrace.logError(
-            name: 'error in site locator config init method',
-            value: e.toString(),
-            reason: e.toString(),
-          );
+      DynatraceUtils.logError(
+        name: 'error in site locator config init method',
+        value: e.toString(),
+        reason: e.toString(),
+      );
     }
   }
 
