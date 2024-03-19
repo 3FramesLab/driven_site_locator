@@ -3,6 +3,7 @@ import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
+import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pin_variant_store.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/additional_details/a_additional_details_container.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/a_panel_handle.dart';
 import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/b_site_info_header_banner.dart';
@@ -82,9 +83,8 @@ class SiteInfoPanelContent extends GetView<SiteLocatorController> {
           padding: const EdgeInsets.all(16),
           child: DrivenBackButton(
             onPressed: () {
-              if (onSiteInfoTap != null) {
-                onSiteInfoTap!();
-              }
+              controller.resetMarkers(PinVariantStore.statusList);
+              onSiteInfoTap?.call();
             },
             mainAxisSize: MainAxisSize.min,
             color: DrivenColors.black,
