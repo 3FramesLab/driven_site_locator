@@ -21,6 +21,7 @@ import 'package:driven_site_locator/data/use_cases/base_future_usecase.dart';
 import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/driven_site_locator.dart';
+import 'package:driven_site_locator/dynatrace_utils/dynatrace_utils.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
 import 'package:driven_site_locator/site_locator/constants/semantic_strings.dart';
 import 'package:driven_site_locator/site_locator/constants/site_location_info_view_modes.dart';
