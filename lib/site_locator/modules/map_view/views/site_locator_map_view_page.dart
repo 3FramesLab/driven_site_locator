@@ -198,7 +198,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         _siteLocatorMapView(),
         _headerColumn(topPadding),
         applyForFuelman(),
-        _loadingIndicator(),
+        if (!kIsWeb) _loadingIndicator(),
       ],
     );
   }
