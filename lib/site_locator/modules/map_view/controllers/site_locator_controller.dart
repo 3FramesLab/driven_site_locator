@@ -157,13 +157,22 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       SiteLocatorConstants.isLocationPermissionStatusUpdated,
     );
     if (permissionStatus == null) {
-      await Geolocator.requestPermission();
+      final locationPermission = await Geolocator.requestPermission();
+      final isLocationPermissionAllowed =
+          locationPermission == LocationPermission.always ||
+              locationPermission == LocationPermission.whileInUse;
+
+      await SiteLocatorStorageUtils.setIsLocationPermissionAllowed(
+        value: isLocationPermissionAllowed,
+      );
       await PreferenceUtils.setBool(
         SiteLocatorConstants.isLocationPermissionStatusUpdated,
         value: true,
       );
     } else if (GetPlatform.isWeb) {
-      await handleLocationPermissionDialog();
+      if (!SiteLocatorStorageUtils.getIsLocationPermissionAllowed()) {
+        await handleLocationPermissionDialog();
+      }
     }
     await subscribeToLocationStream();
   }
@@ -2080,12 +2089,17 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   // ignore: avoid_positional_boolean_parameters
   Future<void> onToggleShareMyCurrentLocation(bool shareMyLocation) async {
     shareMyCurrentLocationStatus(shareMyLocation);
-    final permissionStatus = await Geolocator.checkPermission();
-    if (shareMyLocation && permissionStatus != LocationPermission.always ||
-        permissionStatus != LocationPermission.whileInUse) {
-      await Geolocator.requestPermission();
+    final permissionStatus = await isLocationPermissionGranted();
+    if (shareMyLocation && !permissionStatus) {
+      final locationPermission = await Geolocator.requestPermission();
       await subscribeToLocationStream();
-      if (await isLocationPermissionGranted()) {
+      final isLocationPermissionGranted =
+          locationPermission == LocationPermission.always ||
+              locationPermission == LocationPermission.whileInUse;
+      await SiteLocatorStorageUtils.setIsLocationPermissionAllowed(
+        value: isLocationPermissionGranted,
+      );
+      if (isLocationPermissionGranted) {
         await updateCurrentLatLngBoundsOnReCenter();
         await getSiteLocationsData();
       } else {
@@ -2095,8 +2109,28 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<bool> isLocationPermissionGranted() async {
+    return kIsWeb
+        ? isLocationPermissionGrantedWeb()
+        : isLocationPermissionGrantedMobile();
+  }
+
+  Future<bool> isLocationPermissionGrantedMobile() async {
     final permissionStatus = await Geolocator.checkPermission();
     return permissionStatus == LocationPermission.always ||
         permissionStatus == LocationPermission.whileInUse;
+  }
+
+  Future<bool> isLocationPermissionGrantedWeb() async {
+    try {
+      if (SiteLocatorStorageUtils.getIsLocationPermissionAllowed()) {
+        await Geolocator.getCurrentPosition();
+        return true;
+      }
+      return false;
+    } catch (_) {
+      await SiteLocatorStorageUtils.setIsLocationPermissionAllowed(
+          value: false);
+      return false;
+    }
   }
 }

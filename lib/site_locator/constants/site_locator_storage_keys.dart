@@ -6,4 +6,5 @@ class SiteLocatorStorageKeys {
   static const lastSitesDataSyncDate = 'last_sites_data_sync_date_key';
   static const lastUserCenterLoc = 'last_user_center_loc_key';
   static const lastUsedMapRadius = 'last_used_map_radius';
+  static const isLocationPermissionAllowed = 'is_location_permission_allowed';
 }

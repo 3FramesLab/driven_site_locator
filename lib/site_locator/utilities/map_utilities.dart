@@ -7,6 +7,8 @@ import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/utilities/math_utils.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/single_function_dialog.dart';
+import 'package:driven_site_locator/utils/site_locator_storage_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -72,10 +74,24 @@ class MapUtilities {
   }
 
   static Future<bool> getLocationPermissionStatus() async {
-    final status = await Geolocator.checkPermission();
+    if (kIsWeb) {
+      try {
+        if (SiteLocatorStorageUtils.getIsLocationPermissionAllowed()) {
+          await Geolocator.getCurrentPosition();
+          return true;
+        }
+        return false;
+      } catch (_) {
+        await SiteLocatorStorageUtils.setIsLocationPermissionAllowed(
+            value: false);
+        return false;
+      }
+    } else {
+      final status = await Geolocator.checkPermission();
 
-    return status == LocationPermission.always ||
-        status == LocationPermission.whileInUse;
+      return status == LocationPermission.always ||
+          status == LocationPermission.whileInUse;
+    }
   }
 
   static Future<void> onLocationSettingsEnableCounter() async {
