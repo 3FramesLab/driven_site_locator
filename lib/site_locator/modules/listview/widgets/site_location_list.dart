@@ -8,11 +8,19 @@ import 'package:get/get.dart';
 class SiteLocationList extends StatefulWidget {
   final Function()? onListViewSiteInfoDetailsTap;
   final Function()? onListViewSiteInfoDetailsBackTap;
+  final Widget? stickyHeaderWidget;
+  final Widget? scrollingHeaderWidget;
+  final bool? canAppendToScroll;
+  final bool? canShowLeftTopHeader;
 
   const SiteLocationList({
     super.key,
     this.onListViewSiteInfoDetailsTap,
     this.onListViewSiteInfoDetailsBackTap,
+    this.stickyHeaderWidget,
+    this.scrollingHeaderWidget,
+    this.canAppendToScroll = false,
+    this.canShowLeftTopHeader = true,
   });
 
   @override
@@ -47,23 +55,64 @@ class _SiteLocationListState extends State<SiteLocationList> {
       final items = controller.listViewItems();
       final itemCount =
           (present <= originalItems.length) ? items.length + 1 : items.length;
-      return _siteLocationCards(items, itemCount);
+      return _buildHeaderSectionWithSiteList(items, itemCount);
     });
   }
 
-  Widget _siteLocationCards(List<SiteLocation> items, int itemCount) {
+  Widget _buildHeaderSectionWithSiteList(
+      List<SiteLocation> items, int itemCount) {
     if (items.isEmpty) {
       return NoLocationsFound();
     } else {
-      return ListView.builder(
-        controller: listScrollcontroller,
-        itemCount: itemCount,
-        itemBuilder: (context, index) {
-          return (index == items.length)
-              ? ViewMoreSitesLoadingProgress()
-              : SiteLocationInfoCard(items[index], index);
-        },
+      return Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            displayStickyHeaderSection(),
+            Expanded(
+              child: ListView.builder(
+                primary: false,
+                controller: listScrollcontroller,
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  if ((widget.canAppendToScroll ?? false) && index == 0) {
+                    return Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          displayScrollingHeaderSection(),
+                          SiteLocationInfoCard(items[index], index),
+                        ],
+                      ),
+                    );
+                  }
+                  return displaySiteLocationInfoCard(index, items);
+                },
+              ),
+            ),
+          ],
+        ),
       );
     }
+  }
+
+  Widget displayStickyHeaderSection() {
+    if ((widget.canShowLeftTopHeader ?? false) &&
+        !(widget.canAppendToScroll ?? false)) {
+      return widget.stickyHeaderWidget ?? const SizedBox.shrink();
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget displayScrollingHeaderSection() {
+    return widget.scrollingHeaderWidget ?? const SizedBox.shrink();
+  }
+
+  Widget displaySiteLocationInfoCard(int index, List<SiteLocation> items) {
+    return (index == items.length)
+        ? ViewMoreSitesLoadingProgress()
+        : SiteLocationInfoCard(items[index], index);
   }
 }
