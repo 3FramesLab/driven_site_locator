@@ -1,3 +1,4 @@
+import 'package:driven_common/driven_common_resources_module.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
 import 'package:driven_site_locator/site_locator/styles/site_locator_colors.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class SiteLocatorTextFieldStyle {
   }) {
     return InputDecoration(
       hintText: hintText,
+      hintStyle: f14RegularGrey,
       enabledBorder: _searchTextFieldBorder(width: borderWidth),
       focusedBorder: _searchTextFieldBorder(width: borderWidth),
       fillColor: Colors.white,

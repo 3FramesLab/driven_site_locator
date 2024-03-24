@@ -13,7 +13,8 @@ class SitesLoadingProgressIndicator extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       switchInCurve: Curves.easeIn,
       switchOutCurve: Curves.easeOut,
-      child: loadingProgressController.progressValue() > 0
+      child: loadingProgressController.progressValue() > 0 ||
+              loadingProgressController.canShowIndicator()
           ? _getProgressIndicator(context)
           : const SizedBox.shrink(),
     );
