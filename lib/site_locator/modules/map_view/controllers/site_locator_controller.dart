@@ -946,9 +946,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     showFullViewExtraData(true);
     selectedSiteLocation(siteLocation);
 
-    await getMiles(selectedSiteLocation()).then((_) {
-      milesDisplay(displayMiles(selectedSiteLocation()));
-    });
+    // TODO(siva): need to remove condition once google cors issue resolved
+    if (!kIsWeb) {
+      await getMiles(selectedSiteLocation()).then((_) {
+        milesDisplay(displayMiles(selectedSiteLocation()));
+      });
+    }
+
     if (kIsWeb) {
       if (!isComingFromMapPin) {
         await updateMarkerOnDetailsTap(siteLocation);
