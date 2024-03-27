@@ -11,12 +11,6 @@ class SitesLoadingProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!siteLocatorController.isShowLoading()) {
-      siteLocatorController.resetSitesLoadingIndicatorProgressValue();
-    } else {
-      siteLocatorController.toggleSitesLoadingIndicatorVisibility(
-          visible: true);
-    }
     return Container(
       margin: EdgeInsets.zero,
       child: AnimatedSwitcher(
