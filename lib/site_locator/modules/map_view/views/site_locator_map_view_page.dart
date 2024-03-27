@@ -175,7 +175,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
-        applyForFuelman(),
+        // TODO(siva): need to show after mobile testing done as its overlapping quick filters
+        // applyForFuelman(),
         if (!kIsWeb) _loadingIndicator(),
       ],
     );
