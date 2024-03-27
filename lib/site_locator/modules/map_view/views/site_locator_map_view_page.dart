@@ -169,6 +169,28 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     }
   }
 
+  Widget _loadingIndicator() {
+    if (!siteLocatorController.isShowLoading()) {
+      siteLocatorController.resetSitesLoadingIndicatorProgressValue();
+    } else {
+      siteLocatorController.toggleSitesLoadingIndicatorVisibility(
+          visible: true);
+    }
+    return Container(
+      margin: EdgeInsets.zero,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 100),
+        switchInCurve: Curves.fastLinearToSlowEaseIn,
+        switchOutCurve: Curves.fastLinearToSlowEaseIn,
+        child: siteLocatorController.getHastoShowSitesLoadingIndicator()
+            ? Center(
+                child: SitesLoadingProgressIndicator(),
+              )
+            : const SizedBox.shrink(),
+      ),
+    );
+  }
+
   Widget _body(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
     return Stack(
@@ -332,15 +354,5 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
     );
-  }
-
-  Widget _loadingIndicator() {
-    if (!siteLocatorController.isShowLoading()) {
-      siteLocatorController.resetSitesLoadingIndicatorProgressValue();
-    } else {
-      siteLocatorController.toggleSitesLoadingIndicatorVisibility(
-          visible: true);
-    }
-    return SitesLoadingProgressIndicator();
   }
 }

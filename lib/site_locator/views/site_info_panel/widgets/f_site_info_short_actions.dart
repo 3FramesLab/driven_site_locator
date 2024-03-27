@@ -6,6 +6,7 @@ import 'package:driven_site_locator/site_locator/modules/map_view/map_view_modul
 import 'package:driven_site_locator/site_locator/utilities/external_map_utils.dart';
 import 'package:driven_site_locator/site_locator/utilities/site_locator_utils.dart';
 import 'package:driven_site_locator/site_locator/widgets/bottom_sheet/site_info_bottom_sheet_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class SiteInfoShortActions extends StatelessWidget {
@@ -21,7 +22,7 @@ class SiteInfoShortActions extends StatelessWidget {
       children: [
         directionsButton(context),
         const SizedBox(width: 30),
-        callButton(context),
+        if (kIsWeb) shareLocationButtonButton(context) else callButton(context),
       ],
     );
   }
@@ -130,4 +131,19 @@ class SiteInfoShortActions extends StatelessWidget {
       selectedSiteLocation.siteLongitude!,
     ).openExternalMapApp(context);
   }
+
+  // Share location - start
+
+  Widget shareLocationButtonButton(BuildContext context) => Expanded(
+        child: Semantics(
+          container: true,
+          label: SemanticStrings.siteInfoShareLocationButton,
+          child: OutlinedPrimaryButton(
+            onPressed: () {},
+            text: SiteLocatorConstants.shareLocation,
+          ),
+        ),
+      );
+
+  // Share location - end
 }
