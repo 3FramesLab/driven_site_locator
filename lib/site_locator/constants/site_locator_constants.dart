@@ -42,6 +42,7 @@ class SiteLocatorConstants {
   static const exit = 'Exit';
   static const highway = 'Highway';
   static const fuelPriceAsOfBannerText = 'Fuel price updated on';
+  static const shareLocation = 'Share Location';
 
   static const infoDiscountFeesBannerHeight = 48.0;
   static const locationNameWidgetHeight = 36;

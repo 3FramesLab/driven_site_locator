@@ -66,6 +66,7 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
           onPressed: _popPage,
           mainAxisSize: MainAxisSize.min,
           buttonLabelText: SiteLocatorConstants.filters,
+          verticalSpacing: kIsWeb ? 16 : 0,
         ),
       );
 
