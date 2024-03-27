@@ -14,17 +14,16 @@ class SitesLoadingProgressIndicator extends StatelessWidget {
       switchInCurve: Curves.easeIn,
       switchOutCurve: Curves.easeOut,
       child: loadingProgressController.progressValue() > 0
-          ? _getProgressIndicator(context)
+          ? _getProgressIndicator()
           : const SizedBox.shrink(),
     );
   }
 
-  Widget _getProgressIndicator(BuildContext context) {
+  Widget _getProgressIndicator() {
     return Container(
       color: SitesLoadingProgressProps.modalBgColor,
       padding: EdgeInsets.zero,
       width: double.infinity,
-      height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
