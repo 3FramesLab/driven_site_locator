@@ -2,21 +2,31 @@ import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_controller.dart';
 import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_props.dart';
 import 'package:driven_site_locator/site_locator/loading_progress_indicator/widgets/sites_loading_indicator_icon.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:get/get.dart';
 
 class SitesLoadingProgressIndicator extends StatelessWidget {
   final SitesLoadingProgressController loadingProgressController = Get.find();
+  final SiteLocatorController siteLocatorController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 200),
-      switchInCurve: Curves.easeIn,
-      switchOutCurve: Curves.easeOut,
-      child: loadingProgressController.progressValue() > 0 ||
-              loadingProgressController.canShowIndicator()
-          ? _getProgressIndicator(context)
-          : const SizedBox.shrink(),
+    if (!siteLocatorController.isShowLoading()) {
+      siteLocatorController.resetSitesLoadingIndicatorProgressValue();
+    } else {
+      siteLocatorController.toggleSitesLoadingIndicatorVisibility(
+          visible: true);
+    }
+    return Container(
+      margin: EdgeInsets.zero,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 200),
+        switchInCurve: Curves.easeIn,
+        switchOutCurve: Curves.easeOut,
+        child: siteLocatorController.getHastoShowSitesLoadingIndicator()
+            ? _getProgressIndicator(context)
+            : const SizedBox.shrink(),
+      ),
     );
   }
 
