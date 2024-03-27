@@ -88,6 +88,8 @@ class SiteInfoPanelContent extends GetView<SiteLocatorController> {
             },
             mainAxisSize: MainAxisSize.min,
             color: DrivenColors.black,
+            textStyle: f24ExtraboldBlackDark,
+            verticalSpacing: 16,
             buttonLabelText: SiteLocatorConstants.locationDetails,
           ),
         ),
