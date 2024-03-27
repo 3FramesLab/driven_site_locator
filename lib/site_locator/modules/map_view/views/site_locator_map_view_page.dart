@@ -176,19 +176,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       siteLocatorController.toggleSitesLoadingIndicatorVisibility(
           visible: true);
     }
-    return Container(
-      margin: EdgeInsets.zero,
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 100),
-        switchInCurve: Curves.fastLinearToSlowEaseIn,
-        switchOutCurve: Curves.fastLinearToSlowEaseIn,
-        child: siteLocatorController.getHastoShowSitesLoadingIndicator()
-            ? Center(
-                child: SitesLoadingProgressIndicator(),
-              )
-            : const SizedBox.shrink(),
-      ),
-    );
+    return SitesLoadingProgressIndicator();
   }
 
   Widget _body(BuildContext context) {
@@ -199,7 +187,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         _headerColumn(topPadding),
         // TODO(siva): need to show after mobile testing done as its overlapping quick filters
         // applyForFuelman(),
-        _loadingIndicator(),
+        if (!kIsWeb) _loadingIndicator(),
       ],
     );
   }
