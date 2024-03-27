@@ -94,7 +94,7 @@ packages:
     description:
       path: "."
       ref: "feature/fix-sitelocator-api-cors"
-      resolved-ref: ad1e20597d8569e1530bf157329fa32e2ede5861
+      resolved-ref: "3cfad41fd17712660e36bcd9b63ca58704d4fc80"
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"
@@ -286,10 +286,10 @@ packages:
     dependency: transitive
     description:
       name: geolocator_apple
-      sha256: "2f2d4ee16c4df269e93c0e382be075cc01d5db6703c3196e4af20a634fe49ef4"
+      sha256: bc2aca02423ad429cb0556121f56e60360a2b7d694c8570301d06ea0c00732fd
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.6"
+    version: "2.3.7"
   geolocator_platform_interface:
     dependency: transitive
     description:
