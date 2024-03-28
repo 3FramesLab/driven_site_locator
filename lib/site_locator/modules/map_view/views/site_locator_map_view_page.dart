@@ -2,7 +2,9 @@
 part of map_view_module;
 
 class SiteLocatorMapViewPage extends StatefulWidget {
-  const SiteLocatorMapViewPage({Key? key}) : super(key: key);
+  final bool canShowApplyForFuelman;
+  const SiteLocatorMapViewPage({this.canShowApplyForFuelman = false, Key? key})
+      : super(key: key);
 
   @override
   State<SiteLocatorMapViewPage> createState() => _SiteLocatorMapViewPageState();
@@ -185,8 +187,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
-        // TODO(siva): need to show after mobile testing done as its overlapping quick filters
-        // applyForFuelman(),
+        if (widget.canShowApplyForFuelman) applyForFuelman(),
         if (!kIsWeb) _loadingIndicator(),
       ],
     );
