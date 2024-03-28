@@ -7,6 +7,7 @@ import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/utilities/math_utils.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/single_function_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -98,6 +99,9 @@ class MapUtilities {
   }
 
   static void showLocationEnableDialog() {
+    if (kIsWeb) {
+      return;
+    }
     Get.dialog(
       const SingleFunctionDialog(
         dialogTitle: SiteLocatorConstants.locationEnableDialogTitle,
