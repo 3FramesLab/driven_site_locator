@@ -1051,23 +1051,31 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> cachingDrivingDistance(List<SiteLocation> siteLocations) async {
-    final latLngList = getLangList(siteLocations);
-    final slicedLatLng =
-        sliceLatLngCount(latLngList, count: latLngList.length > 10 ? 10 : null);
-    final destinationsParamValues = formatLatLngParams(latLngList);
-    final originsParamValue = formatLatLngKey(
-      currentLocation().latitude,
-      currentLocation().longitude,
-    );
-    final qs =
-        'destinations=$destinationsParamValues&origins=$originsParamValue';
-    final distanceMatrixUrl = '${ApiConstants.distanceMatrixGoogleUrl}&$qs';
-    final distanceMatrix = await fetchDistanceData(distanceMatrixUrl);
-    if (distanceMatrix != null) {
-      await processMilesCache(slicedLatLng, distanceMatrix);
+    try {
+      final latLngList = getLangList(siteLocations);
+      final slicedLatLng = sliceLatLngCount(latLngList,
+          count: latLngList.length > 10 ? 10 : null);
+      final destinationsParamValues = formatLatLngParams(latLngList);
+      final originsParamValue = formatLatLngKey(
+        currentLocation().latitude,
+        currentLocation().longitude,
+      );
+      final qs =
+          'destinations=$destinationsParamValues&origins=$originsParamValue';
+      final distanceMatrixUrl = '${ApiConstants.distanceMatrixGoogleUrl}&$qs';
+      final distanceMatrix = await fetchDistanceData(distanceMatrixUrl);
+      if (distanceMatrix != null) {
+        await processMilesCache(slicedLatLng, distanceMatrix);
+      }
+      isInitialListLoading(false);
+      isViewMoreLoading(false);
+    } catch (e) {
+      DynatraceUtils.logError(
+        name: DynatraceErrorMessages.getDistanceMatrixErrorName,
+        value: DynatraceErrorMessages.getDistanceMatrixErrorValue,
+        reason: e.toString(),
+      );
     }
-    isInitialListLoading(false);
-    isViewMoreLoading(false);
   }
 
   Future<void> processMilesCache(

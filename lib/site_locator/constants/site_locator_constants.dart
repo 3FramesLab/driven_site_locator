@@ -334,6 +334,10 @@ class DynatraceErrorMessages {
   static const getFuelPricesAPIErrorName = 'Get fuel prices api error';
   static const getFuelPricesAPIErrorValue =
       'error while updating fuel prices in site locations data';
+
+  static const getDistanceMatrixErrorName = 'Get Distance api error';
+  static const getDistanceMatrixErrorValue =
+      'Get Distance api errors while fetching data';
 }
 
 class EnhancedFilterConstants {
