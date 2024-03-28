@@ -764,6 +764,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isFetchSitesData = true;
     isMapPinTapped = false;
     currentLatLngBounds(await googleMapController?.getVisibleRegion());
+    if (kIsWeb) {
+      onListViewSiteInfoDetailsBackTap?.call();
+    }
   }
 
   Future<void> setCenterCoordinate() async {
