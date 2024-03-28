@@ -25,6 +25,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   void initState() {
     MapUtilities.onLocationSettingsEnableCounter();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      siteLocatorController
+          .canShowApplyForFuelman(widget.canShowApplyForFuelman);
       if (!setUpWizardController.canShowSetUpWizard() &&
           fuelPriceDisclaimerController.isFuelPriceDisclaimerVisible()) {
         await _showFuelPriceDisclaimerDialog();
@@ -187,7 +189,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
-        if (widget.canShowApplyForFuelman) applyForFuelman(),
+        _applyForFuelman(),
         if (!kIsWeb) _loadingIndicator(),
       ],
     );
@@ -342,6 +344,14 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   void _onZoomOutButtonTap() {
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
+    );
+  }
+
+  Widget _applyForFuelman() {
+    return Obx(
+      () => siteLocatorController.canShowApplyForFuelman()
+          ? applyForFuelman()
+          : const SizedBox.shrink(),
     );
   }
 }
