@@ -227,10 +227,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       if (isFirstLaunch) {
         await moveCameraPosition(currentLatLngBounds());
       }
-      if (kIsWeb) {
-        resetPrevSelectedMarkerStatus();
-        unawaited(setListViewInitializers());
-      }
+
       isFirstLaunch = false;
     } on Exception catch (e) {
       DynatraceUtils.logError(
@@ -1331,9 +1328,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   List<SiteLocation> getSiteLocationsForListView() => List.from(
-        selectedSiteFilters.isNotEmpty
-            ? filteredSiteLocationsList
-            : siteLocations ?? <SiteLocation>[],
+        siteLocationDisplayData,
       );
 
   void showNoMatchingLocationDialog() {
@@ -2003,6 +1998,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     markers.clear();
     if (markersList.isNotEmpty) {
       markers.addAll(markersList);
+    }
+
+    if (kIsWeb) {
+      resetPrevSelectedMarkerStatus();
+      unawaited(setListViewInitializers());
     }
   }
 
