@@ -47,8 +47,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           await siteLocatorController.updateFullMapViewSitesData();
         });
       }
-      siteLocatorController
-          .canShowApplyForFuelman(widget.updateApplyForFuelmanButton?.call());
+      siteLocatorController.updateApplyForFuelmanButton =
+          widget.updateApplyForFuelmanButton;
     });
     super.initState();
     WidgetsBinding.instance.addObserver(this);

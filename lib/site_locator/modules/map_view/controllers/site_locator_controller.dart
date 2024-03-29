@@ -653,6 +653,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> updateCurrentMapZoomLevel() async {
+    canShowApplyForFuelman(updateApplyForFuelmanButton?.call());
     if (googleMapController != null && currentZoomLevel == null) {
       currentZoomLevel = await googleMapController?.getZoomLevel() ??
           SiteLocatorConfig.mapZoomLevel;
