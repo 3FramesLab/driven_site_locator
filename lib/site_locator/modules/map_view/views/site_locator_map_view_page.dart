@@ -25,8 +25,6 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   void initState() {
     MapUtilities.onLocationSettingsEnableCounter();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      siteLocatorController
-          .canShowApplyForFuelman(widget.canShowApplyForFuelman);
       if (!setUpWizardController.canShowSetUpWizard() &&
           fuelPriceDisclaimerController.isFuelPriceDisclaimerVisible()) {
         await _showFuelPriceDisclaimerDialog();
@@ -49,6 +47,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           await siteLocatorController.updateFullMapViewSitesData();
         });
       }
+      siteLocatorController
+          .canShowApplyForFuelman(widget.canShowApplyForFuelman);
     });
     super.initState();
     WidgetsBinding.instance.addObserver(this);
