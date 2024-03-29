@@ -2,8 +2,8 @@
 part of map_view_module;
 
 class SiteLocatorMapViewPage extends StatefulWidget {
-  final bool canShowApplyForFuelman;
-  const SiteLocatorMapViewPage({this.canShowApplyForFuelman = false, Key? key})
+  final Function()? updateApplyForFuelmanButton;
+  const SiteLocatorMapViewPage({this.updateApplyForFuelmanButton, Key? key})
       : super(key: key);
 
   @override
@@ -48,7 +48,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         });
       }
       siteLocatorController
-          .canShowApplyForFuelman(widget.canShowApplyForFuelman);
+          .canShowApplyForFuelman(widget.updateApplyForFuelmanButton?.call());
     });
     super.initState();
     WidgetsBinding.instance.addObserver(this);
