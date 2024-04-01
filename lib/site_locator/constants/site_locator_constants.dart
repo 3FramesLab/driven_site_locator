@@ -347,6 +347,7 @@ class EnhancedFilterConstants {
   static const showMoreBrands = 'Show More Brands';
   static const hideBrands = 'Hide Brands';
   static const search = 'Search';
+  static const searchFor = 'Search for...';
   static const searchCriteriaNotFound =
       'No results found.\n\nPlease try a different search criteria.';
 }

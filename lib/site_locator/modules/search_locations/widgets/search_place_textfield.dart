@@ -53,7 +53,10 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
   InputDecoration _searchTextFieldDecoration() =>
       SiteLocatorTextFieldStyle().searchTextFieldDecoration(
-          suffixIcon: _searchTextFieldSuffixIcon(), borderWidth: 0.1);
+        suffixIcon: _searchTextFieldSuffixIcon(),
+        borderWidth: 0.1,
+        hintText: EnhancedFilterConstants.searchFor,
+      );
 
   Widget _searchTextFieldSuffixIcon() => Padding(
         padding: const EdgeInsets.fromLTRB(0, 3, 3, 3),
