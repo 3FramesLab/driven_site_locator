@@ -123,17 +123,18 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
   Future<void> onClearIconTapped() async {
     _clearTextInput();
-    if (!kIsWeb) {
-      try {
-        if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
-          await searchPlacesController
-              .resetListViewOnClearSearchTextfield(siteLocatorController);
-        } else {
-          await searchPlacesController
-              .resetMapViewOnClearSearchTextfield(siteLocatorController);
-        }
-      } catch (_) {}
-    }
+    // TODO(siva): revisit,for now need this to clear search text field on web
+    // if (!kIsWeb) {
+    try {
+      if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
+        await searchPlacesController
+            .resetListViewOnClearSearchTextfield(siteLocatorController);
+      } else {
+        await searchPlacesController
+            .resetMapViewOnClearSearchTextfield(siteLocatorController);
+      }
+    } catch (_) {}
+    // }
   }
 
   void _clearTextInput() {

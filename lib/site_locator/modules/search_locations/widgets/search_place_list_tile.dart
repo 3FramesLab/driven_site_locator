@@ -57,6 +57,12 @@ class SearchPlaceListTile extends StatelessWidget {
     if (onResetTapFunc != null) {
       onResetTapFunc();
     }
+    searchPlacesController.searchTextEditingController.text =
+        searchPlacesController.placesList[rowIndex].structuredFormatting
+            .toString();
+    searchPlacesController.searchText = searchPlacesController
+        .placesList[rowIndex].structuredFormatting
+        .toString();
     return siteLocatorController
         .getLatLngForSelectedPlace(searchPlacesController.placesList[rowIndex]);
   }
