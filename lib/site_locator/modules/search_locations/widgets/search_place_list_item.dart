@@ -1,5 +1,7 @@
 part of search_location_module;
 
+// this class has lot of issues
+// and this WHILE-FILE needs to be SAFE-DELETED
 class SearchPlaceListItem extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
   final SearchPlacesController searchPlacesController = Get.find();

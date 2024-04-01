@@ -4,30 +4,38 @@ class SearchPlaceResultsView extends StatelessWidget {
   final SearchPlacesController searchPlacesController = Get.find();
   final SiteLocatorController siteLocatorController = Get.find();
   final Function()? onClearIconTap;
+  final Function() onBackArrowTap;
 
   SearchPlaceResultsView({
+    required this.onBackArrowTap,
     this.onClearIconTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _goBack,
-      child: SafeArea(
-        child: SiteLocatorScaffold(
-          backgroundColor: Colors.white,
-          body: Column(
-            children: [
-              backButton(),
-              const SizedBox(height: 5),
-              _searchTextField(),
-              const SizedBox(height: 20),
-              SearchPlacesListView(onResetTap: onClearIconTap),
-            ],
-          ),
-        ),
-      ),
+    return kIsWeb
+        ? buildViewContents()
+        : WillPopScope(
+            onWillPop: _goBack,
+            child: SafeArea(
+              child: SiteLocatorScaffold(
+                backgroundColor: Colors.white,
+                body: buildViewContents(),
+              ),
+            ),
+          );
+  }
+
+  Widget buildViewContents() {
+    return Column(
+      children: [
+        backButton(),
+        const SizedBox(height: 5),
+        _searchTextField(),
+        const SizedBox(height: 20),
+        SearchPlacesListView(onResetTap: onClearIconTap),
+      ],
     );
   }
 
