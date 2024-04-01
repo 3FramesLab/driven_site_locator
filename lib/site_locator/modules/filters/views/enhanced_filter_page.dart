@@ -25,18 +25,20 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _popPage,
-      child: SiteLocatorScaffold(
-        backgroundColor: SiteLocatorColors.white,
-        body: SafeArea(child: _bodyContent),
-      ),
-    );
+    return kIsWeb
+        ? _bodyContent
+        : WillPopScope(
+            onWillPop: _popPage,
+            child: SiteLocatorScaffold(
+              backgroundColor: SiteLocatorColors.white,
+              body: SafeArea(child: _bodyContent),
+            ),
+          );
   }
 
   Widget get _bodyContent => Column(
         crossAxisAlignment:
-            kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+            kIsWeb ? CrossAxisAlignment.start : CrossAxisAlignment.start,
         children: [
           _scrollView,
           ApplyFilterButton(
@@ -50,11 +52,11 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment:
-                kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                kIsWeb ? CrossAxisAlignment.start : CrossAxisAlignment.start,
             children: [
               _backButton,
               BadgeView(),
-              _filterList,
+              EnhancedFilterListView(),
             ],
           ),
         ),

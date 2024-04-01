@@ -102,9 +102,6 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
         }
         await _executeSearchPlace(searchText);
       } else if (_isClearIcon) {
-        if (kIsWeb) {
-          widget.onClearIconTap?.call();
-        }
         await onClearIconTapped();
       }
     }
@@ -123,15 +120,17 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
 
   Future<void> onClearIconTapped() async {
     _clearTextInput();
-    try {
-      if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
-        await searchPlacesController
-            .resetListViewOnClearSearchTextfield(siteLocatorController);
-      } else {
-        await searchPlacesController
-            .resetMapViewOnClearSearchTextfield(siteLocatorController);
-      }
-    } catch (_) {}
+    if (!kIsWeb) {
+      try {
+        if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
+          await searchPlacesController
+              .resetListViewOnClearSearchTextfield(siteLocatorController);
+        } else {
+          await searchPlacesController
+              .resetMapViewOnClearSearchTextfield(siteLocatorController);
+        }
+      } catch (_) {}
+    }
   }
 
   void _clearTextInput() {

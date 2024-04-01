@@ -48,11 +48,9 @@ class EnhancedFilterListItem extends StatelessWidget {
   }
 
   Widget get _titleText => kIsWeb
-      ? Align(
-          child: Text(
-            enhancedFilter.filterHeader,
-            style: f16SemiboldBlack,
-          ),
+      ? Text(
+          enhancedFilter.filterHeader,
+          style: f16SemiboldBlack,
         )
       : Text(enhancedFilter.filterHeader);
 

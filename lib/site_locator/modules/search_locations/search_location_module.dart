@@ -1,6 +1,5 @@
 library search_location_module;
 
-import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/config/site_locator_routes.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/use_cases/base_future_usecase.dart';
@@ -37,6 +36,8 @@ part 'use_cases/get_places_url_use_case.dart';
 part 'use_cases/get_selected_place_lat_lng_use_case.dart';
 
 part 'widgets/search_place_list_item.dart';
+
+part 'widgets/search_place_list_tile.dart';
 
 part 'widgets/search_place_list_view.dart';
 
