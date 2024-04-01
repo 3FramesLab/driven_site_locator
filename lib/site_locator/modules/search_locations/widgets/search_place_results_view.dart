@@ -44,7 +44,7 @@ class SearchPlaceResultsView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SearchPlaceTextField(
           currentLocation: _getLatLngAsString(),
-          onSearchIconTap: onClearIconTap,
+          // onSearchIconTap: onClearIconTap,
         ),
       );
 
