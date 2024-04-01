@@ -22,7 +22,7 @@ class SearchPlaceListTile extends StatelessWidget {
       child: Container(
         color: SiteInfoUtils.getCardBgColor(rowIndex),
         child: ListTile(
-          contentPadding: const EdgeInsets.only(left: 20),
+          contentPadding: const EdgeInsets.only(left: 20, right: 20),
           title: _searchResultMainText(rowIndex),
           subtitle: _searchResultSecondaryText(rowIndex),
           trailing: _arrowIcon(),
