@@ -9,7 +9,7 @@ class RoundedButtonWithChild extends StatelessWidget {
   final Color? disabledBackgroundColor;
   final BorderSide? side;
   final TextStyle? buttonTextStyle;
-  final bool showBorder;
+  final bool showRoundedShape;
 
   const RoundedButtonWithChild({
     required this.onPressed,
@@ -20,7 +20,7 @@ class RoundedButtonWithChild extends StatelessWidget {
     this.disabledBackgroundColor = DrivenColors.disabledButtonColor,
     this.side,
     this.buttonTextStyle,
-    this.showBorder = true,
+    this.showRoundedShape = true,
     super.key,
   });
 
@@ -40,7 +40,7 @@ class RoundedButtonWithChild extends StatelessWidget {
       minimumHeight: height,
       disabledBackgroundColor: disabledBackgroundColor!,
       side: side,
-      showBorder: showBorder,
+      showRoundedShape: showRoundedShape,
     );
   }
 }
