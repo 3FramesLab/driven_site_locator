@@ -291,6 +291,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             SiteLocatorConstants.applyForFuelmanUrl,
             SiteLocatorConstants.openApplyForFuelmanError,
           ),
+          showBorder: false,
           backgroundColor: SiteLocatorColors.red,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
