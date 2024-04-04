@@ -32,6 +32,8 @@ class EnhancedFilterListItem extends StatelessWidget {
       maintainState: true,
       title: _titleText,
       onExpansionChanged: (value) => onExpansionChanged(isExpand: value),
+      collapsedIconColor: Colors.black,
+      iconColor: Colors.black,
       children: _buildExpansionContent,
     );
   }
