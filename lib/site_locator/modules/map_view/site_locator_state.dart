@@ -170,6 +170,7 @@ mixin SiteLocatorState {
   FuelPreferenceType selectedCardFuelPreferenceType = FuelPreferenceType.both;
 
   bool isComingFromRecenter = false;
+  RxBool canShowApplyForFuelman = false.obs;
 
   RxBool shareMyCurrentLocationStatus = false.obs;
   Function()? onListViewSiteInfoDetailsTap;

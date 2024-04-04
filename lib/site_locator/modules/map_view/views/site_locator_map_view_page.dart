@@ -185,8 +185,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       children: [
         _siteLocatorMapView(),
         _headerColumn(topPadding),
-        // TODO(siva): need to show after mobile testing done as its overlapping quick filters
-        // applyForFuelman(),
+        _applyForFuelman(),
         if (!kIsWeb) _loadingIndicator(),
       ],
     );
@@ -288,6 +287,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             SiteLocatorConstants.applyForFuelmanUrl,
             SiteLocatorConstants.openApplyForFuelmanError,
           ),
+          showRoundedShape: false,
           backgroundColor: SiteLocatorColors.red,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -341,6 +341,14 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   void _onZoomOutButtonTap() {
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
+    );
+  }
+
+  Widget _applyForFuelman() {
+    return Obx(
+      () => siteLocatorController.canShowApplyForFuelman()
+          ? applyForFuelman()
+          : const SizedBox.shrink(),
     );
   }
 }
