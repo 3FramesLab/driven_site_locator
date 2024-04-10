@@ -43,6 +43,7 @@ mixin SiteLocatorState {
   bool isUserAuthenticated = false;
   bool canClearSearchTextField = true;
   RxBool isShowLoading = false.obs;
+  RxBool ignorePointer = false.obs;
   RxBool canShow2CTA = false.obs;
   bool isFirstLaunch = true;
   Rx<LatLng> currentLocation = SiteLocatorConstants.defaultUserLocation.obs;
