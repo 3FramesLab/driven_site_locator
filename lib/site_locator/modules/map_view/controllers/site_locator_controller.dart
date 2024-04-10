@@ -111,7 +111,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> subscribeToLocationStream() async {
-    if (await isLocationPermissionGranted()) {
+    if (await _isLocationPermissionGranted) {
       shareMyCurrentLocationStatus(true);
       const LocationSettings locationSettings = LocationSettings(
         accuracy: LocationAccuracy.high,
@@ -169,7 +169,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> handleLocationPermissionDialog() async {
-    if (!(await isLocationPermissionGranted())) {
+    if (!(await _isLocationPermissionGranted)) {
       final showLocationPermission = await Get.dialog(
         EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
         barrierDismissible: false,
@@ -2100,7 +2100,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         permissionStatus != LocationPermission.whileInUse) {
       await Geolocator.requestPermission();
       await subscribeToLocationStream();
-      if (await isLocationPermissionGranted()) {
+      if (await _isLocationPermissionGranted) {
         await updateCurrentLatLngBoundsOnReCenter();
         await getSiteLocationsData();
       } else {
@@ -2109,9 +2109,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  Future<bool> isLocationPermissionGranted() async {
-    final permissionStatus = await Geolocator.checkPermission();
-    return permissionStatus == LocationPermission.always ||
-        permissionStatus == LocationPermission.whileInUse;
-  }
+  Future<bool> get _isLocationPermissionGranted async =>
+      MapUtilities.getLocationPermissionStatus();
 }

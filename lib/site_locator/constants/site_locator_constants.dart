@@ -168,6 +168,10 @@ To view fuel sites in a different location, use the search bar or enable “site
 
   static String menu = 'Menu';
   static String locationDetails = 'Location details';
+
+  // Directions button tap
+  static const googleDirectionsUrl = 'https://www.google.com/maps/dir//';
+  static const openDirectionsAppError = 'Could not launch url.';
 }
 
 class QuickFilterLabel {

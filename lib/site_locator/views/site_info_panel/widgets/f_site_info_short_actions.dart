@@ -127,9 +127,9 @@ class SiteInfoShortActions extends StatelessWidget {
   void _onDirectionsButtonTap(BuildContext context) {
     siteLocatorController.getSiteInfoDrawerDirectionsButtonClickTrackAction();
     ExternalMapUtils(
-      selectedSiteLocation.siteLatitude!,
-      selectedSiteLocation.siteLongitude!,
-    ).openExternalMapApp(context);
+      selectedSiteLocation.siteLatitude,
+      selectedSiteLocation.siteLongitude,
+    ).openDirectionsMapApp(context, selectedSiteLocation);
   }
 
   // Share location - start

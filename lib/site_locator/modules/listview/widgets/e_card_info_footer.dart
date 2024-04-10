@@ -89,7 +89,7 @@ class CardInfoFooter extends StatelessWidget {
     ExternalMapUtils(
       siteLocation.siteLatitude,
       siteLocation.siteLongitude,
-    ).openExternalMapApp(context);
+    ).openDirectionsMapApp(context, siteLocation);
   }
 
   void _onDetailsClick() {
