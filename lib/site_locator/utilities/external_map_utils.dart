@@ -1,9 +1,12 @@
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
+import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/utilities/map_utilities.dart';
+import 'package:driven_site_locator/site_locator/utilities/site_info_utils.dart';
 import 'package:driven_site_locator/site_locator/utilities/site_locator_utils.dart';
 import 'package:driven_site_locator/site_locator/widgets/bottom_sheet/site_info_bottom_sheet_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
 
@@ -20,6 +23,20 @@ class ExternalMapUtils {
       await _showAvailableMapAppsBottomSheet(context);
     } else {
       _enableLocationDialog();
+    }
+  }
+
+  Future<void> openDirectionsMapApp(
+    BuildContext context,
+    SiteLocation siteLocation,
+  ) async {
+    if (kIsWeb) {
+      await launchGoogleDirectionsWeb(
+        SiteInfoUtils.getStreetAddress(siteLocation),
+        '${siteLocation.siteLatitude},${siteLocation.siteLongitude}',
+      );
+    } else {
+      await openExternalMapApp(context);
     }
   }
 
@@ -103,4 +120,13 @@ class ExternalMapUtils {
 
   Future<bool> get _isLocationPermissionGranted async =>
       MapUtilities.getLocationPermissionStatus();
+
+  Future<void> launchGoogleDirectionsWeb(String address, String latlng) async {
+    final url = '${SiteLocatorConstants.googleDirectionsUrl}$address/@$latlng';
+    final String encodedURl = Uri.encodeFull(url);
+    await SiteLocatorUtils.launchURL(
+      encodedURl,
+      SiteLocatorConstants.openDirectionsAppError,
+    );
+  }
 }
