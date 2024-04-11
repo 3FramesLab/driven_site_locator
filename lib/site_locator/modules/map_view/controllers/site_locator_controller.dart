@@ -813,6 +813,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> onMarkerTap(MarkerDetails item,
       {bool isComingFromDetailsTap = false}) async {
     try {
+      if (ignorePointer()) {
+        return;
+      }
       trackAction(
         AnalyticsTrackActionName.locationPinClickedEvent,
         // // adobeCustomTag: AdobeTagProperties.mapView,

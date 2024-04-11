@@ -27,6 +27,10 @@ class QuickFiltersList extends StatelessWidget {
 
   Future<void> _onQuickFilterTapped(
       SiteFilter siteFilter, bool isLoading) async {
+    siteLocatorController.ignorePointer(true);
+    Future.delayed(const Duration(milliseconds: 200), () {
+      siteLocatorController.ignorePointer(false);
+    });
     trackAction(
       _getTrackActionName(siteFilter),
       // // adobeCustomTag: AdobeTagProperties.mapView,
