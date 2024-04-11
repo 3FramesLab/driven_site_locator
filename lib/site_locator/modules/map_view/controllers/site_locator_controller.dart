@@ -1234,7 +1234,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isGenerateMapPinsOnFiltering = false;
     }
 
-    final markersWithoutCluster = await filterMarkers(
+    markersWithoutCluster = await filterMarkers(
       rawMarkersList,
       filteredSiteLocationsList,
     );
