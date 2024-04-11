@@ -14,6 +14,7 @@ mixin SiteLocatorState {
   RxInt mapKeyValue = 1.obs;
   RxList<Site> siteList = <Site>[].obs;
   RxList<Marker> markers = <Marker>[].obs;
+  List<Marker> markersWithoutCluster = [];
   double sitesRadiusInMeters = SiteLocatorConfig.defaultMapRadiusInMeters;
   double allowedSitesRadiusInMeters = MathUtil.milesToMeters(25);
   GoogleMapController? googleMapController;
