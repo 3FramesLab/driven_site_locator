@@ -30,8 +30,11 @@ class SearchPlaceResultsView extends StatelessWidget {
   Widget buildViewContents() {
     return Column(
       children: [
+        if (kIsWeb) ...[
+          const SizedBox(height: 48),
+        ],
         backButton(),
-        const SizedBox(height: 5),
+        const SizedBox(height: kIsWeb ? 27 : 5),
         _searchTextField(),
         const SizedBox(height: 20),
         SearchPlacesListView(onResetTap: onClearIconTap),
@@ -57,11 +60,30 @@ class SearchPlaceResultsView extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20),
         child: DrivenBackButton(
           onPressed: _goBack,
-          color: SiteLocatorColors.blueColor,
+          color: kIsWeb ? SiteLocatorColors.black : SiteLocatorColors.blueColor,
+          buttonLabelText: _buttonLabelText,
+          textStyle: backButtonTextStyle,
+          verticalSpacing: 16,
         ),
       );
 
+  String get _buttonLabelText {
+    return kIsWeb ? EnhancedFilterConstants.search : DrivenConstants.back;
+  }
+
+  TextStyle get backButtonTextStyle {
+    return kIsWeb
+        ? f24ExtraboldBlackDark
+        : const TextStyle(
+            fontSize: 17,
+            color: SiteLocatorColors.blueColor,
+          );
+  }
+
   Future<bool> _goBack() {
+    if (kIsWeb) {
+      onBackArrowTap();
+    }
     Get.back(result: true);
     return Future.value(false);
   }
