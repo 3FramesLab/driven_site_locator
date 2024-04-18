@@ -3,12 +3,12 @@ part of search_location_module;
 class SearchPlaceTextField extends StatefulWidget {
   final String? currentLocation;
   final Function()? onSearchIconTap;
-  final Function()? onClearIconTap;
+  final bool? isListView;
 
   const SearchPlaceTextField({
     this.onSearchIconTap,
-    this.onClearIconTap,
     this.currentLocation,
+    this.isListView,
     super.key,
   });
 
@@ -124,17 +124,24 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
   Future<void> onClearIconTapped() async {
     _clearTextInput();
     // TODO(siva): revisit,for now need this to clear search text field on web
-    // if (!kIsWeb) {
-    try {
-      if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
-        await searchPlacesController
-            .resetListViewOnClearSearchTextfield(siteLocatorController);
-      } else {
+    if (kIsWeb) {
+      if (widget.isListView != null && widget.isListView!) {
         await searchPlacesController
             .resetMapViewOnClearSearchTextfield(siteLocatorController);
+      } else {
+        searchPlacesController.searchIconName(SiteLocatorConstants.search);
       }
-    } catch (_) {}
-    // }
+    } else {
+      try {
+        if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
+          await searchPlacesController
+              .resetListViewOnClearSearchTextfield(siteLocatorController);
+        } else {
+          await searchPlacesController
+              .resetMapViewOnClearSearchTextfield(siteLocatorController);
+        }
+      } catch (_) {}
+    }
   }
 
   void _clearTextInput() {
