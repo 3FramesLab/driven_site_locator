@@ -16,7 +16,8 @@ dependencies:
     git:
       url: https://github.com/3FramesLab/flutter_driven-common
       # ref: feature/driven-common-base
-      ref: feature/fix-sitelocator-api-cors
+      # ref: feature/fix-sitelocator-api-cors
+      ref: feature/merge-main-into-fix-sitelocator-api-cors-22apr2024
       version: ^0.0.2
   equatable: ^2.0.0
   flutter:

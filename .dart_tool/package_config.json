@@ -69,13 +69,13 @@
     },
     {
       "name": "driven_common",
-      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-ad1e20597d8569e1530bf157329fa32e2ede5861/",
+      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-1e89ba7fb053e896a9aa2cc99c419ed3cb6c90f6/",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "dynatrace_flutter_plugin",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dynatrace_flutter_plugin-3.285.2",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dynatrace_flutter_plugin-3.287.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -219,7 +219,7 @@
     },
     {
       "name": "geolocator_apple",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.6",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.7",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -638,7 +638,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-03-19T13:21:56.675789Z",
+  "generated": "2024-04-23T10:06:17.525154Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
