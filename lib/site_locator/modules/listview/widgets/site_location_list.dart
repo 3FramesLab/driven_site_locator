@@ -62,7 +62,15 @@ class _SiteLocationListState extends State<SiteLocationList> {
   Widget _buildHeaderSectionWithSiteList(
       List<SiteLocation> items, int itemCount) {
     if (items.isEmpty) {
-      return NoLocationsFound();
+      return Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            displayStickyHeaderSection(),
+            NoLocationsFound(),
+          ],
+        ),
+      );
     } else {
       return Container(
         color: Colors.white,
