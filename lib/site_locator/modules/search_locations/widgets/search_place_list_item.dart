@@ -43,8 +43,11 @@ class SearchPlaceListItem extends StatelessWidget {
     if (onResetViewTap != null) {
       onResetViewTap!();
     }
-    return siteLocatorController
-        .getLatLngForSelectedPlace(searchPlacesController.placesList[rowIndex]);
+    // return siteLocatorController
+    //     .getLatLngForSelectedPlace(searchPlacesController.placesList[rowIndex]);
+    final selectedPlace = searchPlacesController.placesList[rowIndex];
+    siteLocatorController.selectedPlace = selectedPlace;
+    return siteLocatorController.getLatLngForSelectedPlace(selectedPlace);
   }
 
   Expanded _placeDetailsView() => Expanded(

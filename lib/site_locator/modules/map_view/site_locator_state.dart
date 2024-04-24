@@ -125,7 +125,7 @@ mixin SiteLocatorState {
 
   bool isGenerateMapPinsOnFiltering = false;
   bool positionStreamStarted = false;
-  bool isMoveCameraCallingFromMapView = true;
+  bool isMapViewCameraMoving = true;
 
   bool canRecenterMapViewOnLocationChange = true;
   LatLng prevUserCenterLocation = SiteLocatorConstants.defaultUserLocation;
@@ -172,6 +172,7 @@ mixin SiteLocatorState {
   FuelPreferenceType selectedCardFuelPreferenceType = FuelPreferenceType.both;
 
   bool isComingFromRecenter = false;
+  Predictions? selectedPlace;
   RxBool canShowApplyForFuelman = false.obs;
 
   RxBool shareMyCurrentLocationStatus = false.obs;

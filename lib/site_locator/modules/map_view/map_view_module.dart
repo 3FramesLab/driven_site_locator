@@ -2,7 +2,6 @@ library map_view_module;
 
 import 'dart:async';
 import 'dart:io';
-import 'dart:js' as js;
 
 import 'package:cron/cron.dart';
 import 'package:driven_common/common/driven_dimensions.dart';
@@ -41,6 +40,7 @@ import 'package:driven_site_locator/site_locator/data/models/distance_matrix.dar
 import 'package:driven_site_locator/site_locator/data/models/enhanced_filter_model.dart';
 import 'package:driven_site_locator/site_locator/data/models/fuel_preferences.dart';
 import 'package:driven_site_locator/site_locator/data/models/fuel_prices.dart';
+import 'package:driven_site_locator/site_locator/data/models/google_geocoding_model.dart';
 import 'package:driven_site_locator/site_locator/data/models/google_place_model.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_filter.dart';
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';

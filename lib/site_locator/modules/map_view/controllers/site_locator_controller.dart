@@ -81,9 +81,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     getLatLngForSelectedPlaceUseCase = Get.put(
       GetSelectedPlaceLatLngUseCase(siteLocationsService: siteLocationsService),
     );
-    getLatLngForSelectedPlaceUseCase = Get.put(
-      GetSelectedPlaceLatLngUseCase(siteLocationsService: siteLocationsService),
-    );
     computeCircleRadiusUseCase = Get.put(ComputeCircleRadiusUseCase());
     getTapOnMapLocationMessageUseCase =
         Get.put(GetTapOnMapLocationMessageUseCase());
@@ -622,7 +619,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> updateFullMapViewSitesData() async {
-    await onReCenterButtonClicked();
+    if (selectedPlace != null) {
+      await getLatLngForSelectedPlace(selectedPlace!);
+    } else {
+      await onReCenterButtonClicked();
+    }
   }
 
   Future<void> onReCenterButtonClicked() async {
@@ -633,12 +634,14 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isShowLoading(true);
       resetMapViewScreen();
       resetRadius();
+      searchPlacesController.clearTextInput();
       await updateCurrentLatLngBoundsOnReCenter();
       resetCircleAfterZoomIn();
       await getSiteLocationsData(updateLocationCache: true);
       isShowLoading(false);
-      canClearSearchTextField = true;
       canRecenterMapViewOnLocationChange = true;
+      canClearSearchTextField = true;
+      selectedPlace = null;
     } on Exception catch (e) {
       isShowLoading(false);
       DynatraceUtils.logError(
@@ -718,13 +721,14 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void clearSearchPlaceInput() {
     final searchPlacesController = Get.find<SearchPlacesController>();
     if (searchPlacesController.searchTextEditingController.text.isNotEmpty &&
-        canClearSearchTextField) {
+        canClearSearchTextField &&
+        selectedPlace == null) {
       searchPlacesController.clearTextInput();
     }
   }
 
   Future<void> onCameraIdle() async {
-    isMoveCameraCallingFromMapView = true;
+    isMapViewCameraMoving = false;
     await setCenterCoordinate();
   }
 
@@ -754,8 +758,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       cameraPositionZoom(cameraPosition.zoom);
     }
 
-    if (isMoveCameraCallingFromMapView) {
+    if (!isMapViewCameraMoving &&
+        !sitesLoadingProgressController.canShowIndicator()) {
       canClearSearchTextField = true;
+      selectedPlace = null;
     }
     clearSearchPlaceInput();
     isFetchSitesData = true;
@@ -1454,7 +1460,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       searchPlaceLatLng,
       sitesRadiusInMeters,
     ));
-    isMoveCameraCallingFromMapView = false;
     await moveCameraPosition(currentLatLngBounds());
     await getSiteLocationsData();
   }
@@ -1509,11 +1514,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isShowLoading(true);
     isInitialListLoading(true);
     try {
-      final placeLatLng = await getLatLngForSelectedPlaceUseCase
-          .execute(GetLatLngForSelectedPlaceUseCaseParams(
-        SiteLocatorApiConstants.googleGeoCodingUrl,
-        selectedPlaceDetails.placeId ?? '',
-      ));
+      final placeLatLng = await getSelectedPlaceLatLng(selectedPlaceDetails);
       final LatLng searchPlaceLatLng = LatLng(
         placeLatLng!.results!.first.geometry!.location!.lat!,
         placeLatLng.results!.first.geometry!.location!.lng!,
@@ -1531,6 +1532,17 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
     isShowLoading(false);
     isInitialListLoading(false);
+  }
+
+  Future<GoogleGeoCodingModel?> getSelectedPlaceLatLng(
+      Predictions selectedPlaceDetails) async {
+    final response = await getLatLngForSelectedPlaceUseCase.execute(
+      GetLatLngForSelectedPlaceUseCaseParams(
+        SiteLocatorApiConstants.googleGeoCodingUrl,
+        selectedPlaceDetails.placeId ?? '',
+      ),
+    );
+    return response;
   }
 
   double getMapHeight(BuildContext context) => isUserAuthenticated
@@ -1565,7 +1577,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> navigateToSiteLocatorMapViewPage() async {
-    isMoveCameraCallingFromMapView = false;
     mapFullViewInitStatus();
     isShowBackButton = true;
     safeAreaPadding = 0;
@@ -1868,6 +1879,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> resetMapUiOnLogout() async {
     isFirstLaunch = true;
     searchPlacesController.resetUI();
+    selectedPlace = null;
     await _getUserLocation();
     await calcLatLngBoundsAndZoomLevels();
     await recenterMapOnLocationChange();

@@ -99,7 +99,7 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
     widget.siteLocatorController.googleMapController = controller;
     _controller?.complete(controller);
     await widget.siteLocatorController.updateCurrentMapZoomLevel();
-    _updateCamera(controller);
+    await _updateCamera(controller);
   }
 
   Set<Marker> get _getMarkersToDisplay => _clusterPins;
@@ -111,9 +111,13 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
       ? Set.from(widget.siteLocatorController.markers)
       : null)!;
 
-  void _updateCamera(GoogleMapController controller) {
-    if (widget.siteLocatorController.markers().isNotEmpty) {
-      widget.siteLocatorController.moveCameraPosition(
+  Future<void> _updateCamera(GoogleMapController controller) async {
+    if (widget.siteLocatorController.selectedPlace != null &&
+        widget.siteLocatorController.isUserAuthenticated) {
+      await widget.siteLocatorController.getLatLngForSelectedPlace(
+          widget.siteLocatorController.selectedPlace!);
+    } else if (widget.siteLocatorController.markers().isNotEmpty) {
+      await widget.siteLocatorController.moveCameraPosition(
           widget.siteLocatorController.currentLatLngBounds());
     }
   }

@@ -6,6 +6,7 @@ class SiteLocatorMenuContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.only(top: 6, left: 6),
       shrinkWrap: true,
       children: [
         PanelHandle(),

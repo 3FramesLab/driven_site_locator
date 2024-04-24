@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/utilities/site_info_utils.dart';
@@ -21,7 +22,8 @@ class SiteLocatorMenuPanel extends StatelessWidget {
     return SlidingUpPanel(
       margin: const EdgeInsets.only(top: SiteLocatorDimensions.dp100),
       controller: controller.menuPanelController,
-      maxHeight: Get.height > 600 ? Get.height * 0.55 : Get.height * 0.7,
+      // maxHeight: Get.height > 600 ? Get.height * 0.55 : Get.height * 0.7,
+      maxHeight: SiteLocatorConstants.menuPanelHeight,
       body: body,
       minHeight: SiteLocatorDimensions.dp0,
       panelBuilder: _panelBuilder,

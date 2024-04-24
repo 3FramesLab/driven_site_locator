@@ -50,6 +50,8 @@ class SiteLocatorConstants {
   static const phoneMaintenanceWidgetHeight = 26;
   static const milesUnit = 'mi';
 
+  static const menuPanelHeight = 450.0;
+
   static const unbranded = 'Unbranded';
   static const locationEnableCounter = 'location_enable_counter';
   static const locationEnableDialogTitle =

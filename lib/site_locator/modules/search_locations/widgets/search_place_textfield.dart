@@ -147,6 +147,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
   void _clearTextInput() {
     siteLocatorController.canClearSearchTextField = true;
     searchPlacesController.clearTextInput();
+    siteLocatorController.selectedPlace = null;
   }
 
   bool get _isSearchIcon =>
