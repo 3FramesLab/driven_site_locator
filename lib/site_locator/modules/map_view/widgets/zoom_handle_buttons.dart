@@ -1,8 +1,7 @@
 import 'package:driven_common/common/driven_dimensions.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/site_locator/constants/semantic_strings.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
-
-import '../../../constants/semantic_strings.dart';
 
 class ZoomHandleButtons extends StatelessWidget {
   final Function()? onZoomInIconTap;

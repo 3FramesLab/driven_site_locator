@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/config/site_locator_navigation.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
@@ -17,7 +18,7 @@ class HelpCenterMenuCard extends StatelessWidget {
 
   void navToHelpCenterPage() {
     trackAction(
-      AnalyticsTrackActionName.menuDrawerHelpCenterLinkClickEvent,
+      SiteLocatorTrackActionName.menuDrawerHelpCenterLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     SiteLocatorNavigation.instance.toCommonWebView(

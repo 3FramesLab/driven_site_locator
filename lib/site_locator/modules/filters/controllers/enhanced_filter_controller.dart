@@ -270,7 +270,7 @@ class EnhancedFilterController extends GetxController with EnhanceFilterState {
 
   Future<void> onClearAllClick() async {
     trackAction(
-      AnalyticsTrackActionName.enhancedFiltersClearFiltersLinkClickEvent,
+      SiteLocatorTrackActionName.enhancedFiltersClearFiltersLinkClickEvent,
       // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
     );
     selectedSiteFilters.removeWhere((p) => p.key != QuickFilterKeys.favorites);

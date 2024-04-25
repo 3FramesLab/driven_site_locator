@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/config/site_locator_navigation.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
 import 'package:driven_site_locator/constants/app_strings.dart';
@@ -18,7 +19,7 @@ class LegalPrivacyMenuCard extends StatelessWidget {
 
   void navToLegalPage() {
     trackAction(
-      AnalyticsTrackActionName.menuDrawerLegalPrivacyLinkClickEvent,
+      SiteLocatorTrackActionName.menuDrawerLegalPrivacyLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     SiteLocatorNavigation.instance.toCommonWebView(

@@ -1,5 +1,6 @@
 import 'package:driven_common/globals.dart';
 import 'package:driven_common/utils/safe_launch.dart';
+import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -55,7 +56,7 @@ class SiteLocatorUtils {
   static Future<void> _openExternalAppTap(
       AvailableMap selectedMap, Coords destinationLatLng) async {
     trackAction(
-      AnalyticsTrackActionName.siteInfoDrawerViewAllDiscountsLinkClickEvent,
+      SiteLocatorTrackActionName.siteInfoDrawerViewAllDiscountsLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     await selectedMap.showDirections(destination: destinationLatLng);

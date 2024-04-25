@@ -99,7 +99,7 @@ class SearchPlaceListItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildPlacesDetailsColumn(),
-        Icon(
+        const Icon(
           Icons.chevron_right,
           size: 26,
         )

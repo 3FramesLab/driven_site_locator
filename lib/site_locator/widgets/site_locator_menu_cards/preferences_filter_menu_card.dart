@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
@@ -19,7 +20,7 @@ class PreferencesFilterMenuCard extends StatelessWidget {
 
   void navToPreferencesFilterPage() {
     trackAction(
-      AnalyticsTrackActionName.menuDrawerPreferencesFiltersLinkClickEvent,
+      SiteLocatorTrackActionName.menuDrawerPreferencesFiltersLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     siteLocatorController.navigateToEnhancedFilter();

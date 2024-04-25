@@ -76,7 +76,7 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
 
   Future<bool> _popPage() {
     trackAction(
-      AnalyticsTrackActionName.enhancedFiltersBackLinkClickEvent,
+      SiteLocatorTrackActionName.enhancedFiltersBackLinkClickEvent,
       // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
     );
     if (kIsWeb) {

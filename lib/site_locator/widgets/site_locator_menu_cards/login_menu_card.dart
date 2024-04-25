@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/driven_site_locator.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
@@ -21,13 +22,13 @@ class LoginMenuCard extends StatelessWidget {
   Future<void> handleAuthenticateButtonAction() async {
     if (siteLocatorController.isUserAuthenticated) {
       trackAction(
-        AnalyticsTrackActionName.menuDrawerLogoutLinkClickEvent,
+        SiteLocatorTrackActionName.menuDrawerLogoutLinkClickEvent,
         // adobeCustomTag: AdobeTagProperties.slMenu,
       );
       await DrivenSiteLocator.instance.logoutDialog?.call();
     } else {
       trackAction(
-        AnalyticsTrackActionName.menuDrawerLoginLinkClickEvent,
+        SiteLocatorTrackActionName.menuDrawerLoginLinkClickEvent,
         // adobeCustomTag: AdobeTagProperties.slMenu,
       );
       DrivenSiteLocator.instance.navigateToLogin?.call();

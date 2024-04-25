@@ -493,7 +493,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
     if (!isShowingErrorModal) {
       isShowingErrorModal = true;
-      trackState(AnalyticsScreenName.noLocationModalScreen);
+      trackState(
+        SiteLocatorAnalyticsScreenName.noLocationModalScreen.value,
+        SiteLocatorAnalyticsScreenName.noLocationModalScreen.section.value,
+      );
       Get.dialog(
         NoLocationsDialog(errorMessage: locationsErrorMessage),
         barrierDismissible: true,
@@ -553,7 +556,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         return;
       }
       trackAction(
-        AnalyticsTrackActionName.repositionEvent,
+        SiteLocatorTrackActionName.repositionEvent,
         // // adobeCustomTag: AdobeTagProperties.mapView,
       );
       if (!isClusterClick &&
@@ -823,7 +826,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         return;
       }
       trackAction(
-        AnalyticsTrackActionName.locationPinClickedEvent,
+        SiteLocatorTrackActionName.locationPinClickedEvent,
         // // adobeCustomTag: AdobeTagProperties.mapView,
       );
       SiteLocatorUtils.hideKeyboard();
@@ -1170,12 +1173,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (favoriteList.contains(id)) {
       if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
         trackAction(
-          AnalyticsTrackActionName.listViewRemoveFromFavoritesLinkClickEvent,
+          SiteLocatorTrackActionName.listViewRemoveFromFavoritesLinkClickEvent,
           // // adobeCustomTag: AdobeTagProperties.listView,
         );
       } else {
         trackAction(
-          AnalyticsTrackActionName
+          SiteLocatorTrackActionName
               .siteInfoDrawerRemoveFromFavoritesLinkClickEvent,
           // // adobeCustomTag: AdobeTagProperties.siteInfo,
         );
@@ -1186,12 +1189,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } else {
       if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
         trackAction(
-          AnalyticsTrackActionName.listViewAddToFavoritesLinkClickEvent,
+          SiteLocatorTrackActionName.listViewAddToFavoritesLinkClickEvent,
           // // adobeCustomTag: AdobeTagProperties.listView,
         );
       } else {
         trackAction(
-          AnalyticsTrackActionName.siteInfoDrawerAddToFavoritesLinkClickEvent,
+          SiteLocatorTrackActionName.siteInfoDrawerAddToFavoritesLinkClickEvent,
           // // adobeCustomTag: AdobeTagProperties.siteInfo,
         );
       }
@@ -1328,7 +1331,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> listViewShowMoreHandler() async {
     if (loadMoreSitesOnScroll()) {
       trackAction(
-        AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
+        SiteLocatorTrackActionName.listViewViewMoreSitesLinkClickEvent,
         // // adobeCustomTag: AdobeTagProperties.listView,
       );
 
@@ -1358,7 +1361,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
     closeSiteLocatorMenuPanel();
     if (canShowEnhancedNoLocationDialog()) {
-      trackState(AnalyticsScreenName.noLocationModalScreen);
+      trackState(SiteLocatorAnalyticsScreenName.noLocationModalScreen.value,
+          SiteLocatorAnalyticsScreenName.noLocationModalScreen.section.value);
       Get.dialog(
         EnhancedNoLocationDialog(),
         barrierDismissible: false,
@@ -1397,7 +1401,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> expandSearchRadius() async {
     try {
       trackAction(
-        AnalyticsTrackActionName.noLocationModalExpandSearchEvent,
+        SiteLocatorTrackActionName.noLocationModalExpandSearchEvent,
         // // adobeCustomTag: AdobeTagProperties.modals,
       );
       isFetchSitesData = false;
@@ -1482,7 +1486,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   void _setFullViewStatus() {
     trackAction(
-      AnalyticsTrackActionName.siteInfoDrawerSlideToFullScreenEvent,
+      SiteLocatorTrackActionName.siteInfoDrawerSlideToFullScreenEvent,
       // // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     isShownRemainingFullSiteInfo(true);
@@ -1567,7 +1571,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> navToNextPageOnMapViewTap() async {
     trackMapClick();
-    trackState(AnalyticsScreenName.mapviewScreen);
+    trackState(SiteLocatorAnalyticsScreenName.mapviewScreen.value,
+        SiteLocatorAnalyticsScreenName.mapviewScreen.section.value);
     isUserAuthenticated = false;
     if (canShowCardholderSetup()) {
       SiteLocatorNavigation.instance.cardholderSetupPageOne();
@@ -1755,12 +1760,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void _getZoomInZoomOutTrackAction(bool hasToMakeAPICall) {
     if (hasToMakeAPICall) {
       trackAction(
-        AnalyticsTrackActionName.mapZoomOutEvent,
+        SiteLocatorTrackActionName.mapZoomOutEvent,
         // // adobeCustomTag: AdobeTagProperties.mapView,
       );
     } else {
       trackAction(
-        AnalyticsTrackActionName.mapZoomInEvent,
+        SiteLocatorTrackActionName.mapZoomInEvent,
         // // adobeCustomTag: AdobeTagProperties.mapView,
       );
     }
@@ -1768,49 +1773,49 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   void getFilterTapTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.filtersButtonClickedEvent,
+      SiteLocatorTrackActionName.filtersButtonClickedEvent,
       // // adobeCustomTag: AdobeTagProperties.mapView,
     );
   }
 
   void getListViewTapTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.listviewButtonsClickedEvent,
+      SiteLocatorTrackActionName.listviewButtonsClickedEvent,
       // // adobeCustomTag: AdobeTagProperties.mapView,
     );
   }
 
   void getNoLocationModalCancelClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.noLocationModalCancelLinkClickEvent,
+      SiteLocatorTrackActionName.noLocationModalCancelLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.modals,
     );
   }
 
   void getNoLocationModalClearNewFilterClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.noLocationModalClearNewFilterLinkClickEvent,
+      SiteLocatorTrackActionName.noLocationModalClearNewFilterLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.modals,
     );
   }
 
   void getListViewDetailsLinkClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.listViewDetailsLinkClickEvent,
+      SiteLocatorTrackActionName.listViewDetailsLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getListViewDirectionsLinkClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.listViewDirectionsLinkClickEvent,
+      SiteLocatorTrackActionName.listViewDirectionsLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getListViewFilterClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.listViewFiltersButtonClickEvent,
+      SiteLocatorTrackActionName.listViewFiltersButtonClickEvent,
       // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
@@ -1818,12 +1823,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void getSearchTrackAction() {
     if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
       trackAction(
-        AnalyticsTrackActionName.listViewScreenExecuteSearchEvent,
+        SiteLocatorTrackActionName.listViewScreenExecuteSearchEvent,
         // adobeCustomTag: AdobeTagProperties.listView,
       );
     } else {
       trackAction(
-        AnalyticsTrackActionName.executeSearchEvent,
+        SiteLocatorTrackActionName.executeSearchEvent,
         // adobeCustomTag: AdobeTagProperties.mapView,
       );
     }
@@ -1831,25 +1836,25 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   void getSiteInfoDrawerCallButtonClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.siteInfoDrawerCallButtonLinkClickEvent,
+      SiteLocatorTrackActionName.siteInfoDrawerCallButtonLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
   }
 
   void getSiteInfoDrawerDirectionsButtonClickTrackAction() {
     trackAction(
-      AnalyticsTrackActionName.siteInfoDrawerDirectionsButtonLinkClickEvent,
+      SiteLocatorTrackActionName.siteInfoDrawerDirectionsButtonLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
   }
 
   void trackMapClick() => trackAction(
-        AnalyticsTrackActionName.mapClick,
+        SiteLocatorTrackActionName.mapClick,
         // adobeCustomTag: AdobeTagProperties.welcome,
       );
 
   void trackWalletSiteLocatorClick() =>
-      trackAction(AnalyticsTrackActionName.walletSiteLocatorClick);
+      trackAction(SiteLocatorTrackActionName.walletSiteLocatorClick);
 
   List<SiteLocation>? loadLocalSiteLocationsList(List<dynamic> data) {
     final value = <SiteLocation>[];

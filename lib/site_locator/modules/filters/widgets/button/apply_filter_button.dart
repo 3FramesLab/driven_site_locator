@@ -44,7 +44,7 @@ class ApplyFilterButton extends StatelessWidget {
       }
     } else {
       trackAction(
-        AnalyticsTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
+        SiteLocatorTrackActionName.enhancedFiltersApplyFiltersButtonClickEvent,
         // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
       );
     }

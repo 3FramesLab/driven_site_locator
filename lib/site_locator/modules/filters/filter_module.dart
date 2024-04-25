@@ -1,6 +1,7 @@
 library filter_module;
 
 import 'package:driven_common/common/driven_dimensions.dart';
+import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
