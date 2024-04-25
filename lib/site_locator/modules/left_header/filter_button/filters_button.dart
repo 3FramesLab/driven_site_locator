@@ -36,7 +36,7 @@ class FiltersButton extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Icon(Icons.filter_alt_outlined),
             SizedBox(width: 2),
             Text(

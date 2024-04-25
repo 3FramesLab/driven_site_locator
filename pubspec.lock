@@ -94,7 +94,7 @@ packages:
     description:
       path: "."
       ref: "feature/driven-common-base-23apr2024"
-      resolved-ref: "1692192cf0111994f27d46757188e12c622bb9e6"
+      resolved-ref: e4a7164e079ca971ed3f9b89b9406cbcf44fbf84
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"

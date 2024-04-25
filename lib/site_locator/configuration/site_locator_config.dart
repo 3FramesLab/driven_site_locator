@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
