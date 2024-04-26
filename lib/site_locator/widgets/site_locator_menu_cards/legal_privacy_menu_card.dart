@@ -19,7 +19,7 @@ class LegalPrivacyMenuCard extends StatelessWidget {
 
   void navToLegalPage() {
     trackAction(
-      SiteLocatorTrackActionName.menuDrawerLegalPrivacyLinkClickEvent,
+      SiteLocatorAnalyticsTrackActionName.menuDrawerLegalPrivacyLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     SiteLocatorNavigation.instance.toCommonWebView(

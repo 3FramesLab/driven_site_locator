@@ -56,7 +56,8 @@ class SiteLocatorUtils {
   static Future<void> _openExternalAppTap(
       AvailableMap selectedMap, Coords destinationLatLng) async {
     trackAction(
-      SiteLocatorTrackActionName.siteInfoDrawerViewAllDiscountsLinkClickEvent,
+      SiteLocatorAnalyticsTrackActionName
+          .siteInfoDrawerViewAllDiscountsLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     await selectedMap.showDirections(destination: destinationLatLng);

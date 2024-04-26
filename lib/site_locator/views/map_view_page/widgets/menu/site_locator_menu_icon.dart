@@ -42,7 +42,7 @@ class SiteLocatorMenuIcon extends StatelessWidget {
 
   void _onTap() {
     trackAction(
-      SiteLocatorTrackActionName.menuDrawerVisitEvent,
+      SiteLocatorAnalyticsTrackActionName.menuDrawerVisitEvent,
       // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     siteLocatorController.clearSearchPlaceInput();

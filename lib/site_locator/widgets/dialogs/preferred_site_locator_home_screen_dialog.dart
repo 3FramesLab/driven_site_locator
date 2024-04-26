@@ -40,7 +40,7 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
 
   void _yesButtonTap() {
     trackAction(
-      SiteLocatorTrackActionName.preferredHomeScreenYesButtonEvent,
+      SiteLocatorAnalyticsTrackActionName.preferredHomeScreenYesButtonEvent,
       // adobeCustomTag: AdobeTagProperties.modals,
     );
     DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
@@ -52,7 +52,8 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
   Widget _noThanksButton() => UnderlinedButton.black(
         onPressed: () {
           trackAction(
-            SiteLocatorTrackActionName.preferredHomeScreenNoButtonEvent,
+            SiteLocatorAnalyticsTrackActionName
+                .preferredHomeScreenNoButtonEvent,
             // adobeCustomTag: AdobeTagProperties.modals,
           );
           DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(

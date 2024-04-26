@@ -1,4 +1,4 @@
-class SiteLocatorTrackActionName {
+class SiteLocatorAnalyticsTrackActionName {
   // Site Locator: Mapview
   static const executeSearchEvent = 'map view screen : Execute Search';
   static const recenterButtonClickedEvent =

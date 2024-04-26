@@ -18,7 +18,7 @@ class HelpCenterMenuCard extends StatelessWidget {
 
   void navToHelpCenterPage() {
     trackAction(
-      SiteLocatorTrackActionName.menuDrawerHelpCenterLinkClickEvent,
+      SiteLocatorAnalyticsTrackActionName.menuDrawerHelpCenterLinkClickEvent,
       // adobeCustomTag: AdobeTagProperties.slMenu,
     );
     SiteLocatorNavigation.instance.toCommonWebView(

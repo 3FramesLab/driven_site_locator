@@ -22,13 +22,13 @@ class LoginMenuCard extends StatelessWidget {
   Future<void> handleAuthenticateButtonAction() async {
     if (siteLocatorController.isUserAuthenticated) {
       trackAction(
-        SiteLocatorTrackActionName.menuDrawerLogoutLinkClickEvent,
+        SiteLocatorAnalyticsTrackActionName.menuDrawerLogoutLinkClickEvent,
         // adobeCustomTag: AdobeTagProperties.slMenu,
       );
       await DrivenSiteLocator.instance.logoutDialog?.call();
     } else {
       trackAction(
-        SiteLocatorTrackActionName.menuDrawerLoginLinkClickEvent,
+        SiteLocatorAnalyticsTrackActionName.menuDrawerLoginLinkClickEvent,
         // adobeCustomTag: AdobeTagProperties.slMenu,
       );
       DrivenSiteLocator.instance.navigateToLogin?.call();
