@@ -108,6 +108,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     getSelectedCardFuelPrefTypeUseCase = Get.put(
       GetSelectedCardFuelPrefTypeUseCase(),
     );
+    getLocationDialogContentUseCase = Get.put(
+      GetLocationDialogContentUseCase(),
+    );
   }
 
   Future<void> subscribeToLocationStream() async {
@@ -1682,6 +1685,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> getInitialPageLoadData() async {
     try {
+      await getBrowserDetails();
       isUserAuthenticated = false;
       isShowLoading(true);
       getFavoriteList();
@@ -2114,4 +2118,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<bool> get _isLocationPermissionGranted async =>
       MapUtilities.getLocationPermissionStatus();
+
+  Future<void> getBrowserDetails() async {
+    browserInfoData = await DeviceInfoUtils.getWebBrowserInfo();
+  }
+
+  List<TextSpan> getEnableLocationContent() {
+    return getLocationDialogContentUseCase.execute();
+  }
 }

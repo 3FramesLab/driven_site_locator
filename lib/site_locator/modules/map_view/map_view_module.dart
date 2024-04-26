@@ -2,9 +2,9 @@ library map_view_module;
 
 import 'dart:async';
 import 'dart:io';
-import 'dart:js' as js;
 
 import 'package:cron/cron.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:driven_common/common/driven_dimensions.dart';
 import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/config/site_locator_navigation.dart';
@@ -56,6 +56,7 @@ import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cach
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/manage_cache_fuel_prices.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_fuel_preferences_use_case.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_location_dialog_content_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/zoom_handle_buttons.dart';
@@ -73,6 +74,7 @@ import 'package:driven_site_locator/site_locator/use_cases/common/store_string_l
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/display_diesel_price_usecase.dart';
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/get_diesel_prices_pack_usecase.dart';
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/manage_diesel_sale_type_usecase.dart';
+import 'package:driven_site_locator/site_locator/utilities/device_info_utils.dart';
 import 'package:driven_site_locator/site_locator/utilities/extensions/lat_lng_bounds_extension.dart';
 import 'package:driven_site_locator/site_locator/utilities/map_utilities.dart';
 import 'package:driven_site_locator/site_locator/utilities/math_utils.dart';
