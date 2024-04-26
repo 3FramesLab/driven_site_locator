@@ -4,10 +4,10 @@ class SearchPlaceResultsView extends StatelessWidget {
   final SearchPlacesController searchPlacesController = Get.find();
   final SiteLocatorController siteLocatorController = Get.find();
   final Function()? onClearIconTap;
-  final Function() onBackArrowTap;
+  final Function()? onBackArrowTap;
 
   SearchPlaceResultsView({
-    required this.onBackArrowTap,
+    this.onBackArrowTap,
     this.onClearIconTap,
     super.key,
   });
@@ -82,7 +82,7 @@ class SearchPlaceResultsView extends StatelessWidget {
 
   Future<bool> _goBack() {
     if (kIsWeb) {
-      onBackArrowTap();
+      onBackArrowTap?.call();
     }
     Get.back(result: true);
     return Future.value(false);
