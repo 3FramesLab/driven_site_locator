@@ -58,6 +58,7 @@ import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cach
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/manage_cache_fuel_prices.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_fuel_preferences_use_case.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_location_dialog_content_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/zoom_handle_buttons.dart';

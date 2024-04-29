@@ -178,4 +178,6 @@ mixin SiteLocatorState {
   RxBool shareMyCurrentLocationStatus = false.obs;
   Function()? onListViewSiteInfoDetailsTap;
   Function()? onListViewSiteInfoDetailsBackTap;
+  RxString browserName = ''.obs;
+  late GetLocationDialogContentUseCase getLocationDialogContentUseCase;
 }

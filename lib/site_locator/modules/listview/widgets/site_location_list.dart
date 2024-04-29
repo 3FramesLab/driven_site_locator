@@ -66,7 +66,10 @@ class _SiteLocationListState extends State<SiteLocationList> {
         color: Colors.white,
         child: Column(
           children: [
-            displayStickyHeaderSection(),
+            if (widget.canShowLeftTopHeader ?? false)
+              displayStickyHeaderSection(),
+            if (widget.canAppendToScroll ?? false)
+              displayScrollingHeaderSection(),
             NoLocationsFound(),
           ],
         ),

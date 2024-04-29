@@ -1,58 +1,49 @@
+import 'package:driven_site_locator/constants/view_text.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:get/get.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 class EnableLocationServiceDialog extends StatelessWidget {
   final Function()? onUseMyLocation;
 
-  const EnableLocationServiceDialog({
-    required this.onUseMyLocation,
-  });
-
+  EnableLocationServiceDialog({required this.onUseMyLocation});
+  final SiteLocatorController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return PointerInterceptor(
       child: DrivenDialog(
-        height: 100,
-        width: 350,
+        height: getDialogHeight(),
+        width: 390,
         text: _message(),
         primaryButton: _primaryButton(context),
-        isDynamicAlert: true,
-        secondaryButton: _secondaryRightButton(),
+        isAlignedLeft: !isOtherBrowser(),
+        hasSmallContentHeight: true,
+        crossAxisAlignment: getDialogCrossAxisAlignment(),
       ),
     );
   }
 
-  Widget _secondaryRightButton() {
-    const textStyle = TextStyle(
-      fontSize: 14,
-      fontWeight: DrivenFonts.fontWeightSemibold,
-      color: Colors.black,
-      decoration: TextDecoration.underline,
-    );
-    return TextButton(
-      onPressed: _onCancelButtonTap,
-      child: Text(
-        SiteLocatorConstants.continueWithoutUsingMyLocation,
-        style: textStyle,
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-
-  void _onCancelButtonTap() {
+  void _onOkButtonTap() {
     Get.back();
   }
 
-  List<TextSpan> _message() => [
-        const TextSpan(
-          text: SiteLocatorConstants.useMyLocation,
-        )
-      ];
+  List<TextSpan> _message() => controller.getEnableLocationContent();
 
   Widget _primaryButton(BuildContext context) => PrimaryButton(
-        onPressed: onUseMyLocation,
-        text: SiteLocatorConstants.useMyLocationButton,
+        onPressed: _onOkButtonTap,
+        text: ViewText.ok,
       );
+
+  double getDialogHeight() => isOtherBrowser() ? 50 : 300;
+
+  CrossAxisAlignment getDialogCrossAxisAlignment() =>
+      isOtherBrowser() ? CrossAxisAlignment.center : CrossAxisAlignment.start;
+
+// Return false if browser is other than chrome or safari
+
+  bool isOtherBrowser() =>
+      !(controller.browserName() == SiteLocatorConstants.chromeBrowser ||
+          controller.browserName() == SiteLocatorConstants.safariBrowser);
 }

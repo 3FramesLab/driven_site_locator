@@ -159,14 +159,14 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         SiteLocatorConstants.isLocationPermissionStatusUpdated,
         value: true,
       );
-    } else if (GetPlatform.isWeb) {
-      await handleLocationPermissionDialog();
     }
     await subscribeToLocationStream();
   }
 
   Future<void> handleLocationPermissionDialog() async {
     if (!(await _isLocationPermissionGranted)) {
+      getLocationDialogContentUseCase =
+          Get.put(GetLocationDialogContentUseCase());
       final showLocationPermission = await Get.dialog(
         EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
         barrierDismissible: false,
@@ -2130,6 +2130,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         await updateCurrentLatLngBoundsOnReCenter();
         await getSiteLocationsData();
       } else {
+        if (kIsWeb) {
+          await handleLocationPermissionDialog();
+        }
         await locationStreamSubscription?.cancel();
       }
     }
@@ -2137,4 +2140,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<bool> get _isLocationPermissionGranted async =>
       MapUtilities.getLocationPermissionStatus();
+
+  List<TextSpan> getEnableLocationContent() {
+    return getLocationDialogContentUseCase.execute();
+  }
 }
