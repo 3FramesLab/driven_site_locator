@@ -170,7 +170,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (!(await _isLocationPermissionGranted)) {
       getLocationDialogContentUseCase =
           Get.put(GetLocationDialogContentUseCase());
-      await getBrowserDetails();
       final showLocationPermission = await Get.dialog(
         EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
         barrierDismissible: false,
@@ -2118,10 +2117,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<bool> get _isLocationPermissionGranted async =>
       MapUtilities.getLocationPermissionStatus();
-
-  Future<void> getBrowserDetails() async {
-    browserName.value = await DeviceInfoUtils.getWebBrowserName();
-  }
 
   List<TextSpan> getEnableLocationContent() {
     return getLocationDialogContentUseCase.execute();

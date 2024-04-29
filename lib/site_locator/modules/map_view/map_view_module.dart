@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cron/cron.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:driven_common/common/driven_dimensions.dart';
 import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/config/site_locator_navigation.dart';
@@ -74,7 +73,6 @@ import 'package:driven_site_locator/site_locator/use_cases/common/store_string_l
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/display_diesel_price_usecase.dart';
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/get_diesel_prices_pack_usecase.dart';
 import 'package:driven_site_locator/site_locator/use_cases/diesel_prices/manage_diesel_sale_type_usecase.dart';
-import 'package:driven_site_locator/site_locator/utilities/device_info_utils.dart';
 import 'package:driven_site_locator/site_locator/utilities/extensions/lat_lng_bounds_extension.dart';
 import 'package:driven_site_locator/site_locator/utilities/map_utilities.dart';
 import 'package:driven_site_locator/site_locator/utilities/math_utils.dart';
