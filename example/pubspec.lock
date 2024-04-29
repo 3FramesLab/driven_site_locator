@@ -102,7 +102,7 @@ packages:
     description:
       path: "."
       ref: "feature/driven-common-base-23apr2024"
-      resolved-ref: "10843b7c2c4e983d21d9ea3dede17a4fd30b5ff8"
+      resolved-ref: "807fb438ee824a485a6267d7ee079b17b1b765ee"
       url: "https://github.com/3FramesLab/flutter_driven-common"
     source: git
     version: "0.0.2"
@@ -117,10 +117,10 @@ packages:
     dependency: transitive
     description:
       name: dynatrace_flutter_plugin
-      sha256: b3b6b7d57fd57e5e91ba0e0325f38806b5d4b7d5acc94984a4f96da1347ab522
+      sha256: "58bfa1298ae14aae69bed049afb0b6a254055a0aad46d14e709cc0e655042e21"
       url: "https://pub.dev"
     source: hosted
-    version: "3.287.2"
+    version: "3.289.1"
   equatable:
     dependency: transitive
     description:

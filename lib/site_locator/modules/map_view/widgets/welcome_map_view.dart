@@ -2,10 +2,14 @@ part of map_view_module;
 
 class WelcomeMapView extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
-  // TODO Smeet uncomment
-  // final CardholderSignUpPanelController signUpPanelController = Get.find();
+  final Function() checkToShowCardholderPanel;
+  final Function() handleSignUpPanel;
 
-  WelcomeMapView({super.key});
+  WelcomeMapView({
+    required this.checkToShowCardholderPanel,
+    required this.handleSignUpPanel,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +35,11 @@ class WelcomeMapView extends StatelessWidget {
   }
 
   void _buildOnMapViewTap() {
-    // TODO Smeet uncomment
-    // if (signUpPanelController.checkToShowCardholderPanel()) {
-    //   signUpPanelController.handleSignUpPanel();
-    // } else {
-    //   siteLocatorController.onMapViewTap();
-    // }
+    if (checkToShowCardholderPanel()) {
+      handleSignUpPanel();
+    } else {
+      siteLocatorController.onMapViewTap();
+    }
   }
 
   Widget _welcomeMapView() =>

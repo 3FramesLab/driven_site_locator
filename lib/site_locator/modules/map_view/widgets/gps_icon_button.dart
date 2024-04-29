@@ -17,8 +17,8 @@ class GpsIconButton extends StatelessWidget {
               onTap: onGpsIconTap,
               child: Image.asset(
                 SiteLocatorAssets.gpsIcon,
-                height: 40,
-                width: 40,
+                height: kIsWeb ? 40 : null,
+                width: kIsWeb ? 40 : null,
               ),
             ),
           ),
