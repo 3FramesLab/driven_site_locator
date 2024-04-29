@@ -175,28 +175,31 @@ To view fuel sites in a different location, use the search bar or enable “site
 
   // SL web location services
   static const enableLocationText = '''
-To share your location you need to enable this setting on your browser.\n ''';
-  static const howToDoItText = '''
-  
-  Here is how you do it:\n 
-    
-  ''';
-
+To share your location you need to enable this setting on your browser.\n
+''';
+  static const howToDoItText = 'Here is how you do it:\n ';
   static const useMyLocationSafari = '''
-1. On your Safari browser, click on Safari then “Settings”.
-2. On the top of the pop up, select “Websites”.
-3. Then, choose “Location” on the left side.
-4. On the sites list, select “Allow” for Driven Mobile. 
-5. At last, refresh your site locator page.
+  
+  1. On your Safari browser, click on Safari then “Settings”.
+  2. On the top of the pop up, select “Websites”.
+  3. Then, choose “Location” on the left side.
+  4. On the sites list, select “Allow” for Driven Mobile. 
+  5. At last, refresh your site locator page.
 ''';
 
   static const useMyLocationChrome = '''
-1. On your Chrome browser go to Settings, then “Privacy and Security”. 
-2. There, select “Site Settings”. 
-3. Under Permissions, click on “Location”. 
-4. On “Not allowed to see your location”, delete Driven Mobile from the list. (trash can icon)
-5. At last, refresh the site locator page.
+  
+  1. On your Chrome browser go to Settings, then 
+      “Privacy and Security”. 
+  2. There, select “Site Settings”. 
+  3. Under Permissions, click on “Location”. 
+  4. On “Not allowed to see your location”, delete 
+      Driven Mobile from the list. (trash can icon)
+  5. At last, refresh the site locator page.
 ''';
+
+  static const chromeBrowser = 'chrome';
+  static const safariBrowser = 'safari';
 }
 
 class QuickFilterLabel {

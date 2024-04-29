@@ -1,4 +1,3 @@
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
@@ -11,12 +10,12 @@ class GetLocationDialogContentUseCase
 
   @override
   List<TextSpan> execute() {
-    final browserInfo = siteLocatorController.browserInfoData;
-    return getBrowserName(browserInfo);
+    final browserName = siteLocatorController.browserName.value;
+    return getBrowserName(browserName);
   }
 
-  List<TextSpan> getBrowserName(WebBrowserInfo browserInfo) {
-    if (browserInfo.browserName.name == 'chrome') {
+  List<TextSpan> getBrowserName(String browserName) {
+    if (browserName == SiteLocatorConstants.chromeBrowser) {
       return [
         const TextSpan(
           text: SiteLocatorConstants.enableLocationText,
@@ -31,7 +30,7 @@ class GetLocationDialogContentUseCase
           style: f14RegularBlack,
         )
       ];
-    } else if (browserInfo.browserName.name == 'safari') {
+    } else if (browserName == SiteLocatorConstants.safariBrowser) {
       return [
         const TextSpan(
           text: SiteLocatorConstants.enableLocationText,

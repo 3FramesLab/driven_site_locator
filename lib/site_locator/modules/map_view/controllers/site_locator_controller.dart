@@ -108,9 +108,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     getSelectedCardFuelPrefTypeUseCase = Get.put(
       GetSelectedCardFuelPrefTypeUseCase(),
     );
-    getLocationDialogContentUseCase = Get.put(
-      GetLocationDialogContentUseCase(),
-    );
   }
 
   Future<void> subscribeToLocationStream() async {
@@ -165,14 +162,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         SiteLocatorConstants.isLocationPermissionStatusUpdated,
         value: true,
       );
-    } else if (GetPlatform.isWeb) {
-      await handleLocationPermissionDialog();
     }
     await subscribeToLocationStream();
   }
 
   Future<void> handleLocationPermissionDialog() async {
     if (!(await _isLocationPermissionGranted)) {
+      getLocationDialogContentUseCase =
+          Get.put(GetLocationDialogContentUseCase());
+      await getBrowserDetails();
       final showLocationPermission = await Get.dialog(
         EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
         barrierDismissible: false,
@@ -1685,7 +1683,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> getInitialPageLoadData() async {
     try {
-      await getBrowserDetails();
       isUserAuthenticated = false;
       isShowLoading(true);
       getFavoriteList();
@@ -2111,6 +2108,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         await updateCurrentLatLngBoundsOnReCenter();
         await getSiteLocationsData();
       } else {
+        if (kIsWeb) {
+          await handleLocationPermissionDialog();
+        }
         await locationStreamSubscription?.cancel();
       }
     }
@@ -2120,7 +2120,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       MapUtilities.getLocationPermissionStatus();
 
   Future<void> getBrowserDetails() async {
-    browserInfoData = await DeviceInfoUtils.getWebBrowserInfo();
+    browserName.value = await DeviceInfoUtils.getWebBrowserName();
   }
 
   List<TextSpan> getEnableLocationContent() {

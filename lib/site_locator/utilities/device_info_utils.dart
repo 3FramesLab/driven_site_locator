@@ -6,4 +6,9 @@ class DeviceInfoUtils {
   static Future<WebBrowserInfo> getWebBrowserInfo() async {
     return deviceInfoPlugin.webBrowserInfo;
   }
+
+  static Future<String> getWebBrowserName() async {
+    final deviceInfo = await deviceInfoPlugin.webBrowserInfo;
+    return deviceInfo.browserName.name;
+  }
 }
