@@ -8,4 +8,7 @@ class SiteLocatorRoutes {
   static const cardholderSetupPageOne = '/cardholderSetupPageOne';
   static const cardholderSetupPageTwo = '/cardholderSetupPageTwo';
   static const cardholderSetupPageThree = '/cardholderSetupPageThree';
+  // Add card for unauthenticated user
+  static const String addUnAuthorizeCard = '/addUnAuthorizeCard';
+  static const String fuelCardsSelection = '/fuelCardsSelection';
 }

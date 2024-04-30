@@ -32,4 +32,12 @@ class SiteLocatorNavigation {
   void cardholderSetupPageThree({dynamic arguments}) =>
       Get.offNamed(SiteLocatorRoutes.cardholderSetupPageThree,
           arguments: arguments);
+
+  Future<void> addUnAuthorizeCard() async {
+    await Get.toNamed(SiteLocatorRoutes.addUnAuthorizeCard);
+  }
+
+  Future<void> fuelCardSelection() async {
+    await Get.toNamed(SiteLocatorRoutes.fuelCardsSelection);
+  }
 }

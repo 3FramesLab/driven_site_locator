@@ -18,11 +18,16 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   final FuelPriceDisclaimerController fuelPriceDisclaimerController =
       Get.find();
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
+  final FuelCardsController fuelCardsController =
+      Get.put(FuelCardsController());
 
   @override
   void initState() {
     MapUtilities.onLocationSettingsEnableCounter();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Get fuel cards from hive db
+      await fuelCardsController.getFuelCardsList();
+
       if (!setUpWizardController.canShowSetUpWizard() &&
           fuelPriceDisclaimerController.isFuelPriceDisclaimerVisible()) {
         await _showFuelPriceDisclaimerDialog();
@@ -74,6 +79,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       return _bodyContainer(context);
     } else {
       return Scaffold(
+        appBar: FuelCardsHeader(),
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -147,8 +153,11 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget _backButtonWidget() => siteLocatorController.isShowBackButton
-      ? SiteLocatorMapViewBackButton(
-          onBackButtonPressed: onMapViewBackButtonPressed,
+      ? Visibility(
+          visible: AppUtils.flavor != AppFlavor.comdata.name,
+          child: SiteLocatorMapViewBackButton(
+            onBackButtonPressed: onMapViewBackButtonPressed,
+          ),
         )
       : const SizedBox(height: DrivenDimensions.dp4);
 
@@ -180,7 +189,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   Widget _body(BuildContext context) {
-    final topPadding = MediaQuery.of(context).padding.top;
+    final topPadding = MediaQuery.of(context).padding.top / 5;
     return Stack(
       children: [
         _siteLocatorMapView(),

@@ -93,6 +93,11 @@ class SiteLocatorAssets {
   static const appleStore = '$interimAssetPath/apple.png';
   static const googleStore = '$interimAssetPath/google_play.png';
 
+  // Add cards for unauthenticated user
+  static const editIcon = '$assetPath/edit.png';
+  static const deleteIcon = '$assetPath/delete.png';
+  static const accountIcon = '$assetPath/account.png';
+
   static String getAccuratePath(String path) {
     return path;
   }

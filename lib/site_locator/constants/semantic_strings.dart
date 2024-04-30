@@ -46,4 +46,7 @@ class SemanticStrings {
 
   static const shareMyCurrentLocationSwitch =
       'share-my-current-location-switch';
+
+  static const changeFuelCards = 'change-fuel-cards';
+  static const favoriteCard = 'favorite_card';
 }

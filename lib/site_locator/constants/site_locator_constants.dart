@@ -202,6 +202,14 @@ To share your location you need to enable this setting on your browser.\n
 
   static const chromeBrowser = 'chrome';
   static const safariBrowser = 'safari';
+
+  // hive type id
+  static const fuelCardTypeId = 101;
+
+  // hive box name
+  static const fuelCardBox = 'fuelCardBox';
+
+  static const nickNameLength = 20;
 }
 
 class QuickFilterLabel {

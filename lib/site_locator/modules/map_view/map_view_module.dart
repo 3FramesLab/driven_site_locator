@@ -54,6 +54,8 @@ import 'package:driven_site_locator/site_locator/loading_progress_indicator/widg
 import 'package:driven_site_locator/site_locator/modules/cardholder_setup/cardholder_setup_module.dart';
 import 'package:driven_site_locator/site_locator/modules/filters/filter_module.dart';
 import 'package:driven_site_locator/site_locator/modules/location_cache/location_cache_module.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/fuel_cards_header.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/controllers/fuel_cards_controller.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/get_sites_uncached_usecase.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/manage_cache_fuel_prices.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';

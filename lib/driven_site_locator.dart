@@ -19,6 +19,7 @@ class DrivenSiteLocator {
   Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen;
   void Function()? navigateToCardholderSiteLocatorMap;
   Future<void> Function()? navigateToAdminLocatorTab;
+  Future<void> Function()? addCardNavigation;
   Map<String, String?> env = {};
 
   String? _fleetManagerAccessToken;
@@ -72,6 +73,7 @@ class DrivenSiteLocator {
     Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen,
     void Function()? navigateToCardholderSiteLocatorMap,
     Future<void> Function()? navigateToAdminLocatorTab,
+    Future<void> Function()? addCardNavigation,
     Widget? walletHeader,
   }) async {
     setAppFlavor(flavor);
@@ -86,6 +88,7 @@ class DrivenSiteLocator {
     this.setLocatorMapAsPreferredHomeScreen =
         setLocatorMapAsPreferredHomeScreen;
     this.walletHeader = walletHeader;
+    this.addCardNavigation = addCardNavigation;
 
     // entitlementRepository.siteLocatorEntitlementRepository =
     //     siteLocatorEntitlementRepository;
