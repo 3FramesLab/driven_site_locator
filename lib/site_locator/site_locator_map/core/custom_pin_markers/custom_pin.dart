@@ -371,9 +371,17 @@ class CustomPin {
   static bool hasBrandLogoIdentifier(String? shopBrandLogoIdentifier) =>
       (shopBrandLogoIdentifier?.isNotEmpty ?? false) && remoteBrandLogo;
 
+  static bool canHideFuelPriceOnPinDrop() =>
+      siteLocatorController.isWelcomeScreen && AppUtils.isComdata;
+
+  static String? fuelPriceOnPinDrop(Site site) =>
+      canHideFuelPriceOnPinDrop() ? null : site.price;
+
   static Future<BitmapDescriptor> normalMarker(Site site) async {
     ui.Image bannerPinMarkerImageBg;
-    final String? price = site.price;
+    // final String? price = site.price;
+    final String? price = fuelPriceOnPinDrop(site);
+
     final hasDiscount =
         AppUtils.isComdata ? site.hasGallonUp : site.hasDiscount;
 

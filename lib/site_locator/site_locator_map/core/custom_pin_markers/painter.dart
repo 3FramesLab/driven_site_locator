@@ -21,7 +21,7 @@ class MarkerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final markerImageWidth = PindropDesign.getMarkerImageWidth(site);
+    final markerImageWidth = PindropDesign.getMarkerImageWidth(site, price);
     final Paint paint = Paint();
     canvas.drawImage(priceTagImage, Offset.zero, paint);
 
@@ -29,13 +29,14 @@ class MarkerPainter extends CustomPainter {
       site: site,
       markerImageWidth: markerImageWidth,
       brandLogoImage: brandLogoImage,
+      price: price,
     );
     canvas.drawImage(brandLogoImage,
         Offset(brandLogoAlignment.offsetX, brandLogoAlignment.offsetY), paint);
 
     // if Price available then paint the price banner
     if (price != null) {
-      final textStyle = PindropDesign.getPriceStyle(site);
+      final textStyle = PindropDesign.getPriceStyle(site, price);
       final textSpan = TextSpan(
         text: '\$$price',
         style: textStyle,

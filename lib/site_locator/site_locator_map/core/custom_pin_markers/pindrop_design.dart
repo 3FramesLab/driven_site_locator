@@ -6,8 +6,8 @@ import 'package:driven_site_locator/site_locator/site_locator_map/models/site.da
 import 'package:flutter/foundation.dart';
 
 class PindropDesign {
-  static TextStyle getPriceStyle(Site site) {
-    final price = site.price;
+  static TextStyle getPriceStyle(Site site, String? price) {
+    // final price = site.price;
     Color priceTextColor = site.hasDiscount ? Colors.black : Colors.white;
     // DFC Asset updates
     if (AppUtils.isComdata) {
@@ -23,8 +23,8 @@ class PindropDesign {
     );
   }
 
-  static double getMarkerImageWidth(Site site) {
-    final price = site.price;
+  static double getMarkerImageWidth(Site site, String? price) {
+    // final price = site.price;
     double markerImageWidth = price != null ? 230 : 73;
     if (kIsWeb) {
       final double pinWidth = site.hasDiscount ? 100.0 : 85.0;
@@ -37,37 +37,36 @@ class PindropDesign {
     required Site site,
     required double markerImageWidth,
     required ui.Image brandLogoImage,
+    required String? price,
   }) {
     const sizingFactor = kIsWeb ? 2 : 1;
     double ofX, ofY;
     ofX = (markerImageWidth - brandLogoImage.width) - 20;
     ofY = 12 / sizingFactor;
-    double logoAlignX = site.price != null ? ofX : ofX + 20;
+    double logoAlignX = price != null ? ofX : ofX + 20;
 
     if (AppUtils.isComdata) {
       // DFC Asset updates
-      logoAlignX = site.price != null ? ofX + 2 : ofX + 20;
+      logoAlignX = price != null ? ofX + 2 : ofX + 20;
     }
     double logoAlignY = kIsWeb
         ? 4
         : site.hasDiscount
             ? ofY + 5
-            : site.price != null
+            : price != null
                 ? ofY + 4
                 : ofY + 5;
 
     if (kIsWeb) {
       if (site.hasDiscount) {
-        logoAlignX =
-            site.price != null ? (logoAlignX + 15) : (logoAlignX - 5) + 0.5;
+        logoAlignX = price != null ? (logoAlignX + 15) : (logoAlignX - 5) + 0.5;
       } else {
-        logoAlignX =
-            site.price != null ? (logoAlignX + 15) : (logoAlignX - 5) + 0.5;
+        logoAlignX = price != null ? (logoAlignX + 15) : (logoAlignX - 5) + 0.5;
       }
       if (site.hasDiscount) {
-        logoAlignY = site.price != null ? logoAlignY + 1 : logoAlignY + 1;
+        logoAlignY = price != null ? logoAlignY + 1 : logoAlignY + 1;
       } else {
-        logoAlignY = site.price != null ? logoAlignY + 1 : logoAlignY + 1;
+        logoAlignY = price != null ? logoAlignY + 1 : logoAlignY + 1;
       }
     }
     return LogoAlignment(offsetX: logoAlignX, offsetY: logoAlignY);
