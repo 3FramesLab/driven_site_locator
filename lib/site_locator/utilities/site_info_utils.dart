@@ -226,7 +226,7 @@ class SiteInfoUtils {
           label: SemanticStrings.siteInfoTime,
           child: SiteInfoDetail(
             iconData: Icons.access_time_outlined,
-            description: siteLocation.hoursOfOperation!,
+            description: siteLocation.hoursOfOperation ?? '',
             maxLines: 2,
             textOverflow: TextOverflow.ellipsis,
           ),
