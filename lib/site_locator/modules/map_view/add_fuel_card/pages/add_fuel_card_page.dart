@@ -1,14 +1,4 @@
-import 'package:driven_common/driven_components/text_widgets/view_large_title.dart';
-import 'package:driven_site_locator/constants/view_text.dart';
-import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/driven_site_locator.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/add_fuel_card_form.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/fuel_card_favorite_checkbox.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/controllers/fuel_cards_controller.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/fuel_card/add_fuel_card_use_case.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/fuel_card/get_fuel_cards_use_case.dart';
-import 'package:get/get.dart';
+part of map_view_module;
 
 class AddFuelCardPage extends StatelessWidget {
   final FuelCardsController controller = Get.find();

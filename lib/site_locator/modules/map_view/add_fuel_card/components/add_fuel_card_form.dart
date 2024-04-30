@@ -1,7 +1,4 @@
-import 'package:driven_site_locator/constants/view_text.dart';
-import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/fuel_card_nick_name_field.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/fuel_card_number_field.dart';
+part of map_view_module;
 
 class AddFuelCardForm extends StatelessWidget {
   AddFuelCardForm({super.key});

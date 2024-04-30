@@ -1,8 +1,4 @@
-import 'package:driven_common/driven_components/text_widgets/view_large_title.dart';
-import 'package:driven_site_locator/config/site_locator_navigation.dart';
-import 'package:driven_site_locator/constants/view_text.dart';
-import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/driven_site_locator.dart';
+part of map_view_module;
 
 class FuelCardsSelectionPage extends StatelessWidget {
   @override

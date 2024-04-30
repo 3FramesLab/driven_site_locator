@@ -1,7 +1,4 @@
-import 'package:driven_site_locator/constants/view_text.dart';
-import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/controllers/fuel_cards_controller.dart';
-import 'package:get/get.dart';
+part of map_view_module;
 
 class FuelCardFavoriteCheckbox extends GetView<FuelCardsController> {
   @override

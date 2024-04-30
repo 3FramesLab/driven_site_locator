@@ -1,7 +1,4 @@
-import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/site_locator/constants/semantic_strings.dart';
-import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
-import 'package:driven_site_locator/site_locator/models/cards/fuel_card.dart';
+part of map_view_module;
 
 class FuelCardsItemView extends StatelessWidget {
   final Function() onTap;

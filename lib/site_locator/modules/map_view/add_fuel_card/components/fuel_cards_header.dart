@@ -1,10 +1,4 @@
-import 'package:driven_site_locator/data/model/app_utils.dart';
-import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/change_fuel_card.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/components/fuel_cards_display_text.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/add_fuel_card/controllers/fuel_cards_controller.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
-import 'package:get/get.dart';
+part of map_view_module;
 
 class FuelCardsHeader extends StatelessWidget implements PreferredSizeWidget {
   final FuelCardsController fuelCardsController = Get.find();
