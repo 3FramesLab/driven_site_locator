@@ -51,12 +51,14 @@ class DrivenSiteLocator {
     required SiteLocatorEntitlementRepository siteLocatorEntitlementRepository,
     Map<String, dynamic>? configDataJson,
     AppFlavor flavor = AppFlavor.none,
+    bool setup = true,
   }) async {
     setAppFlavor(flavor);
     SiteLocatorEntitlementUtils.instance.siteLocatorEntitlementRepository =
         siteLocatorEntitlementRepository;
     await SiteLocatorConfig.init(
       configDataJson: configDataJson,
+      setup: setup,
     );
   }
 
