@@ -179,10 +179,8 @@ class FuelCardsController extends GetxController {
     cards.add(fuelCard);
     await _updateFavoriteCard(fuelCard);
     clearData();
-    BaseDrivenFlashBar.show(
-      message: ViewText.cardSavedSuccessfully,
-      type: MessageType.success,
-    );
+    isOnBackPress(true);
+    Get.back();
   }
 
   Future<void> _updateFavoriteCard(FuelCard fuelCard) async {
