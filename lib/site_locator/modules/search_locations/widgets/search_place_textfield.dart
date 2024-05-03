@@ -114,7 +114,8 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     siteLocatorController.getSearchTrackAction();
     searchPlacesController.searchIconName(SiteLocatorConstants.clear);
     searchPlacesController.searchText = searchText;
-    if (Get.currentRoute != SiteLocatorRoutes.searchPlaceResultsView) {
+    if (kIsWeb ||
+        Get.currentRoute == SiteLocatorRoutes.searchPlaceResultsView) {
       await searchPlacesController.getPlacesResults();
     } else {
       _goToResultPage();
