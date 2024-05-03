@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/adobe_tag_properties.dart';
 import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/constants/app_strings.dart';
 import 'package:driven_site_locator/constants/view_text.dart';
@@ -41,7 +42,7 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
   void _yesButtonTap() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.preferredHomeScreenYesButtonEvent,
-      // adobeCustomTag: AdobeTagProperties.modals,
+      adobeCustomTag: AdobeTagProperties.modals.value,
     );
     DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
       AppStrings.trueText,
@@ -54,7 +55,7 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
           trackAction(
             SiteLocatorAnalyticsTrackActionName
                 .preferredHomeScreenNoButtonEvent,
-            // adobeCustomTag: AdobeTagProperties.modals,
+            adobeCustomTag: AdobeTagProperties.modals.value,
           );
           DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
             AppStrings.falseText,

@@ -557,7 +557,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
       trackAction(
         SiteLocatorAnalyticsTrackActionName.repositionEvent,
-        // // adobeCustomTag: AdobeTagProperties.mapView,
+        adobeCustomTag: AdobeTagProperties.mapView.value,
       );
       if (!isClusterClick &&
           isFetchSitesData &&
@@ -827,7 +827,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
       trackAction(
         SiteLocatorAnalyticsTrackActionName.locationPinClickedEvent,
-        // // adobeCustomTag: AdobeTagProperties.mapView,
+        adobeCustomTag: AdobeTagProperties.mapView.value,
       );
       SiteLocatorUtils.hideKeyboard();
       closeSiteLocatorMenuPanel();
@@ -1175,13 +1175,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         trackAction(
           SiteLocatorAnalyticsTrackActionName
               .listViewRemoveFromFavoritesLinkClickEvent,
-          // // adobeCustomTag: AdobeTagProperties.listView,
+          adobeCustomTag: AdobeTagProperties.listView.value,
         );
       } else {
         trackAction(
           SiteLocatorAnalyticsTrackActionName
               .siteInfoDrawerRemoveFromFavoritesLinkClickEvent,
-          // // adobeCustomTag: AdobeTagProperties.siteInfo,
+          adobeCustomTag: AdobeTagProperties.siteInfo.value,
         );
       }
 
@@ -1192,13 +1192,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         trackAction(
           SiteLocatorAnalyticsTrackActionName
               .listViewAddToFavoritesLinkClickEvent,
-          // // adobeCustomTag: AdobeTagProperties.listView,
+          adobeCustomTag: AdobeTagProperties.listView.value,
         );
       } else {
         trackAction(
           SiteLocatorAnalyticsTrackActionName
               .siteInfoDrawerAddToFavoritesLinkClickEvent,
-          // // adobeCustomTag: AdobeTagProperties.siteInfo,
+          adobeCustomTag: AdobeTagProperties.siteInfo.value,
         );
       }
 
@@ -1335,7 +1335,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (loadMoreSitesOnScroll()) {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
-        // // adobeCustomTag: AdobeTagProperties.listView,
+        adobeCustomTag: AdobeTagProperties.listView.value,
       );
 
       final List<SiteLocation> originalItems = getSiteLocationsForListView();
@@ -1405,7 +1405,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     try {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.noLocationModalExpandSearchEvent,
-        // // adobeCustomTag: AdobeTagProperties.modals,
+        adobeCustomTag: AdobeTagProperties.modals.value,
       );
       isFetchSitesData = false;
       incrementExpandRadiusButtonTapCount();
@@ -1490,7 +1490,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void _setFullViewStatus() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.siteInfoDrawerSlideToFullScreenEvent,
-      // // adobeCustomTag: AdobeTagProperties.siteInfo,
+      adobeCustomTag: AdobeTagProperties.siteInfo.value,
     );
     isShownRemainingFullSiteInfo(true);
     isSiteInfoFullViewed(true);
@@ -1764,12 +1764,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (hasToMakeAPICall) {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.mapZoomOutEvent,
-        // // adobeCustomTag: AdobeTagProperties.mapView,
+        adobeCustomTag: AdobeTagProperties.mapView.value,
       );
     } else {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.mapZoomInEvent,
-        // // adobeCustomTag: AdobeTagProperties.mapView,
+        adobeCustomTag: AdobeTagProperties.mapView.value,
       );
     }
   }
@@ -1777,21 +1777,21 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void getFilterTapTrackAction() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.filtersButtonClickedEvent,
-      // // adobeCustomTag: AdobeTagProperties.mapView,
+      adobeCustomTag: AdobeTagProperties.mapView.value,
     );
   }
 
   void getListViewTapTrackAction() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.listviewButtonsClickedEvent,
-      // // adobeCustomTag: AdobeTagProperties.mapView,
+      adobeCustomTag: AdobeTagProperties.mapView.value,
     );
   }
 
   void getNoLocationModalCancelClickTrackAction() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.noLocationModalCancelLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.modals,
+      adobeCustomTag: AdobeTagProperties.modals.value,
     );
   }
 
@@ -1799,28 +1799,28 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     trackAction(
       SiteLocatorAnalyticsTrackActionName
           .noLocationModalClearNewFilterLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.modals,
+      adobeCustomTag: AdobeTagProperties.modals.value,
     );
   }
 
   void getListViewDetailsLinkClickTrackAction() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.listViewDetailsLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.listView,
+      adobeCustomTag: AdobeTagProperties.listView.value,
     );
   }
 
   void getListViewDirectionsLinkClickTrackAction() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.listViewDirectionsLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.listView,
+      adobeCustomTag: AdobeTagProperties.listView.value,
     );
   }
 
   void getListViewFilterClickTrackAction() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.listViewFiltersButtonClickEvent,
-      // adobeCustomTag: AdobeTagProperties.listView,
+      adobeCustomTag: AdobeTagProperties.listView.value,
     );
   }
 
@@ -1828,12 +1828,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (Get.currentRoute == SiteLocatorRoutes.siteLocationsListView) {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.listViewScreenExecuteSearchEvent,
-        // adobeCustomTag: AdobeTagProperties.listView,
+        adobeCustomTag: AdobeTagProperties.listView.value,
       );
     } else {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.executeSearchEvent,
-        // adobeCustomTag: AdobeTagProperties.mapView,
+        adobeCustomTag: AdobeTagProperties.mapView.value,
       );
     }
   }
@@ -1842,7 +1842,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     trackAction(
       SiteLocatorAnalyticsTrackActionName
           .siteInfoDrawerCallButtonLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.siteInfo,
+      adobeCustomTag: AdobeTagProperties.siteInfo.value,
     );
   }
 
@@ -1850,13 +1850,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     trackAction(
       SiteLocatorAnalyticsTrackActionName
           .siteInfoDrawerDirectionsButtonLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.siteInfo,
+      adobeCustomTag: AdobeTagProperties.siteInfo.value,
     );
   }
 
   void trackMapClick() => trackAction(
         SiteLocatorAnalyticsTrackActionName.mapClick,
-        // adobeCustomTag: AdobeTagProperties.welcome,
+        adobeCustomTag: AdobeTagProperties.welcome.value,
       );
 
   void trackWalletSiteLocatorClick() =>

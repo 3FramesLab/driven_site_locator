@@ -33,7 +33,7 @@ class QuickFiltersList extends StatelessWidget {
     });
     trackAction(
       _getTrackActionName(siteFilter),
-      // // adobeCustomTag: AdobeTagProperties.mapView,
+      adobeCustomTag: AdobeTagProperties.mapView.value,
     );
     siteLocatorController.resetMapViewScreen();
     if (!isLoading) {

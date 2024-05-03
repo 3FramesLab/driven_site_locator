@@ -134,7 +134,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   Future<void> _onRecenterButtonTap() async {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.recenterButtonClickedEvent,
-      // adobeCustomTag: AdobeTagProperties.mapView,
+      adobeCustomTag: AdobeTagProperties.mapView.value,
     );
     siteLocatorController.canClearSearchTextField = true;
     siteLocatorController.clearSearchPlaceInput();

@@ -46,7 +46,7 @@ class ApplyFilterButton extends StatelessWidget {
       trackAction(
         SiteLocatorAnalyticsTrackActionName
             .enhancedFiltersApplyFiltersButtonClickEvent,
-        // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
+        adobeCustomTag: AdobeTagProperties.enhancedFilters.value,
       );
     }
 

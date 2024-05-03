@@ -1,6 +1,7 @@
 library filter_module;
 
 import 'package:driven_common/common/driven_dimensions.dart';
+import 'package:driven_site_locator/analytics/adobe_tag_properties.dart';
 import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/use_cases/base_future_usecase.dart';

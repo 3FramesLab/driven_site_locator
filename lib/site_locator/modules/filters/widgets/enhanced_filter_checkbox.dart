@@ -66,7 +66,7 @@ class EnhancedFilterCheckbox extends StatelessWidget {
     if (isChecked!) {
       trackAction(
         _getTrackActionName,
-        // // adobeCustomTag: AdobeTagProperties.enhancedFilters,
+        adobeCustomTag: AdobeTagProperties.enhancedFilters.value,
       );
     }
   }

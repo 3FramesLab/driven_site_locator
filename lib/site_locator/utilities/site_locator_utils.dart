@@ -1,5 +1,6 @@
 import 'package:driven_common/globals.dart';
 import 'package:driven_common/utils/safe_launch.dart';
+import 'package:driven_site_locator/analytics/adobe_tag_properties.dart';
 import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
@@ -58,7 +59,7 @@ class SiteLocatorUtils {
     trackAction(
       SiteLocatorAnalyticsTrackActionName
           .siteInfoDrawerViewAllDiscountsLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.siteInfo,
+      adobeCustomTag: AdobeTagProperties.siteInfo.value,
     );
     await selectedMap.showDirections(destination: destinationLatLng);
   }

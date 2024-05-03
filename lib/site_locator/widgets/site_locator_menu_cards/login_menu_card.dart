@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/adobe_tag_properties.dart';
 import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/driven_site_locator.dart';
@@ -23,13 +24,13 @@ class LoginMenuCard extends StatelessWidget {
     if (siteLocatorController.isUserAuthenticated) {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.menuDrawerLogoutLinkClickEvent,
-        // adobeCustomTag: AdobeTagProperties.slMenu,
+        adobeCustomTag: AdobeTagProperties.slMenu.value,
       );
       await DrivenSiteLocator.instance.logoutDialog?.call();
     } else {
       trackAction(
         SiteLocatorAnalyticsTrackActionName.menuDrawerLoginLinkClickEvent,
-        // adobeCustomTag: AdobeTagProperties.slMenu,
+        adobeCustomTag: AdobeTagProperties.slMenu.value,
       );
       DrivenSiteLocator.instance.navigateToLogin?.call();
     }

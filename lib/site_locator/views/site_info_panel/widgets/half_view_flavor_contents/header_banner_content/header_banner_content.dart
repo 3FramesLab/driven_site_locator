@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/analytics/adobe_tag_properties.dart';
 import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
 import 'package:driven_site_locator/config/site_locator_routes.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
@@ -73,7 +74,7 @@ class SiteInfoHeaderBannerContent extends StatelessWidget {
     trackAction(
       SiteLocatorAnalyticsTrackActionName
           .siteInfoDrawerFeesMayApplyLinkClickEvent,
-      // adobeCustomTag: AdobeTagProperties.siteInfo,
+      adobeCustomTag: AdobeTagProperties.siteInfo.value,
     );
     Get.toNamed(SiteLocatorRoutes.extendedNetworkFeesPage);
   }
