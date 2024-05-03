@@ -429,11 +429,11 @@ class SiteLocatorConfigConstants {
     'circle k'
   ];
   static List<String> comdataFuelTypesTopShortList = <String>[
-    'shell',
-    'bp',
     'ta',
-    'circle k',
-    'exxon',
+    'petro stopping centers',
+    'pilot',
+    'speedway',
+    'loves'
   ];
   static List<String> fuelmanQuickFilterList = <String>[
     'fuel',

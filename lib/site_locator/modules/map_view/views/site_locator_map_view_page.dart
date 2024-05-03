@@ -189,7 +189,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   Widget _body(BuildContext context) {
-    final topPadding = MediaQuery.of(context).padding.top / 5;
+    final topPadding = MediaQuery.of(context).padding.top;
     return Stack(
       children: [
         _siteLocatorMapView(),
@@ -204,7 +204,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: isShowWalletHeader ? 5 : topPadding),
+          _walletHeaderPadding(topPadding),
           if (!setUpWizardController.canShowSetUpWizard()) _backButtonWidget(),
           _comdataWalletHeader(),
           const SizedBox(height: 5),
@@ -284,6 +284,15 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           height: SiteLocatorDimensions.dp100,
         ),
       );
+
+  Widget _walletHeaderPadding(double topPadding) {
+    return SizedBox(
+      key: const Key(InternalText.showHeaderPaddingKey),
+      height: isShowWalletHeader || !siteLocatorController.isUserAuthenticated
+          ? 5
+          : topPadding,
+    );
+  }
 
   Widget applyForFuelman() {
     return Positioned(

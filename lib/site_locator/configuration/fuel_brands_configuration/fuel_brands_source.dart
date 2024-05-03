@@ -72,10 +72,11 @@ final Map<String, String> fuelmanBrandsListSource = {
 };
 
 final Map<String, String> comdataBrandsListSource = {
-  'pilot': 'Pilot',
-  'loves': "Love's",
   'ta': 'TA',
+  'petro stopping centers': 'Petro Stopping Centers',
+  'pilot': 'Pilot',
   'speedway': 'Speedway',
+  'loves': "Love's",
   '7-eleven': '7-Eleven',
   'allsups': "Allsup's",
   'caseys': 'Caseys',
@@ -94,7 +95,6 @@ final Map<String, String> comdataBrandsListSource = {
   'mapco': 'Mapco',
   'mcclure oil': 'McClure Oil',
   'one9': 'One9',
-  'petro stopping centers': 'Petro Stopping Centers',
   'petro-canada': 'Petro-Cananda',
   'petroleum wholesale': 'Petroleum Wholesale',
   'pump & pantry': 'Pump & Pantry',
