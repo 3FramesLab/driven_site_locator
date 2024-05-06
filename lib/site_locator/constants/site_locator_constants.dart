@@ -134,6 +134,7 @@ class SiteLocatorConstants {
 
   //site locator menu
   static const login = 'Login';
+  static const loginOrSignUp = 'Login / Sign Up';
   static const logout = 'Log Out';
   static const preferencesFilters = 'Preferences & Filters';
   static const helpCenter = 'Help Center';

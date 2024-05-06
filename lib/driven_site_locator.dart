@@ -11,7 +11,10 @@ class DrivenSiteLocator {
   AppFlavor flavor = AppFlavor.none;
   String appVersionNumber = '';
   Future<Widget> Function()? logoutDialog;
-  void Function()? navigateToLogin;
+  Future<void> Function({
+    bool isCardHolderLogin,
+    bool isConfirmLoginAsFleetManager,
+  })? navigateToLogin;
   bool? isInactivityWrapperActivated;
   void Function()? onInactivityTimeOut;
   double? bottomNavBarHeight;
@@ -69,7 +72,11 @@ class DrivenSiteLocator {
     // Map<String, dynamic>? configDataJson,
     String appVersionNumber = '',
     Future<Widget> Function()? logoutDialog,
-    void Function()? navigateToLogin,
+    Future<void> Function({
+      bool isCardHolderLogin,
+      bool isConfirmLoginAsFleetManager,
+    })?
+        navigateToLogin,
     void Function(bool)? onTimerLogout,
     double? bottomNavBarHeight,
     Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen,
@@ -105,7 +112,12 @@ class DrivenSiteLocator {
     this.logoutDialog = logoutDialog;
   }
 
-  void setNavigateToLogin(void Function()? navigateToLogin) {
+  void setNavigateToLogin(
+      Future<void> Function({
+    bool isCardHolderLogin,
+    bool isConfirmLoginAsFleetManager,
+  })?
+          navigateToLogin) {
     this.navigateToLogin = navigateToLogin;
   }
 

@@ -3,6 +3,8 @@ import 'package:driven_site_locator/analytics/site_locator_track_action_name.dar
 import 'package:driven_site_locator/config/site_locator_navigation.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
 import 'package:driven_site_locator/constants/app_strings.dart';
+import 'package:driven_site_locator/constants/internal_text.dart';
+import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/styles/site_locator_colors.dart';
@@ -14,7 +16,7 @@ class LegalPrivacyMenuCard extends StatelessWidget {
     return SiteLocatorMenuRow(
       title: SiteLocatorConstants.legalPrivacy,
       icon: _legalPrivacyIcon(),
-      buttonAction: navToLegalPage,
+      buttonAction: AppUtils.isComdata ? navToLegalPageComdata : navToLegalPage,
     );
   }
 
@@ -25,6 +27,17 @@ class LegalPrivacyMenuCard extends StatelessWidget {
     );
     SiteLocatorNavigation.instance.toCommonWebView(
       url: ApiConstants.fuelmanLegalUrl,
+      title: AppStrings.fuelmanLegalPrivacy,
+    );
+  }
+
+  void navToLegalPageComdata() {
+    trackAction(
+      SiteLocatorAnalyticsTrackActionName.menuDrawerLegalPrivacyLinkClickEvent,
+      adobeCustomTag: AdobeTagProperties.slMenu.value,
+    );
+    SiteLocatorNavigation.instance.toCommonWebView(
+      url: InternalText.comdataLegalDocsUrl,
       title: AppStrings.fuelmanLegalPrivacy,
     );
   }

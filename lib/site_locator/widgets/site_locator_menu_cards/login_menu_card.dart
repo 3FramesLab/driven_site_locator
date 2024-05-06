@@ -1,5 +1,6 @@
 import 'package:driven_site_locator/analytics/adobe_tag_properties.dart';
 import 'package:driven_site_locator/analytics/site_locator_track_action_name.dart';
+import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/driven_site_locator.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
@@ -32,13 +33,17 @@ class LoginMenuCard extends StatelessWidget {
         SiteLocatorAnalyticsTrackActionName.menuDrawerLoginLinkClickEvent,
         adobeCustomTag: AdobeTagProperties.slMenu.value,
       );
-      DrivenSiteLocator.instance.navigateToLogin?.call();
+      await DrivenSiteLocator.instance.navigateToLogin?.call(
+        isCardHolderLogin: AppUtils.isComdata,
+      );
     }
   }
 
   String get _title => siteLocatorController.isUserAuthenticated
       ? SiteLocatorConstants.logout
-      : SiteLocatorConstants.login;
+      : AppUtils.isComdata
+          ? SiteLocatorConstants.loginOrSignUp
+          : SiteLocatorConstants.login;
 
   AssetImage get _icon => siteLocatorController.isUserAuthenticated
       ? const AssetImage(SiteLocatorAssets.logoutIcon)

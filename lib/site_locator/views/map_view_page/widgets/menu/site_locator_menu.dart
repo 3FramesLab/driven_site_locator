@@ -18,36 +18,38 @@ class SiteLocatorMenu extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 24),
-        Visibility(
-          visible: repository.isLoginLogoutSettingsEnabled,
-          child: LoginMenuCard(),
-        ),
-        _divider(),
-        Visibility(
-          visible: repository.isPreferenceFilterEnabled,
-          child: PreferencesFilterMenuCard(),
-        ),
-        _divider(),
-        Visibility(
-          visible: repository.isHelpCenterEnabled,
-          child: HelpCenterMenuCard(),
-        ),
-        _divider(),
-        Visibility(
-          visible: repository.isLegalPrivacySettingEnabled,
-          child: LegalPrivacyMenuCard(),
-        ),
-        _divider(),
+        if (repository.isLoginLogoutSettingsEnabled) ...[
+          LoginMenuCard(),
+          _divider(),
+        ],
+        if (repository.isPreferenceFilterEnabled) ...[
+          PreferencesFilterMenuCard(),
+          _divider(),
+        ],
+        if (repository.isHelpCenterEnabled) ...[
+          HelpCenterMenuCard(),
+          _divider(),
+        ],
+        if (repository.isLegalPrivacySettingEnabled) ...[
+          LegalPrivacyMenuCard(),
+          _divider(),
+        ],
         _appVersion(),
       ],
     );
   }
 
-  SizedBox _divider() => const SizedBox(height: 6);
+  Widget _divider() => const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: DrivenDivider(
+          thickness: 0.8,
+          color: DrivenColors.disabledButtonColor,
+        ),
+      );
 
   PaddedText _appVersion() => PaddedText(
         '${ViewText.version} ${AppUtils.appVersionName}',
-        style: f12RegularBlack,
+        style: f12RegularGrey,
         padding: const EdgeInsets.only(
           top: SiteLocatorDimensions.dp11,
           left: SiteLocatorDimensions.dp15,
