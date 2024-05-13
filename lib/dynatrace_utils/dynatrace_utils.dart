@@ -1,7 +1,5 @@
-// TODO(Smeet): Uncomment below imports
-// import 'dart:js' as dart_js;
-
 import 'package:driven_common/globals.dart';
+import 'package:driven_site_locator/dynatrace_utils/dynatrace_web_utils.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:flutter/foundation.dart';
 
@@ -14,7 +12,7 @@ class DynatraceUtils {
     int? errorCode,
   }) {
     if (kIsWeb) {
-      logErrorForWebApp(name, errorCode);
+      DynatraceWebUtils.logErrorForWebApp(name, errorCode);
     } else {
       logErrorForMobileApp(
         name: name,
@@ -23,12 +21,6 @@ class DynatraceUtils {
         stackTrace: stackTrace,
       );
     }
-  }
-
-  static void logErrorForWebApp(String? error, int? errorCode) {
-    final err = error ?? 'Unknown Error';
-    final errCode = errorCode ?? -99;
-    // dart_js.context.callMethod('createActionAndError', [err, errCode]);
   }
 
   static void logErrorForMobileApp({
@@ -47,7 +39,7 @@ class DynatraceUtils {
   // Tag User
   static void tagUser(String userTag) {
     if (kIsWeb) {
-      // dart_js.context.callMethod('tagUser', [userTag]);
+      DynatraceWebUtils.tagUser(userTag);
     } else {
       Globals().dynatrace.tagUser(userTag);
     }
@@ -56,7 +48,7 @@ class DynatraceUtils {
   // Tag Event
   static void tagEvent(String eventName) {
     if (kIsWeb) {
-      // dart_js.context.callMethod('tagEvent', [eventName]);
+      DynatraceWebUtils.tagEvent(eventName);
     } else {
       Globals().dynatrace.tagEvent(eventName);
     }
