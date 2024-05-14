@@ -1,7 +1,7 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as dart_js;
 
-class DynatraceWebUtils {
+class DynatraceUtils {
   static void logError({
     required String name,
     required String value,
