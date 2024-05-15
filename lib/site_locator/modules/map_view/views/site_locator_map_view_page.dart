@@ -216,7 +216,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   Widget _comdataWalletHeader() => isShowWalletHeader
       // ? WalletHeader(isFromSiteLocator: true)
-      ? walletHeader
+      ? Padding(
+          padding: const EdgeInsets.only(top: 30),
+          child: walletHeader,
+        )
       : const SizedBox();
 
   Widget get walletHeader =>
@@ -266,7 +269,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       ? Row(
           children: [
             Visibility(
-              visible: _entitlementRepository.isDisplaySettingsEnabled,
+              visible:
+                  _entitlementRepository.isDisplaySettingsEnabled && isShowMenu,
               child: SiteLocatorMenuIcon(),
             ),
             SizedBox(
@@ -369,4 +373,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           : const SizedBox.shrink(),
     );
   }
+
+  bool get isShowMenu =>
+      (Globals().isCardHolderLogin &&
+          !siteLocatorController.isUserAuthenticated) ||
+      (AppUtils.isComdata && !Globals().isCardHolderLogin) ||
+      AppUtils.isFuelman;
 }
