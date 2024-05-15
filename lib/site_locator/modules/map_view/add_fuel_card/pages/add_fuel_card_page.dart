@@ -3,8 +3,6 @@ part of map_view_module;
 class AddFuelCardPage extends StatelessWidget {
   final FuelCardsController controller = Get.find();
   final SiteLocatorController siteLocatorController = Get.find();
-  final AddFuelCardUseCase addFuelCardUseCase = AddFuelCardUseCase();
-  final GetFuelCardsUseCase getFuelCardsUseCase = GetFuelCardsUseCase();
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +55,7 @@ class AddFuelCardPage extends StatelessWidget {
   Widget _addCardButton() {
     return Obx(
       () => PrimaryButton(
-        onPressed: controller.canAddCard
-            ? controller.onAddUnAuthorizedCardClicked
-            : null,
+        onPressed: controller.canAddCard ? controller.onAddButtonClicked : null,
         text: ViewText.addCard,
       ),
     );

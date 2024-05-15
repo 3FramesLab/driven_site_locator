@@ -8,7 +8,7 @@ class FuelCardFavoriteCheckbox extends GetView<FuelCardsController> {
           onChanged: (_) => controller.toggleSetAsFavorite(),
           value: controller.isFavoriteCard(),
           textWidget: _checkboxText(),
-          isShowGreyCheckbox: controller.hasNoCards(),
+          isShowGreyCheckbox: controller.isShowGreyCheckbox,
         ));
   }
 

@@ -13,3 +13,7 @@ class AppStrings {
   static const falseText = 'false';
   static const noneText = 'none';
 }
+
+class WidgetKeys {
+  static const editCardKey = 'edit_card_key';
+}

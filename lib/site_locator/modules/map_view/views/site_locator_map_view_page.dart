@@ -26,7 +26,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     MapUtilities.onLocationSettingsEnableCounter();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Get fuel cards from hive db
-      await fuelCardsController.getFuelCardsList();
+      await fuelCardsController.loadFuelCards();
 
       if (!setUpWizardController.canShowSetUpWizard() &&
           fuelPriceDisclaimerController.isFuelPriceDisclaimerVisible()) {

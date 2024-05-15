@@ -2,9 +2,13 @@ part of map_view_module;
 
 class GetFuelCardsUseCase
     extends BaseFutureUseCase<List<FuelCard>, GetFuelCardsParam?> {
+  final HiveInterface hive;
+
+  GetFuelCardsUseCase({required this.hive});
+
   @override
   Future<List<FuelCard>> execute(GetFuelCardsParam? param) async {
-    final box = await Hive.openBox<FuelCard>(SiteLocatorConstants.fuelCardBox);
+    final box = await hive.openBox<FuelCard>(SiteLocatorConstants.fuelCardBox);
     final unorderedCards = box.values.toList();
     if (param?.inOrdered ?? false) {
       unorderedCards.sort((a, b) {

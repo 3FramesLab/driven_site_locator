@@ -22,9 +22,7 @@ class FuelCardsHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget _activeCardText() {
     return Row(
       children: [
-        Expanded(
-          child: FuelCardsDisplayText(),
-        ),
+        Expanded(child: FuelCardsDisplayText()),
         const SizedBox(width: 5),
         ChangeFuelCard(),
       ],

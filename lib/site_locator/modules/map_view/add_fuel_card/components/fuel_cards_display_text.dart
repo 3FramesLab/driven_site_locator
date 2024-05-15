@@ -14,7 +14,8 @@ class FuelCardsDisplayText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.hasNoCards()
+      () => (controller.hasNoCards() ||
+              controller.favoriteFuelCard.cardNickName == null)
           ? _headerText(ViewText.addCardToSeeDiscounts)
           : _nickNameWithNumber,
     );

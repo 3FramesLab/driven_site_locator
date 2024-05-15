@@ -41,9 +41,11 @@ class SiteLocatorAssets {
   static const loginIcon = '$assetPath/loginIcon.png';
   static const logoutIcon = '$assetPath/logoutIcon.png';
   static const preferencesFilterIcon = '$assetPath/preferencesFilterIcon.png';
+  static const legalPrivacyPolicyIcon = '$assetPath/legal_privacy_policy.png';
   static const icUps = '$assetPath/ic_ups.png';
   static const icFedex = '$assetPath/ic_fedex.png';
   static const gpsIcon = '$packagePath/assets/images/ic_gps.png';
+  static const creditCard = '$assetPath/creditCard.png';
 
   // COMDATA ASSET PATHS
 

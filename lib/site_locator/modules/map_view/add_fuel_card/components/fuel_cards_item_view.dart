@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class FuelCardsItemView extends StatelessWidget {
+class FuelCardsItemView extends GetView<FuelCardsController> {
   final Function() onTap;
   final FuelCard fuelCard;
 
@@ -22,99 +22,147 @@ class FuelCardsItemView extends StatelessWidget {
     return _cardTile(context);
   }
 
-  Widget _cardTile(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-      child: Column(
+  Widget _cardTile(BuildContext context) => Padding(
+        padding: EdgeInsets.fromLTRB(0, _topPadding, 0, 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _favoriteCardIcon(),
+            _cardListTile(),
+          ],
+        ),
+      );
+
+  double get _topPadding =>
+      fuelCard.isFavoriteCard != null && fuelCard.isFavoriteCard! ? 10 : 20;
+
+  Widget _cardListTile() => Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _cardNumberRow(),
+            const SizedBox(width: 8),
+            _cardActionsRow(),
+          ],
+        ),
+      );
+
+  Flexible _cardActionsRow() => Flexible(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _editIcon(),
+            const SizedBox(width: 8),
+            _deleteIcon(),
+          ],
+        ),
+      );
+
+  Row _cardNumberRow() => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _favoriteCardIcon(),
-          _cardListTile(),
+          _cardIcon(),
+          const SizedBox(width: 18),
+          _cardNameWithNumber,
         ],
-      ),
-    );
-  }
+      );
 
-  ListTile _cardListTile() {
-    return ListTile(
-      contentPadding: const EdgeInsets.fromLTRB(17, 0, 17, 0),
-      onTap: onTap,
-      leading: _cardIcon(),
-      title: _cardTitleWithBalance(),
-      shape: _cardShape(),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _editIcon(),
-          const SizedBox(width: 8),
-          _deletIcon(),
-        ],
-      ),
-    );
-  }
-
-  Flexible _deletIcon() {
-    return Flexible(
-      child: GestureDetector(
-        onTap: () {},
-        child: Image.asset(
-          SiteLocatorAssets.deleteIcon,
-          height: 24,
-          width: 24,
+  Flexible _deleteIcon() => Flexible(
+        child: GestureDetector(
+          onTap: _removeCardDialog,
+          child: Semantics(
+            label: SemanticStrings.deleteCard,
+            child: Image.asset(
+              SiteLocatorAssets.deleteIcon,
+              height: 24,
+              width: 24,
+            ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 
-  Flexible _editIcon() {
-    return Flexible(
-      child: Image.asset(
-        SiteLocatorAssets.editIcon,
+  Flexible _editIcon() => Flexible(
+        child: GestureDetector(
+          key: const Key(WidgetKeys.editCardKey),
+          onTap: () => SiteLocatorNavigation.instance.editFuelCard(fuelCard),
+          child: Image.asset(
+            SiteLocatorAssets.editIcon,
+            height: 24,
+            width: 24,
+          ),
+        ),
+      );
+
+  Widget _favoriteCardIcon() => Visibility(
+        visible: fuelCard.isFavoriteCard ?? false,
+        child: const Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Icon(
+            Icons.favorite,
+            color: DrivenColors.black90,
+            size: 22,
+            semanticLabel: SemanticStrings.favoriteCard,
+          ),
+        ),
+      );
+
+  Widget _cardIcon() => Image.asset(
+        SiteLocatorAssets.creditCard,
+        color: DrivenColors.brandPurple,
         height: 24,
         width: 24,
+      );
+
+  Widget _cardTitleWithBalance(String cardTitle) => Body1Regular14Lh23(
+        cardTitle,
+        style: f14RegularBlackDark,
+        overflow: TextOverflow.fade,
+        maxLines: 1,
+        textAlign: TextAlign.left,
+      );
+
+  Widget get _cardNameWithNumber => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: Get.width * 0.35),
+            child: _cardTitleWithBalance(fuelCard.cardNickName ?? ''),
+          ),
+          const SizedBox(width: 3),
+          _cardTitleWithBalance(
+            '- *${fuelCard.cardLastFourDigit ?? ''}',
+          ),
+        ],
+      );
+
+  Widget get removeCardButton => PrimaryButton(
+        onPressed: _onRemoveCardClick,
+        text: ViewText.removeCardTitle,
+      );
+
+  Widget get cancelButton => ClickableText(
+        onTap: Get.back,
+        title: ViewText.cancel,
+      );
+
+  Future<void> _onRemoveCardClick() async {
+    if (fuelCard.id != null) {
+      await controller.deleteFuelCards(fuelCard);
+    }
+    Get.back();
+  }
+
+  void _removeCardDialog() {
+    Get.dialog(
+      DrivenDialog(
+        text: const [TextSpan(text: ViewText.removeCardDialogTitle)],
+        primaryButton: removeCardButton,
+        secondaryButton: cancelButton,
       ),
-    );
-  }
-
-  Widget _favoriteCardIcon() {
-    return Visibility(
-      visible: fuelCard.isFavoriteCard ?? false,
-      child: const Padding(
-        padding: EdgeInsets.only(left: 10),
-        child: Icon(
-          Icons.favorite,
-          color: DrivenColors.black90,
-          size: 22,
-          semanticLabel: SemanticStrings.favoriteCard,
-        ),
-      ),
-    );
-  }
-
-  Widget _cardIcon() {
-    return const CircleAvatar(
-      backgroundImage: AssetImage(SiteLocatorAssets.accountIcon),
-      backgroundColor: Colors.transparent,
-    );
-  }
-
-  RoundedRectangleBorder _cardShape() {
-    return RoundedRectangleBorder(
-      side: const BorderSide(color: DrivenColors.transparent),
-      borderRadius: BorderRadius.circular(8),
-    );
-  }
-
-  Widget _cardTitleWithBalance() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          fuelCard.cardNickName ?? '',
-          style: f14BoldBlackDark,
-          textAlign: TextAlign.left,
-        ),
-      ],
     );
   }
 }

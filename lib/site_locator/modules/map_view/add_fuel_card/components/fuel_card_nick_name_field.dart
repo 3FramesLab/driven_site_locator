@@ -8,6 +8,7 @@ class FuelCardNickNameField extends StatefulWidget {
 class _NickNameUnAuthorized extends State<FuelCardNickNameField>
     with HasValidation {
   final FuelCardsController controller = Get.find();
+  final isFocused = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,8 @@ class _NickNameUnAuthorized extends State<FuelCardNickNameField>
         () => CustomTextFormField(
           textEditingController: controller.nickNameEditController,
           textInputFormatters: [alphaNumericSpaceInputFilter],
-          onTextChanged: controller.onNickNameTextChanged,
+          onTextChanged: (value) =>
+              controller.onNickNameTextChanged(value, validators),
           textCapitalization: TextCapitalization.sentences,
           onValidate: controller.canValidateForm() ? validate : null,
           textMaxLength: SiteLocatorConstants.nickNameLength,
@@ -40,7 +42,7 @@ class _NickNameUnAuthorized extends State<FuelCardNickNameField>
         const HasAtLeastNCharactersValidator(1),
         AlreadyInUseValidator(
           ViewText.cardNickname,
-          controller.existingNickNames,
+          controller.existingNickNames(),
         )
       ];
 }

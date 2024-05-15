@@ -4,13 +4,21 @@ class FuelCardsController extends GetxController {
   late GetFuelCardsUseCase _fuelCardsUseCase;
   late AddFuelCardUseCase addFuelCardUseCase;
   late UpdateFuelCardUseCase updateFuelCardUseCase;
+  late DeleteFuelCardUseCase deleteFuelCardUseCase;
 
   RxList<FuelCard> cards = <FuelCard>[].obs;
   RxList<String> existingNickNames = <String>[].obs;
   FuelCard favoriteFuelCard = FuelCard();
+  Rx<FuelCard> editableFuelCard = FuelCard().obs;
 
   final cardTextEditController = TextEditingController();
   final nickNameEditController = TextEditingController();
+
+  final HiveInterface hive = Hive;
+
+  String initialNickNameValue = '';
+  bool? initialFavoriteCardStatus;
+  RxBool isAnyDataUpdated = false.obs;
 
   final cardNumber = ''.obs;
   final nickName = ''.obs;
@@ -24,32 +32,48 @@ class FuelCardsController extends GetxController {
 
   bool get canAddCard => isValidNickname() && isValidCardNumber();
 
-  List<Validator> get validators => [
-        const HasAtLeastNCharactersValidator(1),
-        AlreadyInUseValidator(
-          ViewText.cardNickname,
-          existingNickNames,
-        )
-      ];
+  bool get canUpdateCard =>
+      isAnyDataUpdated() &&
+      isValidNickname() &&
+      editableFuelCard().cardLastFourDigit != null;
+
+  bool get isShowGreyCheckbox =>
+      hasNoCards() || editableFuelCard().isFavoriteCard == true;
 
   @override
   Future<void> onInit() async {
     clearData();
     _initUseCases();
-    await loadExistingCards();
+    await loadFuelCards();
     super.onInit();
   }
 
   void _initUseCases() {
-    _fuelCardsUseCase = GetFuelCardsUseCase();
-    addFuelCardUseCase = AddFuelCardUseCase();
-    updateFuelCardUseCase = UpdateFuelCardUseCase();
+    _fuelCardsUseCase = GetFuelCardsUseCase(hive: hive);
+    addFuelCardUseCase = AddFuelCardUseCase(hive: hive);
+    updateFuelCardUseCase = UpdateFuelCardUseCase(hive: hive);
+    deleteFuelCardUseCase = DeleteFuelCardUseCase(hive: hive);
   }
 
-  Future<List<FuelCard>>? getFuelCardsList() async {
+  Future<void> loadFuelCards() async {
     cards.value = await _fuelCardsUseCase
         .execute(const GetFuelCardsParam(inOrdered: true));
-    return cards();
+    existingNickNames.clear();
+    for (final card in cards()) {
+      existingNickNames.add(card.cardNickName ?? '');
+      if (card.isFavoriteCard == true) {
+        favoriteFuelCard = card;
+      }
+    }
+  }
+
+  Future<void> deleteFuelCards(FuelCard fuelCard) async {
+    await deleteFuelCardUseCase.execute(fuelCard.id!);
+    await loadFuelCards();
+    if (fuelCard.isFavoriteCard != null && fuelCard.isFavoriteCard!) {
+      favoriteFuelCard.cardNickName = null;
+      isFavoriteCard.value = false;
+    }
   }
 
   bool hasCards() {
@@ -72,13 +96,19 @@ class FuelCardsController extends GetxController {
     return cards.length == 3;
   }
 
+  bool hasTenCards() {
+    return cards.length >= 10;
+  }
+
   Future<void> cardSelected(FuelCard card) async {}
 
   void setUpFavorite() => isFavoriteCard(hasNoCards());
 
   void toggleSetAsFavorite() {
-    if (hasCards()) {
+    if (hasCards() && editableFuelCard().isFavoriteCard != true) {
       isFavoriteCard(!isFavoriteCard());
+      isAnyDataUpdated(initialFavoriteCardStatus != isFavoriteCard.value ||
+          initialNickNameValue != nickNameEditController.text);
     }
   }
 
@@ -102,25 +132,19 @@ class FuelCardsController extends GetxController {
     showCardDetails(!showCardDetails());
   }
 
-  void onNickNameTextChanged(String value) {
+  void onNickNameTextChanged(String value, List<Validator> validators) {
     final previousSelection = nickNameEditController.selection;
     nickNameEditController.text = value;
     nickNameEditController.selection = previousSelection;
-    isValidNickname(_isValid(value));
+    isValidNickname(_isValid(value, validators));
     nickName(value);
+    canValidateForm(true);
+    isAnyDataUpdated(initialFavoriteCardStatus != isFavoriteCard.value ||
+        initialNickNameValue != nickNameEditController.text);
   }
 
-  bool _isValid(String value) => validators.every((v) => v.isValid(value));
-
-  Future<void> loadExistingCards() async {
-    final fuelCardsList = await getFuelCardsList();
-    fuelCardsList?.forEach((e) {
-      existingNickNames.add(e.cardNickName ?? '');
-      if (e.isFavoriteCard == true) {
-        favoriteFuelCard = e;
-      }
-    });
-  }
+  bool _isValid(String value, List<Validator> validators) =>
+      validators.every((v) => v.isValid(value));
 
   String formatCardStringValue(String value) {
     return value.removeAllWhitespace
@@ -162,39 +186,43 @@ class FuelCardsController extends GetxController {
 
   void onAddCardClicked() {
     if (hasNoCards()) {
-      SiteLocatorNavigation.instance.addUnAuthorizeCard();
+      SiteLocatorNavigation.instance.addFuelCard();
     } else {
       SiteLocatorNavigation.instance.fuelCardSelection();
     }
   }
 
-  Future<void> onAddUnAuthorizedCardClicked() async {
+  Future<void> onAddButtonClicked() async {
     final fuelCard = FuelCard(
       cardNickName: nickName(),
       cardLastFourDigit: lastFourDigits(),
       isFavoriteCard: isFavoriteCard(),
     );
-    await addFuelCardUseCase.execute(fuelCard);
-    existingNickNames.add(nickName());
-    cards.add(fuelCard);
-    await _updateFavoriteCard(fuelCard);
-    clearData();
-    isOnBackPress(true);
-    Get.back();
+    final cardId = await addFuelCardUseCase.execute(fuelCard);
+    fuelCard.id = cardId;
+    await _updateExistingFavoriteCard(fuelCard);
   }
 
-  Future<void> _updateFavoriteCard(FuelCard fuelCard) async {
-    if (isFavoriteCard()) {
-      favoriteFuelCard = fuelCard;
-      for (final FuelCard card in cards()) {
-        if (card.cardLastFourDigit == lastFourDigits()) {
-          card.isFavoriteCard = true;
-        } else {
-          card.isFavoriteCard = false;
-        }
+  Future<void> onUpdateButtonClicked() async {
+    editableFuelCard().cardNickName = nickNameEditController.text;
+    editableFuelCard().isFavoriteCard = isFavoriteCard();
+    await updateFuelCardUseCase.execute(editableFuelCard());
+    await _updateExistingFavoriteCard(editableFuelCard());
+  }
+
+  Future<void> _updateExistingFavoriteCard(FuelCard fuelCard) async {
+    if (isFavoriteCard() && hasCards()) {
+      for (final card in cards()) {
+        card.isFavoriteCard = false;
         await updateFuelCardUseCase.execute(card);
       }
+      fuelCard.isFavoriteCard = true;
+      await updateFuelCardUseCase.execute(fuelCard);
     }
+    isOnBackPress(true);
+    clearData();
+    await loadFuelCards();
+    Get.back();
   }
 
   void clearData() {
@@ -205,6 +233,7 @@ class FuelCardsController extends GetxController {
     nickNameEditController.clear();
     isValidNickname(false);
     isFavoriteCard(false);
+    editableFuelCard(FuelCard());
   }
 
   String lastFourDigits() {
@@ -213,6 +242,9 @@ class FuelCardsController extends GetxController {
     }
     return '';
   }
+
+  String get maskedCardNumber =>
+      '•••• •••• •••• ${editableFuelCard().cardLastFourDigit ?? ''}';
 
   void onBackPressed() {
     canValidateForm(false);

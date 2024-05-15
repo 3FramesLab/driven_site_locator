@@ -1,9 +1,13 @@
 part of map_view_module;
 
-class AddFuelCardUseCase extends BaseFutureUseCase<bool, FuelCard> {
+class AddFuelCardUseCase extends BaseFutureUseCase<int, FuelCard> {
+  final HiveInterface hive;
+
+  AddFuelCardUseCase({required this.hive});
+
   @override
-  Future<bool> execute(FuelCard param) async {
-    final box = await Hive.openBox<FuelCard>(SiteLocatorConstants.fuelCardBox);
+  Future<int> execute(FuelCard param) async {
+    final box = await hive.openBox<FuelCard>(SiteLocatorConstants.fuelCardBox);
 
     final id = await _getIncrementId(box);
 
@@ -12,7 +16,7 @@ class AddFuelCardUseCase extends BaseFutureUseCase<bool, FuelCard> {
     param.modifiedDate = DateTime.now().millisecondsSinceEpoch;
 
     await box.put(param.id, param);
-    return true;
+    return id;
   }
 
   Future<int> _getIncrementId(Box<FuelCard> fuelCardBox) async {

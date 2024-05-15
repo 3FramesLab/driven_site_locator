@@ -49,4 +49,6 @@ class SemanticStrings {
 
   static const changeFuelCards = 'change-fuel-cards';
   static const favoriteCard = 'favorite_card';
+
+  static const deleteCard = 'delete_card';
 }

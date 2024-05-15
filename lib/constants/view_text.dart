@@ -20,4 +20,10 @@ class ViewText {
       'Please enter a card number and a nickname.';
   static const chooseACard = 'Choose a Card';
   static const addNewCard = 'Add New Card';
+  static const removeCardDialogTitle =
+      'Are you sure you want to remove this card?';
+  static const editCard = 'Edit card';
+  static const updateCard = 'Update Card';
+  static const removeCardTitle = 'Remove Card';
+  static const cancel = 'Cancel';
 }

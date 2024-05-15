@@ -1,6 +1,8 @@
 import 'package:driven_common/common/common_routes.dart';
 import 'package:driven_site_locator/config/site_locator_routes.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_route_arguments.dart';
+import 'package:driven_site_locator/site_locator/models/cards/fuel_card.dart';
 import 'package:get/get.dart';
 
 class SiteLocatorNavigation {
@@ -33,8 +35,14 @@ class SiteLocatorNavigation {
       Get.offNamed(SiteLocatorRoutes.cardholderSetupPageThree,
           arguments: arguments);
 
-  Future<void> addUnAuthorizeCard() async {
-    await Get.toNamed(SiteLocatorRoutes.addUnAuthorizeCard);
+  Future<void> addFuelCard() async {
+    await Get.toNamed(SiteLocatorRoutes.addFuelCard);
+  }
+
+  Future<void> editFuelCard(FuelCard fuelCard) async {
+    await Get.toNamed(SiteLocatorRoutes.editFuelCard, arguments: {
+      SiteLocatorRouteArguments.fuelCard: fuelCard,
+    });
   }
 
   Future<void> fuelCardSelection() async {
