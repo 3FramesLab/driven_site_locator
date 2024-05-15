@@ -23,7 +23,7 @@ class FuelCardsItemView extends GetView<FuelCardsController> {
   }
 
   Widget _cardTile(BuildContext context) => Padding(
-        padding: EdgeInsets.fromLTRB(0, _topPadding, 0, 20),
+        padding: EdgeInsets.fromLTRB(0, _topPadding, 0, _bottomPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -34,7 +34,10 @@ class FuelCardsItemView extends GetView<FuelCardsController> {
       );
 
   double get _topPadding =>
-      fuelCard.isFavoriteCard != null && fuelCard.isFavoriteCard! ? 10 : 20;
+      fuelCard.isFavoriteCard != null && fuelCard.isFavoriteCard! ? 9 : 25;
+
+  double get _bottomPadding =>
+      fuelCard.isFavoriteCard != null && fuelCard.isFavoriteCard! ? 25 : 30;
 
   Widget _cardListTile() => Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
