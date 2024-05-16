@@ -39,6 +39,6 @@ class LoginMenuCard extends StatelessWidget {
       : SiteLocatorConstants.login;
 
   AssetImage get _icon => siteLocatorController.isUserAuthenticated
-      ? const AssetImage(SiteLocatorAssets.logoutIcon)
-      : const AssetImage(SiteLocatorAssets.loginIcon);
+      ? AssetImage(SiteLocatorAssets.logoutIcon)
+      : AssetImage(SiteLocatorAssets.loginIcon);
 }
