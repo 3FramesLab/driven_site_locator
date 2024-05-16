@@ -21,8 +21,7 @@ class SiteInfoShortActions extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // directionsButton(context),
-        // const SizedBox(width: 30),
+        directionsButton(context),
         if (kIsWeb) ...[
           const SizedBox(width: 30),
           shareLocationButtonButton(context),

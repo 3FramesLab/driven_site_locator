@@ -201,13 +201,13 @@
     },
     {
       "name": "driven_common",
-      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-fcbe472ddc0405a8cfe61ab19231a7e03f6ac9fa/",
+      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-30ac777db51aaff2f0ce417e4cf22eb44c1ce315/",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "dynatrace_flutter_plugin",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dynatrace_flutter_plugin-3.289.1",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dynatrace_flutter_plugin-3.291.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -938,7 +938,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-05-16T09:42:04.786683Z",
+  "generated": "2024-05-16T11:17:36.331169Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
