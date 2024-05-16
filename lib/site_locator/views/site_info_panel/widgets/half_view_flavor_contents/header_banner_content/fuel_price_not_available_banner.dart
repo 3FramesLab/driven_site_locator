@@ -5,11 +5,10 @@ import 'package:driven_site_locator/site_locator/data/models/diesel_prices_pack.
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/utilities/site_info_utils.dart';
-import 'package:driven_site_locator/site_locator/views/site_info_panel/widgets/half_view_flavor_contents/header_banner_content/fuel_price_not_available_banner.dart';
 import 'package:get/get.dart';
 
-class FuelPriceAsOfDateBanner extends StatelessWidget {
-  FuelPriceAsOfDateBanner(this.selectedSiteLocation, this.type);
+class FuelPriceNotAvailableBanner extends StatelessWidget {
+  FuelPriceNotAvailableBanner(this.selectedSiteLocation, this.type);
 
   final SiteLocation selectedSiteLocation;
   final FuelPriceAsOfDateBannerViewType type;
@@ -17,26 +16,28 @@ class FuelPriceAsOfDateBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final asOfdateEntity = siteLocatorController
-        .checkFuelPriceAsOfDisplayEntity(selectedSiteLocation);
-    final displayDate = asOfdateEntity.displayDate;
+    final canShowFlag = siteLocatorController
+        .canShowFuelPriceNotAvailableBanner(selectedSiteLocation);
 
-    return asOfdateEntity.canShow
+    return canShowFlag
         ? Padding(
             padding: SiteInfoUtils.paddingForFuelPriceTopBanner(
                 isInfoView: isInfoView),
             child: Semantics(
               container: true,
-              label: SemanticStrings.siteInfoFuelPriceAsOfDate,
-              child: Text(
-                '${SiteLocatorConstants.fuelPriceAsOfBannerText} $displayDate',
+              label: SemanticStrings.siteInfoFuelPriceNotAvailable,
+              child: const Text(
+                SiteLocatorConstants.fuelPriceNotAvailableBannerText,
                 style: f14RegularBlack,
                 textAlign: TextAlign.center,
               ),
             ),
           )
-        : FuelPriceNotAvailableBanner(selectedSiteLocation, type);
+        : emptyBox();
   }
+
+  Widget emptyBox() =>
+      isInfoView ? const SizedBox(height: 25) : const SizedBox.shrink();
 
   bool get isInfoView => type == FuelPriceAsOfDateBannerViewType.infoPanel;
 }

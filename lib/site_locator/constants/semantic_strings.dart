@@ -25,6 +25,8 @@ class SemanticStrings {
   static const siteInfoDieselRetailPrice = 'site-info-diesel-retail-price';
   static const siteInfoFuelPrice = 'site-info-fuel-price';
   static const siteInfoFuelPriceAsOfDate = 'site-info-fuel-price-as-of-date';
+  static const siteInfoFuelPriceNotAvailable =
+      'site-info-fuel-price-not-available';
   static const siteInfoFuelPriceWithType = 'site-info-fuel-price-with-type';
   static const siteInfoBrandLogo = 'site-info-brand-logo';
   static const siteInfoFuelBrandName = 'site-info-brand-name';

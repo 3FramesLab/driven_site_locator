@@ -56,11 +56,6 @@ class UpdateSiteLocationsFuelPricesUseCase
           );
         }
       }
-
-      siteLocatorController?.siteLocations = param.siteLocations!;
-      await siteLocatorController
-          ?.processSiteLocations(siteLocatorController?.siteLocations ?? []);
-      await siteLocatorController?.validateSiteLocationWithFilters();
     } on Exception catch (e) {
       DynatraceUtils.logError(
         name: DynatraceErrorMessages.getFuelPricesAPIErrorName,
@@ -68,6 +63,15 @@ class UpdateSiteLocationsFuelPricesUseCase
         reason: e.toString(),
       );
     }
+
+    //==========================================================================
+    // Purging the SiteLocation asper As-Of-Date and Price limit show the Sites that has good price data - Starts
+    //==========================================================================
+    final siteLocationsToUI =
+        ManageSitesPurge.removeSitesPerAsOfDate(param.siteLocations);
+    siteLocatorController?.siteLocations = siteLocationsToUI;
+    // Purging the SiteLocation asper As-Of-Date and Price limit show the Sites that has good price data - Ends
+    //--------------------------------------------------------------------------
   }
 
   List<SiteLocation> getTruckStopSiteLocations(
@@ -102,32 +106,24 @@ class UpdateSiteLocationsFuelPricesUseCase
         final fuelPriceData = fuelPrices.firstWhereOrNull(
             (p) => p.locationId == siteLocation.siteIdentifier);
         if (fuelPriceData != null) {
-          siteLocation.dieselRetail =
-              double.parse(fuelPriceData.dieselRetail ?? '0');
-          siteLocation.dieselNet = double.parse(fuelPriceData.dieselNet ?? '0');
-          siteLocation.asOfDate = fuelPriceData.asOfDate;
+          ManageSitesPurge.setFuelPriceSourceEntity(
+              siteLocation, fuelPriceData);
+          final fuelPriceUIEntity =
+              ManageSitesPurge.fuelPriceEntityToUI(fuelPriceData);
 
-          // will be removing this from UI when we have caching at BFF, in future.
-          _saveNewPricesToCache(siteLocation, fuelPriceData);
+          siteLocation.dieselRetail =
+              double.parse(fuelPriceUIEntity?.dieselRetail ?? '0');
+          siteLocation.dieselNet =
+              double.parse(fuelPriceUIEntity?.dieselNet ?? '0');
+          siteLocation.asOfDate = fuelPriceUIEntity?.asOfDate;
+
+          fuelPriceData.asOfDate = fuelPriceUIEntity?.asOfDate;
+          // TODO(Pandiyan): will be removing this from UI when we have caching at BFF, in future.
+          // if (fuelPriceData.locationId != null) {
+          //   _saveNewPricesToCache(siteLocation, fuelPriceData);
+          // }
         }
       });
-    }
-  }
-
-  void _saveNewPricesToCache(
-      SiteLocation siteLocation, FuelPrices fuelPriceData) {
-    // will be removing this from UI when we have caching at BFF, in future.
-    if (ManageCacheFuelPrices.isCachingFuelPricesAllowed) {
-      final priceData = CachedFuelPriceData(
-        timeStamp: DateTime.now().millisecondsSinceEpoch,
-        siteIdentifier: siteLocation.siteIdentifier,
-        asOfDate: fuelPriceData.asOfDate,
-        dieselNet: double.parse(fuelPriceData.dieselNet ?? '0'),
-        dieselRetail: double.parse(fuelPriceData.dieselRetail ?? '0'),
-      );
-      ManageCacheFuelPrices.saveSiteFuelPriceData(
-        priceData: priceData,
-      );
     }
   }
 

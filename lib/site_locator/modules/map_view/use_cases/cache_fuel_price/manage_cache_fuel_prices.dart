@@ -10,7 +10,7 @@ class ManageCacheFuelPrices {
   static String? selectedCardCustomerIdCached;
   static CachedAllFuelPricesStore cachedAllFuelPricesDataStore =
       CachedAllFuelPricesStore(data: {}, recentTimeStamp: null);
-  static bool isCachingFuelPricesAllowed = !(thresholdPeriod == 0);
+  static bool isCachingFuelPricesAllowed = false; //!(thresholdPeriod == 0);
 
   static void setSelectedCardCustomerId(String customerIdKey) {
     selectedCardCustomerIdCached = customerIdKey.toLowerCase();

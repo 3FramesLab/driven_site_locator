@@ -148,3 +148,4 @@ part 'use_cases/fuel_card/get_favorite_fuel_card_use_case.dart';
 part 'use_cases/fuel_card/get_fuel_cards_use_case.dart';
 part 'use_cases/fuel_card/reset_favorite_fuel_card_use_case.dart';
 part 'use_cases/fuel_card/update_fuel_card_use_case.dart';
+part 'use_cases/purge_sites/manage_sites_purge.dart';

@@ -4,7 +4,9 @@
 
 import 'package:driven_common/data/data_sources/remote/decodable.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_api_constants.dart';
 import 'package:driven_site_locator/site_locator/data/models/enum_values.dart';
+import 'package:driven_site_locator/site_locator/data/models/fuel_prices.dart';
 
 class SiteLocation extends Decodable<List<SiteLocation>> {
   SiteLocation({
@@ -39,6 +41,7 @@ class SiteLocation extends Decodable<List<SiteLocation>> {
     this.dieselNet,
     this.dieselRetail,
     this.asOfDate,
+    this.fuelPriceSourceEntity,
   });
 
   String? masterIdentifier;
@@ -73,6 +76,7 @@ class SiteLocation extends Decodable<List<SiteLocation>> {
   double? dieselRetail;
   double? dieselNet;
   String? asOfDate;
+  FuelPrices? fuelPriceSourceEntity;
 
   /// Whatever changes made in fromJson should also refactor in toJson
   factory SiteLocation.fromJson(Map<String, dynamic> json) => SiteLocation(
@@ -113,6 +117,8 @@ class SiteLocation extends Decodable<List<SiteLocation>> {
         dieselNet: json['dieselNet'],
         dieselRetail: json['dieselRetail'],
         asOfDate: json['asOfDate'],
+        fuelPriceSourceEntity:
+            FuelPrices.fromJson(SiteLocatorApiConstants.fuelPriceJsonTemplate),
       );
 
   static String? _getBrandLogo(Map<String, dynamic> json) =>
@@ -163,6 +169,7 @@ class SiteLocation extends Decodable<List<SiteLocation>> {
         'dieselNet': dieselNet,
         'dieselRetail': dieselRetail,
         'asOfDate': asOfDate,
+        'fuelPriceSourceEntity': fuelPriceSourceEntity?.toJson(),
       };
 }
 

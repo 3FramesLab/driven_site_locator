@@ -41,6 +41,13 @@ class SiteLocatorApiConstants {
   static const defaultSysAccountId = '0_0000_3';
   static const defaultFuelPricesApiLimit = 5;
 
+  static const fuelPriceJsonTemplate = {
+    'locationId': null,
+    'dieselRetail': '0.00',
+    'dieselNet': '0.00',
+    'asOfDate': null
+  };
+
   //mobile app store links
   static const fuelmanAppGoogleStoreLink =
       'https://play.google.com/store/apps/details?id=com.fuelman.driven&hl=en&gl=US&pli=1';

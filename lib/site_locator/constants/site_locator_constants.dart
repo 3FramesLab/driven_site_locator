@@ -1,3 +1,4 @@
+import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
 import 'package:driven_site_locator/site_locator/data/models/enum_values.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,7 +15,9 @@ class SiteLocatorConstants {
   static const locationPermissionStatus =
       'is_location_permission_status_updated';
   static const viewSiteLocator = 'View Site Locator';
-  static const defaultUserLocation = LatLng(36.158939, -86.781948);
+  static final defaultUserLocation = AppUtils.isComdata
+      ? const LatLng(33.74873, -84.3877)
+      : const LatLng(36.158939, -86.781948);
   static const noLocationsErrorText =
       'No locations were found. To view more sites, please expand the search area or reposition the map center.';
   static const maxZoomLevelErrorText =
@@ -42,11 +45,14 @@ class SiteLocatorConstants {
   static const exit = 'Exit';
   static const highway = 'Highway';
   static const fuelPriceAsOfBannerText = 'Fuel price updated on';
+  static const fuelPriceNotAvailableBannerText =
+      'Fuel price not available for this location';
   static const shareLocation = 'Share Location';
 
   static const infoDiscountFeesBannerHeight = 48.0;
   static const locationNameWidgetHeight = 36;
   static const panelWidgetHeight = 406.0;
+  static const panelWidgetHeightWithoutPhoneAndHours = 350.0;
   static const phoneMaintenanceWidgetHeight = 26;
   static const milesUnit = 'mi';
 

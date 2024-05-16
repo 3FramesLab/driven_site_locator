@@ -4,6 +4,7 @@ import 'package:driven_site_locator/site_locator/constants/site_locator_constant
 import 'package:driven_site_locator/site_locator/data/models/site_location.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/utilities/external_map_utils.dart';
+import 'package:driven_site_locator/site_locator/utilities/site_info_utils.dart';
 import 'package:driven_site_locator/site_locator/utilities/site_locator_utils.dart';
 import 'package:driven_site_locator/site_locator/widgets/bottom_sheet/site_info_bottom_sheet_view.dart';
 import 'package:flutter/foundation.dart';
@@ -20,9 +21,17 @@ class SiteInfoShortActions extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        directionsButton(context),
-        const SizedBox(width: 30),
-        if (kIsWeb) shareLocationButtonButton(context) else callButton(context),
+        // directionsButton(context),
+        // const SizedBox(width: 30),
+        if (kIsWeb) ...[
+          const SizedBox(width: 30),
+          shareLocationButtonButton(context),
+        ] else ...[
+          if (SiteInfoUtils.canShowPhoneNumber(selectedSiteLocation))
+            const SizedBox(width: 30),
+          if (SiteInfoUtils.canShowPhoneNumber(selectedSiteLocation))
+            callButton(context),
+        ],
       ],
     );
   }

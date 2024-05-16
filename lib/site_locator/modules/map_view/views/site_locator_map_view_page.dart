@@ -25,9 +25,10 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   void initState() {
     MapUtilities.onLocationSettingsEnableCounter();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // Get fuel cards from hive db
-      await fuelCardsController.loadFuelCards();
-
+      // Clearing markers when landing on full map view screen
+      if (AppUtils.isComdata) {
+        siteLocatorController.markers.clear();
+      }
       if (!setUpWizardController.canShowSetUpWizard() &&
           fuelPriceDisclaimerController.isFuelPriceDisclaimerVisible()) {
         await _showFuelPriceDisclaimerDialog();
@@ -47,7 +48,9 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
       if (!kIsWeb) {
         await Future.delayed(const Duration(milliseconds: 500), () async {
-          await siteLocatorController.updateFullMapViewSitesData();
+          await siteLocatorController.updateFullMapViewSitesData(
+            forceApiCall: true,
+          );
         });
       }
     });

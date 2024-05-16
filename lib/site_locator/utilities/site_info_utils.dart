@@ -238,6 +238,14 @@ class SiteInfoUtils {
       siteLocation.hoursOfOperation != 'null' &&
       siteLocation.hoursOfOperation!.isNotEmpty;
 
+  static bool canShowPhoneNumber(SiteLocation siteLocation) =>
+      siteLocation.locationPhone != null ||
+      (siteLocation.locationPhone?.isNotEmpty ?? false);
+
+  static bool canShowServiceHours(SiteLocation siteLocation) =>
+      siteLocation.hoursOfOperation != null ||
+      (siteLocation.hoursOfOperation?.isNotEmpty ?? false);
+
   static Widget divider() => Padding(
         padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
         child: DrivenDivider(height: 5, color: Colors.grey[300]),
@@ -253,4 +261,10 @@ class SiteInfoUtils {
                 : 1000;
     return sitesCount == 0 ? 0 : timeInterval;
   }
+
+  static EdgeInsets paddingForFuelPriceTopBanner({required bool isInfoView}) =>
+      EdgeInsets.only(
+        top: isInfoView ? 12 : 0,
+        bottom: isInfoView ? 0 : 12,
+      );
 }

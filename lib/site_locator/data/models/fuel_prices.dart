@@ -20,6 +20,13 @@ class FuelPrices extends Decodable<List<FuelPrices>> {
     asOfDate = json['asOfDate'];
   }
 
+  Map<String, dynamic> toJson() => {
+        'locationId': locationId,
+        'dieselRetail': dieselRetail,
+        'dieselNet': dieselNet,
+        'asOfDate': asOfDate,
+      };
+
   @override
   List<FuelPrices> decode(dynamic data) {
     final siteList = <FuelPrices>[];

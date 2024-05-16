@@ -35,7 +35,9 @@ class SiteInfoHalfViewContentsDFC extends StatelessWidget {
           SiteInfoAddress(selectedSiteLocation),
           const SizedBox(height: 12),
           SiteInfoPhoneService(selectedSiteLocation),
-          const SizedBox(height: 15),
+          if (SiteInfoUtils.canShowPhoneNumber(selectedSiteLocation) ||
+              SiteInfoUtils.canShowServiceHours(selectedSiteLocation))
+            const SizedBox(height: 15),
         ],
       ),
     );

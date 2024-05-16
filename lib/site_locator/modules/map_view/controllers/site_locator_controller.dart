@@ -193,6 +193,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     bool updateLocationCache = false,
   }) async {
     try {
+      if (AppUtils.isComdata) {
+        markers.clear();
+      }
       final newCenterLocation = MapUtilities.latLngBoundCenter(
         southwest: currentLatLngBounds().southwest,
         northeast: currentLatLngBounds().northeast,
@@ -373,14 +376,17 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       siteLocations?.sort(sortByMilesApart);
       selectedSiteFilters = retrieveStoredFilters();
 
-      await processSiteLocations(siteLocations ?? []);
-      await validateSiteLocationWithFilters();
       //For comdata, getting fuel prices and merging into site locations.
-      if (AppUtils.isComdata && !isWelcomeScreen) {
+      // if (AppUtils.isComdata && !isWelcomeScreen) {
+      if (canMakeFuelPricesApiCall) {
         await _getAndUpdateFuelPreferenceType();
-
         await updateSiteLocationsFuelPricesForComdata();
       }
+      //processing sites after fuel prices api call
+      //to avoid multiple times processing
+      await processSiteLocations(siteLocations ?? []);
+      await validateSiteLocationWithFilters();
+
       if (AppUtils.isComdata && isWelcomeScreen) {
         ManageCacheFuelPrices.setSelectedCardCustomerIdEmpty();
       }
@@ -391,6 +397,14 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       showNoLocationsErrorDialog(SiteLocatorConstants.noLocationsErrorText);
     }
   }
+
+  bool get canMakeFuelPricesApiCall =>
+      AppUtils.isComdata &&
+      !isWelcomeScreen &&
+      // Get.currentRoute != Routes.wallet &&
+      // Get.currentRoute != Routes.home;
+      !DrivenSiteLocator.instance.getIsHomeScreen() &&
+      !DrivenSiteLocator.instance.getIsWalletScreen();
 
   Future<void> _getAndUpdateFuelPreferenceType() async {
     fuelPreferencesList =
@@ -543,6 +557,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   bool get isZoomLevelBelowThreshold =>
       previousZoomLevel != null && previousZoomLevel! < 10.5;
 
+  // ignore: long-method
   Future<void> onLatLngBoundsChange() async {
     try {
       /// tap on recenter,making camera move and executing this method.
@@ -578,13 +593,18 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             await validateLastSavedCenterLocationUseCase
                 .execute(newCenterLocation);
 
-        await applyClustering();
+        // only for DFF it should apply.
+        if (!AppUtils.isComdata) {
+          await applyClustering();
+        }
 
         if (allowGateKeeperToGetSiteLocationsData() &&
             !isZoomedWithinCurrentLatLngBounds()) {
           await getSiteLocationsData(
               updateLocationCache: !isAwayFromLastSavedLocation,
               forceApiCall: hasToCallOnZoomGesture);
+        } else if (AppUtils.isComdata) {
+          await applyClustering();
         }
         isShowLoading(false);
       }
@@ -621,15 +641,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     return zoomedWithinBounds;
   }
 
-  Future<void> updateFullMapViewSitesData() async {
+  Future<void> updateFullMapViewSitesData({bool forceApiCall = false}) async {
     if (selectedPlace != null) {
       await getLatLngForSelectedPlace(selectedPlace!);
     } else {
-      await onReCenterButtonClicked();
+      await onReCenterButtonClicked(forceApiCall: forceApiCall);
     }
   }
 
-  Future<void> onReCenterButtonClicked() async {
+  Future<void> onReCenterButtonClicked({bool forceApiCall = false}) async {
     try {
       isComingFromRecenter = true;
       resetCircleAfterZoomOut();
@@ -640,7 +660,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       searchPlacesController.clearTextInput();
       await updateCurrentLatLngBoundsOnReCenter();
       resetCircleAfterZoomIn();
-      await getSiteLocationsData(updateLocationCache: true);
+      await getSiteLocationsData(
+        updateLocationCache: true,
+        forceApiCall: forceApiCall,
+      );
       isShowLoading(false);
       canRecenterMapViewOnLocationChange = true;
       canClearSearchTextField = true;
@@ -664,14 +687,22 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> updateCurrentLatLngBoundsOnReCenter() async {
-    currentLocation.value = await getUserLocationUseCase.execute();
-    await googleMapController?.moveCamera(
-      CameraUpdate.newLatLngZoom(
-        currentLocation(),
-        currentZoomLevel ?? SiteLocatorConfig.mapZoomLevel,
-      ),
-    );
-    currentLatLngBounds(await googleMapController?.getVisibleRegion());
+    try {
+      currentLocation.value = await getUserLocationUseCase.execute();
+      await googleMapController?.moveCamera(
+        CameraUpdate.newLatLngZoom(
+          currentLocation(),
+          currentZoomLevel ?? SiteLocatorConfig.mapZoomLevel,
+        ),
+      );
+      currentLatLngBounds(await googleMapController?.getVisibleRegion());
+    } on Exception catch (e) {
+      Globals().dynatrace.logError(
+            name: 'error occurred on camera move',
+            value: e.toString(),
+            reason: e.toString(),
+          );
+    }
   }
 
   void modifyCircleSize() {
@@ -736,42 +767,50 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> onCameraMove(CameraPosition cameraPosition) async {
-    SiteLocatorUtils.hideKeyboard();
+    try {
+      SiteLocatorUtils.hideKeyboard();
 
-    if (!isExecuteCameraMoveForCardHolderOnFirstLaunch) {
-      isExecuteCameraMoveForCardHolderOnFirstLaunch = true;
-      return;
-    }
+      if (!isExecuteCameraMoveForCardHolderOnFirstLaunch) {
+        isExecuteCameraMoveForCardHolderOnFirstLaunch = true;
+        return;
+      }
 
-    if (forceResetCanRecenterMapView) {
-      canRecenterMapViewOnLocationChange = true;
-    } else {
-      canRecenterMapViewOnLocationChange = false;
-    }
-    forceResetCanRecenterMapView = false;
-    if (!kIsWeb && Platform.isIOS) {
-      if (backFromWelcomeToMapView()) {
-        backFromWelcomeToMapView(false);
+      if (forceResetCanRecenterMapView) {
+        canRecenterMapViewOnLocationChange = true;
+      } else {
+        canRecenterMapViewOnLocationChange = false;
+      }
+      forceResetCanRecenterMapView = false;
+      if (!kIsWeb && Platform.isIOS) {
+        if (backFromWelcomeToMapView()) {
+          backFromWelcomeToMapView(false);
+        } else {
+          lastZoomByUser(cameraPosition.zoom);
+          cameraPositionZoom(cameraPosition.zoom);
+        }
       } else {
         lastZoomByUser(cameraPosition.zoom);
         cameraPositionZoom(cameraPosition.zoom);
       }
-    } else {
-      lastZoomByUser(cameraPosition.zoom);
-      cameraPositionZoom(cameraPosition.zoom);
-    }
 
-    if (!isMapViewCameraMoving &&
-        !sitesLoadingProgressController.canShowIndicator()) {
-      canClearSearchTextField = true;
-      selectedPlace = null;
-    }
-    clearSearchPlaceInput();
-    isFetchSitesData = true;
-    isMapPinTapped = false;
-    currentLatLngBounds(await googleMapController?.getVisibleRegion());
-    if (kIsWeb) {
-      onListViewSiteInfoDetailsBackTap?.call();
+      if (!isMapViewCameraMoving &&
+          !sitesLoadingProgressController.canShowIndicator()) {
+        canClearSearchTextField = true;
+        selectedPlace = null;
+      }
+      clearSearchPlaceInput();
+      isFetchSitesData = true;
+      isMapPinTapped = false;
+      currentLatLngBounds(await googleMapController?.getVisibleRegion());
+      if (kIsWeb) {
+        onListViewSiteInfoDetailsBackTap?.call();
+      }
+    } on Exception catch (e) {
+      Globals().dynatrace.logError(
+            name: 'error occurred on camera move',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1155,6 +1194,18 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } else {
       infoPanelInitialHeight(SiteLocatorConstants.panelWidgetHeight);
     }
+    calculateHeightWithoutPhoneAndHours(selectedLocation);
+  }
+
+  void calculateHeightWithoutPhoneAndHours(SiteLocation? selectedLocation) {
+    if (AppUtils.isComdata) {
+      final locPhone = selectedLocation?.locationPhone ?? '';
+      final hoursOp = selectedLocation?.hoursOfOperation ?? '';
+      if (locPhone.isEmpty && hoursOp.isEmpty) {
+        infoPanelInitialHeight(
+            SiteLocatorConstants.panelWidgetHeightWithoutPhoneAndHours);
+      }
+    }
   }
 
   bool isLocationPresent(SiteLocation? selectedLocation) {
@@ -1363,13 +1414,18 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       return;
     }
     closeSiteLocatorMenuPanel();
-    if (canShowEnhancedNoLocationDialog()) {
+    if (selectedSiteFilters.isNotEmpty && canShowEnhancedNoLocationDialog()) {
       trackState(SiteLocatorAnalyticsScreenName.noLocationModalScreen.value,
           SiteLocatorAnalyticsScreenName.noLocationModalScreen.section.value);
-      Get.dialog(
-        EnhancedNoLocationDialog(),
-        barrierDismissible: false,
-      );
+      if (!(Get.isDialogOpen ?? false)) {
+        Get.dialog(
+          EnhancedNoLocationDialog(),
+          barrierDismissible: false,
+        );
+      }
+    } else if (inFullMapViewScreen) {
+      _clearSiteListItemIfNecessary();
+      showNoLocationsErrorDialog(SiteLocatorConstants.noLocationsErrorText);
     }
   }
 
@@ -1875,14 +1931,17 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isExecuteCameraMoveForCardHolderOnFirstLaunch = false;
     isUserAuthenticated = true;
     isShowBackButton = false;
+    canRecenterMapViewOnLocationChange = true;
+
+    // if location permission is not given earlier, asking again after login.
+    await checkAndRequestLocationPermission();
 
     final loginUserType = DrivenSiteLocator.instance.getAppLoginUserType();
     if (loginUserType.isNotEmpty && loginUserType == InternalText.cardholder) {
       if (isPreviousScreenLogin) {
         await _getUserLocation();
-        await calcLatLngBoundsAndZoomLevels();
-        await recenterMapOnLocationChange();
       }
+      await calcLatLngBoundsAndZoomLevels();
       getFavoriteList();
     }
   }
@@ -1922,6 +1981,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         .execute(DieselPricesPackParam(siteLocation: siteLocation));
     return displayPriceEntity.price.isNotEmpty;
   }
+
+  bool canShowFuelPriceNotAvailableBanner(SiteLocation selectedSiteLocation) =>
+      !hasDieselPriceToDisplay(selectedSiteLocation);
 
   // Cluster region
   void generateHashmapForCluster() {

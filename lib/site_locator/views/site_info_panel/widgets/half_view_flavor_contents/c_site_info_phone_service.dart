@@ -21,13 +21,26 @@ class SiteInfoPhoneService extends StatelessWidget {
         selectedSiteLocation.locationType?.maintenanceService == Status.N) {
       return const SizedBox();
     } else {
-      return Row(
-        children: [
-          SiteInfoUtils.getPhoneWidget(selectedSiteLocation),
-          const HorizontalSpacer(size: 48),
-          Expanded(child: getServiceOrTime()),
-        ],
-      );
+      if (AppUtils.isComdata) {
+        return Row(
+          children: [
+            if (SiteInfoUtils.canShowPhoneNumber(selectedSiteLocation))
+              SiteInfoUtils.getPhoneWidget(selectedSiteLocation),
+            if (SiteInfoUtils.canShowPhoneNumber(selectedSiteLocation))
+              const HorizontalSpacer(size: 48),
+            if (SiteInfoUtils.canShowServiceHours(selectedSiteLocation))
+              Expanded(child: getServiceOrTime()),
+          ],
+        );
+      } else {
+        return Row(
+          children: [
+            SiteInfoUtils.getPhoneWidget(selectedSiteLocation),
+            const HorizontalSpacer(size: 48),
+            Expanded(child: getServiceOrTime()),
+          ],
+        );
+      }
     }
   }
 

@@ -29,6 +29,8 @@ class DrivenSiteLocator {
   String _appLoginUserType = '';
   bool _isWelcomeScreen = false;
   bool _isCardholderFullMapScreen = false;
+  bool _isHomeScreen = false;
+  bool _isWalletScreen = false;
   // bool _isPreviousScreenLogin = false;
 
   // Wallet module's data members
@@ -175,27 +177,29 @@ class DrivenSiteLocator {
 
   String getAppLoginUserType() => _appLoginUserType;
 
-  //TODO: Set this value in super app
   void setIsWelcomeScreen(bool isWelcomeScreen) {
     _isWelcomeScreen = isWelcomeScreen;
   }
 
   bool getIsWelcomeScreen() => _isWelcomeScreen;
 
-  //TODO: Set this value in super app
   void setIsCardholderFullMapScreen(bool isCardholderFullMapScreen) {
     _isCardholderFullMapScreen = isCardholderFullMapScreen;
   }
 
   bool getIsCardholderFullMapScreen() => _isCardholderFullMapScreen;
 
-  // /// TODO: call this method with value 'Get.previousRoute == Routes.login'
-  // /// prior to siteLocatorController.initAuthenticatedMapView();
-  // void setIsPreviousScreenLogin(bool isPreviousScreenLogin) {
-  //   _isPreviousScreenLogin = isPreviousScreenLogin;
-  // }
+  void setIsHomeScreen(bool isHomeScreen) {
+    _isHomeScreen = isHomeScreen;
+  }
 
-  // bool getIsPreviousScreenLogin() => _isPreviousScreenLogin;
+  bool getIsHomeScreen() => _isHomeScreen;
+
+  void setIsWalletScreen(bool isWalletScreen) {
+    _isWalletScreen = isWalletScreen;
+  }
+
+  bool getIsWalletScreen() => _isWalletScreen;
 
   void setWalletData({
     required bool hasCards,
