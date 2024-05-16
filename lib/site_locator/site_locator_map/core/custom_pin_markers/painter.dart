@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:driven_site_locator/data/model/app_utils.dart';
+import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pindrop_design.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
 import 'package:flutter/foundation.dart';
@@ -21,7 +22,7 @@ class MarkerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final markerImageWidth = PindropDesign.getMarkerImageWidth(site);
+    final markerImageWidth = PindropDesign.getMarkerImageWidth(site, price);
     final Paint paint = Paint();
     canvas.drawImage(priceTagImage, Offset.zero, paint);
 
@@ -29,13 +30,14 @@ class MarkerPainter extends CustomPainter {
       site: site,
       markerImageWidth: markerImageWidth,
       brandLogoImage: brandLogoImage,
+      price: price,
     );
     canvas.drawImage(brandLogoImage,
         Offset(brandLogoAlignment.offsetX, brandLogoAlignment.offsetY), paint);
 
     // if Price available then paint the price banner
     if (price != null) {
-      final textStyle = PindropDesign.getPriceStyle(site);
+      final textStyle = PindropDesign.getPriceStyle(site, price);
       final textSpan = TextSpan(
         text: '\$$price',
         style: textStyle,
@@ -57,8 +59,18 @@ class MarkerPainter extends CustomPainter {
       final xAdjuster = (price != null && price!.length < 5) ? adjustLeft : 12;
       double dx = (((size.width) - textPainter.width) * 0.5) - xAdjuster;
       double dy = ((size.height - textPainter.height) * 0.6) - adjustTop;
-      dx = kIsWeb ? (site.hasDiscount ? dx + 4 : dx + 1) : dx;
-      dy = kIsWeb ? (site.hasDiscount ? dy + 3 : dy + 3) : dy;
+
+      final isWebForMobile = SiteLocatorAssets.isWebForMobile();
+      // ASSETS FOR DIFFERENT DEVICES
+      if (kIsWeb) {
+        dx = isWebForMobile
+            ? (site.hasDiscount ? dx + 8 : dx + 9)
+            : (site.hasDiscount ? dx + 4.5 : dx + 1);
+        dy = isWebForMobile
+            ? (site.hasDiscount ? dy + 5.5 : dy + 5.5)
+            : (site.hasDiscount ? dy + 3 : dy + 3);
+      }
+
       final offset = Offset(dx, dy);
       textPainter.paint(canvas, offset);
     }

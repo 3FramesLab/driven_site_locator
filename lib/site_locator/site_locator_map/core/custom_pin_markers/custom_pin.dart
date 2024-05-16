@@ -424,7 +424,7 @@ class CustomPin {
 
   /// Paints the Cluster Count Text
   static Future<ui.Image> _getClusterImage() async {
-    const logoBgPath = SiteLocatorAssets.icClusterMarker;
+    final logoBgPath = SiteLocatorAssets.icClusterMarker;
     final ByteData bigPinBgByteData = await rootBundle.load(logoBgPath);
 
     final Uint8List assetImageByteData = bigPinBgByteData.buffer.asUint8List();
@@ -468,11 +468,20 @@ class CustomPin {
 
   static void _paintText(Canvas canvas, Color color, String text, int size) {
     final textPainter = TextPainter(textDirection: TextDirection.ltr);
+    final isWebForMobile = SiteLocatorAssets.isWebForMobile();
+
     textPainter.text = TextSpan(
         text: text,
         style: kIsWeb
             ? f13BoldWhite.copyWith(fontWeight: FontWeight.w600)
             : f26BoldWhite.copyWith(fontWeight: FontWeight.w600));
+
+    if (isWebForMobile) {
+      textPainter.text = TextSpan(
+        text: text,
+        style: f13BoldWhite.copyWith(fontSize: 6, fontWeight: FontWeight.w600),
+      );
+    }
 
     textPainter.layout();
     double dx = (clusterImage.width - textPainter.width) * 0.1;
@@ -480,7 +489,7 @@ class CustomPin {
 
     if (kIsWeb) {
       dx = dx + 8;
-      dy = dy;
+      dy = isWebForMobile ? dy - 0.75 : dy;
     }
     textPainter.paint(
       canvas,
