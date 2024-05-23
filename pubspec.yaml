@@ -18,7 +18,7 @@ dependencies:
       # ref: feature/driven-common-base
       # ref: feature/fix-sitelocator-api-cors
       ref: feature/driven-common-base-23apr2024
-      version: ^0.0.3
+      version: ^0.0.4
   equatable: ^2.0.0
   flutter:
     sdk: flutter

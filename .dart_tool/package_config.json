@@ -201,7 +201,7 @@
     },
     {
       "name": "driven_common",
-      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-30ac777db51aaff2f0ce417e4cf22eb44c1ce315/",
+      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-03855df932a8f7f575a4f02326dbb7778ba0870e/",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -352,6 +352,12 @@
     {
       "name": "flutter_plugin_android_lifecycle",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.17",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "flutter_svg",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_svg-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -614,6 +620,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "path_parsing",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_parsing-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path_provider",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_provider-2.0.15",
       "packageUri": "lib/",
@@ -648,6 +660,12 @@
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_provider_windows-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/petitparser-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "platform",
@@ -896,6 +914,24 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "vector_graphics",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/vector_graphics-1.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_codec",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/vector_graphics_codec-1.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_compiler",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/vector_graphics_compiler-1.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -926,6 +962,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/xml-6.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
@@ -938,7 +980,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-05-17T07:02:15.161146Z",
+  "generated": "2024-05-23T14:42:58.874077Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

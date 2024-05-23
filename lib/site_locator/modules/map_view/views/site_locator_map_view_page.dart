@@ -82,7 +82,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       return _bodyContainer(context);
     } else {
       return Scaffold(
-        appBar: FuelCardsHeader(),
+        // Uncomment below line to enable the fuel card header features.
+        // appBar: FuelCardsHeader(),
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
