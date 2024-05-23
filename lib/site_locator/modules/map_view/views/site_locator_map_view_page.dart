@@ -157,11 +157,8 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
       );
 
   Widget _backButtonWidget() => siteLocatorController.isShowBackButton
-      ? Visibility(
-          visible: AppUtils.flavor != AppFlavor.comdata.name,
-          child: SiteLocatorMapViewBackButton(
-            onBackButtonPressed: onMapViewBackButtonPressed,
-          ),
+      ? SiteLocatorMapViewBackButton(
+          onBackButtonPressed: onMapViewBackButtonPressed,
         )
       : const SizedBox(height: DrivenDimensions.dp4);
 
@@ -208,7 +205,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          _walletHeaderPadding(topPadding),
+          SizedBox(height: isShowWalletHeader ? 5 : topPadding),
           if (!setUpWizardController.canShowSetUpWizard()) _backButtonWidget(),
           _comdataWalletHeader(),
           const SizedBox(height: 5),
@@ -220,10 +217,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
 
   Widget _comdataWalletHeader() => isShowWalletHeader
       // ? WalletHeader(isFromSiteLocator: true)
-      ? Padding(
-          padding: const EdgeInsets.only(top: 30),
-          child: walletHeader,
-        )
+      ? walletHeader
       : const SizedBox();
 
   Widget get walletHeader =>
@@ -292,15 +286,6 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           height: SiteLocatorDimensions.dp100,
         ),
       );
-
-  Widget _walletHeaderPadding(double topPadding) {
-    return SizedBox(
-      key: const Key(InternalText.showHeaderPaddingKey),
-      height: isShowWalletHeader || !siteLocatorController.isUserAuthenticated
-          ? 5
-          : topPadding,
-    );
-  }
 
   Widget applyForFuelman() {
     return Positioned(

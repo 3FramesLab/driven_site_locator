@@ -3,7 +3,6 @@ class InternalText {
   static const cardholderSetupCloseTextKey = 'cardholder_setup_close_text';
   static const cardholder = 'Cardholder';
   static const admin = 'Admin';
-  static const showHeaderPaddingKey = 'show_header_padding_key';
   static const comdataLegalDocsUrl =
       'https://resourcecenter.comdata.com/driven-mobile-app/menu/';
 }

@@ -26,4 +26,5 @@ class ViewText {
   static const updateCard = 'Update Card';
   static const removeCardTitle = 'Remove Card';
   static const cancel = 'Cancel';
+  static const dismissSettingPopup = 'Dismiss';
 }

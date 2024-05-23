@@ -57,6 +57,10 @@ class UpdateSiteLocationsFuelPricesUseCase
         }
       }
     } on Exception catch (e) {
+      unawaited(Get.dialog(
+        NoFuelPricesDialog(),
+        barrierDismissible: false,
+      ));
       DynatraceUtils.logError(
         name: DynatraceErrorMessages.getFuelPricesAPIErrorName,
         value: DynatraceErrorMessages.getFuelPricesAPIErrorValue,

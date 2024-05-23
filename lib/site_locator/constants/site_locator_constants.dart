@@ -217,6 +217,11 @@ To share your location you need to enable this setting on your browser.\n
   static const fuelCardBox = 'fuelCardBox';
 
   static const nickNameLength = 20;
+
+  // Fuel price api error
+  static const fuelPriceApiErrorMsg =
+      'We were unable to load all of the fuel prices at this time. You can refresh the map to try again or dismiss to see the map without all of the fuel prices.';
+  static const refreshMap = 'Refresh Map';
 }
 
 class QuickFilterLabel {

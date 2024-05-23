@@ -379,7 +379,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       //For comdata, getting fuel prices and merging into site locations.
       // if (AppUtils.isComdata && !isWelcomeScreen) {
       if (canMakeFuelPricesApiCall) {
-        await _getAndUpdateFuelPreferenceType();
+        await getAndUpdateFuelPreferenceType();
         await updateSiteLocationsFuelPricesForComdata();
       }
       //processing sites after fuel prices api call
@@ -406,7 +406,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       !DrivenSiteLocator.instance.getIsHomeScreen() &&
       !DrivenSiteLocator.instance.getIsWalletScreen();
 
-  Future<void> _getAndUpdateFuelPreferenceType() async {
+  Future<void> getAndUpdateFuelPreferenceType() async {
     fuelPreferencesList =
         await getFuelPreferencesUseCase.execute(GetFuelPreferencesParams(
       fuelPreferencesList,

@@ -62,7 +62,6 @@ import 'package:driven_site_locator/site_locator/modules/filters/filter_module.d
 import 'package:driven_site_locator/site_locator/modules/location_cache/location_cache_module.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/get_sites_uncached_usecase.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/manage_cache_fuel_prices.dart';
-import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_fuel_preferences_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_location_dialog_content_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
@@ -96,6 +95,7 @@ import 'package:driven_site_locator/site_locator/widgets/cancel_text.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/change_filters_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/enhanced_no_locations_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/fuel_price_disclaimer_dialog.dart';
+import 'package:driven_site_locator/site_locator/widgets/dialogs/no_fuel_prices_dialog.dart';
 import 'package:driven_site_locator/site_locator/widgets/dialogs/no_locations_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

@@ -72,8 +72,6 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
         ),
       );
 
-  Widget get _filterList => EnhancedFilterListView();
-
   Future<bool> _popPage() {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.enhancedFiltersBackLinkClickEvent,
