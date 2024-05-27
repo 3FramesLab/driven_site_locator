@@ -378,14 +378,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
       //For comdata, getting fuel prices and merging into site locations.
       // if (AppUtils.isComdata && !isWelcomeScreen) {
-      if (canMakeFuelPricesApiCall) {
-        await getAndUpdateFuelPreferenceType();
-        await updateSiteLocationsFuelPricesForComdata();
-      }
-      //processing sites after fuel prices api call
-      //to avoid multiple times processing
-      await processSiteLocations(siteLocations ?? []);
-      await validateSiteLocationWithFilters();
+      await getFuelPricesForMarkers(
+          canMakeFuelPricesApiCall: canMakeFuelPricesApiCall);
 
       if (AppUtils.isComdata && isWelcomeScreen) {
         ManageCacheFuelPrices.setSelectedCardCustomerIdEmpty();
@@ -396,6 +390,18 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       _clearSiteListItemIfNecessary();
       showNoLocationsErrorDialog(SiteLocatorConstants.noLocationsErrorText);
     }
+  }
+
+  Future<void> getFuelPricesForMarkers(
+      {bool canMakeFuelPricesApiCall = false}) async {
+    if (canMakeFuelPricesApiCall) {
+      await getAndUpdateFuelPreferenceType();
+      await updateSiteLocationsFuelPricesForComdata();
+    }
+    //processing sites after fuel prices api call
+    //to avoid multiple times processing
+    await processSiteLocations(siteLocations ?? []);
+    await validateSiteLocationWithFilters();
   }
 
   bool get canMakeFuelPricesApiCall =>
@@ -2178,6 +2184,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   // Cluster end region
+
+  Future<void> refreshFuelPriceApi() async {
+    setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
+    toggleSitesLoadingIndicatorVisibility(visible: true);
+    await getFuelPricesForMarkers(canMakeFuelPricesApiCall: true);
+  }
 
   //web app
   // ignore: avoid_positional_boolean_parameters

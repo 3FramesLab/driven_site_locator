@@ -2,7 +2,6 @@ import 'package:driven_site_locator/constants/view_text.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_dimensions.dart';
-import 'package:driven_site_locator/site_locator/loading_progress_indicator/sites_loading_progress_props.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:get/get.dart';
 
@@ -44,11 +43,7 @@ class NoFuelPricesDialog extends StatelessWidget {
   }
 
   Future<void> _refreshButtonTap() async {
-    siteLocatorController
-        .setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
-    siteLocatorController.toggleSitesLoadingIndicatorVisibility(visible: true);
-    await siteLocatorController.getAndUpdateFuelPreferenceType();
-    await siteLocatorController.updateSiteLocationsFuelPricesForComdata();
+    await siteLocatorController.refreshFuelPriceApi();
     Get.back();
   }
 
