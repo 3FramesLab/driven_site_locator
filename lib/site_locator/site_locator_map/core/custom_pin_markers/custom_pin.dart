@@ -7,7 +7,6 @@ import 'package:driven_common/globals.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/dynatrace_utils/dynatrace_lib_utils.dart';
-// import 'package:driven_site_locator/dynatrace_utils/dynatrace_utils.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_assets.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
@@ -17,6 +16,7 @@ import 'package:driven_site_locator/site_locator/data/services/site_locator_acce
 import 'package:driven_site_locator/site_locator/modules/cardholder_setup/cardholder_setup_module.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/painter.dart';
+import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/site_default_brand_logos.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/use_cases/pin_drop_image_path_use_case.dart';
 import 'package:flutter/foundation.dart';
@@ -148,8 +148,15 @@ class CustomPin {
 
   static Future<void> cacheBrandLogo(String key, Uint8List? imageBytes) async {
     if (imageBytes != null) {
-      final imageResized = await unit8ListBytesToImageConverter(imageBytes);
-      brandLogosImageCacheStore.putIfAbsent(key, () => imageResized);
+      try {
+        final imageResized = await unit8ListBytesToImageConverter(imageBytes);
+        brandLogosImageCacheStore.putIfAbsent(key, () => imageResized);
+      } catch (_) {
+        Globals().dynatrace.logError(
+              name: 'Invalid Image',
+              value: 'Invalid Image unit8ListBytesToImageConverter',
+            );
+      }
     }
   }
 
@@ -292,7 +299,13 @@ class CustomPin {
     return (await codec.getNextFrame()).image;
   }
 
-  static Future<BitmapDescriptor> selectedMarker(Site site) async {
+  static Future<ui.Image> getDefaultLogoBig() async {
+    final logoBigFuture = defaultLogo(BrandLogoSize.big, BrandLogoSize.big);
+    DefaultBrandLogos.big = await logoBigFuture;
+    return logoBigFuture;
+  }
+
+  static Future<BitmapDescriptor> selectedPinMarker(Site site) async {
     final String? price = site.price;
     final hasDiscount =
         AppUtils.isComdata ? site.hasGallonUp : site.hasDiscount;
@@ -303,6 +316,7 @@ class CustomPin {
 
     ui.Image? logoResized;
     ui.Image brandLogoToBePassed;
+    defaultBrandLogoBig = DefaultBrandLogos.big ?? await getDefaultLogoBig();
 
     if (hasBrandLogoIdentifier(shopBrandLogoIdentifier)) {
       final ui.Image? cachedItem =
@@ -378,9 +392,15 @@ class CustomPin {
   static String? fuelPriceOnPinDrop(Site site) =>
       canHideFuelPriceOnPinDrop() ? null : site.price;
 
-  static Future<BitmapDescriptor> normalMarker(Site site) async {
+  static Future<ui.Image> getDefaultLogoSmall() async {
+    final logoSmallFuture =
+        defaultLogo(BrandLogoSize.small, BrandLogoSize.small);
+    DefaultBrandLogos.small = await logoSmallFuture;
+    return logoSmallFuture;
+  }
+
+  static Future<BitmapDescriptor> normalPinMarker(Site site) async {
     ui.Image bannerPinMarkerImageBg;
-    // final String? price = site.price;
     final String? price = fuelPriceOnPinDrop(site);
 
     final hasDiscount =
@@ -389,6 +409,8 @@ class CustomPin {
     final String? shopBrandLogoIdentifier = site.brandLogoIdentifier;
     ui.Image? logoResized;
     ui.Image brandLogoToBePassed;
+    defaultBrandLogoSmall =
+        DefaultBrandLogos.small ?? await getDefaultLogoSmall();
 
     if (hasBrandLogoIdentifier(shopBrandLogoIdentifier)) {
       final logoImageCachedBig =
@@ -465,7 +487,7 @@ class CustomPin {
         sizeWidth,
       );
     } else {
-      return normalMarker(site);
+      return normalPinMarker(site);
     }
 
     final img =

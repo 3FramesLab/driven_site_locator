@@ -26,8 +26,8 @@ class PinVariantStore {
     final List<MarkerDetails> listTemp = [];
 
     for (final Site site in siteList ?? []) {
-      final markerCanvasIcon = await CustomPin.normalMarker(site);
-      final selectedMarkerCanvasIcon = await CustomPin.selectedMarker(site);
+      final markerCanvasIcon = await CustomPin.normalPinMarker(site);
+      final selectedMarkerCanvasIcon = await CustomPin.selectedPinMarker(site);
 
       listTemp.add(
         MarkerDetails(
@@ -43,8 +43,8 @@ class PinVariantStore {
 
   static Future<MarkerDetails?> getMarkerDetails(Site? site) async {
     if (site != null) {
-      final markerCanvasIcon = await CustomPin.normalMarker(site);
-      final selectedMarkerCanvasIcon = await CustomPin.selectedMarker(site);
+      final markerCanvasIcon = await CustomPin.normalPinMarker(site);
+      final selectedMarkerCanvasIcon = await CustomPin.selectedPinMarker(site);
 
       return MarkerDetails(
         keyIdentifier: site.id,
