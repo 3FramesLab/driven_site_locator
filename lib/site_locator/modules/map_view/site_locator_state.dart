@@ -180,4 +180,6 @@ mixin SiteLocatorState {
   Function()? onListViewSiteInfoDetailsBackTap;
   RxString browserName = ''.obs;
   late GetLocationDialogContentUseCase getLocationDialogContentUseCase;
+
+  bool canShowFuelPricesApiErrorDialog = false;
 }

@@ -85,15 +85,9 @@ class UpdateSiteLocationsFuelPricesUseCase
     if (param.isUserAuthenticated &&
         DrivenSiteLocator.instance.getIsDashboardScreen()) {
       // For fleet manager authenticated user
-      // TODO(Smeet): Uncomment below lines.
-      // // bool canShowDialog = false;
-      // // dashboardController = Get.find();
-      // // if (dashboardController.selectedTab() == AppStrings.locator) {
-      // //   canShowDialog = true;
-      // // }
-      // return canShowDialog;
-
-      // TODO(Smeet): Remove below hardcoded return
+      if (siteLocatorController != null) {
+        return siteLocatorController!.canShowFuelPricesApiErrorDialog;
+      }
       return false;
     } else if (param.isUserAuthenticated &&
         DrivenSiteLocator.instance.getIsCardholderFullMapScreen()) {
