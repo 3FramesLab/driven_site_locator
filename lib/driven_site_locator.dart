@@ -31,7 +31,6 @@ class DrivenSiteLocator {
   bool _isCardholderFullMapScreen = false;
   bool _isHomeScreen = false;
   bool _isWalletScreen = false;
-  bool _isCardholderSiteLocatorMapPage = false;
   bool _isDashboardScreen = false;
   // bool _isPreviousScreenLogin = false;
 
@@ -202,12 +201,6 @@ class DrivenSiteLocator {
   }
 
   bool getIsWalletScreen() => _isWalletScreen;
-
-  void setIsCardholderSiteLocatorMapPage(bool isCardholderSiteLocatorMapPage) {
-    _isCardholderSiteLocatorMapPage = isCardholderSiteLocatorMapPage;
-  }
-
-  bool getIsCardholderSiteLocatorMapPage() => _isCardholderSiteLocatorMapPage;
 
   void setIsDashboardScreen(bool isDashboardScreen) {
     _isDashboardScreen = isDashboardScreen;

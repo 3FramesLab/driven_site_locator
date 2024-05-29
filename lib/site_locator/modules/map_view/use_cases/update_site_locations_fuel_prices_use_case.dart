@@ -96,7 +96,7 @@ class UpdateSiteLocationsFuelPricesUseCase
       // TODO(Smeet): Remove below hardcoded return
       return false;
     } else if (param.isUserAuthenticated &&
-        DrivenSiteLocator.instance.getIsCardholderSiteLocatorMapPage()) {
+        DrivenSiteLocator.instance.getIsCardholderFullMapScreen()) {
       // For DFC authenticated user
       return true;
     } else {

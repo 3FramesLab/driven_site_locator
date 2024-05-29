@@ -1438,7 +1438,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     final canShowFlag =
         Get.currentRoute == SiteLocatorRoutes.siteLocatorMapView ||
             Get.currentRoute == SiteLocatorRoutes.siteLocationsListView ||
-            DrivenSiteLocator.instance.getIsCardholderSiteLocatorMapPage() ||
+            DrivenSiteLocator.instance.getIsCardholderFullMapScreen() ||
             (DrivenSiteLocator.instance.getIsDashboardScreen() &&
                 isLocatorBottomNavTabPressed());
     return canShowFlag;
