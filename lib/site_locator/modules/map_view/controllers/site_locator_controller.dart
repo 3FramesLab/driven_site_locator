@@ -377,7 +377,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       selectedSiteFilters = retrieveStoredFilters();
 
       //For comdata, getting fuel prices and merging into site locations.
-      // if (AppUtils.isComdata && !isWelcomeScreen) {
       await getFuelPricesForMarkers(
           canMakeFuelPricesApiCall: canMakeFuelPricesApiCall);
 
@@ -1436,13 +1435,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   bool canShowEnhancedNoLocationDialog() {
-    final canShowFlag = Get.currentRoute ==
-            SiteLocatorRoutes.siteLocatorMapView ||
-        Get.currentRoute == SiteLocatorRoutes.siteLocationsListView ||
-        // Get.currentRoute == SiteLocatorRoutes.cardholderSiteLocatorMapPage ||
-        // (Get.currentRoute == SiteLocatorRoutes.dashboard &&
-        isUserAuthenticated ||
-        (isUserAuthenticated && isLocatorBottomNavTabPressed());
+    final canShowFlag =
+        Get.currentRoute == SiteLocatorRoutes.siteLocatorMapView ||
+            Get.currentRoute == SiteLocatorRoutes.siteLocationsListView ||
+            DrivenSiteLocator.instance.getIsCardholderSiteLocatorMapPage() ||
+            (DrivenSiteLocator.instance.getIsDashboardScreen() &&
+                isLocatorBottomNavTabPressed());
     return canShowFlag;
   }
 

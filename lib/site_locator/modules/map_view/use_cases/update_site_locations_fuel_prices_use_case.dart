@@ -57,10 +57,12 @@ class UpdateSiteLocationsFuelPricesUseCase
         }
       }
     } on Exception catch (e) {
-      unawaited(Get.dialog(
-        NoFuelPricesDialog(),
-        barrierDismissible: false,
-      ));
+      if (_canShowFuelPriceDialogForAuthenticated(param)) {
+        unawaited(Get.dialog(
+          NoFuelPricesDialog(),
+          barrierDismissible: false,
+        ));
+      }
       DynatraceUtils.logError(
         name: DynatraceErrorMessages.getFuelPricesAPIErrorName,
         value: DynatraceErrorMessages.getFuelPricesAPIErrorValue,
@@ -76,6 +78,31 @@ class UpdateSiteLocationsFuelPricesUseCase
     siteLocatorController?.siteLocations = siteLocationsToUI;
     // Purging the SiteLocation asper As-Of-Date and Price limit show the Sites that has good price data - Ends
     //--------------------------------------------------------------------------
+  }
+
+  bool _canShowFuelPriceDialogForAuthenticated(
+      UpdateSiteLocationsFuelPricesParams param) {
+    if (param.isUserAuthenticated &&
+        DrivenSiteLocator.instance.getIsDashboardScreen()) {
+      // For fleet manager authenticated user
+      // TODO(Smeet): Uncomment below lines.
+      // // bool canShowDialog = false;
+      // // dashboardController = Get.find();
+      // // if (dashboardController.selectedTab() == AppStrings.locator) {
+      // //   canShowDialog = true;
+      // // }
+      // return canShowDialog;
+
+      // TODO(Smeet): Remove below hardcoded return
+      return false;
+    } else if (param.isUserAuthenticated &&
+        DrivenSiteLocator.instance.getIsCardholderSiteLocatorMapPage()) {
+      // For DFC authenticated user
+      return true;
+    } else {
+      // For unauthenticated users for both DFF & DFC
+      return Get.currentRoute == SiteLocatorRoutes.siteLocatorMapView;
+    }
   }
 
   List<SiteLocation> getTruckStopSiteLocations(

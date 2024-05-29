@@ -29,13 +29,10 @@ class FuelCardsHeader extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  // bool get _isAuthenticatedMapView =>
-  //     !(AppUtils.flavor != AppFlavor.comdata.name ||
-  //         Get.currentRoute == AdminRoutes.dashboard ||
-  //         Get.currentRoute == AdminRoutes.cardholderSiteLocatorMapPage);
   bool get _isAuthenticatedMapView =>
       !(AppUtils.flavor != AppFlavor.comdata.name ||
-          siteLocatorController.isUserAuthenticated);
+          DrivenSiteLocator.instance.getIsDashboardScreen() ||
+          DrivenSiteLocator.instance.getIsCardholderSiteLocatorMapPage());
 
   @override
   // ignore: avoid_field_initializers_in_const_classes

@@ -39,27 +39,26 @@ class PreferredSiteLocatorHomeScreenDialog extends StatelessWidget {
     );
   }
 
-  void _yesButtonTap() {
+  Future<void> _yesButtonTap() async {
     trackAction(
       SiteLocatorAnalyticsTrackActionName.preferredHomeScreenYesButtonEvent,
       adobeCustomTag: AdobeTagProperties.modals.value,
     );
-    DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
+    await DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
       AppStrings.trueText,
     );
     Get.back();
   }
 
   Widget _noThanksButton() => UnderlinedButton.black(
-        onPressed: () {
+        onPressed: () async {
           trackAction(
             SiteLocatorAnalyticsTrackActionName
                 .preferredHomeScreenNoButtonEvent,
             adobeCustomTag: AdobeTagProperties.modals.value,
           );
-          DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen?.call(
-            AppStrings.falseText,
-          );
+          await DrivenSiteLocator.instance.setLocatorMapAsPreferredHomeScreen
+              ?.call(AppStrings.falseText);
           Get.back();
         },
         text: ViewText.noThanks,

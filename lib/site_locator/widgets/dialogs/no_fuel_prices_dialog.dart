@@ -43,8 +43,9 @@ class NoFuelPricesDialog extends StatelessWidget {
   }
 
   Future<void> _refreshButtonTap() async {
-    await siteLocatorController.refreshFuelPriceApi();
     Get.back();
+    await Future.delayed(const Duration(milliseconds: 200));
+    await siteLocatorController.refreshFuelPriceApi();
   }
 
   Widget _dismissButton() => UnderlinedButton.black(

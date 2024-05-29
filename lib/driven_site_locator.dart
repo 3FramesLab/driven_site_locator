@@ -31,6 +31,8 @@ class DrivenSiteLocator {
   bool _isCardholderFullMapScreen = false;
   bool _isHomeScreen = false;
   bool _isWalletScreen = false;
+  bool _isCardholderSiteLocatorMapPage = false;
+  bool _isDashboardScreen = false;
   // bool _isPreviousScreenLogin = false;
 
   // Wallet module's data members
@@ -200,6 +202,18 @@ class DrivenSiteLocator {
   }
 
   bool getIsWalletScreen() => _isWalletScreen;
+
+  void setIsCardholderSiteLocatorMapPage(bool isCardholderSiteLocatorMapPage) {
+    _isCardholderSiteLocatorMapPage = isCardholderSiteLocatorMapPage;
+  }
+
+  bool getIsCardholderSiteLocatorMapPage() => _isCardholderSiteLocatorMapPage;
+
+  void setIsDashboardScreen(bool isDashboardScreen) {
+    _isDashboardScreen = isDashboardScreen;
+  }
+
+  bool getIsDashboardScreen() => _isDashboardScreen;
 
   void setWalletData({
     required bool hasCards,
