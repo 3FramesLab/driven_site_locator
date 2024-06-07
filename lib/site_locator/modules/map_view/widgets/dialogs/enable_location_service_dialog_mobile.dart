@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:driven_site_locator/constants/view_text.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
@@ -11,35 +12,52 @@ class EnableLocationServiceDialogMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PointerInterceptor(
-      child: DrivenDialog(
-        height: getDialogHeight(),
+      child: GetPlatform.isAndroid
+          ? _androidLocationDialog(context)
+          : _iosLocationDialog(context),
+    );
+  }
+
+  DrivenDialog _androidLocationDialog(BuildContext context) => DrivenDialog(
+        height: 50,
         width: 390,
         text: _message(),
         primaryButton: _primaryButton(context),
-        isAlignedLeft: true,
         hasSmallContentHeight: true,
         crossAxisAlignment: getDialogCrossAxisAlignment(),
-      ),
-    );
-  }
+      );
+
+  DrivenDialog _iosLocationDialog(BuildContext context) => DrivenDialog(
+        height: 100,
+        width: 390,
+        text: _message(),
+        primaryButton: _primaryButton(context),
+        clickableText: SiteLocatorConstants.cancel,
+        onClickableTextPressed: _onOkButtonTap,
+        hasSmallContentHeight: true,
+        crossAxisAlignment: getDialogCrossAxisAlignment(),
+      );
 
   void _onOkButtonTap() => Get.back();
 
   List<TextSpan> _message() => controller.getEnableLocationContent();
 
   Widget _primaryButton(BuildContext context) => PrimaryButton(
-        onPressed: _onOkButtonTap,
-        text: ViewText.ok,
+        onPressed: onPrimaryButtonTap,
+        text: _primaryButtonText,
       );
 
-  double getDialogHeight() => GetPlatform.isAndroid ? 50 : 300;
-
   CrossAxisAlignment getDialogCrossAxisAlignment() => CrossAxisAlignment.center;
-  // isOtherBrowser() ? CrossAxisAlignment.center : CrossAxisAlignment.start;
 
-// Return false if browser is other than chrome or safari
+  String get _primaryButtonText => GetPlatform.isAndroid
+      ? ViewText.ok
+      : SiteLocatorConstants.locationEnableDialogButtonText;
 
-  bool isOtherBrowser() =>
-      !(controller.browserName() == SiteLocatorConstants.chromeBrowser ||
-          controller.browserName() == SiteLocatorConstants.safariBrowser);
+  void onPrimaryButtonTap() =>
+      GetPlatform.isAndroid ? _onOkButtonTap : openSettingsButtonTap;
+
+  void openSettingsButtonTap() {
+    Get.back();
+    AppSettings.openAppSettings();
+  }
 }

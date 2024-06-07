@@ -2,7 +2,6 @@ import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class GetLocationDialogContentUseCase
@@ -11,11 +10,11 @@ class GetLocationDialogContentUseCase
 
   @override
   List<TextSpan> execute() {
-    if (kIsWeb) {
+    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+      return _defaultLocationEnableText;
+    } else {
       final browserName = siteLocatorController.browserName.value;
       return getLocationDialogContent(browserName);
-    } else {
-      return _defaultLocationEnableText;
     }
   }
 

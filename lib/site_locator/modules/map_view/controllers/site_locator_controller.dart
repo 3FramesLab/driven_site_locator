@@ -167,13 +167,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> handleLocationPermissionDialog() async {
+    getLocationDialogContentUseCase =
+        Get.put(GetLocationDialogContentUseCase());
     if (!(await _isLocationPermissionGranted)) {
       if (GetPlatform.isAndroid || GetPlatform.isIOS) {
-        //show default browser dialog
-        EnableLocationServiceDialogMobile();
+        await Get.dialog(
+          EnableLocationServiceDialogMobile(),
+          barrierDismissible: false,
+        );
       } else {
-        getLocationDialogContentUseCase =
-            Get.put(GetLocationDialogContentUseCase());
         final showLocationPermission = await Get.dialog(
           EnableLocationServiceDialog(onUseMyLocation: onUseMyLocation),
           barrierDismissible: false,
