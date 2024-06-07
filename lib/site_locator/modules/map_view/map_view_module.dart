@@ -58,6 +58,7 @@ import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_location_dialog_content_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/use_cases/get_selected_card_fuel_pref_type_use_case.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/widgets/dialogs/enable_location_service_dialog_mobile.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/widgets/zoom_handle_buttons.dart';
 import 'package:driven_site_locator/site_locator/modules/search_locations/search_location_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_components/common_widgets/rounded_button.dart';

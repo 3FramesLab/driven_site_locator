@@ -2,6 +2,7 @@ import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class GetLocationDialogContentUseCase
@@ -10,11 +11,15 @@ class GetLocationDialogContentUseCase
 
   @override
   List<TextSpan> execute() {
-    final browserName = siteLocatorController.browserName.value;
-    return getBrowserName(browserName);
+    if (kIsWeb) {
+      final browserName = siteLocatorController.browserName.value;
+      return getLocationDialogContent(browserName);
+    } else {
+      return _defaultLocationEnableText;
+    }
   }
 
-  List<TextSpan> getBrowserName(String browserName) {
+  List<TextSpan> getLocationDialogContent(String browserName) {
     if (browserName == SiteLocatorConstants.chromeBrowser) {
       return [
         const TextSpan(
@@ -46,12 +51,14 @@ class GetLocationDialogContentUseCase
         )
       ];
     } else {
-      return [
+      return _defaultLocationEnableText;
+    }
+  }
+
+  List<TextSpan> get _defaultLocationEnableText => [
         const TextSpan(
           text: SiteLocatorConstants.enableLocationText,
           style: f14RegularBlack,
-        ),
+        )
       ];
-    }
-  }
 }
