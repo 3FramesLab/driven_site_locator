@@ -177,6 +177,9 @@ To view fuel sites in a different location, use the search bar or enable “site
   static const enableLocationText = '''
 To share your location you need to enable this setting on your browser.\n
 ''';
+  static const enableLocationTextForIOS = '''
+To share your location you need to enable this setting on your device.\n
+''';
   static const howToDoItText = 'Here is how you do it:\n ';
   static const useMyLocationSafari = '''
   

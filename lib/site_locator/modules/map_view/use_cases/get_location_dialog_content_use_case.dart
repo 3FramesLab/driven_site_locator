@@ -10,8 +10,15 @@ class GetLocationDialogContentUseCase
 
   @override
   List<TextSpan> execute() {
-    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+    if (GetPlatform.isAndroid) {
       return _defaultLocationEnableText;
+    } else if (GetPlatform.isIOS) {
+      return [
+        const TextSpan(
+          text: SiteLocatorConstants.enableLocationTextForIOS,
+          style: f14RegularBlack,
+        )
+      ];
     } else {
       final browserName = siteLocatorController.browserName.value;
       return getLocationDialogContent(browserName);

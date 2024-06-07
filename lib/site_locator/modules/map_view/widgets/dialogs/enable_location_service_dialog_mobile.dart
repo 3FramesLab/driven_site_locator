@@ -19,7 +19,7 @@ class EnableLocationServiceDialogMobile extends StatelessWidget {
   }
 
   DrivenDialog _androidLocationDialog(BuildContext context) => DrivenDialog(
-        height: 50,
+        height: 60,
         width: 390,
         text: _message(),
         primaryButton: _primaryButton(context),
@@ -28,7 +28,7 @@ class EnableLocationServiceDialogMobile extends StatelessWidget {
       );
 
   DrivenDialog _iosLocationDialog(BuildContext context) => DrivenDialog(
-        height: 100,
+        height: 95,
         width: 390,
         text: _message(),
         primaryButton: _primaryButton(context),
@@ -43,7 +43,8 @@ class EnableLocationServiceDialogMobile extends StatelessWidget {
   List<TextSpan> _message() => controller.getEnableLocationContent();
 
   Widget _primaryButton(BuildContext context) => PrimaryButton(
-        onPressed: onPrimaryButtonTap,
+        onPressed:
+            GetPlatform.isAndroid ? _onOkButtonTap : openSettingsButtonTap,
         text: _primaryButtonText,
       );
 
@@ -52,9 +53,6 @@ class EnableLocationServiceDialogMobile extends StatelessWidget {
   String get _primaryButtonText => GetPlatform.isAndroid
       ? ViewText.ok
       : SiteLocatorConstants.locationEnableDialogButtonText;
-
-  void onPrimaryButtonTap() =>
-      GetPlatform.isAndroid ? _onOkButtonTap : openSettingsButtonTap;
 
   void openSettingsButtonTap() {
     Get.back();
