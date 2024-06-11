@@ -10,15 +10,17 @@ class GpsIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Visibility(
           visible: siteLocatorController.gpsIconButtonVisible(),
-          child: Semantics(
-            container: true,
-            label: SemanticStrings.gpsIconButton,
-            child: GestureDetector(
-              onTap: onGpsIconTap,
-              child: Image.asset(
-                SiteLocatorAssets.gpsIcon,
-                height: 40,
-                width: 40,
+          child: PointerInterceptor(
+            child: Semantics(
+              container: true,
+              label: SemanticStrings.gpsIconButton,
+              child: GestureDetector(
+                onTap: onGpsIconTap,
+                child: Image.asset(
+                  SiteLocatorAssets.gpsIcon,
+                  height: 40,
+                  width: 40,
+                ),
               ),
             ),
           ),

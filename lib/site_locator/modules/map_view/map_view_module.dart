@@ -95,6 +95,7 @@ import 'package:flutter_google_maps_cluster/flutter_google_maps_cluster.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 part 'controllers/site_locator_controller.dart';
