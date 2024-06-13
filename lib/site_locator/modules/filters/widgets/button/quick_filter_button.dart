@@ -17,24 +17,26 @@ class QuickFilterButton extends StatelessWidget {
     final quickFilterOptions = SiteLocatorConfig.quickFilterOptions;
     return Obx(
       () {
-        return Semantics(
-          container: true,
-          label: SemanticStrings.quickFilterButton,
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: siteFilter == quickFilterOptions.first
-                  ? DrivenDimensions.dp16
-                  : 0,
-              right: siteFilter == quickFilterOptions.last
-                  ? DrivenDimensions.dp16
-                  : 0,
-            ),
-            child: GestureDetector(
-              onTap: () => onFilterIconTapped(
-                siteFilter,
-                siteLocatorController.isShowLoading(),
+        return PointerInterceptor(
+          child: Semantics(
+            container: true,
+            label: SemanticStrings.quickFilterButton,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: siteFilter == quickFilterOptions.first
+                    ? DrivenDimensions.dp16
+                    : 0,
+                right: siteFilter == quickFilterOptions.last
+                    ? DrivenDimensions.dp16
+                    : 0,
               ),
-              child: _getQuickFilterButton(),
+              child: GestureDetector(
+                onTap: () => onFilterIconTapped(
+                  siteFilter,
+                  siteLocatorController.isShowLoading(),
+                ),
+                child: _getQuickFilterButton(),
+              ),
             ),
           ),
         );

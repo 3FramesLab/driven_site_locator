@@ -1,9 +1,6 @@
 library filter_module;
 
 import 'package:driven_common/common/driven_dimensions.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/use_cases/base_future_usecase.dart';
 import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
@@ -36,6 +33,9 @@ import 'package:driven_site_locator/site_locator/utilities/site_info_utils.dart'
 import 'package:driven_site_locator/site_locator/utilities/site_locator_utils.dart';
 import 'package:driven_site_locator/site_locator/widgets/common/custom_card_with_shadow.dart';
 import 'package:driven_site_locator/site_locator/widgets/site_locator_scaffold.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 part 'controllers/enhanced_filter_controller.dart';
 part 'enhanced_filter_state.dart';
