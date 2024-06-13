@@ -28,7 +28,7 @@ class QuickFiltersList extends StatelessWidget {
   Future<void> _onQuickFilterTapped(
       SiteFilter siteFilter, bool isLoading) async {
     siteLocatorController.ignorePointer(true);
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       siteLocatorController.ignorePointer(false);
     });
     trackAction(

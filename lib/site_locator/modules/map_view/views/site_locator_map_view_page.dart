@@ -280,29 +280,31 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     return Positioned(
       right: 32,
       top: 28,
-      child: SizedBox(
-        width: 207,
-        child: RoundedButtonWithChild(
-          onPressed: () => SiteLocatorUtils.launchURL(
-            SiteLocatorConstants.applyForFuelmanUrl,
-            SiteLocatorConstants.openApplyForFuelmanError,
-          ),
-          showRoundedShape: false,
-          backgroundColor: SiteLocatorColors.red,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                SiteLocatorConstants.applyForFuelman,
-                style: f16RegularWhite,
-              ),
-              const SizedBox(width: 20),
-              Image.asset(
-                SiteLocatorAssets.fuelmanBrandFilePath,
-                height: SiteLocatorDimensions.dp24,
-                width: SiteLocatorDimensions.dp24,
-              ),
-            ],
+      child: PointerInterceptor(
+        child: SizedBox(
+          width: 207,
+          child: RoundedButtonWithChild(
+            onPressed: () => SiteLocatorUtils.launchURL(
+              SiteLocatorConstants.applyForFuelmanUrl,
+              SiteLocatorConstants.openApplyForFuelmanError,
+            ),
+            showRoundedShape: false,
+            backgroundColor: SiteLocatorColors.red,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  SiteLocatorConstants.applyForFuelman,
+                  style: f16RegularWhite,
+                ),
+                const SizedBox(width: 20),
+                Image.asset(
+                  SiteLocatorAssets.fuelmanBrandFilePath,
+                  height: SiteLocatorDimensions.dp24,
+                  width: SiteLocatorDimensions.dp24,
+                ),
+              ],
+            ),
           ),
         ),
       ),
