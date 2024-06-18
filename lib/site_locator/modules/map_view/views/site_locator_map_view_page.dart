@@ -328,7 +328,14 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             zoomInOutButton(),
             const SizedBox(height: DrivenDimensions.dp16),
           ],
-          gpsIconButton(),
+          Row(
+            children: [
+              if (kIsWeb) ...[
+                SearchThisAreaButton(),
+              ],
+              gpsIconButton(),
+            ],
+          ),
         ],
       ),
     );

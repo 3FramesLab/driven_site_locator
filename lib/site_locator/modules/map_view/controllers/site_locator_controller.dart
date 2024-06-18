@@ -196,6 +196,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     bool updateLocationCache = false,
   }) async {
     try {
+      isShowSearchThisArea(false);
+      isLatLngBoundsChanged(false);
       final newCenterLocation = MapUtilities.latLngBoundCenter(
         southwest: currentLatLngBounds().southwest,
         northeast: currentLatLngBounds().northeast,
@@ -566,25 +568,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         isShowLoading(true);
         resetMarkers(PinVariantStore.statusList);
 
-        /// hasToCallOnZoomGesture is true then zoomed out
-        /// hasToCallOnZoomGesture is false then zoomed in
-        final hasToCallOnZoomGesture = await canMakeAPICallOnZoomGesture();
-
-        final newCenterLocation = MapUtilities.latLngBoundCenter(
-          southwest: currentLatLngBounds().southwest,
-          northeast: currentLatLngBounds().northeast,
-        );
-        final isAwayFromLastSavedLocation =
-            await validateLastSavedCenterLocationUseCase
-                .execute(newCenterLocation);
-
         await applyClustering();
 
         if (allowGateKeeperToGetSiteLocationsData() &&
             !isZoomedWithinCurrentLatLngBounds()) {
-          await getSiteLocationsData(
-              updateLocationCache: !isAwayFromLastSavedLocation,
-              forceApiCall: hasToCallOnZoomGesture);
+          isShowSearchThisArea(true);
+          isLatLngBoundsChanged(true);
         }
         isShowLoading(false);
       }
@@ -1498,6 +1487,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (buttonsVisibility != null) {
       gpsIconButtonVisible(buttonsVisibility);
       canShowFloatingMapButtons(buttonsVisibility);
+      isShowSearchThisArea(buttonsVisibility);
     }
   }
 
@@ -2120,5 +2110,37 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   List<TextSpan> getEnableLocationContent() {
     return getLocationDialogContentUseCase.execute();
+  }
+
+  Future<void> onSearchThisAreaButtonTap() async {
+    try {
+      isShowLoading(true);
+
+      /// hasToCallOnZoomGesture is true then zoomed out
+      /// hasToCallOnZoomGesture is false then zoomed in
+      final hasToCallOnZoomGesture = await canMakeAPICallOnZoomGesture();
+
+      final newCenterLocation = MapUtilities.latLngBoundCenter(
+        southwest: currentLatLngBounds().southwest,
+        northeast: currentLatLngBounds().northeast,
+      );
+      final isAwayFromLastSavedLocation =
+          await validateLastSavedCenterLocationUseCase
+              .execute(newCenterLocation);
+
+      await getSiteLocationsData(
+        updateLocationCache: !isAwayFromLastSavedLocation,
+        forceApiCall: hasToCallOnZoomGesture,
+      );
+
+      isShowLoading(false);
+    } catch (e) {
+      isShowLoading(false);
+      Globals().dynatrace.logError(
+            name: 'error on search this area button tap',
+            value: e.toString(),
+            reason: e.toString(),
+          );
+    }
   }
 }
