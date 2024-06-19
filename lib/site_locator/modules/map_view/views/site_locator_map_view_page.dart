@@ -132,6 +132,9 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     );
     siteLocatorController.canClearSearchTextField = true;
     siteLocatorController.clearSearchPlaceInput();
+    siteLocatorController.canClearSearchTextField = true;
+    siteLocatorController.initialLatLngLoading(false);
+    siteLocatorController.isCameraMove(false);
     siteLocatorController.updateSearchThisAreaVisibility();
     await siteLocatorController.onReCenterButtonClicked();
   }
@@ -345,14 +348,14 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   void _onZoonInButtonTap() {
-    siteLocatorController.updateSearchThisAreaVisibility();
+    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomIn(),
     );
   }
 
   void _onZoomOutButtonTap() {
-    siteLocatorController.updateSearchThisAreaVisibility();
+    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
     );

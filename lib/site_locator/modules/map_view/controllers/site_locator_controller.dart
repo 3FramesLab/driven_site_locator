@@ -200,9 +200,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     bool updateLocationCache = false,
   }) async {
     try {
-      isShowSearchThisArea(false);
+      updateSearchThisAreaVisibility();
       initialLatLngLoading(false);
-      isLatLngBoundsChanged(false);
       final newCenterLocation = MapUtilities.latLngBoundCenter(
         southwest: currentLatLngBounds().southwest,
         northeast: currentLatLngBounds().northeast,
@@ -582,7 +581,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         if (allowGateKeeperToGetSiteLocationsData() &&
             !isZoomedWithinCurrentLatLngBounds() &&
             !initialLatLngLoading()) {
-          updateSearchThisAreaVisibility();
+          updateSearchThisAreaVisibility(isVisible: true);
         }
         isShowLoading(false);
       }
@@ -674,7 +673,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void resetCircleAfterZoomOut() {
     if (cameraPositionZoom() < defaultCircleZoom) {
       cameraPositionZoom(defaultCircleZoom);
-      updateSearchThisAreaVisibility();
+      updateSearchThisAreaVisibility(isVisible: true);
     }
   }
 
@@ -682,7 +681,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     Future.delayed(const Duration(milliseconds: 200), () {
       if (cameraPositionZoom() > defaultCircleZoom) {
         cameraPositionZoom(defaultCircleZoom);
-        updateSearchThisAreaVisibility();
+        updateSearchThisAreaVisibility(isVisible: true);
       }
     });
   }
@@ -763,10 +762,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     currentLatLngBounds(await googleMapController?.getVisibleRegion());
     if (kIsWeb) {
       onListViewSiteInfoDetailsBackTap?.call();
-      if (isCameraMove() && !isComingFromRecenter) {
-        updateSearchThisAreaVisibility();
+      if (isCameraMove() && !canRecenterMapViewOnLocationChange) {
+        updateSearchThisAreaVisibility(isVisible: true);
       }
-      isCameraMove(true);
+      Future.delayed(
+          const Duration(milliseconds: 1000), () => isCameraMove(true));
     }
   }
 
@@ -2161,8 +2161,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  void updateSearchThisAreaVisibility() {
-    isShowSearchThisArea(true);
-    isLatLngBoundsChanged(true);
+  void updateSearchThisAreaVisibility({bool isVisible = false}) {
+    isShowSearchThisArea(isVisible);
+    isLatLngBoundsChanged(isVisible);
   }
 }
