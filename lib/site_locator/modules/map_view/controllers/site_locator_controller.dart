@@ -49,7 +49,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       );
       debounce(
         currentLatLngBounds,
-        (_) => onLatLngBoundsChange(),
+        (_) {
+          if (initialLatLngLoading()) {
+            onLatLngBoundsChange();
+          }
+        },
         time: const Duration(
           seconds: SiteLocatorConstants.mapDebounceTimeInSeconds,
         ),
@@ -197,6 +201,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }) async {
     try {
       isShowSearchThisArea(false);
+      initialLatLngLoading(false);
       isLatLngBoundsChanged(false);
       final newCenterLocation = MapUtilities.latLngBoundCenter(
         southwest: currentLatLngBounds().southwest,
@@ -569,11 +574,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         resetMarkers(PinVariantStore.statusList);
 
         await applyClustering();
+        debugPrint(
+            'allowGateKeeperToGetSiteLocationsData()=== ${allowGateKeeperToGetSiteLocationsData()}');
+        debugPrint(
+            'isZoomedWithinCurrentLatLngBounds()=== ${!isZoomedWithinCurrentLatLngBounds()}');
 
         if (allowGateKeeperToGetSiteLocationsData() &&
-            !isZoomedWithinCurrentLatLngBounds()) {
-          isShowSearchThisArea(true);
-          isLatLngBoundsChanged(true);
+            !isZoomedWithinCurrentLatLngBounds() &&
+            !initialLatLngLoading()) {
+          updateSearchThisAreaVisibility();
         }
         isShowLoading(false);
       }
@@ -665,6 +674,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void resetCircleAfterZoomOut() {
     if (cameraPositionZoom() < defaultCircleZoom) {
       cameraPositionZoom(defaultCircleZoom);
+      updateSearchThisAreaVisibility();
     }
   }
 
@@ -672,6 +682,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     Future.delayed(const Duration(milliseconds: 200), () {
       if (cameraPositionZoom() > defaultCircleZoom) {
         cameraPositionZoom(defaultCircleZoom);
+        updateSearchThisAreaVisibility();
       }
     });
   }
@@ -752,6 +763,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     currentLatLngBounds(await googleMapController?.getVisibleRegion());
     if (kIsWeb) {
       onListViewSiteInfoDetailsBackTap?.call();
+      if (isCameraMove() && !isComingFromRecenter) {
+        updateSearchThisAreaVisibility();
+      }
+      isCameraMove(true);
     }
   }
 
@@ -1673,7 +1688,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> getInitialPageLoadData() async {
     try {
       isUserAuthenticated = false;
-      isShowLoading(true);
+      if (!isShowLoading()) {
+        isShowLoading(true);
+      }
       getFavoriteList();
       await checkAndRequestLocationPermission();
       await _getUserLocation();
@@ -2142,5 +2159,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             reason: e.toString(),
           );
     }
+  }
+
+  void updateSearchThisAreaVisibility() {
+    isShowSearchThisArea(true);
+    isLatLngBoundsChanged(true);
   }
 }

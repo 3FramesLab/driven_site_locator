@@ -182,4 +182,6 @@ mixin SiteLocatorState {
 
   RxBool isShowSearchThisArea = false.obs;
   RxBool isLatLngBoundsChanged = false.obs;
+  RxBool initialLatLngLoading = true.obs;
+  RxBool isCameraMove = false.obs;
 }

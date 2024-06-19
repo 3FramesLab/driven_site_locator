@@ -132,6 +132,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     );
     siteLocatorController.canClearSearchTextField = true;
     siteLocatorController.clearSearchPlaceInput();
+    siteLocatorController.updateSearchThisAreaVisibility();
     await siteLocatorController.onReCenterButtonClicked();
   }
 
@@ -323,6 +324,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           ? siteLocatorController.staticBottomSpacing
           : siteLocatorController.floatingButtonsBottomPosition(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (kIsWeb) ...[
             zoomInOutButton(),
@@ -332,6 +334,7 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
             children: [
               if (kIsWeb) ...[
                 SearchThisAreaButton(),
+                const SizedBox(width: DrivenDimensions.dp32),
               ],
               gpsIconButton(),
             ],
@@ -342,12 +345,14 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   void _onZoonInButtonTap() {
+    siteLocatorController.updateSearchThisAreaVisibility();
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomIn(),
     );
   }
 
   void _onZoomOutButtonTap() {
+    siteLocatorController.updateSearchThisAreaVisibility();
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
     );
