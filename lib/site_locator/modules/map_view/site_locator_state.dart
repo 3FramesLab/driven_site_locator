@@ -179,4 +179,9 @@ mixin SiteLocatorState {
   Function()? onListViewSiteInfoDetailsBackTap;
   RxString browserName = ''.obs;
   late GetLocationDialogContentUseCase getLocationDialogContentUseCase;
+
+  RxBool isShowSearchThisArea = false.obs;
+  RxBool isLatLngBoundsChanged = false.obs;
+  RxBool initialLatLngLoading = true.obs;
+  RxBool isCameraMove = false.obs;
 }

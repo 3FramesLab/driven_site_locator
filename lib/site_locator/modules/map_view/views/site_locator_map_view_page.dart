@@ -323,12 +323,21 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
           ? siteLocatorController.staticBottomSpacing
           : siteLocatorController.floatingButtonsBottomPosition(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (kIsWeb) ...[
             zoomInOutButton(),
             const SizedBox(height: DrivenDimensions.dp16),
           ],
-          gpsIconButton(),
+          Row(
+            children: [
+              if (kIsWeb) ...[
+                SearchThisAreaButton(),
+                const SizedBox(width: DrivenDimensions.dp32),
+              ],
+              gpsIconButton(),
+            ],
+          ),
         ],
       ),
     );
@@ -338,12 +347,14 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomIn(),
     );
+    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
   }
 
   void _onZoomOutButtonTap() {
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
     );
+    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
   }
 
   Widget _applyForFuelman() {

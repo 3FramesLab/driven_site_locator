@@ -62,6 +62,42 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "device_info_plus",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/device_info_plus-3.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "device_info_plus_linux",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/device_info_plus_linux-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "device_info_plus_macos",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/device_info_plus_macos-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "device_info_plus_platform_interface",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/device_info_plus_platform_interface-2.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "device_info_plus_web",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/device_info_plus_web-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "device_info_plus_windows",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/device_info_plus_windows-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dio",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dio-4.0.6",
       "packageUri": "lib/",
@@ -69,13 +105,13 @@
     },
     {
       "name": "driven_common",
-      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-ad1e20597d8569e1530bf157329fa32e2ede5861/",
+      "rootUri": "file:///Users/admin/.pub-cache/git/flutter_driven-common-06af7776b798d4aeef58ce1530f91e21fe0777ac/",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "dynatrace_flutter_plugin",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dynatrace_flutter_plugin-3.285.2",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/dynatrace_flutter_plugin-3.291.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -93,9 +129,9 @@
     },
     {
       "name": "ffi",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/ffi-2.0.2",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/ffi-1.2.1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.12"
     },
     {
       "name": "file",
@@ -219,7 +255,7 @@
     },
     {
       "name": "geolocator_apple",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.6",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.7",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -375,9 +411,9 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_provider-2.1.1",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_provider-2.0.15",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "2.17"
     },
     {
       "name": "path_provider_android",
@@ -405,9 +441,9 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/path_provider_windows-2.0.7",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "2.12"
     },
     {
       "name": "platform",
@@ -429,7 +465,7 @@
     },
     {
       "name": "rational",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/rational-2.2.2",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/rational-2.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -615,7 +651,7 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/win32-4.1.4",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dev/win32-2.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -638,7 +674,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-03-19T13:21:56.675789Z",
+  "generated": "2024-06-19T09:10:38.274234Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

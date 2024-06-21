@@ -46,4 +46,6 @@ class SemanticStrings {
 
   static const shareMyCurrentLocationSwitch =
       'share-my-current-location-switch';
+
+  static const searchThisArea = 'search_this_area';
 }

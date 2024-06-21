@@ -4,10 +4,15 @@ class FloatingMapButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final void Function()? onPressed;
+  final bool canShowBorder;
+  final MaterialStateProperty<EdgeInsetsGeometry>? buttonPadding;
+
   const FloatingMapButton({
     required this.label,
     required this.icon,
     this.onPressed,
+    this.canShowBorder = true,
+    this.buttonPadding,
     Key? key,
   }) : super(key: key);
 
@@ -35,24 +40,25 @@ class FloatingMapButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 3),
       child: Text(
         label,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-        ),
+        style: f16SemiboldBlackDark,
       ),
     );
   }
 
   ButtonStyle buttonStyle() {
     return ButtonStyle(
+      padding: buttonPadding ??
+          MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       backgroundColor: MaterialStateProperty.all(Colors.white),
-      shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: const BorderSide(),
-        ),
-      ),
+      shape: canShowBorder
+          ? MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: const BorderSide(),
+              ),
+            )
+          : null,
     );
   }
 }

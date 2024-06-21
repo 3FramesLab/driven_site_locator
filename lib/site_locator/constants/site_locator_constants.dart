@@ -200,6 +200,8 @@ To share your location you need to enable this setting on your browser.\n
 
   static const chromeBrowser = 'chrome';
   static const safariBrowser = 'safari';
+
+  static const searchThisArea = 'Search this area';
 }
 
 class QuickFilterLabel {
