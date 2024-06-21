@@ -132,10 +132,6 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
     );
     siteLocatorController.canClearSearchTextField = true;
     siteLocatorController.clearSearchPlaceInput();
-    siteLocatorController.canClearSearchTextField = true;
-    siteLocatorController.initialLatLngLoading(false);
-    siteLocatorController.isCameraMove(false);
-    siteLocatorController.updateSearchThisAreaVisibility();
     await siteLocatorController.onReCenterButtonClicked();
   }
 
@@ -348,17 +344,17 @@ class _SiteLocatorMapViewPageState extends State<SiteLocatorMapViewPage>
   }
 
   void _onZoonInButtonTap() {
-    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomIn(),
     );
+    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
   }
 
   void _onZoomOutButtonTap() {
-    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
     siteLocatorController.googleMapController?.animateCamera(
       CameraUpdate.zoomOut(),
     );
+    siteLocatorController.updateSearchThisAreaVisibility(isVisible: true);
   }
 
   Widget _applyForFuelman() {

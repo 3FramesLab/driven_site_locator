@@ -636,6 +636,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isShowLoading(false);
       canClearSearchTextField = true;
       canRecenterMapViewOnLocationChange = true;
+      initialLatLngLoading(false);
+      updateSearchThisAreaVisibility();
     } on Exception catch (e) {
       isShowLoading(false);
       DynatraceUtils.logError(
@@ -673,7 +675,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void resetCircleAfterZoomOut() {
     if (cameraPositionZoom() < defaultCircleZoom) {
       cameraPositionZoom(defaultCircleZoom);
-      updateSearchThisAreaVisibility(isVisible: true);
     }
   }
 
@@ -681,7 +682,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     Future.delayed(const Duration(milliseconds: 200), () {
       if (cameraPositionZoom() > defaultCircleZoom) {
         cameraPositionZoom(defaultCircleZoom);
-        updateSearchThisAreaVisibility(isVisible: true);
       }
     });
   }
@@ -736,6 +736,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
 
     if (forceResetCanRecenterMapView) {
+      updateSearchThisAreaVisibility();
       canRecenterMapViewOnLocationChange = true;
     } else {
       canRecenterMapViewOnLocationChange = false;
@@ -762,11 +763,13 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     currentLatLngBounds(await googleMapController?.getVisibleRegion());
     if (kIsWeb) {
       onListViewSiteInfoDetailsBackTap?.call();
-      if (isCameraMove() && !canRecenterMapViewOnLocationChange) {
+      if (isCameraMove() && !isComingFromRecenter) {
         updateSearchThisAreaVisibility(isVisible: true);
       }
-      Future.delayed(
-          const Duration(milliseconds: 1000), () => isCameraMove(true));
+      Future.delayed(const Duration(milliseconds: 500), () {
+        isCameraMove(true);
+        isComingFromRecenter = false;
+      });
     }
   }
 
@@ -1508,6 +1511,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<dynamic> getLatLngForSelectedPlace(
       Predictions selectedPlaceDetails) async {
+    isCameraMove(false);
+    initialLatLngLoading(true);
+    isComingFromRecenter = false;
+    updateSearchThisAreaVisibility();
     canRecenterMapViewOnLocationChange = false;
     canClearSearchTextField = false;
     Get.back(result: selectedPlaceDetails);
@@ -2162,7 +2169,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   void updateSearchThisAreaVisibility({bool isVisible = false}) {
-    isShowSearchThisArea(isVisible);
-    isLatLngBoundsChanged(isVisible);
+    isShowSearchThisArea.value = isVisible;
+    isLatLngBoundsChanged.value = isVisible;
   }
 }
