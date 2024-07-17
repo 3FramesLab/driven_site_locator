@@ -28,7 +28,10 @@ class SiteInfoHeader extends StatelessWidget {
           children: [
             fuelTitleWidget(),
             const VerticalSpacer(size: 2),
-            if (AppUtils.isFuelman || AppUtils.isIFleet) fuelPriceWidget(),
+            if (AppUtils.isFuelman ||
+                AppUtils.isIFleet ||
+                AppUtils.isFuelmanWeb)
+              fuelPriceWidget(),
           ],
         ),
       ],

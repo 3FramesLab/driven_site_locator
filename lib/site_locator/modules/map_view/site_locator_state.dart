@@ -177,6 +177,7 @@ mixin SiteLocatorState {
   RxBool shareMyCurrentLocationStatus = false.obs;
   Function()? onListViewSiteInfoDetailsTap;
   Function()? onListViewSiteInfoDetailsBackTap;
+  RxString currentSecondaryWebView = ''.obs;
   RxString browserName = ''.obs;
   late GetLocationDialogContentUseCase getLocationDialogContentUseCase;
 

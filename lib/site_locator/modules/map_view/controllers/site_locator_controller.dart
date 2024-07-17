@@ -215,6 +215,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       /// check if we forcefully need to call API [forceApiCall]
       /// [fetchSitesFromRemote] is responsible for checking time and
       /// if [newCenterLocation] is within 1 mile of the stored cache location.
+
+      if (kIsWeb) {
+        currentSecondaryWebView(WebCurrentSecondaryView.normal.name);
+        onListViewSiteInfoDetailsBackTap?.call();
+      }
+
       if (forceApiCall || fetchSitesFromRemote) {
         setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
         await fetchSitesFromServer();
@@ -718,7 +724,14 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     final searchPlacesController = Get.find<SearchPlacesController>();
     if (searchPlacesController.searchTextEditingController.text.isNotEmpty &&
         canClearSearchTextField) {
-      searchPlacesController.clearTextInput();
+      if (kIsWeb &&
+          currentSecondaryWebView() !=
+              WebCurrentSecondaryView.searchResultPageView.name) {
+        searchPlacesController.clearTextInput();
+      }
+      if (!kIsWeb) {
+        searchPlacesController.clearTextInput();
+      }
     }
   }
 
@@ -844,6 +857,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
       if (selectedMapPinKey == SiteLocatorConstants.resetCode) {
         if (kIsWeb) {
+          currentSecondaryWebView(WebCurrentSecondaryView.normal.name);
           onListViewSiteInfoDetailsBackTap?.call();
         } else {
           closeLocationInfoPanel();
@@ -2139,6 +2153,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> onSearchThisAreaButtonTap() async {
     try {
       isShowLoading(true);
+      if (kIsWeb) {
+        searchPlacesController.clearTextInput();
+      }
 
       /// hasToCallOnZoomGesture is true then zoomed out
       /// hasToCallOnZoomGesture is false then zoomed in
