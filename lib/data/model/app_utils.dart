@@ -20,6 +20,9 @@ class AppUtils {
   static bool get noAppFlavor =>
       DrivenSiteLocator.instance.flavor == AppFlavor.none;
 
+  static bool get isFuelmanWeb =>
+      DrivenSiteLocator.instance.flavor == AppFlavor.fuelmanWeb;
+
   static String get flavor => DrivenSiteLocator.instance.flavor.name;
 
   static Future<dynamic> readJsonFile(String path) async {

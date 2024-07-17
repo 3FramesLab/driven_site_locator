@@ -54,7 +54,7 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
             crossAxisAlignment:
                 kIsWeb ? CrossAxisAlignment.start : CrossAxisAlignment.start,
             children: [
-              _backButton,
+              _backButton(),
               BadgeView(),
               EnhancedFilterListView(),
             ],
@@ -62,15 +62,33 @@ class _EnhancedFilterPageState extends State<EnhancedFilterPage> {
         ),
       );
 
-  Widget get _backButton => Padding(
-        padding: const EdgeInsets.all(16),
-        child: DrivenBackButton(
-          onPressed: _popPage,
-          mainAxisSize: MainAxisSize.min,
-          buttonLabelText: SiteLocatorConstants.filters,
-          verticalSpacing: kIsWeb ? 16 : 0,
+  Widget _backButton() {
+    if (kIsWeb) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: DrivenBackButton(
+            onPressed: _popPage,
+            mainAxisSize: MainAxisSize.min,
+            color: DrivenColors.black,
+            textStyle: f24ExtraboldBlackDark,
+            verticalSpacing: 16,
+            buttonLabelText: SiteLocatorConstants.filters,
+          ),
         ),
       );
+    }
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: DrivenBackButton(
+        onPressed: _popPage,
+        mainAxisSize: MainAxisSize.min,
+        buttonLabelText: SiteLocatorConstants.filters,
+        verticalSpacing: kIsWeb ? 16 : 0,
+      ),
+    );
+  }
 
   Widget get _filterList => EnhancedFilterListView();
 

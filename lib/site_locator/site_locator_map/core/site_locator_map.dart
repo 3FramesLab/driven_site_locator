@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:driven_common/styles/styles_module.dart';
 import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
+import 'package:driven_site_locator/site_locator/modules/map_view/controllers/web_secondary_views_enum.dart';
 import 'package:driven_site_locator/site_locator/modules/map_view/map_view_module.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/core/custom_pin_markers/pin_variant_store.dart';
 import 'package:driven_site_locator/site_locator/site_locator_map/models/site.dart';
@@ -83,6 +84,8 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
                 currentFocus.focusedChild != null) {
               currentFocus.focusedChild?.unfocus();
               if (kIsWeb) {
+                widget.siteLocatorController.currentSecondaryWebView(
+                    WebCurrentSecondaryView.normal.name);
                 widget.siteLocatorController.onListViewSiteInfoDetailsBackTap
                     ?.call();
               }
