@@ -43,7 +43,7 @@ class DrivenSiteLocator {
   }
 
   Future<void> initializePreferenceUtils() async {
-    await PreferenceUtils.init();
+    // await PreferenceUtils.init();
   }
 
   Future<void> initSiteLocatorEntitlement({

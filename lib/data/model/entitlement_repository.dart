@@ -23,6 +23,13 @@ class SiteLocatorEntitlementRepository {
   // Account Entitlement
   final bool isHelpCenterEnabled;
 
+  final bool isCardTypeFilterEnabled;
+  final bool isCheapestTabEnabled;
+  final bool isNearbyTabEnabled;
+  final bool isBestRatedTabEnabled;
+  final bool isRecentTabEnabled;
+  final bool isGoogleRatingEnabled;
+
   const SiteLocatorEntitlementRepository({
     required this.isAmenitiesFilterEnabled,
     required this.isDiscountsQuickFilterEnabled,
@@ -44,6 +51,12 @@ class SiteLocatorEntitlementRepository {
     required this.isClusterFeatureEnabled,
     required this.isHelpCenterEnabled,
     required this.isEnhancedFilterEnabled,
+    required this.isCardTypeFilterEnabled,
+    required this.isCheapestTabEnabled,
+    required this.isNearbyTabEnabled,
+    required this.isBestRatedTabEnabled,
+    required this.isRecentTabEnabled,
+    required this.isGoogleRatingEnabled,
   });
 }
 
@@ -95,4 +108,18 @@ class SiteLocatorEntitlementUtils {
       siteLocatorEntitlementRepository?.isHelpCenterEnabled ?? false;
   bool get isEnhancedFilterEnabled =>
       siteLocatorEntitlementRepository?.isEnhancedFilterEnabled ?? false;
+
+  // new
+  bool get isCardTypeFilterEnabled =>
+      siteLocatorEntitlementRepository?.isCardTypeFilterEnabled ?? false;
+  bool get isCheapestTabEnabled =>
+      siteLocatorEntitlementRepository?.isCheapestTabEnabled ?? false;
+  bool get isNearbyTabEnabled =>
+      siteLocatorEntitlementRepository?.isNearbyTabEnabled ?? false;
+  bool get isBestRatedTabEnabled =>
+      siteLocatorEntitlementRepository?.isBestRatedTabEnabled ?? false;
+  bool get isRecentTabEnabled =>
+      siteLocatorEntitlementRepository?.isRecentTabEnabled ?? false;
+  bool get isGoogleRatingEnabled =>
+      siteLocatorEntitlementRepository?.isGoogleRatingEnabled ?? false;
 }

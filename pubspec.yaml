@@ -5,39 +5,37 @@ homepage:
 
 publish_to: 'none'
 environment:
-  sdk: '>=2.19.6 <3.0.0'
-  flutter: ">=2.5.0"
+  sdk: ">=3.5.0 <4.0.0"
 
 dependencies:
-  app_settings: ^4.2.1
-  cron: ^0.5.1
-  dio: ^4.0.6
+  app_settings: ^5.2.0
+  cron: ^0.6.1
+  dio: ^5.7.0
   driven_common:
     git:
-      url: https://github.com/3FramesLab/flutter_driven-common
-      ref: feature/fix-sitelocator-api-cors
+      url: https://git.fleetcor.com/ucx/flutter/super-app
+      ref: driven-common
       version: ^0.0.2
-  equatable: ^2.0.0
+  equatable: "2.0.7"
   flutter:
     sdk: flutter
-  flutter_dotenv: ^5.0.0
-  flutter_google_maps_cluster:
-    git:
-      url: https://github.com/3FramesLab/flutter_google_maps_cluster
-      ref: main
-      version: ^0.0.6
+  flutter_dotenv: ^5.2.1
+  google_maps_cluster_manager_2: ^3.2.0
   gauge_indicator: ^0.4.3
-  geolocator: ^11.0.0
-  get: ^4.6.5
-  google_maps_flutter: ^2.2.3
-  http: ^0.13.3
-  map_launcher: ^2.4.0
-  path_provider: ^2.0.15
-  plugin_platform_interface: ^2.0.2
+  geolocator: ^13.0.2
+  get: ^4.6.6
+  google_maps_flutter: ^2.10.0
+  http: ^1.2.2
+  map_launcher: ^3.5.0
+  path_provider: ^2.1.5
+  plugin_platform_interface: ^2.1.3
   pointer_interceptor: ^0.9.3+5
-  sliding_up_panel: ^2.0.0+1
+  sliding_up_panel2: ^3.3.0+1
+  shimmer: ^3.0.0
   
-
+dependency_overrides:
+  flutter_plugin_android_lifecycle: 2.0.24
+  geolocator_android: 4.6.1
       
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -78,6 +76,9 @@ flutter:
     - assets/site_locator/comdata/
     - assets/site_locator/web/
     - assets/site_locator/web_for_mobile/
+    - assets/site_locator/card_types/
+    - assets/site_locator/brand_logos/
+    - assets/svgs/site_locator/
 
   #
   # For details regarding assets in packages, see

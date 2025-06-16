@@ -1,0 +1,49 @@
+// import 'package:driven_site_locator/driven_components/driven_components.dart';
+// import 'package:get/get.dart';
+
+// class DrivenSlideUpPanel extends StatelessWidget {
+//   final SlideUpPanelService panel = Get.find();
+//   final Widget? body;
+//   final ScrollController scrollController = ScrollController();
+
+//   DrivenSlideUpPanel({
+//     this.body,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     panel.scrollController = scrollController;
+//     return Obx(
+//       () => SlidingUpPanel(
+//         scrollController: panel.scrollController,
+//         backdropEnabled: true,
+//         backdropOpacity: 0.3,
+//         body: body,
+//         borderRadius: BorderRadius.circular(10),
+//         controller: panel.controller,
+//         defaultPanelState: panel.panelState,
+//         maxHeight: !panel.isDynamicHeight()
+//             ? UiHelper.screenHeight(context, panel.height())
+//             : panel.height().toDouble(),
+//         minHeight: 0,
+//         onPanelClosed: panel.callAndResetPanelClosed,
+//         panelBuilder: _panelHelper,
+//       ),
+//     );
+//   }
+
+//   Widget _panelHelper() {
+//     return ClipRRect(
+//       borderRadius: BorderRadius.circular(10),
+//       child: Scaffold(
+//         backgroundColor: Colors.white,
+//         body: Obx(
+//           () => Container(
+//             margin: EdgeInsets.only(top: panel.topMargin()),
+//             child: panel.panelWidget,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

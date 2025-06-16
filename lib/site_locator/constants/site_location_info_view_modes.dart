@@ -1,4 +1,0 @@
-enum SiteLocationInfoViewModes {
-  half,
-  full,
-}
