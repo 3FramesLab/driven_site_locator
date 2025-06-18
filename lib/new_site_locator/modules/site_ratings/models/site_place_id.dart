@@ -1,9 +1,9 @@
-import 'package:driven/constants/driven_constants.dart';
+import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 import 'package:hive/hive.dart';
 
 part 'site_place_id.g.dart';
 
-@HiveType(typeId: DrivenConstants.sitePlaceIdTypeId)
+@HiveType(typeId: SLInternalText.sitePlaceIdTypeId)
 class SitePlaceId extends HiveObject {
   @HiveField(0)
   final String masterIdentifier;

@@ -24,6 +24,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
 export 'config/z_sl_config_module.dart';
+export 'constants/z_sl_constants_module.dart';
 export 'modules/filters/sl_filter_module.dart';
 export 'modules/loading_progress_indicator/z_loading_progress_indicator_module.dart';
 export 'modules/map_view/map_view_module.dart';

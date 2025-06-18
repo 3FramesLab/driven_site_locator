@@ -184,8 +184,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     getRatingsFromPlaceIdUseCase = GetRatingsFromPlaceIdUseCase(
       siteLocationsService: siteLocationsService,
     );
-    saveSitePlaceIdUseCase = SaveSitePlaceIdUseCase(hive: Globals.hive);
-    getPlaceIdForSiteUseCase = GetPlaceIdForSiteUseCase(hive: Globals.hive);
+    saveSitePlaceIdUseCase = SaveSitePlaceIdUseCase(hive: Globals().hive);
+    getPlaceIdForSiteUseCase = GetPlaceIdForSiteUseCase(hive: Globals().hive);
     merchSiteFilterUseCase = MerchSiteFilterUseCase();
     getCardAcceptedUseCase = GetCardAcceptedUseCase();
     getSiteSourceFromCardTypeUseCase = GetSiteSourceFromCardTypeUseCase();
@@ -298,11 +298,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isFirstLaunch = false;
       showUIControls(true);
     } on Exception catch (e) {
-      Globals.dynatrace.logError(
-        name: SLInternalText.getSitesAPIErrorName,
-        value: SLInternalText.getSitesAPIErrorValue,
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: SLInternalText.getSitesAPIErrorName,
+            value: SLInternalText.getSitesAPIErrorValue,
+            reason: e.toString(),
+          );
       showUIControls(true);
     }
     // setSitesLoadingProgress(1);
@@ -336,11 +336,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       siteLocations = null;
       filteredSiteLocationsList.clear();
       sitesIdentifierWithLowestFuelPrice.clear();
-      Globals.dynatrace.logError(
-        name: 'error in site locator controller fetching site data from api',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name:
+                'error in site locator controller fetching site data from api',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -981,11 +982,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isRecenterTap = false;
     } catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error in site locator controller bounds change',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error in site locator controller bounds change',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1029,11 +1030,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
     } catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error: on updateFullMapViewSitesData',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error: on updateFullMapViewSitesData',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1064,11 +1065,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       selectedPlace = null;
     } catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error: on recenter button tap',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error: on recenter button tap',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1093,11 +1094,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       );
       currentLatLngBounds(await controller?.getVisibleRegion());
     } catch (e) {
-      Globals.dynatrace.logError(
-        name: 'error occurred on camera move',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error occurred on camera move',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1244,11 +1245,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isMapPinTapped = false;
       currentLatLngBounds(await googleMapController?.getVisibleRegion());
     } on Exception catch (e) {
-      Globals.dynatrace.logError(
-        name: 'error occurred on camera move',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error occurred on camera move',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1340,11 +1341,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         barrierColor: Colors.transparent,
       );
     } catch (e) {
-      Globals.dynatrace.logError(
-        name: 'error occurred on marker tap',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error occurred on marker tap',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1511,11 +1512,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
     } catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error: on getMiles',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error: on getMiles',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
     return milesToReturn;
   }
@@ -1752,11 +1753,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error while filter site locations',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error while filter site locations',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -1994,11 +1995,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isInitialListLoading(false);
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error while expand search radius',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error while expand search radius',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -2140,10 +2141,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } catch (_) {
       isShowLoading(false);
       firstTimeLoading(false);
-      Globals.dynatrace.logError(
-        name: SLInternalText.geoCodingAPIErrorName,
-        value: SLInternalText.geoCodingAPIErrorValue,
-      );
+      Globals().dynatrace.logError(
+            name: SLInternalText.geoCodingAPIErrorName,
+            value: SLInternalText.geoCodingAPIErrorValue,
+          );
     }
     sitesLoadingProgressController.isLoading.value = false;
     await _completeInitialLoader();
@@ -2372,11 +2373,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     } on Exception catch (e) {
       isShowLoading(false);
 
-      Globals.dynatrace.logError(
-        name: 'Error in site locator controller at initial load data',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'Error in site locator controller at initial load data',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -2435,11 +2436,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isShowLoading(false);
     } on Exception catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: SLInternalText.getSitesAPIErrorName,
-        value: SLInternalText.getSitesAPIErrorValue,
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: SLInternalText.getSitesAPIErrorName,
+            value: SLInternalText.getSitesAPIErrorValue,
+            reason: e.toString(),
+          );
     }
   }
 
@@ -2451,11 +2452,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         await getSiteLocationsData();
       }
     } catch (e) {
-      Globals.dynatrace.logError(
-        name: 'error in site locator controller resetMcFiltersOnCardChange()',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name:
+                'error in site locator controller resetMcFiltersOnCardChange()',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -2487,11 +2489,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isShowLoading(false);
     } catch (e) {
       isShowLoading(false);
-      Globals.dynatrace.logError(
-        name: 'error on search this area button tap',
-        value: e.toString(),
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: 'error on search this area button tap',
+            value: e.toString(),
+            reason: e.toString(),
+          );
     }
   }
 
@@ -3065,11 +3067,11 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         await validateSiteLocationWithFilters();
       }
     } on Exception catch (e) {
-      Globals.dynatrace.logError(
-        name: SLInternalText.getSitesAPIErrorName,
-        value: SLInternalText.getSitesAPIErrorValue,
-        reason: e.toString(),
-      );
+      Globals().dynatrace.logError(
+            name: SLInternalText.getSitesAPIErrorName,
+            value: SLInternalText.getSitesAPIErrorValue,
+            reason: e.toString(),
+          );
     }
     isShowLoading(false);
     hideSitesLoadingIndicator();

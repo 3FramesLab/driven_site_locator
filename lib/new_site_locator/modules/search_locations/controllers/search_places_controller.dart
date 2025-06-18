@@ -21,10 +21,10 @@ class SearchPlacesController extends GetxController with SearchLocationState {
         GetPlacesResultUseCase(siteLocationsService: siteLocationsService));
     getPlacesURLUseCase = Get.put(GetPlacesURLUseCase());
     saveGooglePlacePredictionUseCase = SaveGooglePlacePredictionUseCase(
-      hive: Globals.hive,
+      hive: Globals().hive,
     );
     getGooglePlaceFromPlaceIdUseCase = GetGooglePlaceFromPlaceIdUseCase(
-      hive: Globals.hive,
+      hive: Globals().hive,
     );
   }
 
@@ -41,10 +41,10 @@ class SearchPlacesController extends GetxController with SearchLocationState {
       );
       placesList(placesResponse?.predictions ?? []);
     } catch (_) {
-      Globals.dynatrace.logError(
-        name: SLInternalText.placesAPIErrorName,
-        value: SLInternalText.placesAPIErrorValue,
-      );
+      Globals().dynatrace.logError(
+            name: SLInternalText.placesAPIErrorName,
+            value: SLInternalText.placesAPIErrorValue,
+          );
     }
     isLoading(false);
   }

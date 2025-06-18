@@ -9,7 +9,7 @@ import 'package:driven/modules/wallet/controllers/wallet_controller.dart';
 import 'package:driven/new_site_locator/modules/map_view/use_cases/mc_sites/mc_sites_governor.dart';
 import 'package:driven/site_locator/configuration/site_locator_config.dart';
 import 'package:driven/site_locator/constants/site_filter_keys_constants.dart';
-import 'package:driven_site_locator/new_site_locator/config/z_sl_config_module.dart';
+import 'package:driven_site_locator/new_site_locator/constants/z_sl_constants_module.dart';
 import 'package:get/get.dart';
 
 class HasToSwitchMCTypeUseCase

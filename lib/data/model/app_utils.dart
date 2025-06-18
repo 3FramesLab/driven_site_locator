@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:driven_common/extensions/extensions_module.dart';
 import 'package:driven_site_locator/driven_site_locator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class AppUtils {
@@ -14,8 +15,10 @@ class AppUtils {
   static bool get isFuelman =>
       DrivenSiteLocator.instance.flavor == AppFlavor.fuelman;
 
-  static bool get isIFleet =>
-      DrivenSiteLocator.instance.flavor == AppFlavor.ifleet;
+  // TODO(Smeet): important set from super-app
+  static bool isQABuild = false;
+
+  static bool get isQADebugMode => isQABuild && kDebugMode;
 
   static bool get noAppFlavor =>
       DrivenSiteLocator.instance.flavor == AppFlavor.none;
@@ -24,6 +27,10 @@ class AppUtils {
       DrivenSiteLocator.instance.flavor == AppFlavor.fuelmanWeb;
 
   static String get flavor => DrivenSiteLocator.instance.flavor.name;
+
+  static bool get isIos => defaultTargetPlatform == TargetPlatform.iOS;
+
+  static bool get isAndroid => defaultTargetPlatform == TargetPlatform.android;
 
   static Future<dynamic> readJsonFile(String path) async {
     final response = await rootBundle.loadString(path);
@@ -37,6 +44,11 @@ class AppUtils {
 
   static String getPriceString(double price) =>
       price.truncateDecimalsToString(2);
+
+  // TODO(Smeet): important set from super-app
+  static String versionNumber = '';
+  static String buildNumber = '';
+  static String driven = '';
 }
 
 enum AppFlavor {
