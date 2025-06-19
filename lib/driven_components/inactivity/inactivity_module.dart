@@ -1,0 +1,13 @@
+library inactivity_module;
+
+import 'dart:async';
+
+import 'package:driven_common/driven_common_resources_module.dart';
+import 'package:driven_site_locator/constants/view_text.dart';
+import 'package:driven_site_locator/driven_components/inactivity/routes.dart';
+import 'package:driven_site_locator/new_site_locator/constants/sl_data.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+part 'inactivity_controller.dart';
+part 'inactivity_wrapper.dart';
