@@ -33,6 +33,7 @@ export 'modules/select_your_card/select_your_card_module.dart';
 export 'modules/site_ratings/site_ratings_module.dart';
 export 'modules/sl_list/sl_list_module.dart';
 export 'widgets/z_sl_widget_module.dart';
+export 'modules/site_locator_map/z_site_locator_map_module.dart';
 
 part 'models/site_filter.dart';
 part 'utilities/dc_site_locator_utils.dart';

@@ -145,8 +145,6 @@ mixin SiteLocatorState {
   late ComputeCircleRadiusUseCase computeCircleRadiusUseCase;
   late GetSiteLocationsInVisibleMapRegionUseCase
       getSiteLocationsInVisibleMapRegionUseCase;
-  late FetchMCSitesUseCase fetchMCSitesUseCase;
-  late HasToSwitchMCTypeUseCase hasToSwitchMCTypeUseCase;
   late GetTapOnMapLocationMessageUseCase getTapOnMapLocationMessageUseCase;
   late GetWelcomeScreenInfoUseCase getWelcomeScreenInfoUseCase;
   late GetLowestFuelPriceUseCase getLowestFuelPriceUseCase;

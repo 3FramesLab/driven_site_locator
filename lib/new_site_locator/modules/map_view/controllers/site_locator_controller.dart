@@ -172,10 +172,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     );
     getSiteLocationsInVisibleMapRegionUseCase =
         GetSiteLocationsInVisibleMapRegionUseCase();
-
-    hasToSwitchMCTypeUseCase = HasToSwitchMCTypeUseCase();
-    fetchMCSitesUseCase =
-        FetchMCSitesUseCase(siteLocationsService: siteLocationsService);
     getLowestFuelPriceUseCase = GetLowestFuelPriceUseCase();
     getSitesWithLowestFuelPriceUseCase = GetSitesWithLowestFuelPriceUseCase();
     fetchPlaceIDUseCase = FetchPlaceIDUseCase(
@@ -345,16 +341,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  Future<void> checkAndSetMCSitesGovernor() async {
-    final hasToSwitchMCCheckParams = HasToSwitchMCTypeUseCaseParams(
-      isUserAuthenticated: DrivenSessionManager().isUserAuthenticated ||
-          !MCSitesGovernor.isUnauthSLFlow,
-    );
-    hasToSwitchMCSites(
-      await hasToSwitchMCTypeUseCase.execute(hasToSwitchMCCheckParams),
-    );
-  }
-
   Future<void> getSitesData(
       Map<String, dynamic> jsonData, String accessToken) async {
     filteredSiteLocationsList.clear();
@@ -412,19 +398,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (DcSiteLocatorUtils.isGuest) {
       DcSiteLocatorUtils.setNewDiscountedDieselPrice(siteLocations ?? []);
     }
-  }
-
-  Future<void> fetchMCSiteLocationSummaryData(
-      Map<String, dynamic> payload, String accessToken) async {
-    await reassemblePinDropLogoAssetSetup();
-    lastTimeFetchedMCSites(true);
-    final fetchMCSitesUseCaseParams = FetchSitesUseCaseParams(
-      payload,
-      accessToken,
-      isUserAuthenticated: DrivenSessionManager().isUserAuthenticated,
-    );
-    siteLocations =
-        await fetchMCSitesUseCase.execute(fetchMCSitesUseCaseParams);
   }
 
   Future<void> reassemblePinDropLogoAssetSetup() async {

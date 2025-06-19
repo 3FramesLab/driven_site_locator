@@ -1,7 +1,4 @@
-import 'package:driven_site_locator/use_cases/base_future_usecase.dart';
-import 'package:driven/new_site_locator/modules/map_view/use_cases/cache_fuel_price/manage_cache_fuel_prices.dart';
-import 'package:driven/new_site_locator/modules/map_view/use_cases/cache_fuel_price/model/cached_fuel_prices_store.dart';
-import 'package:driven/new_site_locator/new_site_locator_module.dart';
+part of map_view_module;
 
 class GetSitesUncachedFuelPriceUseCase extends BaseFutureUseCase<
     GetSitesPriceCachedResult, GetSitesUncachedFuelPriceUseCaseParams> {
