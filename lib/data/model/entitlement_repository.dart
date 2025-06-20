@@ -30,6 +30,9 @@ class SiteLocatorEntitlementRepository {
   final bool isRecentTabEnabled;
   final bool isGoogleRatingEnabled;
   final bool isAcceptedCardSectionEnabled;
+  final bool isSearchSitesEnabled;
+  final bool isFixedCircleRadiusEnabled;
+  final bool isMovingCircleRadiusEnabled;
 
   const SiteLocatorEntitlementRepository({
     required this.isAmenitiesFilterEnabled,
@@ -59,6 +62,9 @@ class SiteLocatorEntitlementRepository {
     required this.isRecentTabEnabled,
     required this.isGoogleRatingEnabled,
     required this.isAcceptedCardSectionEnabled,
+    required this.isSearchSitesEnabled,
+    required this.isFixedCircleRadiusEnabled,
+    required this.isMovingCircleRadiusEnabled,
   });
 }
 
@@ -126,4 +132,10 @@ class SiteLocatorEntitlementUtils {
       siteLocatorEntitlementRepository?.isGoogleRatingEnabled ?? false;
   bool get isAcceptedCardSectionEnabled =>
       siteLocatorEntitlementRepository?.isAcceptedCardSectionEnabled ?? false;
+  bool get isSearchSitesEnabled =>
+      siteLocatorEntitlementRepository?.isSearchSitesEnabled ?? false;
+  bool get isFixedCircleRadiusEnabled =>
+      siteLocatorEntitlementRepository?.isFixedCircleRadiusEnabled ?? false;
+  bool get isMovingCircleRadiusEnabled =>
+      siteLocatorEntitlementRepository?.isMovingCircleRadiusEnabled ?? false;
 }

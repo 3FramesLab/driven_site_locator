@@ -3,6 +3,7 @@ part of sl_constants_module;
 class SLAssets {
   static const double logoSize = 40;
   static const assetPathCardTypes = 'assets/site_locator/card_types';
+  static const assetPath = 'assets/site_locator';
 
   /// Card Types.
   static const fuelmanFleetCard = '$assetPathCardTypes/fuelman_fleet_card.png';
@@ -18,4 +19,6 @@ class SLAssets {
       '$assetPathCardTypes/comdata_mastercard_fleet_card.png';
 
   static const currentLocationButtonIcon = 'assets/images/current_location.png';
+
+  static const backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
 }

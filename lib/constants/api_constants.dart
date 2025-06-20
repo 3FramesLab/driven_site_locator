@@ -12,6 +12,15 @@ class ApiConstants {
   static String packageId = '';
   static String androidSignature = '';
   static String basicAuthSecret = '';
+  static String googleAPIKey = '';
+  static String clientId = '';
+  static String client_secret = '';
+
+  static final siteLocatorAccessTokenJson = {
+    'client_id': clientId,
+    'client_secret': client_secret,
+    'grant_type': 'client_credentials'
+  };
 
   //api header constants
   static const deviceId = 'deviceid';
@@ -30,4 +39,9 @@ class ApiConstants {
   static const mobileDeviceToken = 'mobileDeviceToken';
 
   static const accessTokenPath = '/token';
+
+  static const googlePlacesSearchUrl =
+      'https://places.googleapis.com/v1/places:searchText';
+  static const googlePlaceDetailsUrl =
+      'https://places.googleapis.com/v1/places';
 }

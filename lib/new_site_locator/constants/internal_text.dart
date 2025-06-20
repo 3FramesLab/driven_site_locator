@@ -142,4 +142,9 @@ class SLInternalText {
   // API Dio
   static const xDeviceToken = 'xDeviceToken';
   static const xDeviceTokenHeader = 'x-device-token';
+
+  // Shared Peference
+  static const siteLocatorAccessToken = 'site_locator_access_token_new';
+  static const siteLocatorAccessTokenLastUpdatedTime =
+      'site_locator_access_token_updated_time_new';
 }

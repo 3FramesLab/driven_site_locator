@@ -2,7 +2,7 @@ part of map_view_module;
 
 class SiteLocatorMapUI extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
-  final EntitlementRepository entitlementRepository = Get.find();
+  static final entitlementRepository = SiteLocatorEntitlementUtils.instance;
   final Function(CameraPosition)? onCameraMove;
   final Function()? onCameraIdle;
 

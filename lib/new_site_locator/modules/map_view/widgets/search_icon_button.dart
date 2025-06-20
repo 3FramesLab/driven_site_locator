@@ -2,7 +2,7 @@ part of map_view_module;
 
 class SearchIconButton extends StatelessWidget {
   final SiteLocatorController siteLocatorController = Get.find();
-  final EntitlementRepository _entitlementRepository = Get.find();
+  static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
   SearchIconButton({super.key});
 
@@ -19,12 +19,13 @@ class SearchIconButton extends StatelessWidget {
                       label: SLSemanticStrings.gpsIconButton,
                       child: ElevatedButton(
                         onPressed: () {
-                          NavTo.searchPlace(
-                            arguments: {
-                              RouteArguments.fromScreen:
-                                  Routes.unauthSiteLocator,
-                            },
-                          );
+                          // TODO(Smeet): need superapp.
+                          // NavTo.searchPlace(
+                          //   arguments: {
+                          //     RouteArguments.fromScreen:
+                          //         Routes.unauthSiteLocator,
+                          //   },
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),
