@@ -10,7 +10,7 @@ class SaveSitePlaceIdUseCase
   Future<bool>? execute(SaveSitePlaceIdParam param) async {
     try {
       final box = await hive.openBox<SitePlaceId>(
-        DrivenConstants.sitePlaceIdBox,
+        SLInternalText.sitePlaceIdBox,
       );
 
       final sitePlaceId = SitePlaceId(

@@ -11,3 +11,4 @@ part 'semantic_strings.dart';
 part 'sl_colors.dart';
 part 'sl_assets.dart';
 part 'dynatrace_error.dart';
+part 'site_location_info_view_modes.dart';

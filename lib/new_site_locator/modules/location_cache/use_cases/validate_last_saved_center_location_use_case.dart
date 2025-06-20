@@ -4,9 +4,9 @@ class ValidateLastSavedCenterLocationUseCase
     extends BaseFutureUseCase<bool, LatLng> {
   @override
   Future<bool> execute(LatLng param) async {
-    final lastLatLngStr = Globals.sharedPreferences.getString(
-      SiteLocatorStorageKeys.lastUserCenterLoc,
-    );
+    final lastLatLngStr = Globals().sharedPreferences.getString(
+          SLInternalText.lastUserCenterLoc,
+        );
 
     if (lastLatLngStr == null) {
       return true;
@@ -18,11 +18,7 @@ class ValidateLastSavedCenterLocationUseCase
       param,
     );
 
-    final thresholdValueForDistance = AppUtils.isComdata
-        ? SiteLocatorConstants.thresholdDistanceForDFCSitesUpdateInMeters
-        : SiteLocatorConstants.thresholdDistanceForSitesUpdateInMeters;
-
-    if (distanceGap > thresholdValueForDistance) {
+    if (distanceGap > SLInternalText.thresholdDistanceForSitesUpdateInMeters) {
       return true;
     }
     return false;

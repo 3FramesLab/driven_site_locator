@@ -7,7 +7,6 @@ mixin SiteLocatorState {
   final searchPlacesController = Get.put(SearchPlacesController());
   final SitesLoadingProgressController sitesLoadingProgressController =
       Get.find();
-  CardholderSetupController cardholderSetupController = Get.find();
 
   RxDouble infoPanelInitialHeight =
       SLInternalText.siteInfoDrawerHalfViewHeight.obs;
@@ -95,8 +94,6 @@ mixin SiteLocatorState {
   List<SiteFilter> selectedSiteFilters = [];
   double? lowestFuelPrice;
   List<String?> sitesIdentifierWithLowestFuelPrice = [];
-  final _allEnhancedFilters =
-      enhancedFilterData.map(EnhancedFilterModel.clone).toList();
   RxDouble expandRadiusCount = 1.0.obs;
   double safeAreaPadding = 0;
 
@@ -116,8 +113,6 @@ mixin SiteLocatorState {
 
   RxBool showUIControls = true.obs;
 
-  final _filterSessionManager = SiteFilterSessionManager();
-
   String selectedMapPinKey = SLInternalText.resetCode;
   List<Marker> rawMarkersList = [];
   MarkerDetails? prevSelectedMarkerDetails;
@@ -129,14 +124,8 @@ mixin SiteLocatorState {
   //use cases
   late ValidateLastSavedCenterLocationUseCase
       validateLastSavedCenterLocationUseCase;
-  late SiteLocatorRepositoryImpl siteLocatorRepository;
-  late RetrieveFiltersFromSPUseCase retrieveFiltersFromSPUseCase;
-  late ApplySiteFilterUseCase applySiteFilterUseCase;
-  late FilterSitesUseCase filterSitesUseCase;
   late UpdateMarkerIconUseCase updateMarkerIconUseCase;
   late GenerateMarkersUseCase generateMarkersUseCase;
-  late StoreStringListIntoSPUseCase storeStringListIntoSPUseCase;
-  late GetStringListFromSPUseCase getStringListFromSPUseCase;
   late GetSiteListFromSiteLocationsUseCase getSiteListFromSiteLocationsUseCase;
   late FilterMarkersUseCase filterMarkersUseCase;
   late GetUserLocationUseCase getUserLocationUseCase;
@@ -145,8 +134,6 @@ mixin SiteLocatorState {
   late ComputeCircleRadiusUseCase computeCircleRadiusUseCase;
   late GetSiteLocationsInVisibleMapRegionUseCase
       getSiteLocationsInVisibleMapRegionUseCase;
-  late GetTapOnMapLocationMessageUseCase getTapOnMapLocationMessageUseCase;
-  late GetWelcomeScreenInfoUseCase getWelcomeScreenInfoUseCase;
   late GetLowestFuelPriceUseCase getLowestFuelPriceUseCase;
   late GetSitesWithLowestFuelPriceUseCase getSitesWithLowestFuelPriceUseCase;
   late FetchPlaceIDUseCase fetchPlaceIDUseCase;
@@ -171,12 +158,6 @@ mixin SiteLocatorState {
   final locationCacheUtils = LocationCacheUtils();
   bool isFullMapViewFirstLaunch = true;
 
-  late GetSitesUncachedFuelPriceUseCase getSitesUncachedFuelPriceUseCase;
-
-  late ManageDieselSaleTypeUseCase manageDieselSaleTypeUseCase;
-  late DieselPricesPackUseCase dieselPricesPackUseCase;
-  late DisplayDieselPriceUseCase displayDieselPriceUseCase;
-
   bool isExecuteCameraMoveForCardHolderOnFirstLaunch = true;
 
   late GenerateSiteHashmapUseCase generateSiteHashmapUseCase;
@@ -198,10 +179,6 @@ mixin SiteLocatorState {
       calculateSitesLoadingProgressUseCase;
   // late Timer? sitesLoadingPeriodicTimer;
   RxBool isSitesLoadingTimerInitiated = false.obs;
-
-  List<FuelPreferences> fuelPreferencesList = [];
-  late GetSelectedCardFuelPrefTypeUseCase getSelectedCardFuelPrefTypeUseCase;
-  FuelPreferenceType selectedCardFuelPreferenceType = FuelPreferenceType.both;
 
   bool isComingFromRecenter = false;
   Predictions? selectedPlace;

@@ -1,27 +1,5 @@
 library search_location_module;
 
-import 'package:driven/admin_module/config/admin_routes.dart';
-import 'package:driven/common/utilities/app_utils.dart';
-import 'package:driven/config/globals.dart';
-import 'package:driven/config/routes.dart';
-import 'package:driven/constants/driven_constants.dart';
-import 'package:driven/constants/internal_text.dart';
-import 'package:driven/constants/route_arguments.dart';
-import 'package:driven/constants/view_text.dart';
-import 'package:driven/data/nav_to/nav_to.dart';
-import 'package:driven/driven_components.dart';
-import 'package:driven/new_site_locator/modules/map_view/use_cases/mc_sites/mc_sites_governor.dart';
-import 'package:driven/new_site_locator/new_site_locator_module.dart';
-import 'package:driven/site_locator/constants/site_locator_api_constants.dart';
-import 'package:driven/site_locator/data/models/google_geocoding_model.dart';
-import 'package:driven/site_locator/data/models/google_place_model.dart';
-import 'package:driven/site_locator/data/models/google_places/predictions.dart';
-import 'package:driven/site_locator/data/services/site_locations_service.dart';
-import 'package:driven/site_locator/site_locator_map/core/custom_pin_markers/pin_variant_store.dart';
-import 'package:driven/site_locator/styles/site_locator_text_field_style.dart';
-import 'package:driven/site_locator/utilities/site_info_utils.dart';
-import 'package:driven/site_locator/utilities/site_locator_utils.dart';
-import 'package:driven/site_locator/widgets/site_locator_scaffold.dart';
 import 'package:driven_site_locator/config/globals.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';

@@ -40,6 +40,7 @@ export 'modules/site_locator_map/z_site_locator_map_module.dart';
 export 'modules/site_ratings/site_ratings_module.dart';
 export 'modules/sl_list/sl_list_module.dart';
 export 'widgets/z_sl_widget_module.dart';
+export 'modules/location_cache/location_cache_module.dart';
 
 part 'models/site_filter.dart';
 part 'utilities/dc_site_locator_utils.dart';
@@ -49,3 +50,4 @@ part 'utilities/map_utilities.dart';
 part 'utilities/math_utils.dart';
 part 'utilities/site_info_utils.dart';
 part 'utilities/external_map_utils.dart';
+part 'utilities/pin_anchor.dart';

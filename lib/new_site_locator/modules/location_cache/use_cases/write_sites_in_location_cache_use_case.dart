@@ -21,15 +21,15 @@ class WriteSitesInLocationCacheUseCase
     await file.writeAsString(jsonString);
     if (param.sites.isNotEmpty) {
       await Globals().sharedPreferences.setInt(
-            SiteLocatorStorageKeys.lastSitesDataSyncDate,
+            SLInternalText.lastSitesDataSyncDate,
             DateTimeExtension.now.millisecondsSinceEpoch,
           );
       await Globals().sharedPreferences.setString(
-            SiteLocatorStorageKeys.lastUserCenterLoc,
+            SLInternalText.lastUserCenterLoc,
             MapUtilities.appendLatLng(param.centerLocation),
           );
       await Globals().sharedPreferences.setDouble(
-            SiteLocatorStorageKeys.lastUsedMapRadius,
+            SLInternalText.lastUsedMapRadius,
             param.mapRadius,
           );
     }

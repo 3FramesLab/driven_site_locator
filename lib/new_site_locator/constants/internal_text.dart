@@ -25,6 +25,7 @@ class SLInternalText {
   static const minLocationEnableDialogHeight = 200.0;
   static const siteInfoIconSize = 18.0;
   static const socketError = 502;
+  static const siteLocatorAccessTokenExpiryTimeInMinutes = 30;
 
   static const ratedStarColor = Color(0xFFffb300);
   static const unratedStarColor = Color(0XFFe0e0e0);
@@ -147,4 +148,14 @@ class SLInternalText {
   static const siteLocatorAccessToken = 'site_locator_access_token_new';
   static const siteLocatorAccessTokenLastUpdatedTime =
       'site_locator_access_token_updated_time_new';
+  static const firstVisitToSiteLocator = 'first_visit_site_locator_key';
+  static const selectedSiteFilters = 'selected_site_filters_key';
+  static const showFuelPriceDisclaimer = 'show_fuel_price_disclaimer_key';
+  static const newlyAddedSiteFilters = 'newly_added_site_filters_key';
+  static const lastSitesDataSyncDate = 'last_sites_data_sync_date_key';
+  static const lastUserCenterLoc = 'last_user_center_loc_key';
+  static const lastUsedMapRadius = 'last_used_map_radius';
+
+  static const locationFilePath = '/site_locator/';
+  static const locationFileName = 'location_cache.txt';
 }

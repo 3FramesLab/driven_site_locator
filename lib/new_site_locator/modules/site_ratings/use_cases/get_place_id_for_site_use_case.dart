@@ -10,7 +10,7 @@ class GetPlaceIdForSiteUseCase
   Future<String?> execute(GetPlaceIdForSiteParam param) async {
     try {
       final box = await hive.openBox<SitePlaceId>(
-        DrivenConstants.sitePlaceIdBox,
+        SLInternalText.sitePlaceIdBox,
       );
 
       if (box.containsKey(param.masterIdentifier)) {

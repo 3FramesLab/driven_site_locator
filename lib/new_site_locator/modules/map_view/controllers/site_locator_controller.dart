@@ -9,8 +9,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void onInit() {
     super.onInit();
     if (SLSessionManager().isUserAuthenticated && AppUtils.isComdata) {
-      MCSitesGovernor.isUnauthSLFlow = false;
-      MCSitesGovernor.isMCSitesViewEnabled = false;
       unawaited(reassemblePinDropLogoAssetSetup());
     }
 
@@ -119,21 +117,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   void _initUseCases() {
-    siteLocatorRepository = Get.put(SiteLocatorRepositoryImpl(
-      siteLocationsService: siteLocationsService,
-    ));
-
     validateLastSavedCenterLocationUseCase =
         Get.put(ValidateLastSavedCenterLocationUseCase());
     calculateSitesLoadingProgressUseCase =
         Get.put(CalculateSitesLoadingProgressUseCase());
-    filterSitesUseCase = Get.put(FilterSitesUseCase());
     updateMarkerIconUseCase = Get.put(UpdateMarkerIconUseCase());
     generateMarkersUseCase = Get.put(GenerateMarkersUseCase());
-    retrieveFiltersFromSPUseCase = Get.put(RetrieveFiltersFromSPUseCase());
-    applySiteFilterUseCase = Get.put(ApplySiteFilterUseCase());
-    storeStringListIntoSPUseCase = Get.put(StoreStringListIntoSPUseCase());
-    getStringListFromSPUseCase = Get.put(GetStringListFromSPUseCase());
     getSiteListFromSiteLocationsUseCase =
         Get.put(GetSiteListFromSiteLocationsUseCase());
     filterMarkersUseCase = Get.put(FilterMarkersUseCase());
@@ -143,19 +132,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       GetSelectedPlaceLatLngUseCase(siteLocationsService: siteLocationsService),
     );
     computeCircleRadiusUseCase = Get.put(ComputeCircleRadiusUseCase());
-    getTapOnMapLocationMessageUseCase =
-        Get.put(GetTapOnMapLocationMessageUseCase());
-    getWelcomeScreenInfoUseCase = Get.put(GetWelcomeScreenInfoUseCase());
-    getSitesUncachedFuelPriceUseCase =
-        Get.put(GetSitesUncachedFuelPriceUseCase());
-    manageDieselSaleTypeUseCase = Get.put(ManageDieselSaleTypeUseCase());
-    dieselPricesPackUseCase = Get.put(DieselPricesPackUseCase());
-    displayDieselPriceUseCase = Get.put(DisplayDieselPriceUseCase());
     // applyClusterUseCase = Get.put(ApplyClusterUseCase());
     generateSiteHashmapUseCase = Get.put(GenerateSiteHashmapUseCase());
-    getSelectedCardFuelPrefTypeUseCase = Get.put(
-      GetSelectedCardFuelPrefTypeUseCase(),
-    );
     getSiteLocationsInVisibleMapRegionUseCase =
         GetSiteLocationsInVisibleMapRegionUseCase();
     getLowestFuelPriceUseCase = GetLowestFuelPriceUseCase();
@@ -235,43 +213,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       // ignore: parameter_assignments
       forceApiCall = true;
       await PinVariantStore.iniDefaultLogos();
-      // if (AppUtils.isComdata) {
-      //   markers.clear();
-      // }
-      // final newCenterLocation = MapUtilities.latLngBoundCenter(
-      //   southwest: currentLatLngBounds().southwest,
-      //   northeast: currentLatLngBounds().northeast,
-      // );
-      // final fetchSitesFromRemote =
-      //     await locationCacheUtils.shouldFetchSitesFromRemote(
-      //   newCenterLocation,
-      //   UmaSLProperties.defaultMapRadius,
-      // );
-
-      /// check if we forcefully need to call API [forceApiCall]
-      /// [fetchSitesFromRemote] is responsible for checking time and
-      /// if [newCenterLocation] is within 1 mile of the stored cache location.
-      // if (forceApiCall || fetchSitesFromRemote) {
-      //   // calling Summary API from Server
-      //   await callSiteLocationSummaryFromServer(
-      //       updateLocationCache: updateLocationCache);
-      // } else {
-      //   // calling cache
-      //   if (allowGateKeeperToGetSiteLocationsData()) {
-      //     await checkAndSetMCSitesGovernor();
-      //     await reassemblePinDropLogoAssetSetup();
-      //     await getSitesDataFromCache();
-      //   }
-      // }
 
       await callSiteLocationSummaryFromServer(
         updateLocationCache: updateLocationCache,
       );
-
-      //we need raw markers list on retry fuel prices api call
-      //as we are not doing site locations api call
-      // rawSiteLocationsForFuelPricesApi =
-      //     siteLocations?.map(SiteLocation.clone).toList();
 
       await handleSiteLocationResponse();
 
@@ -347,10 +292,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   bool get isWalletLoading {
-    return AppUtils.isComdata &&
-        AppUtils.isCardHolderLogin &&
-        SLSessionManager().isUserAuthenticated &&
-        Get.find<WalletController>().walletService.isLoadingCards.value;
+    return false;
+    // TODO(Smeet): need work.
+    // return AppUtils.isComdata &&
+    //     AppUtils.isCardHolderLogin &&
+    //     SLSessionManager().isUserAuthenticated &&
+    //     Get.find<WalletController>().walletService.isLoadingCards.value;
   }
 
   Future<void> fetchRegularSiteLocationSummaryData(
@@ -500,13 +447,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> handleSiteLocationResponse() async {
     if (siteLocations?.isNotEmpty ?? false) {
-      // siteLocations?.sort(sortByMilesApart);
-      selectedSiteFilters = retrieveStoredFilters(); //need to check
-
-      ManageCacheFuelPrices.isStandAloneFuelPriceCall = false;
-      //For comdata, getting fuel prices and merging into site locations.
-      // await getFuelPricesForMarkers(siteLocations ?? []);
-
       unawaited(getSiteRatings());
       unawaited(getMilesForSites());
 
@@ -530,8 +470,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       sortListByRatings.clear();
       sitesIdentifierWithLowestFuelPrice.clear();
       _clearMapMarkersAndList();
-      // showNoLocationsErrorDialog(SLInternalText.noLocationsErrorText);
-      _showNoLocationFoundDialog();
     }
   }
 
@@ -676,28 +614,15 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
         (inFullMapViewScreen || isUnauthSLChannel());
   }
 
+  // TODO(Smeet): need work
+  // bool get inFullMapViewScreen => Get.currentRoute == Routes.unauthSiteLocator;
+  bool get inFullMapViewScreen => true;
+
   void _clearMapMarkersAndList() {
     markers.clear();
     filteredSiteLocationsList.clear();
     clusterManager = null;
     _clearSiteListItemIfNecessary();
-  }
-
-  bool get canMakeFuelPricesApiCall =>
-      AppUtils.isComdata &&
-      Get.currentRoute != Routes.welcome &&
-      Get.currentRoute != Routes.wallet &&
-      Get.currentRoute != Routes.cipComplete &&
-      Get.currentRoute != Routes.homeNoRefresh &&
-      Get.currentRoute != Routes.home;
-
-  List<SiteFilter> retrieveStoredFilters() {
-    return retrieveFiltersFromSPUseCase.execute(
-      RetrieveFiltersFromSPParams(
-        allEnhancedFilters: _allEnhancedFilters,
-        requireFavorites: _filterSessionManager.isFavoriteFilterSelected,
-      ),
-    );
   }
 
   Future<void> validateSiteLocationWithFilters({
@@ -725,8 +650,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
           SLInternalText.thresholdForShowingChangeFiltersDialog) {
         resetExpandRadiusButtonTapCount();
         // showChangeFiltersDialog();
-      } else {
-        showNoMatchingLocationDialog();
       }
     }
     if (filteredSiteLocationsList.isNotEmpty) {
@@ -836,20 +759,20 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     final cardToken = SLSessionManager().selectedCardToken;
 
     String? sysAccountId;
-    if (SLSessionManager()
-        .selectedCardSysAccountId
-        .isNotNullEmptyOrWhitespace) {
-      // CH
-      sysAccountId = SLSessionManager().selectedCardSysAccountId;
-    } else if (SLSessionManager()
-            .selectedAccountDetails
-            ?.sysAccountId
-            .isNotNullEmptyOrWhitespace ??
-        false) {
-      // admin
-      sysAccountId =
-          SLSessionManager().selectedAccountDetails?.sysAccountId;
-    }
+    // TODO(Smeet): need work
+    // if (SLSessionManager()
+    //     .selectedCardSysAccountId
+    //     .isNotNullEmptyOrWhitespace) {
+    //   // CH
+    //   sysAccountId = SLSessionManager().selectedCardSysAccountId;
+    // } else if (SLSessionManager()
+    //         .selectedAccountDetails
+    //         ?.sysAccountId
+    //         .isNotNullEmptyOrWhitespace ??
+    //     false) {
+    //   // admin
+    //   sysAccountId = SLSessionManager().selectedAccountDetails?.sysAccountId;
+    // }
 
     final siteSource = getSiteSourceFromCardTypeUseCase.execute(
       SLSessionManager().selectedCardTypeValue,
@@ -1112,7 +1035,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   void resetMapViewScreen() {
-    SiteLocatorUtils.hideKeyboard();
+    DcSiteLocatorUtils.hideKeyboard();
     closeLocationInfoPanel();
     resetPrevSelectedMarkerStatus();
   }
@@ -1158,7 +1081,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
           !firstTimeLoading()) {
         sitesLoadingProgressController.isMapPositionChanged(true);
       }
-      SiteLocatorUtils.hideKeyboard();
+      DcSiteLocatorUtils.hideKeyboard();
       if (backFromSiteLocationsListView || tappedFromPinDrop()) {
         Future.delayed(const Duration(milliseconds: 100), () {
           backFromSiteLocationsListView = false;
@@ -1261,14 +1184,20 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     closeSiteLocatorMenuPanel();
   }
 
+  void closeSiteLocatorMenuPanel() {
+    if (menuPanelController.isAttached) {
+      menuPanelController.close();
+    }
+  }
+
   Future<void> onMarkerTap(MarkerDetails item) async {
     try {
       trackAction(
         AnalyticsTrackActionName.locationPinClickedEvent,
-        adobeCustomTag: AdobeTagProperties.mapView,
+        // adobeCustomTag: AdobeTagProperties.mapView,
       );
       tappedFromPinDrop(true);
-      SiteLocatorUtils.hideKeyboard();
+      DcSiteLocatorUtils.hideKeyboard();
       closeSiteLocatorMenuPanel();
       isFetchSitesData = false;
       isMapPinTapped = true;
@@ -1646,53 +1575,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   void checkIsFavorite(String id) => isSiteFavorite(favoriteList.contains(id));
 
-  Future<void> manageFavorite(String id) async {
-    if (favoriteList.contains(id)) {
-      if (Get.currentRoute == AdminRoutes.siteLocationsListView) {
-        trackAction(
-          AnalyticsTrackActionName.listViewRemoveFromFavoritesLinkClickEvent,
-          adobeCustomTag: AdobeTagProperties.listView,
-        );
-      } else {
-        trackAction(
-          AnalyticsTrackActionName
-              .siteInfoDrawerRemoveFromFavoritesLinkClickEvent,
-          adobeCustomTag: AdobeTagProperties.siteInfo,
-        );
-      }
-
-      favoriteList.remove(id);
-      isSiteFavorite(false);
-    } else {
-      if (Get.currentRoute == AdminRoutes.siteLocationsListView) {
-        trackAction(
-          AnalyticsTrackActionName.listViewAddToFavoritesLinkClickEvent,
-          adobeCustomTag: AdobeTagProperties.listView,
-        );
-      } else {
-        trackAction(
-          AnalyticsTrackActionName.siteInfoDrawerAddToFavoritesLinkClickEvent,
-          adobeCustomTag: AdobeTagProperties.siteInfo,
-        );
-      }
-
-      favoriteList.add(id);
-      isSiteFavorite(true);
-    }
-
-    await updateFavoriteList(favoriteList);
-  }
-
-  List<String> getFavoriteList() => favoriteList(PreferenceUtils.getStringList(
-      SLInternalText.favoriteSiteListStorageKey,
-      defaultValue: []));
-
-  Future<void> updateFavoriteList(List<String> favoriteList) async =>
-      PreferenceUtils.setStringList(
-        SLInternalText.favoriteSiteListStorageKey,
-        value: favoriteList,
-      );
-
   Future<void> filterSiteLocations({
     bool showNoFilterLocationDialog = false,
     bool shouldSortList = false,
@@ -1705,10 +1587,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       }
       isShowLoading(false);
       isInitialListLoading(false);
-
-      if (filteredSiteLocationsList.isEmpty && showNoFilterLocationDialog) {
-        _showNoLocationFoundDialog();
-      }
     } on Exception catch (e) {
       isShowLoading(false);
       Globals().dynatrace.logError(
@@ -1716,12 +1594,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             value: e.toString(),
             reason: e.toString(),
           );
-    }
-  }
-
-  void _showNoLocationFoundDialog() {
-    if (Get.currentRoute == Routes.unauthSiteLocator) {
-      Get.dialog(DcNoLocationFoundDialog(radius: lastSearchedRadius));
     }
   }
 
@@ -1851,7 +1723,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (loadMoreSitesOnScroll()) {
       trackAction(
         AnalyticsTrackActionName.listViewViewMoreSitesLinkClickEvent,
-        adobeCustomTag: AdobeTagProperties.listView,
+        // adobeCustomTag: AdobeTagProperties.listView,
       );
 
       final List<SiteLocation> originalItems = getSiteLocationsForListView();
@@ -1879,86 +1751,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
             : siteLocations ?? <SiteLocation>[],
       );
 
-  void showNoMatchingLocationDialog() {
-    isFetchSitesData = false;
-    lowestFuelPrice = null;
-    // sortedListViewData.clear();
-    sortListByPrice.clear();
-    sortListByDistance.clear();
-    sortListByRatings.clear();
-
-    if (isWelcomeScreen) {
-      return;
-    }
-    closeSiteLocatorMenuPanel();
-    if (selectedSiteFilters.isNotEmpty && canShowEnhancedNoLocationDialog()) {
-      trackState(AnalyticsScreenName.noLocationModalScreen);
-      if (!(Get.isDialogOpen ?? false)) {
-        // Get.dialog(
-        //   EnhancedNoLocationDialog(),
-        //   barrierDismissible: false,
-        // );
-      }
-    } else if (inFullMapViewScreen || isUnauthSLChannel()) {
-      _clearSiteListItemIfNecessary();
-      // showNoLocationsErrorDialog(SLInternalText.noLocationsErrorText);
-    }
-  }
-
-  bool canShowEnhancedNoLocationDialog() {
-    final canShowFlag = Get.currentRoute == AdminRoutes.siteLocatorMapView ||
-        Get.currentRoute == AdminRoutes.siteLocationsListView ||
-        Get.currentRoute == AdminRoutes.cardholderSiteLocatorMapPage ||
-        (Get.currentRoute == AdminRoutes.pwaDashboard &&
-            isLocatorBottomNavTabPressed());
-    return canShowFlag;
-  }
-
   void setBottomNavTab({required bool isLocatorTabPressed}) {
     isLocatorBottomNavTabPressed(isLocatorTabPressed);
-  }
-
-  Future<void> expandSearchRadius() async {
-    try {
-      trackAction(
-        AnalyticsTrackActionName.noLocationModalExpandSearchEvent,
-        adobeCustomTag: AdobeTagProperties.modals,
-      );
-      isFetchSitesData = false;
-      cardholderSetupController.setupWizardFirstTimeLaunch(false);
-      incrementExpandRadiusButtonTapCount();
-      Get.back();
-      feedRelayToSitesLoadingProgress();
-      isShowLoading(true);
-      isInitialListLoading(true);
-      final calculatedLatLngBounds = MapUtilities.toBounds(
-        getCenterLatLng,
-        increaseMilesInMeter(),
-      );
-      await googleMapController?.moveCamera(
-        CameraUpdate.newLatLngBounds(calculatedLatLngBounds, mapPadding),
-      );
-
-      final latLngBounds = await googleMapController?.getVisibleRegion();
-
-      if (latLngBounds != null) {
-        currentLatLngBounds(latLngBounds);
-      }
-
-      fireDynatraceFuelPriceAPILogs('expandSearchRadius');
-      await getSiteLocationsData(forceApiCall: true);
-      await updateListPageIfNecessary();
-      modifyCircleSize();
-      isShowLoading(false);
-      isInitialListLoading(false);
-    } on Exception catch (e) {
-      isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: 'error while expand search radius',
-            value: e.toString(),
-            reason: e.toString(),
-          );
-    }
   }
 
   void incrementExpandRadiusButtonTapCount() => expandRadiusButtonTapCount += 1;
@@ -2046,7 +1840,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void _setFullViewStatus() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerSlideToFullScreenEvent,
-      adobeCustomTag: AdobeTagProperties.siteInfo,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
     isShownRemainingFullSiteInfo(true);
     isSiteInfoFullViewed(true);
@@ -2095,7 +1889,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await searchedLocationWithBounds(
         searchPlaceLatLng: searchPlaceLatLng,
       );
-      await updateListPageIfNecessary();
     } catch (_) {
       isShowLoading(false);
       firstTimeLoading(false);
@@ -2122,7 +1915,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       Predictions selectedPlaceDetails) async {
     final response = await getLatLngForSelectedPlaceUseCase.execute(
       GetLatLngForSelectedPlaceUseCaseParams(
-        SiteLocatorApiConstants.googleGeoCodingUrl,
+        ApiConstants.googleGeoCodingUrl,
         selectedPlaceDetails.placeId ?? '',
       ),
     );
@@ -2137,31 +1930,18 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       //     :
       MediaQuery.of(context).size.height;
 
-  double panelMaxHeight(BuildContext context) {
-    final deviceMedia = MediaQuery.of(context);
-    final deviceEdgePadding = _isAuthenticatedMapView
-        ? AppStrings.bottomNavBarHeight + deviceMedia.padding.top
-        : deviceMedia.padding.top;
-    final deviceHeight = deviceMedia.size.height;
-    return deviceHeight - deviceEdgePadding;
-  }
-
-  bool get _isAuthenticatedMapView =>
-      Get.currentRoute == AdminRoutes.pwaDashboard ||
-      Get.currentRoute == AdminRoutes.cardholderSiteLocatorMapPage;
-
   double get lastZoomComputed => lastZoomByUser();
 
   Future<void> navToNextPageOnMapViewTap() async {
     trackMapClick();
     trackState(AnalyticsScreenName.mapviewScreen);
-   SLSessionManager().isUserAuthenticated = false;
+    SLSessionManager().isUserAuthenticated = false;
 
-    if (canShowCardholderSetup()) {
-      AdminRouteHelper.cardholderSetupPageOne();
-    } else {
-      await navigateToSiteLocatorMapViewPage();
-    }
+    // if (canShowCardholderSetup()) {
+    //   AdminRouteHelper.cardholderSetupPageOne();
+    // } else {
+    //   await navigateToSiteLocatorMapViewPage();
+    // }
   }
 
   Future<void> navigateToSiteLocatorMapViewPage() async {
@@ -2171,92 +1951,31 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
     cameraPositionZoom(lastZoomByUser());
 
-    await Get.toNamed(
-      AdminRoutes.siteLocatorMapView,
-      arguments: {'currentUserLocation': currentLocation},
-    )?.then((val) async {
-      await onReCenterButtonClicked(
-        mapController: welcomeGoogleMapController,
-      );
-    });
+    // await Get.toNamed(
+    //   AdminRoutes.siteLocatorMapView,
+    //   arguments: {'currentUserLocation': currentLocation},
+    // )?.then((val) async {
+    //   await onReCenterButtonClicked(
+    //     mapController: welcomeGoogleMapController,
+    //   );
+    // });
   }
-
-  Future<void> navigateToCardholderSetupOrMapPage() async {
-    if (canShowCardholderSetup()) {
-      AdminRouteHelper.cardholderSetupPageOne();
-    } else {
-      await AdminRouteHelper.cardholderSiteLocatorMap();
-    }
-  }
-
-  bool canShowCardholderSetup() => cardholderSetupController.checkToShowSetup();
 
   Future<void> navigateToCardholderSiteLocatorMap() async {
     trackWalletSiteLocatorClick();
-    await navigateToCardholderSetupOrMapPage();
   }
 
   Future<void> onMapViewTap() async {
-    if (isWelcomeScreen) {
-      await navToNextPageOnMapViewTap();
-    } else {
-      await navigateToCardholderSiteLocatorMap();
-    }
-  }
-
-  void navigateToEnhancedFilter() {
-    resetMapViewScreen();
-    clearSearchPlaceInput();
-
-    Get.toNamed(AdminRoutes.enhancedFilterPage)?.then((data) {
-      try {
-        if (data[SiteLocatorRouteArguments.enhancedFilterClearStatus]) {
-          filterSiteLocations();
-        }
-      } catch (_) {}
-    });
-  }
-
-  Future<void> updateListPageIfNecessary() async {
-    if (Get.currentRoute == AdminRoutes.siteLocationsListView) {
-      await setListViewInitializers();
-    }
-
-    if (isUnauthSLChannel()) {
-      await setListViewInitializers();
-    }
+    // if (isWelcomeScreen) {
+    //   await navToNextPageOnMapViewTap();
+    // } else {
+    //   await navigateToCardholderSiteLocatorMap();
+    // }
   }
 
   void _clearSiteListItemIfNecessary() {
     siteLocationDisplayData.clear();
     listViewItems.clear();
-  }
-
-  bool get isWelcomeScreen => Get.currentRoute == Routes.welcome;
-
-  bool get isAuthenticatedWelcomeScreen =>
-      Get.currentRoute == Routes.home ||
-      Get.currentRoute == Routes.wallet ||
-      Get.currentRoute == Routes.homeNoRefresh ||
-      Get.currentRoute == Routes.cipComplete;
-
-  // TODO(Smeet): check implementation.
-  bool get inFullMapViewScreen =>
-      Get.currentRoute == AdminRoutes.siteLocatorMapView ||
-      Get.currentRoute == AdminRoutes.cardholderSiteLocatorMapPage ||
-      Get.currentRoute == Routes.unauthSiteLocator ||
-      isAdminAuthenticatedFullMapView();
-
-  bool isAdminAuthenticatedFullMapView() {
-    return SLSessionManager().isUserAuthenticated &&
-        Get.currentRoute == AdminRoutes.pwaDashboard &&
-        isLocatorBottomNavTabPressed();
-  }
-
-  void closeSiteLocatorMenuPanel() {
-    if (menuPanelController.isAttached && !AppUtils.isDrivenConnect) {
-      menuPanelController.close();
-    }
   }
 
   Future<void> recenterMapOnLocationChange() async {
@@ -2294,17 +2013,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     await checkLocationPermission();
     unawaited(getMilesForSites());
     await recenterMapOnLocationChange();
-  }
-
-  void show2CTAButton({bool? show2CTA}) {
-    if (retrieveStoredFilters().isNotEmpty &&
-        filteredSiteLocationsList.isEmpty &&
-        !isShowLoading()) {
-      if (show2CTA != null) {
-        canShow2CTA(show2CTA);
-        showNoMatchingLocationDialog();
-      }
-    }
   }
 
   Future<void> getInitialPageLoadData(
@@ -2347,14 +2055,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  void filterButtonTap() {
-    if (isShowLoading()) {
-      return;
-    }
-    getFilterTapTrackAction();
-    navigateToEnhancedFilter();
-  }
-
   Future<void> onSearchThisAreaButtonTap() async {
     try {
       isShowLoading(true);
@@ -2381,12 +2081,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     if (hasToMakeAPICall) {
       trackAction(
         AnalyticsTrackActionName.mapZoomOutEvent,
-        adobeCustomTag: AdobeTagProperties.mapView,
+        // adobeCustomTag: AdobeTagProperties.mapView,
       );
     } else {
       trackAction(
         AnalyticsTrackActionName.mapZoomInEvent,
-        adobeCustomTag: AdobeTagProperties.mapView,
+        // adobeCustomTag: AdobeTagProperties.mapView,
       );
     }
   }
@@ -2394,111 +2094,110 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void getFilterTapTrackAction() {
     trackAction(
       AnalyticsTrackActionName.filtersButtonClickedEvent,
-      adobeCustomTag: AdobeTagProperties.mapView,
+      // adobeCustomTag: AdobeTagProperties.mapView,
     );
   }
 
   void getListViewTapTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listviewButtonsClickedEvent,
-      adobeCustomTag: AdobeTagProperties.mapView,
+      // adobeCustomTag: AdobeTagProperties.mapView,
     );
   }
 
   void getNoLocationModalCancelClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.noLocationModalCancelLinkClickEvent,
-      adobeCustomTag: AdobeTagProperties.modals,
+      // adobeCustomTag: AdobeTagProperties.modals,
     );
   }
 
   void getNoLocationModalClearNewFilterClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.noLocationModalClearNewFilterLinkClickEvent,
-      adobeCustomTag: AdobeTagProperties.modals,
+      // adobeCustomTag: AdobeTagProperties.modals,
     );
   }
 
   void getListViewDetailsLinkClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listViewDetailsLinkClickEvent,
-      adobeCustomTag: AdobeTagProperties.listView,
+      // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getListViewDirectionsLinkClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listViewDirectionsLinkClickEvent,
-      adobeCustomTag: AdobeTagProperties.listView,
+      // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getListViewFilterClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.listViewFiltersButtonClickEvent,
-      adobeCustomTag: AdobeTagProperties.listView,
+      // adobeCustomTag: AdobeTagProperties.listView,
     );
   }
 
   void getSearchTrackAction() {
-    if (Get.currentRoute == AdminRoutes.siteLocationsListView) {
-      trackAction(
-        AnalyticsTrackActionName.listViewScreenExecuteSearchEvent,
-        adobeCustomTag: AdobeTagProperties.listView,
-      );
-    } else {
-      trackAction(
-        AnalyticsTrackActionName.executeSearchEvent,
-        adobeCustomTag: AdobeTagProperties.mapView,
-      );
-    }
+    // if (Get.currentRoute == AdminRoutes.siteLocationsListView) {
+    //   trackAction(
+    //     AnalyticsTrackActionName.listViewScreenExecuteSearchEvent,
+    //     adobeCustomTag: AdobeTagProperties.listView,
+    //   );
+    // } else {
+    //   trackAction(
+    //     AnalyticsTrackActionName.executeSearchEvent,
+    //     adobeCustomTag: AdobeTagProperties.mapView,
+    //   );
+    // }
   }
 
   void getSiteInfoDrawerCallButtonClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerCallButtonLinkClickEvent,
-      adobeCustomTag: AdobeTagProperties.siteInfo,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
   }
 
   void getSiteInfoDrawerDirectionsButtonClickTrackAction() {
     trackAction(
       AnalyticsTrackActionName.siteInfoDrawerDirectionsButtonLinkClickEvent,
-      adobeCustomTag: AdobeTagProperties.siteInfo,
+      // adobeCustomTag: AdobeTagProperties.siteInfo,
     );
   }
 
   void trackMapClick() => trackAction(
         AnalyticsTrackActionName.mapClick,
-        adobeCustomTag: AdobeTagProperties.welcome,
+        // adobeCustomTag: AdobeTagProperties.welcome,
       );
 
   void trackWalletSiteLocatorClick() =>
       trackAction(AnalyticsTrackActionName.walletSiteLocatorClick);
 
-  Future<void> initAuthenticatedMapView(
-      {GoogleMapController? mapController}) async {
-    isExecuteCameraMoveForCardHolderOnFirstLaunch = false;
-    SLSessionManager().isUserAuthenticated = true;
-    isShowBackButton = false;
-    canRecenterMapViewOnLocationChange = true;
+  // Future<void> initAuthenticatedMapView(
+  //     {GoogleMapController? mapController}) async {
+  //   isExecuteCameraMoveForCardHolderOnFirstLaunch = false;
+  //   SLSessionManager().isUserAuthenticated = true;
+  //   isShowBackButton = false;
+  //   canRecenterMapViewOnLocationChange = true;
 
-    //if location permission is not given earlier, asking again after login.
-    await checkAndRequestLocationPermission();
+  //   //if location permission is not given earlier, asking again after login.
+  //   await checkAndRequestLocationPermission();
 
-    final loginUserType = LocalStorageAdapter.getLoginUserType();
-    if (loginUserType.isNotEmpty &&
-        loginUserType == SLInternalText.cardholder) {
-      if (Get.previousRoute == Routes.login) {
-        await _getUserLocation();
-      }
-      await calcLatLngBoundsAndZoomLevels(mapController: mapController);
-      getFavoriteList();
-    }
-  }
+  //   final loginUserType = LocalStorageAdapter.getLoginUserType();
+  //   if (loginUserType.isNotEmpty &&
+  //       loginUserType == SLInternalText.cardholder) {
+  //     if (Get.previousRoute == Routes.login) {
+  //       await _getUserLocation();
+  //     }
+  //     await calcLatLngBoundsAndZoomLevels(mapController: mapController);
+  //   }
+  // }
 
   Future<void> resetMapUiOnLogout({bool canCallUserLocation = true}) async {
-   SLSessionManager().isUserAuthenticated = false;
+    SLSessionManager().isUserAuthenticated = false;
     isFirstLaunch = true;
     searchPlacesController.resetUI();
     selectedPlace = null;
@@ -2507,51 +2206,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       await calcLatLngBoundsAndZoomLevels();
       await recenterMapOnLocationChange();
     }
-  }
-
-  DieselPricesPack getDieselPricesPack(SiteLocation siteLocation) {
-    return dieselPricesPackUseCase
-        .execute(DieselPricesPackParam(siteLocation: siteLocation));
-  }
-
-  bool canDisplayRightColumnDieselPrice(SiteLocation siteLocation) {
-    final saleType = manageDieselSaleTypeUseCase
-        .execute(DieselPricesPackParam(siteLocation: siteLocation));
-    return saleType != DieselPriceDisplay.nothing;
-  }
-
-  FuelPriceAsOfDisplayEntity checkFuelPriceAsOfDisplayEntity(
-      SiteLocation selectedSiteLocation) {
-    final hasPriceToDisplayFlag = hasDieselPriceToDisplay(selectedSiteLocation);
-    final displayDate = shortDate(displayAsOfDate(selectedSiteLocation) ?? '');
-    return FuelPriceAsOfDisplayEntity(
-      canShow: hasPriceToDisplayFlag && displayDate.isNotEmpty,
-      displayDate: displayDate,
-    );
-  }
-
-  String? displayAsOfDate(SiteLocation selectedSiteLocation) =>
-      MCSitesGovernor.isMCSitesViewEnabled
-          ? selectedSiteLocation.gasAsOfDate
-          : selectedSiteLocation.asOfDate;
-
-  bool hasDieselPriceToDisplay(SiteLocation siteLocation) {
-    final DieselPriceEntity displayPriceEntity = displayDieselPriceUseCase
-        .execute(DieselPricesPackParam(siteLocation: siteLocation));
-    return displayPriceEntity.price.isNotEmpty;
-  }
-
-  bool canShowFuelPriceNotAvailableBanner(SiteLocation selectedSiteLocation) {
-    if (selectedSiteLocation.locationType?.maintenanceService == Status.Y &&
-        selectedSiteLocation.locationType?.truckStop == Status.Y) {
-      return !hasDieselPriceToDisplay(selectedSiteLocation);
-    } else if (selectedSiteLocation.locationType?.maintenanceService ==
-            Status.Y ||
-        (selectedSiteLocation.locationType?.truckStop ?? Status.N) ==
-            Status.N) {
-      return false;
-    }
-    return !hasDieselPriceToDisplay(selectedSiteLocation);
   }
 
   // Cluster region
@@ -2902,7 +2556,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   //   );
   // }
 
-  bool get isClusterEnabled => SiteLocatorConfig.isClusterFeatureEnabled;
+  // bool get isClusterEnabled => SiteLocatorConfig.isClusterFeatureEnabled;
 
   bool isFavoriteSiteLocation(String? siteIdentifier) {
     return favoriteList.contains(siteIdentifier);
@@ -2914,8 +2568,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isShowSearchThisArea(false);
     isLatLngBoundsChanged(false);
     markers.clear();
-    ManageCacheFuelPrices.isStandAloneFuelPriceCall = false;
-    KillDupFuelPriceCalls.currentFleetId = null;
     isShowLoading(true);
     // setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
     feedRelayToSitesLoadingProgress();
@@ -2926,40 +2578,36 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     isShowLoading(false);
   }
 
-  Future<void> refreshFuelPriceApi() async {
-    try {
-      if (canFetchSites) {
-        await _fetchFromServerOnRefreshScenario();
-      } else {
-        isShowLoading(true);
-        // setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
-        await checkAndSetMCSitesGovernor();
-        await reassemblePinDropLogoAssetSetup();
-        ManageCacheFuelPrices.isStandAloneFuelPriceCall = true;
-        KillDupFuelPriceCalls.currentFleetId = null;
-        // await getFuelPricesForMarkers(
-        //   rawSiteLocationsForFuelPricesApi ?? [],
-        // );
-        //processing the sitelocations pinmarkers (to update the price banner)
-        //when only fuelPrice API calls being called
-        //while selecting the fuel cards
-        await processSiteLocations(siteLocations ?? []);
-        await validateSiteLocationWithFilters();
-      }
-    } on Exception catch (e) {
-      Globals().dynatrace.logError(
-            name: SLInternalText.getSitesAPIErrorName,
-            value: SLInternalText.getSitesAPIErrorValue,
-            reason: e.toString(),
-          );
-    }
-    isShowLoading(false);
-    hideSitesLoadingIndicator();
-  }
+  // Future<void> refreshFuelPriceApi() async {
+  //   try {
+  //     if (canFetchSites) {
+  //       await _fetchFromServerOnRefreshScenario();
+  //     } else {
+  //       isShowLoading(true);
+  //       // setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
+  //       await reassemblePinDropLogoAssetSetup();
+  //       // await getFuelPricesForMarkers(
+  //       //   rawSiteLocationsForFuelPricesApi ?? [],
+  //       // );
+  //       //processing the sitelocations pinmarkers (to update the price banner)
+  //       //when only fuelPrice API calls being called
+  //       //while selecting the fuel cards
+  //       await processSiteLocations(siteLocations ?? []);
+  //       await validateSiteLocationWithFilters();
+  //     }
+  //   } on Exception catch (e) {
+  //     Globals().dynatrace.logError(
+  //           name: SLInternalText.getSitesAPIErrorName,
+  //           value: SLInternalText.getSitesAPIErrorValue,
+  //           reason: e.toString(),
+  //         );
+  //   }
+  //   isShowLoading(false);
+  //   hideSitesLoadingIndicator();
+  // }
 
   bool get canFetchSites =>
-      (lastTimeFetchedMCSites() && !MCSitesGovernor.isMCSitesViewEnabled) ||
-      (!lastTimeFetchedMCSites() && MCSitesGovernor.isMCSitesViewEnabled);
+      (lastTimeFetchedMCSites()) || (!lastTimeFetchedMCSites());
 
   Future<void> onRecenterButtonTap() async {
     if (isShowLoading() || firstTimeLoading()) {
@@ -2980,7 +2628,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> _onRecenterButtonTap() async {
     trackAction(
       AnalyticsTrackActionName.recenterButtonClickedEvent,
-      adobeCustomTag: AdobeTagProperties.mapView,
+      // adobeCustomTag: AdobeTagProperties.mapView,
     );
     canClearSearchTextField = true;
     clearSearchPlaceInput();
@@ -2988,26 +2636,25 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     await onReCenterButtonClicked();
   }
 
-  Future<void> onMapViewBackButtonPressed() async {
-    backFromWelcomeToMapView(true);
-    if (!isShowLoading()) {
-      unawaited(onRecenterButtonTap());
-      resetMarkers(PinVariantStore.statusList);
-      await moveCameraPosition(reCenterLatLngBounds);
-      modifyCircleSize();
-      show2CTAButton(show2CTA: true);
+  // Future<void> onMapViewBackButtonPressed() async {
+  //   backFromWelcomeToMapView(true);
+  //   if (!isShowLoading()) {
+  //     unawaited(onRecenterButtonTap());
+  //     resetMarkers(PinVariantStore.statusList);
+  //     await moveCameraPosition(reCenterLatLngBounds);
+  //     modifyCircleSize();
 
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
-      final isSiteLocatorMapView = await _isUnAuthenticatedMapView();
-      if (isSiteLocatorMapView) {
-        await NavTo.welcome();
-      } else {
-        Get.back();
-      }
-    }
-  }
+  //     if (Get.isDialogOpen ?? false) {
+  //       Get.back();
+  //     }
+  //     final isSiteLocatorMapView = await _isUnAuthenticatedMapView();
+  //     if (isSiteLocatorMapView) {
+  //       await NavTo.welcome();
+  //     } else {
+  //       Get.back();
+  //     }
+  //   }
+  // }
 
   Future<void> regenerateMcMarkerPins() async {
     siteLocations =
@@ -3015,11 +2662,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     // ManageSitesPurge.removeSitesPerAsOfDate(siteLocations);
     await processSiteLocations(siteLocations ?? []);
     await validateSiteLocationWithFilters();
-  }
-
-  Future<bool> _isUnAuthenticatedMapView() async {
-    return await LocalStorageAdapter.getDefaultLandingScreen() ==
-        SLInternalText.unAuthenticatedSiteLocator;
   }
 
   Future<void> checkLocationPermission() async {

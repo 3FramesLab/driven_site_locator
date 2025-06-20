@@ -4,17 +4,17 @@ class ShouldFetchSitesFromRemoteUseCase
     extends BaseFutureUseCase<bool, ShouldFetchSitesFromRemoteParams> {
   @override
   Future<bool> execute(ShouldFetchSitesFromRemoteParams param) async {
-    final lastUsedMapRadius = Globals.sharedPreferences.getDouble(
-      SiteLocatorStorageKeys.lastUsedMapRadius,
-    );
+    final lastUsedMapRadius = Globals().sharedPreferences.getDouble(
+          SLInternalText.lastUsedMapRadius,
+        );
 
     if (lastUsedMapRadius != param.mapRadius) {
       return true;
     }
 
-    final lastSyncEpoch = Globals.sharedPreferences.getInt(
-      SiteLocatorStorageKeys.lastSitesDataSyncDate,
-    );
+    final lastSyncEpoch = Globals().sharedPreferences.getInt(
+          SLInternalText.lastSitesDataSyncDate,
+        );
 
     if (lastSyncEpoch == null) {
       return true;
@@ -26,7 +26,7 @@ class ShouldFetchSitesFromRemoteUseCase
       currentDt.year,
       currentDt.month,
       currentDt.day,
-      SitesLocationCacheConstants.thresholdHour,
+      SLInternalText.thresholdHour,
     );
 
     if (currentDt.difference(lastSyncDt).inHours > 24) {

@@ -44,4 +44,8 @@ class ApiConstants {
       'https://places.googleapis.com/v1/places:searchText';
   static const googlePlaceDetailsUrl =
       'https://places.googleapis.com/v1/places';
+  static const distanceMatrixGoogleUrl =
+      'https://maps.googleapis.com/maps/api/distancematrix/json?mode=driving&units=imperial';
+  static final googleGeoCodingUrl =
+      'https://maps.googleapis.com/maps/api/geocode/json?key=$googleAPIKey';
 }

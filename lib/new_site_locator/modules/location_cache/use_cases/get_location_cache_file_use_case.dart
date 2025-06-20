@@ -8,10 +8,7 @@ class GetLocationCacheFileUseCase extends BaseNoParamFutureUseCase<File> {
 
   Future<File> get _locationCacheDirectory async {
     final path = await _storageLocalPath;
-    String fileNameParam = fileName;
-    if (MCSitesGovernor.isMCSitesViewEnabled) {
-      fileNameParam = mcSitesFileName;
-    }
+    final fileNameParam = fileName;
     return File('$path$filePath$fileNameParam');
   }
 
@@ -20,8 +17,6 @@ class GetLocationCacheFileUseCase extends BaseNoParamFutureUseCase<File> {
     return directory.path;
   }
 
-  String get filePath => SitesLocationCacheConstants.locationFilePath;
-  String get fileName => SitesLocationCacheConstants.locationFileName;
-  String get mcSitesFileName =>
-      SitesLocationCacheConstants.mcSiteslocationFileName;
+  String get filePath => SLInternalText.locationFilePath;
+  String get fileName => SLInternalText.locationFileName;
 }
