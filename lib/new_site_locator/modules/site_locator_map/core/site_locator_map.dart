@@ -111,7 +111,7 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
 
   Future<void> _updateCamera(GoogleMapController controller) async {
     if (widget.siteLocatorController.selectedPlace != null &&
-        DrivenSessionManager().isUserAuthenticated) {
+       SLSessionManager().isUserAuthenticated) {
       await widget.siteLocatorController.getLatLngForSelectedPlace(
           widget.siteLocatorController.selectedPlace!);
     } else if (widget.siteLocatorController.markers().isNotEmpty) {

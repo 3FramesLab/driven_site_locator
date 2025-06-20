@@ -32,7 +32,7 @@ class FleetHeader extends StatelessWidget {
       );
 
   Future<void> onFleetIdDetailsLinkTap() async {
-    if (DrivenSessionManager().userId.isNotEmpty) {
+    if (SLSessionManager().userId.isNotEmpty) {
       late AdminDashboardController adminDashboardController;
       if (Get.isRegistered<AdminDashboardController>()) {
         adminDashboardController = Get.find<AdminDashboardController>();
@@ -52,11 +52,11 @@ class FleetHeader extends StatelessWidget {
     }
   }
 
-  String get _fleetIdLabelText => DrivenSessionManager()
+  String get _fleetIdLabelText => SLSessionManager()
           .selectedFleetId()
           .isNotEmpty
-      ? '${DrivenSessionManager().selectedFleetId()} - ${DrivenSessionManager().selectedFleetName()}'
-      : DrivenSessionManager().defaultFleetId.isNotEmpty
-          ? '${DrivenSessionManager().defaultFleetId} - ${DrivenSessionManager().defaultFleetName}'
+      ? '${SLSessionManager().selectedFleetId()} - ${SLSessionManager().selectedFleetName()}'
+      : SLSessionManager().defaultFleetId.isNotEmpty
+          ? '${SLSessionManager().defaultFleetId} - ${SLSessionManager().defaultFleetName}'
           : SLViewText.addFleetIdOrCardNumber;
 }

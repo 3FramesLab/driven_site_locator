@@ -8,7 +8,9 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   @override
   void onInit() {
     super.onInit();
-    if (DrivenSessionManager().isUserAuthenticated && AppUtils.isComdata) {
+    if (SLSessionManager().isUserAuthenticated && AppUtils.isComdata) {
+      MCSitesGovernor.isUnauthSLFlow = false;
+      MCSitesGovernor.isMCSitesViewEnabled = false;
       unawaited(reassemblePinDropLogoAssetSetup());
     }
 
@@ -57,7 +59,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   double getSiteInfoDrawerHalfViewHeight() {
     double result = SLInternalText.siteInfoDrawerHalfViewHeight;
-    if (AppUtils.isFuelman && DrivenSessionManager().isUserAuthenticated) {
+    if (AppUtils.isFuelman && SLSessionManager().isUserAuthenticated) {
       result = result + 20;
     }
     return result;
@@ -345,12 +347,10 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   bool get isWalletLoading {
-    return false;
-    // TODO(Smeet): s.
-    // return AppUtils.isComdata &&
-    //     AppUtils.isCardHolderLogin &&
-    //     DrivenSessionManager().isUserAuthenticated &&
-    //     Get.find<WalletController>().walletService.isLoadingCards.value;
+    return AppUtils.isComdata &&
+        AppUtils.isCardHolderLogin &&
+        SLSessionManager().isUserAuthenticated &&
+        Get.find<WalletController>().walletService.isLoadingCards.value;
   }
 
   Future<void> fetchRegularSiteLocationSummaryData(
@@ -829,30 +829,30 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     lastSearchedRadius = radius;
 
     String fleetId = '';
-    if (DrivenSessionManager().selectedFleetId().isNotNullEmptyOrWhitespace) {
-      fleetId = DrivenSessionManager().selectedFleetId();
+    if (SLSessionManager().selectedFleetId().isNotNullEmptyOrWhitespace) {
+      fleetId = SLSessionManager().selectedFleetId();
     }
 
-    final cardToken = DrivenSessionManager().selectedCardToken;
+    final cardToken = SLSessionManager().selectedCardToken;
 
     String? sysAccountId;
-    if (DrivenSessionManager()
+    if (SLSessionManager()
         .selectedCardSysAccountId
         .isNotNullEmptyOrWhitespace) {
       // CH
-      sysAccountId = DrivenSessionManager().selectedCardSysAccountId;
-    } else if (DrivenSessionManager()
+      sysAccountId = SLSessionManager().selectedCardSysAccountId;
+    } else if (SLSessionManager()
             .selectedAccountDetails
             ?.sysAccountId
             .isNotNullEmptyOrWhitespace ??
         false) {
       // admin
       sysAccountId =
-          DrivenSessionManager().selectedAccountDetails?.sysAccountId;
+          SLSessionManager().selectedAccountDetails?.sysAccountId;
     }
 
     final siteSource = getSiteSourceFromCardTypeUseCase.execute(
-      DrivenSessionManager().selectedCardTypeValue,
+      SLSessionManager().selectedCardTypeValue,
     );
 
     final Map<String, dynamic> jsonData = DcSiteLocatorUtils.getJsonData(
@@ -971,7 +971,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> updateFullMapViewSitesData({bool forceApiCall = false}) async {
     try {
       bool canMakeApiCall = forceApiCall;
-      // if (DrivenSessionManager().isUserAuthenticated &&
+      // if (SLSessionManager().isUserAuthenticated &&
       //     AppUtils.isCardHolderLogin &&
       //     Get.find<WalletController>().walletService.isSelectedCardChanged) {
       //   canMakeApiCall = true;
@@ -2130,7 +2130,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   double getMapHeight(BuildContext context) =>
-      // DrivenSessionManager().isUserAuthenticated
+      // SLSessionManager().isUserAuthenticated
       //     ? MediaQuery.of(context).size.height -
       //         AppStrings.bottomNavBarHeight -
       //         safeAreaPadding
@@ -2155,7 +2155,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> navToNextPageOnMapViewTap() async {
     trackMapClick();
     trackState(AnalyticsScreenName.mapviewScreen);
-    DrivenSessionManager().isUserAuthenticated = false;
+   SLSessionManager().isUserAuthenticated = false;
 
     if (canShowCardholderSetup()) {
       AdminRouteHelper.cardholderSetupPageOne();
@@ -2248,7 +2248,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
       isAdminAuthenticatedFullMapView();
 
   bool isAdminAuthenticatedFullMapView() {
-    return DrivenSessionManager().isUserAuthenticated &&
+    return SLSessionManager().isUserAuthenticated &&
         Get.currentRoute == AdminRoutes.pwaDashboard &&
         isLocatorBottomNavTabPressed();
   }
@@ -2479,7 +2479,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> initAuthenticatedMapView(
       {GoogleMapController? mapController}) async {
     isExecuteCameraMoveForCardHolderOnFirstLaunch = false;
-    DrivenSessionManager().isUserAuthenticated = true;
+    SLSessionManager().isUserAuthenticated = true;
     isShowBackButton = false;
     canRecenterMapViewOnLocationChange = true;
 
@@ -2498,7 +2498,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> resetMapUiOnLogout({bool canCallUserLocation = true}) async {
-    DrivenSessionManager().isUserAuthenticated = false;
+   SLSessionManager().isUserAuthenticated = false;
     isFirstLaunch = true;
     searchPlacesController.resetUI();
     selectedPlace = null;
