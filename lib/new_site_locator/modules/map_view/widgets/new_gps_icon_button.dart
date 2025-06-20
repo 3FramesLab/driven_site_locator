@@ -27,7 +27,7 @@ class NewGpsIconButton extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       backgroundColor: Colors.white,
                     ),
-                    child: Image.asset(AdminAssets.currentLocationButtonIcon),
+                    child: Image.asset(SLAssets.currentLocationButtonIcon),
                   ),
                 ),
               )

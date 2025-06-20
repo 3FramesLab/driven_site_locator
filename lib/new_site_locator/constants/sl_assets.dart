@@ -16,4 +16,6 @@ class SLAssets {
   static const comdataOnroad = '$assetPathCardTypes/comdata_onroad.png';
   static const comdataMastercardFleetCard =
       '$assetPathCardTypes/comdata_mastercard_fleet_card.png';
+
+  static const currentLocationButtonIcon = 'assets/images/current_location.png';
 }

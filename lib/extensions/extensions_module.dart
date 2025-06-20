@@ -11,4 +11,3 @@ part 'extensions.dart';
 part 'list_extensions.dart';
 part 'region.dart';
 part 'region_list.dart';
-part 'string_extensions.dart';

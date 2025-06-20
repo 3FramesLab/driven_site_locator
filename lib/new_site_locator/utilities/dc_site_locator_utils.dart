@@ -4,6 +4,50 @@ class DcSiteLocatorUtils {
   static bool isFuelFilterSelectedSeparately = false;
   static bool representativePriceToggleValue = false;
 
+  static void hideKeyboard() {
+    try {
+      FocusManager.instance.primaryFocus?.unfocus();
+    } catch (_) {}
+  }
+
+  static Future<bool> launchURL(
+    String url,
+    String errorMessage, {
+    LaunchMode mode = LaunchMode.platformDefault,
+  }) async {
+    if (await _canSafeLaunchUrl(url)) {
+      await _safeLaunchUrl(url, mode);
+      return true;
+    }
+    return false;
+  }
+
+  static Future<bool> _canSafeLaunchUrl(String url) async =>
+      Globals().canLaunch(url);
+
+  static Future<bool> _safeLaunchUrl(String url, LaunchMode mode) async =>
+      Globals().launch(url, mode: mode);
+
+  static Future<void> openExternalMapApp(
+    AvailableMap selectedMap, {
+    Coords? originLatLng,
+    Coords? destinationLatLng,
+  }) async {
+    await _openExternalAppTap(selectedMap, originLatLng!, destinationLatLng!);
+  }
+
+  static Future<void> _openExternalAppTap(AvailableMap selectedMap,
+      Coords originLatLng, Coords destinationLatLng) async {
+    // trackAction(
+    //   AnalyticsTrackActionName.siteInfoDrawerViewAllDiscountsLinkClickEvent,
+    //   adobeCustomTag: AdobeTagProperties.siteInfo,
+    // );
+    await selectedMap.showDirections(
+        origin: originLatLng, destination: destinationLatLng);
+  }
+
+  ///
+
   static void resetData() {
     try {
       final authSLTypeChoicesController =

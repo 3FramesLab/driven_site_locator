@@ -6,7 +6,7 @@ class SiteInfoPopupBottomContent extends StatelessWidget {
   SiteInfoPopupBottomContent(this.selectedSiteLocation);
 
   final SiteLocatorController siteLocatorController = Get.find();
-  final EntitlementRepository _entitlementRepository = Get.find();
+  static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
   final SiteLocation selectedSiteLocation;
   String cardAccepted = '';
   List<String> amenities = [];
@@ -85,7 +85,7 @@ class SiteInfoPopupBottomContent extends StatelessWidget {
       child: amenities.isEmpty
           ? const SubTitleText(
               title: SLViewText.amenitiesAndFeatureNotAvailable,
-              fontSize: DrivenDimensions.dp16,
+              fontSize: 16,
             )
           : _amenitiesGrid(),
     );
@@ -124,7 +124,7 @@ class SiteInfoPopupBottomContent extends StatelessWidget {
                 ),
                 child: SubTitleText(
                   title: time,
-                  fontSize: DrivenDimensions.dp12,
+                  fontSize: 12,
                   fontWeight: DrivenFonts.fontWeightSemibold,
                   color: DrivenColors.checkboxBorderColor,
                 ),
@@ -139,39 +139,6 @@ class SiteInfoPopupBottomContent extends StatelessWidget {
     );
   }
 
-  List<String> getAmenities() {
-    final List<String> amenitiesListWidgets = <String>[];
-    final siteServices = selectedSiteLocation.services;
-    if (siteServices != null) {
-      final jsonMap = siteServices.toJson();
-      if (jsonMap.keys.isNotEmpty) {
-        for (final item in SiteFilters.amenitiesList) {
-          if (yOrNToBool(jsonMap[item.key] ?? 'N')) {
-            amenitiesListWidgets.add(item.label);
-          }
-        }
-      }
-    }
-    return amenitiesListWidgets;
-  }
-
-  List<String> getFeatures() {
-    final List<String> featuresListWidgets = <String>[];
-    final siteServices = selectedSiteLocation.services;
-    if (siteServices != null) {
-      final jsonMap = siteServices.toJson();
-      if (jsonMap.keys.isNotEmpty) {
-        for (final item in SiteFilters.featuresList) {
-          if (yOrNToBool(jsonMap[item.key] ?? 'N')) {
-            featuresListWidgets.add(item.label);
-          }
-        }
-      }
-    }
-
-    return featuresListWidgets;
-  }
-
   Widget get _cardAcceptedView {
     if (_entitlementRepository.isAcceptedCardSectionEnabled) {
       return DcSiteLocatorUtils.isGuest
@@ -179,7 +146,7 @@ class SiteInfoPopupBottomContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: DrivenDimensions.dp8),
+                const SizedBox(height: 8),
                 const DrivenText(
                   text: SLViewText.cardAccepted,
                   style: f16ExtraBoldBlack,

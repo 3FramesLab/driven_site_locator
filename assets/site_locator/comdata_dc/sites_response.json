@@ -1,0 +1,418 @@
+[
+    {
+        "masterIdentifier": "32817603",
+        "brandName": "Unbranded",
+        "locationName": "JOE'S TRUCK STOP 8",
+        "locationStreetAddress": "821 Cowan St",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37207",
+        "locationPhone": "6152567627",
+        "hoursOfOperation": "8A-5P M-F",
+        "siteLatitude": 36.188211,
+        "siteLongitude": -86.77770129999999,
+        "milesApart": 0.27574295676938354,
+        "milesApartFormatted": "0.276 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "H-155",
+        "exit": "22",
+        "fuelBrand": "Unbranded",
+        "siteIdentifier": "FZ438",
+        "locationId": 446068,
+        "brandLogo": "null",
+        "lastTrxdateFormatted": "04-04-2007",
+        "locationType": {
+            "maintenanceService": "Y",
+            "lumperServices": "N",
+            "truckStop": "Y",
+            "gallonUp": "N"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y",
+            "shower": "Y",
+            "safeHaven": "Y",
+            "rigParking": "Y",
+            "restaurant": "Y",
+            "lounge": "Y",
+            "laundry": "Y",
+            "motel": "Y",
+            "unattended": "Y",
+            "truckWash": "Y",
+            "scales": "Y",
+            "repairs": "Y",
+            "cashAdvance": "Y",
+            "deli": "Y",
+            "permits": "Y",
+            "gameRoom": "Y",
+            "truckersStore": "Y",
+            "tireRepair": "Y",
+            "wreckerService": "Y",
+            "fedex": "Y",
+            "ups": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "27704281",
+        "brandName": "Pilot",
+        "locationName": "Pilot #615",
+        "locationStreetAddress": "402 N 1st St",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37207-5603",
+        "locationPhone": "6153133626",
+        "hoursOfOperation": "5A-10P M-SUN",
+        "siteLatitude": 36.1785007,
+        "siteLongitude": -86.7748838,
+        "milesApart": 0.8959516486170906,
+        "milesApartFormatted": "0.896 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "I-40",
+        "exit": "213",
+        "fuelBrand": "Exxon",
+        "siteIdentifier": "GA339",
+        "locationId": 380231,
+        "brandLogo": " https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/pilot/Pilot.png ",
+        "lastTrxdateFormatted": "07-03-2023",
+        "locationType": {
+            "maintenanceService": "N",
+            "lumperServices": "null",
+            "truckStop": "Y",
+            "gallonUp": "Y"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y",
+            "shower": "N",
+            "safeHaven": "N",
+            "rigParking": "Y",
+            "restaurant": "Y",
+            "lounge": "Y",
+            "laundry": "Y",
+            "motel": "N",
+            "unattended": "N",
+            "truckWash": "N",
+            "scales": "Y",
+            "repairs": "N",
+            "cashAdvance": "Y",
+            "deli": "N",
+            "permits": "Y",
+            "gameRoom": "Y",
+            "truckersStore": "Y",
+            "tireRepair": "N",
+            "wreckerService": "N",
+            "fedex": "N",
+            "ups": "N"
+        }
+    },
+    {
+        "masterIdentifier": "46046418",
+        "brandName": "TA",
+        "locationName": "TA NASHVILLE OTR #034",
+        "locationStreetAddress": "111 N 1st St",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37213-1101",
+        "locationPhone": "6152443682",
+        "hoursOfOperation": "24HRS/7DAYS",
+        "siteLatitude": 36.17145259999999,
+        "siteLongitude": -86.771998,
+        "milesApart": 1.3919809734411825,
+        "milesApartFormatted": "1.392 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "I-65",
+        "exit": "87A",
+        "fuelBrand": "TA",
+        "siteIdentifier": "GA668",
+        "locationId": 317961,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/ta/TA.png",
+        "lastTrxdateFormatted": "03-31-2023",
+        "locationType": {
+            "truckStop": "Y",
+            "gallonUp": "Y"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y",
+            "shower": "Y",
+            "safeHaven": "Y",
+            "rigParking": "Y",
+            "restaurant": "Y",
+            "lounge": "Y",
+            "laundry": "Y",
+            "motel": "Y",
+            "permits": "N",
+            "truckersStore": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "30665959",
+        "brandName": "Speedway",
+        "locationName": "SPEEDWAY 07112 2600-2604",
+        "locationStreetAddress": "2600 Gallatin Pike",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37216-3740",
+        "locationPhone": "5174233352",
+        "hoursOfOperation": "24HRS 7 DAYS WK",
+        "siteLatitude": 36.1970244,
+        "siteLongitude": -86.7414802,
+        "milesApart": 1.8994663150995894,
+        "milesApartFormatted": "1.899 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "null",
+        "exit": "null",
+        "fuelBrand": "Shell",
+        "siteIdentifier": "TN012",
+        "locationId": 47019,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/speedway/Speedway.png",
+        "lastTrxdateFormatted": "07-01-2023",
+        "locationType": {
+            "maintenanceService": "Y",
+            "lumperServices": "N",
+            "truckStop": "Y",
+            "gallonUp": "null"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y",
+            "rigParking": "Y",
+            "restaurant": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "20350320",
+        "brandName": "Love's",
+        "locationName": "LOVE S 551",
+        "locationStreetAddress": "601 Fesslers Ln",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37210-2832",
+        "locationPhone": "2606652810",
+        "hoursOfOperation": "null",
+        "siteLatitude": 36.1442396,
+        "siteLongitude": -86.7444072,
+        "milesApart": 3.6782457230480547,
+        "milesApartFormatted": "3.678 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "H-41A",
+        "exit": "166-A",
+        "fuelBrand": "Conoco",
+        "siteIdentifier": "TN512",
+        "locationId": 34185,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/loves/LOVES.png",
+        "lastTrxdateFormatted": "07-03-2023",
+        "dieselPrice": 3.10,
+        "unleadedRegularPrice": 5.11,
+        "locationType": {
+            "maintenanceService": "Y",
+            "truckStop": "Y",
+            "gallonUp": "Y"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y",
+            "shower": "Y",
+            "rigParking": "Y",
+            "restaurant": "Y",
+            "lounge": "Y",
+            "laundry": "Y",
+            "unattended": "N",
+            "truckWash": "N",
+            "scales": "Y",
+            "repairs": "Y",
+            "permits": "Y",
+            "gameRoom": "Y",
+            "truckersStore": "Y",
+            "tireRepair": "N",
+            "wreckerService": "N",
+            "fedex": "N",
+            "ups": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "29594094",
+        "brandName": "Casey's",
+        "locationName": "Casey's #4024",
+        "locationStreetAddress": "5470 Buena Vista Pike",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37189-9065",
+        "locationPhone": "6158768539",
+        "hoursOfOperation": "null",
+        "siteLatitude": 36.2518981,
+        "siteLongitude": -86.8297213,
+        "milesApart": 5.1756127958018885,
+        "milesApartFormatted": "5.176 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "H-225",
+        "exit": "null",
+        "fuelBrand": "Caseys",
+        "siteIdentifier": "TN123",
+        "locationId": 33037,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/caseys/Caseys.png",
+        "lastTrxdateFormatted": "07-01-2023",
+        "locationType": {
+            "maintenanceService": "N",
+            "lumperServices": "N",
+            "truckStop": "Y",
+            "gallonUp": "Y"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "rigParking": "Y",
+            "restaurant": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "20881717",
+        "brandName": "Pilot",
+        "locationName": "PILOT #413",
+        "locationStreetAddress": "6418 Centennial Blvd",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37209",
+        "locationPhone": "6153507225",
+        "hoursOfOperation": "24 HRS",
+        "siteLatitude": 36.1720996,
+        "siteLongitude": -86.8652395,
+        "milesApart": 5.2155697500118166,
+        "milesApartFormatted": "5.216 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "null",
+        "exit": "null",
+        "fuelBrand": "Caseys",
+        "siteIdentifier": "TN099",
+        "locationId": 33036,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/pilot/Pilot.png",
+        "lastTrxdateFormatted": "07-03-2023",
+        "locationType": {
+            "maintenanceService": "N",
+            "lumperServices": "N",
+            "truckStop": "Y",
+            "gallonUp": "N"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y",
+            "shower": "Y",
+            "rigParking": "Y",
+            "restaurant": "Y",
+            "lounge": "Y",
+            "laundry": "Y",
+            "permits": "Y",
+            "gameRoom": "Y",
+            "truckersStore": "Y",
+            "fedex": "Y",
+            "ups": "N"
+        }
+    },
+    {
+        "masterIdentifier": "19190471",
+        "brandName": "Mapco",
+        "locationName": "MAPCO #3204",
+        "locationStreetAddress": "160 McGavock Pk",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37214",
+        "locationPhone": "6158831455",
+        "hoursOfOperation": "24 HRS",
+        "siteLatitude": 36.1700153,
+        "siteLongitude": -86.6803876,
+        "milesApart": 5.472087125083372,
+        "milesApartFormatted": "5.472 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "null",
+        "exit": "null",
+        "fuelBrand": "Mapco",
+        "siteIdentifier": "TN555",
+        "locationId": 39829,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/mapco/Mapco.png",
+        "lastTrxdateFormatted": "06-29-2023",
+        "locationType": {
+            "truckStop": "Y",
+            "gallonUp": "N"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "atm": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "20669329",
+        "brandName": "Jiffy Lube",
+        "locationName": "JIFFY LUBE # 2260",
+        "locationStreetAddress": "312 White Bridge Rd",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37209-3226",
+        "locationPhone": "6153567104",
+        "hoursOfOperation": "5-11M-F 6-12SA 7-11S",
+        "siteLatitude": 36.145004,
+        "siteLongitude": -86.8579697,
+        "milesApart": 5.639281802859683,
+        "milesApartFormatted": "5.639 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "I-65",
+        "exit": "412",
+        "fuelBrand": "Jiffy Lube",
+        "siteIdentifier": "TN077",
+        "locationId": 483825,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/jiffy_lube/Jiffy_Lube.png",
+        "lastTrxdateFormatted": "04-19-2023",
+        "locationType": {
+            "maintenanceService": "Y",
+            "lumperServices": "N",
+            "truckStop": "N",
+            "gallonUp": "N"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "repairs": "Y",
+            "tireRepair": "Y",
+            "wreckerService": "Y"
+        }
+    },
+    {
+        "masterIdentifier": "30683935",
+        "brandName": "Firestone ",
+        "locationName": "FIRESTONE MOBILE VAN 303592",
+        "locationStreetAddress": "5808 Charlotte Pike",
+        "locationCity": "Nashville",
+        "locationState": "TN",
+        "locationZip": "37209-3102",
+        "locationPhone": "6153567538",
+        "hoursOfOperation": "5-11 MON - SAT",
+        "siteLatitude": 36.14970479999999,
+        "siteLongitude": -86.86220229999999,
+        "milesApart": 5.662607337515328,
+        "milesApartFormatted": "5.663 (miles from center latitude: 36.19146855248888 & longitude: -86.77484420870964)",
+        "highway": "H-70S",
+        "exit": "6",
+        "fuelBrand": "Unbranded",
+        "siteIdentifier": "TN322",
+        "locationId": 508347,
+        "brandLogo": "https://sims-sls.qat.fuels.fleetcor.com/brandLogo/90x90/firestone/Firestone.png",
+        "lastTrxdateFormatted": "02-06-2023",
+        "locationType": {
+            "maintenanceService": "Y"
+        },
+        "paymentNetwork": {
+            "comdataPropriety": "Y"
+        },
+        "services": {
+            "repairs": "Y",
+            "tireRepair": "Y",
+            "wreckerService": "N"
+        }
+    }
+]

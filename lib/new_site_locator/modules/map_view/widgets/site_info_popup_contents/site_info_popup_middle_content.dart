@@ -26,12 +26,12 @@ class SiteInfoPopupMiddleContent extends StatelessWidget {
           if (getIsServiceStation()) _serviceStationText,
           if (_isAnyPriceAvailable) ...[
             ..._fuelPricePack(),
-            const SizedBox(height: DrivenDimensions.dp8),
+            const SizedBox(height: 8),
           ] else
             _fuelPriceNoAvailableText,
           _applyForComdataCard,
           _actionButtons,
-          const SizedBox(height: DrivenDimensions.dp8),
+          const SizedBox(height: 8),
         ],
       ),
     );

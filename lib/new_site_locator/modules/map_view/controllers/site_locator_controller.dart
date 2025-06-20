@@ -9,8 +9,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   void onInit() {
     super.onInit();
     if (DrivenSessionManager().isUserAuthenticated && AppUtils.isComdata) {
-      MCSitesGovernor.isUnauthSLFlow = false;
-      MCSitesGovernor.isMCSitesViewEnabled = false;
       unawaited(reassemblePinDropLogoAssetSetup());
     }
 
@@ -71,20 +69,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     siteInfoDrawerSnapPoint = result;
   }
 
-  double? getSiteInfoDrawerSnapPoint() {
-    double? snapPointResult =
-        isInfoPanelSnapPointRequired ? siteInfoDrawerSnapPoint : null;
-    if (AppUtils.isFuelman && DrivenSessionManager().isUserAuthenticated) {
-      if (snapPointResult != null) {
-        snapPointResult = snapPointResult + 0.025;
-      }
-    }
-    return snapPointResult;
-  }
-
-  bool get isInfoPanelSnapPointRequired =>
-      Get.currentRoute != AdminRoutes.siteLocationsListView;
-
   void siteInfoDrawerOnPanelClosedEventHandler() {
     tappedFromPinDrop(false);
   }
@@ -113,7 +97,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> _initData() async {
-    if (SiteLocatorConfig.isDisplayMapEnabled) {
+    if (UmaSLProperties.isDisplayMapEnabled) {
       // TODO(siva): need to verify after dfc-2.2.4
       if (!AppUtils.isComdata) {
         fetchSitesScheduler();
@@ -361,15 +345,16 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   bool get isWalletLoading {
-    return AppUtils.isComdata &&
-        AppUtils.isCardHolderLogin &&
-        DrivenSessionManager().isUserAuthenticated &&
-        Get.find<WalletController>().walletService.isLoadingCards.value;
+    return false;
+    // TODO(Smeet): s.
+    // return AppUtils.isComdata &&
+    //     AppUtils.isCardHolderLogin &&
+    //     DrivenSessionManager().isUserAuthenticated &&
+    //     Get.find<WalletController>().walletService.isLoadingCards.value;
   }
 
   Future<void> fetchRegularSiteLocationSummaryData(
       Map<String, dynamic> jsonData, String accessToken) async {
-    MCSitesGovernor.isMCSitesViewEnabled = false;
     await reassemblePinDropLogoAssetSetup();
     lastTimeFetchedMCSites(false);
     // siteLocations = await siteLocationsService.getSiteLocationsData(
@@ -986,16 +971,16 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   Future<void> updateFullMapViewSitesData({bool forceApiCall = false}) async {
     try {
       bool canMakeApiCall = forceApiCall;
-      if (DrivenSessionManager().isUserAuthenticated &&
-          AppUtils.isCardHolderLogin &&
-          Get.find<WalletController>().walletService.isSelectedCardChanged) {
-        canMakeApiCall = true;
-        MCSitesGovernor.isMCSitesViewEnabled = false;
-        lastTimeFetchedMCSites(false);
-        await Get.find<EnhancedFilterController>().clearAllFilter();
-        Get.find<WalletController>().walletService.isSelectedCardChanged =
-            false;
-      }
+      // if (DrivenSessionManager().isUserAuthenticated &&
+      //     AppUtils.isCardHolderLogin &&
+      //     Get.find<WalletController>().walletService.isSelectedCardChanged) {
+      //   canMakeApiCall = true;
+      //   MCSitesGovernor.isMCSitesViewEnabled = false;
+      //   lastTimeFetchedMCSites(false);
+      //   await Get.find<EnhancedFilterController>().clearAllFilter();
+      //   Get.find<WalletController>().walletService.isSelectedCardChanged =
+      //       false;
+      // }
       if (selectedPlace != null) {
         await getLatLngForSelectedPlace(selectedPlace!);
       } else {
@@ -2354,11 +2339,6 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  void resetMCQuickFilterSitesData() {
-    MCSitesGovernor.isMCSitesViewEnabled = false;
-    lastTimeFetchedMCSites(false);
-  }
-
   Future<void> _getUserLocation() async {
     try {
       await getCurrentUserLocation();
@@ -2367,85 +2347,12 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     }
   }
 
-  Future<void> onListViewButtonTap() async {
-    if (isShowLoading()) {
-      return;
-    }
-    getListViewTapTrackAction();
-    SiteLocatorUtils.hideKeyboard();
-    unawaited(closeLocationInfoPanel());
-    clearSearchPlaceInput();
-    resetPrevSelectedMarkerStatus();
-    unawaited(setListViewInitializers());
-    await Get.toNamed(AdminRoutes.siteLocationsListView);
-  }
-
   void filterButtonTap() {
     if (isShowLoading()) {
       return;
     }
     getFilterTapTrackAction();
     navigateToEnhancedFilter();
-  }
-
-  Future<void> updateSitesWithFuelPricesOnWalletCardChange({
-    bool hasNoCards = true,
-    bool isMasterCard = false,
-  }) async {
-    try {
-      // Clear all the requested SiteIds tracked.
-      KillDupFuelPriceCalls.emptyTheSiteIds();
-      await Get.find<EnhancedFilterController>().clearAllFilter();
-      isShowLoading(true);
-      selectedCardFuelPreferenceType =
-          await getSelectedCardFuelPrefTypeUseCase.execute(
-        GetSelectedCardFuelPrefTypeParams(
-            fuelPreferencesList: fuelPreferencesList),
-      );
-      //handle mc card changes here for auth user.
-      MCSitesGovernor.isMCSitesViewEnabled = false;
-      await refreshFuelPriceApi();
-
-      isShowLoading(false);
-    } on Exception catch (e) {
-      isShowLoading(false);
-      Globals().dynatrace.logError(
-            name: SLInternalText.getSitesAPIErrorName,
-            value: SLInternalText.getSitesAPIErrorValue,
-            reason: e.toString(),
-          );
-    }
-  }
-
-  Future<void> resetMcFiltersOnCardChange() async {
-    try {
-      if (MCSitesGovernor.isMCSitesViewEnabled) {
-        await Get.find<EnhancedFilterController>().clearAllFilter();
-        MCSitesGovernor.isMCSitesViewEnabled = false;
-        await getSiteLocationsData();
-      }
-    } catch (e) {
-      Globals().dynatrace.logError(
-            name:
-                'error in site locator controller resetMcFiltersOnCardChange()',
-            value: e.toString(),
-            reason: e.toString(),
-          );
-    }
-  }
-
-  Future<void> resetMCQuickFilters() async {
-    final masterCardQuickFilter = SiteLocatorConfig.quickFilterOptions
-        .firstWhereOrNull((p) => p.key == QuickFilterKeys.masterCard);
-    if (masterCardQuickFilter != null) {
-      for (final item in SiteLocatorConfig.quickFilterOptions) {
-        if (SLViewText.mcQuickFilterKeysList.contains(item.key) &&
-            item.key != QuickFilterKeys.masterCard) {
-          item.isVisible = masterCardQuickFilter.isChecked;
-        }
-      }
-      SiteLocatorConfig.quickFilterOptions.refresh();
-    }
   }
 
   Future<void> onSearchThisAreaButtonTap() async {

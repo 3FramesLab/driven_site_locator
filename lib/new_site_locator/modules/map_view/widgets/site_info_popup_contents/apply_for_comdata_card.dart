@@ -29,14 +29,15 @@ class ApplyForComdataCard extends StatelessWidget {
 
   void _onTap() {
     Get.back();
-    NavTo.dcWebView(
-      title: SLViewText.ourFuelCards,
-      url: DrivenConfiguration.applyCardUrl,
-    ).then((_) {
-      if (siteLocatorController.previousMarkerDetails != null) {
-        siteLocatorController
-            .onMarkerTap(siteLocatorController.previousMarkerDetails!);
-      }
-    });
+    // TODO(Smeet): get from super-app.
+    // NavTo.dcWebView(
+    //   title: SLViewText.ourFuelCards,
+    //   url: DrivenConfiguration.applyCardUrl,
+    // ).then((_) {
+    //   if (siteLocatorController.previousMarkerDetails != null) {
+    //     siteLocatorController
+    //         .onMarkerTap(siteLocatorController.previousMarkerDetails!);
+    //   }
+    // });
   }
 }

@@ -1,0 +1,728 @@
+{
+    "filters": {
+        "drivenconnect": [
+            {
+                "quick_filter_label": "Merchants",
+                "sub_filter_header": "Merchants type",
+                "key": "primaryBusiness",
+                "radioButton": true,
+                "filters": [
+                    {
+                        "key": [
+                            "TS"
+                        ],
+                        "label": "Truck stops",
+                        "icon": "0xf18e",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "FS"
+                        ],
+                        "label": "Truck stops and Gas stations",
+                        "icon": "plus_two.svg",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "GS"
+                        ],
+                        "label": "Gas stations",
+                        "icon": "0xf17c",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "CS"
+                        ],
+                        "label": "Convenience stores",
+                        "icon": "0xf3ef",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "TR"
+                        ],
+                        "label": "Towing & Repairs",
+                        "icon": "towing.svg",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "LS"
+                        ],
+                        "label": "Lumper services",
+                        "icon": "forklift_outlined.svg",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "VM"
+                        ],
+                        "label": "Vehicle maintenance",
+                        "icon": "repair_outlined.svg",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "O"
+                        ],
+                        "label": "Other",
+                        "icon": "0xef57",
+                        "parent": "primaryBusiness"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Fuel",
+                "sub_filter_header": "Fuel types",
+                "key": "fuel",
+                "radioButton": true,
+                "filters": [
+                    {
+                        "key": [
+                            "Diesel"
+                        ],
+                        "label": "Diesel",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "Reefer"
+                        ],
+                        "label": "Reefer",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "DEF"
+                        ],
+                        "label": "DEF",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "Gas"
+                        ],
+                        "label": "Gas",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "CNG"
+                        ],
+                        "label": "CNG",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "LNG"
+                        ],
+                        "label": "LNG",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Brands",
+                "sub_filter_header": "Brand types",
+                "key": "brands",
+                "hasGallonUpToggleButton": true,
+                "filters": [
+                    {
+                        "key": [
+                            "TA"
+                        ],
+                        "label": "TA",
+                        "icon": "TA.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "SPEEDWAY",
+                            "SPEEDWAY EXPRESS"
+                        ],
+                        "label": "Speedway",
+                        "icon": "Speedway.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "LOVES"
+                        ],
+                        "label": "Love’s",
+                        "icon": "Loves-Horizontal.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "7-Eleven"
+                        ],
+                        "label": "7-Eleven",
+                        "icon": "7Eleven.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "PILOT"
+                        ],
+                        "label": "Pilot",
+                        "icon": "Pilot.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "FLYING J"
+                        ],
+                        "label": "Flying J",
+                        "icon": "FlyingJ.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "AMBEST"
+                        ],
+                        "label": "Ambest",
+                        "icon": "ambest.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "SHEETZ"
+                        ],
+                        "label": "Sheetz",
+                        "icon": "Sheetz.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "CASEYS"
+                        ],
+                        "label": "Casey’s",
+                        "icon": "Caseys3.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "allOthers"
+                        ],
+                        "label": "All others",
+                        "icon": "0xe394",
+                        "parent": "brands"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Amenities",
+                "sub_filter_header": "Amenities",
+                "key": "amenities",
+                "filters": [
+                    {
+                        "key": [
+                            "TrkPrkOvNt",
+                            "TrkPrkPave",
+                            "TrkPrkUnPv",
+                            "ParkingFee"
+                        ],
+                        "label": "Parking",
+                        "icon": "parking.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "WeighScals"
+                        ],
+                        "label": "Scales",
+                        "icon": "0xf0564",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "FoodOutlet"
+                        ],
+                        "label": "Restaurants",
+                        "icon": "0xe532",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "RestRoom"
+                        ],
+                        "label": "Restrooms",
+                        "icon": "0xf4be",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "Laundry"
+                        ],
+                        "label": "Laundry",
+                        "icon": "laundry_outlined.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "Lounge"
+                        ],
+                        "label": "Lounge",
+                        "icon": "lounge_outlined.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "MaleShwrs",
+                            "FemaleShwr"
+                        ],
+                        "label": "Showers",
+                        "icon": "0xf383",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "GameRoom"
+                        ],
+                        "label": "Game room",
+                        "icon": "game_controller_outlined.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "Lodging"
+                        ],
+                        "label": "Lodging",
+                        "icon": "0xf10e",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "ATM"
+                        ],
+                        "label": "ATM",
+                        "icon": "payments.svg",
+                        "parent": "amenities"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Maintenance",
+                "sub_filter_header": "Maintenance",
+                "key": "maintenance",
+                "filters": [
+                    {
+                        "key": [
+                            "TruckWash"
+                        ],
+                        "label": "Truck wash",
+                        "icon": "truck_wash_outlined.svg",
+                        "parent": "maintenance"
+                    },
+                    {
+                        "key": [
+                            "RepairMajr",
+                            "RepairMinr"
+                        ],
+                        "label": "Truck repair",
+                        "icon": "repair_outlined.svg",
+                        "parent": "maintenance"
+                    },
+                    {
+                        "key": [
+                            "RepairTire"
+                        ],
+                        "label": "Tire repair",
+                        "icon": "flat_tire.svg",
+                        "parent": "maintenance"
+                    }
+                ]
+            }
+        ],
+        "comdata": [
+            {
+                "quick_filter_label": "Merchants",
+                "sub_filter_header": "Merchants types",
+                "key": "primaryBusiness",
+                "radioButton": true,
+                "filters": [
+                    {
+                        "key": [
+                            "TS"
+                        ],
+                        "label": "Truck stops",
+                        "icon": "0xf18e",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "FS"
+                        ],
+                        "label": "Truck stops and Gas stations",
+                        "icon": "plus_two.svg",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "GS"
+                        ],
+                        "label": "Gas stations",
+                        "icon": "0xf17c",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "CS"
+                        ],
+                        "label": "Convenience stores",
+                        "icon": "0xf3ef",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "VM"
+                        ],
+                        "label": "Vehicle maintenance",
+                        "icon": "repair_outlined.svg",
+                        "parent": "primaryBusiness"
+                    },
+                    {
+                        "key": [
+                            "O"
+                        ],
+                        "label": "Other",
+                        "icon": "0xef57",
+                        "parent": "primaryBusiness"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Fuel",
+                "sub_filter_header": "Fuel types",
+                "key": "fuel",
+                "radioButton": true,
+                "filters": [
+                    {
+                        "key": [
+                            "Diesel"
+                        ],
+                        "label": "Diesel",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "Reefer"
+                        ],
+                        "label": "Reefer",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "DEF"
+                        ],
+                        "label": "DEF",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "Gas"
+                        ],
+                        "label": "Gas",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "CNG"
+                        ],
+                        "label": "CNG",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    },
+                    {
+                        "key": [
+                            "LNG"
+                        ],
+                        "label": "LNG",
+                        "icon": "0xf17c",
+                        "parent": "fuel"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Brands",
+                "sub_filter_header": "Brand types",
+                "key": "brands",
+                "hasGallonUpToggleButton": true,
+                "filters": [
+                    {
+                        "key": [
+                            "TA"
+                        ],
+                        "label": "TA",
+                        "icon": "TA.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "SPEEDWAY",
+                            "SPEEDWAY EXPRESS"
+                        ],
+                        "label": "Speedway",
+                        "icon": "Speedway.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "LOVES"
+                        ],
+                        "label": "Love’s",
+                        "icon": "Loves-Horizontal.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "7-Eleven"
+                        ],
+                        "label": "7-Eleven",
+                        "icon": "7Eleven.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "PILOT"
+                        ],
+                        "label": "Pilot",
+                        "icon": "Pilot.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "FLYING J"
+                        ],
+                        "label": "Flying J",
+                        "icon": "FlyingJ.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "AMBEST"
+                        ],
+                        "label": "Ambest",
+                        "icon": "ambest.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "SHEETZ"
+                        ],
+                        "label": "Sheetz",
+                        "icon": "Sheetz.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "CASEYS"
+                        ],
+                        "label": "Casey’s",
+                        "icon": "Caseys3.png",
+                        "parent": "brands"
+                    },
+                    {
+                        "key": [
+                            "allOthers"
+                        ],
+                        "label": "All others",
+                        "icon": "0xe394",
+                        "parent": "brands"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Amenities",
+                "sub_filter_header": "Amenities",
+                "key": "amenities",
+                "filters": [
+                    {
+                        "key": [
+                            "TrkPrkOvNt",
+                            "TrkPrkPave",
+                            "TrkPrkUnPv",
+                            "ParkingFee"
+                        ],
+                        "label": "Parking",
+                        "icon": "parking.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "WeighScals"
+                        ],
+                        "label": "Scales",
+                        "icon": "0xf0564",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "FoodOutlet"
+                        ],
+                        "label": "Restaurants",
+                        "icon": "0xe532",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "RestRooms"
+                        ],
+                        "label": "Restroom",
+                        "icon": "0xf4be",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "Laundry"
+                        ],
+                        "label": "Laundry",
+                        "icon": "laundry_outlined.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "Lounge"
+                        ],
+                        "label": "Lounge",
+                        "icon": "lounge_outlined.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "MaleShwrs",
+                            "FemaleShwr"
+                        ],
+                        "label": "Showers",
+                        "icon": "0xf383",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "viewMore"
+                        ],
+                        "label": "View more",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "GameRoom"
+                        ],
+                        "label": "Game room",
+                        "icon": "game_controller_outlined.svg",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "Lodging"
+                        ],
+                        "label": "Lodging",
+                        "icon": "0xf10e",
+                        "parent": "amenities"
+                    },
+                    {
+                        "key": [
+                            "ATM"
+                        ],
+                        "label": "ATM",
+                        "icon": "payments.svg",
+                        "parent": "amenities"
+                    }
+                ]
+            },
+            {
+                "quick_filter_label": "Maintenance",
+                "sub_filter_header": "Maintenance",
+                "key": "maintenance",
+                "filters": [
+                    {
+                        "key": [
+                            "TruckWash"
+                        ],
+                        "label": "Truck wash",
+                        "icon": "truck_wash_outlined.svg",
+                        "parent": "maintenance"
+                    },
+                    {
+                        "key": [
+                            "RepairMajr",
+                            "RepairMinr"
+                        ],
+                        "label": "Truck repair",
+                        "icon": "repair_outlined.svg",
+                        "parent": "maintenance"
+                    },
+                    {
+                        "key": [
+                            "RepairTire"
+                        ],
+                        "label": "Tire repair",
+                        "icon": "flat_tire.svg",
+                        "parent": "maintenance"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -7,7 +7,7 @@
             "serviceType": "amenities",
             "order": 1,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -38,7 +38,7 @@
             "serviceType": "amenities",
             "order": 4,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -59,7 +59,7 @@
             "serviceType": "amenities",
             "order": 6,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -70,7 +70,7 @@
             "serviceType": "amenities",
             "order": 7,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -81,7 +81,7 @@
             "serviceType": "amenities",
             "order": 8,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -92,7 +92,7 @@
             "serviceType": "amenities",
             "order": 9,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -103,7 +103,7 @@
             "serviceType": "amenities",
             "order": 10,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -113,7 +113,7 @@
             "serviceType": "amenities",
             "order": 11,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -123,7 +123,7 @@
             "serviceType": "amenities",
             "order": 12,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         }
     ],
@@ -175,7 +175,7 @@
             "serviceType": "features",
             "order": 5,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -196,7 +196,7 @@
             "serviceType": "features",
             "order": 7,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -207,7 +207,7 @@
             "serviceType": "features",
             "order": 8,
             "flavors": [
-                "comdata",
+                "drivenconnect",
                 "fuelman"
             ]
         },
@@ -238,7 +238,7 @@
             "serviceType": "features",
             "order": 11,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -248,7 +248,7 @@
             "serviceType": "features",
             "order": 12,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -258,7 +258,7 @@
             "serviceType": "features",
             "order": 13,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -268,7 +268,7 @@
             "serviceType": "features",
             "order": 14,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -278,7 +278,7 @@
             "serviceType": "features",
             "order": 15,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -288,7 +288,7 @@
             "serviceType": "features",
             "order": 16,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         }
     ],
@@ -310,7 +310,7 @@
             "serviceType": "locationType",
             "order": 2,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -321,7 +321,7 @@
             "order": 3,
             "flavors": [
                 "fuelman",
-                "comdata"
+                "drivenconnect"
             ]
         },
         {
@@ -337,11 +337,11 @@
         {
             "type": "enhancedFilter",
             "key": "gallonUp",
-            "label": "Gallon UP",
+            "label": "Gallon Up",
             "serviceType": "locationType",
             "order": 5,
             "flavors": [
-                "comdata"
+                "drivenconnect"
             ]
         }
     ]

@@ -29,6 +29,7 @@ class SiteLocatorEntitlementRepository {
   final bool isBestRatedTabEnabled;
   final bool isRecentTabEnabled;
   final bool isGoogleRatingEnabled;
+  final bool isAcceptedCardSectionEnabled;
 
   const SiteLocatorEntitlementRepository({
     required this.isAmenitiesFilterEnabled,
@@ -57,6 +58,7 @@ class SiteLocatorEntitlementRepository {
     required this.isBestRatedTabEnabled,
     required this.isRecentTabEnabled,
     required this.isGoogleRatingEnabled,
+    required this.isAcceptedCardSectionEnabled,
   });
 }
 
@@ -122,4 +124,6 @@ class SiteLocatorEntitlementUtils {
       siteLocatorEntitlementRepository?.isRecentTabEnabled ?? false;
   bool get isGoogleRatingEnabled =>
       siteLocatorEntitlementRepository?.isGoogleRatingEnabled ?? false;
+  bool get isAcceptedCardSectionEnabled =>
+      siteLocatorEntitlementRepository?.isAcceptedCardSectionEnabled ?? false;
 }

@@ -29,7 +29,7 @@ class SiteInfoActionButtons extends StatelessWidget {
         icon: Icon(
           icon,
           color: DrivenColors.primary,
-          size: DrivenDimensions.dp24,
+          size: 24,
         ),
         label: SubTitleText(
           title: text,
@@ -121,7 +121,7 @@ class SiteInfoActionButtons extends StatelessWidget {
     siteLocatorController.isBottomModalSheetOpened(true);
     Get.back();
     siteLocatorController.isBottomModalSheetVisible = false;
-    await SiteLocatorUtils.launchURL(
+    await DcSiteLocatorUtils.launchURL(
       '${SLInternalText.siteLocatorDialerAppOpen}${selectedSiteLocation.locationPhone}',
       SLInternalText.openDialerAppErrorMessage,
     );

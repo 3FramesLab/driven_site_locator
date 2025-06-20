@@ -70,7 +70,7 @@ class SiteInfoPanelHeader extends StatelessWidget {
         child: const Icon(
           Icons.close,
           color: DrivenColors.black,
-          size: DrivenDimensions.dp24,
+          size: 24,
         ),
       ),
       onTap: () {

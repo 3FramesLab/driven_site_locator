@@ -1,8 +1,10 @@
 part of sl_config_module;
 
 class UmaSLProperties {
+  static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
   static UmaSLModel? configProperties;
 
+  static bool isDisplayMapEnabled = false;
   static List<Filter> filters = [];
   static double mapRadiusCircle = 250;
   static List<CardTypeMapping> cardTypeMapping = [];
@@ -33,6 +35,7 @@ class UmaSLProperties {
   static void init({Map<String, dynamic>? configJsonData}) {
     try {
       _getConfigData(configJsonData);
+      _setIsDisplayMapEnabled();
       _setFilters();
       _setMapRadiusCircle();
       _setCardTypeMapping();
@@ -60,6 +63,9 @@ class UmaSLProperties {
           );
     }
   }
+
+  static void _setIsDisplayMapEnabled() =>
+      isDisplayMapEnabled = _entitlementRepository.isSiteLocatorFeatureEnabled;
 
   static void _getConfigData(Map<String, dynamic>? configJsonData) {
     if (configJsonData != null) {
