@@ -6,7 +6,11 @@ import 'dart:math';
 import 'package:cron/cron.dart';
 import 'package:driven_site_locator/analytics/analytics.dart';
 import 'package:driven_site_locator/config/globals.dart';
+<<<<<<< HEAD
 import 'package:driven_site_locator/data/data_sources/remote/decodable.dart';
+=======
+import 'package:driven_site_locator/config/sl_session_manager.dart';
+>>>>>>> 3311a32b694c1aeb17c60419737b5f98abe6fb0d
 import 'package:driven_site_locator/data/data_sources/remote/dynatrace_logs_tracking.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';

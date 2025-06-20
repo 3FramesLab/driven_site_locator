@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:driven_site_locator/config/globals.dart';
+import 'package:driven_site_locator/config/sl_session_manager.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
@@ -22,7 +23,7 @@ class APIInterceptor extends Interceptor {
     if (err.response?.statusCode == 401) {
       Globals().dynatrace.logError(
             name: DynatraceError.accessTokenExpiredError,
-            value: '${err.response?.realUri} - ${DrivenSessionManager().uuid}',
+            value: '${err.response?.realUri} - ${SLSessionManager().uuid}',
             reason: DynatraceError.accessTokenExpiredError,
           );
       // Refresh the token
@@ -44,12 +45,12 @@ class APIInterceptor extends Interceptor {
 
   Future<String> _getAccessToken() async {
     await _handleAccessToken();
-    return 'Bearer ${DrivenSessionManager().jwtAccessToken}';
+    return 'Bearer ${SLSessionManager().jwtAccessToken}';
   }
 
   Future<void> _handleAccessToken() async {
-    if (DrivenSessionManager().jwtAccessToken.isNullEmptyOrWhitespace ||
-        AppUtils.isTokenExpired(DrivenSessionManager().jwtAccessToken)) {
+    if (SLSessionManager().jwtAccessToken.isNullEmptyOrWhitespace ||
+        AppUtils.isTokenExpired(SLSessionManager().jwtAccessToken)) {
       final getJWTAccessTokenUseCase = GetJWTAccessTokenUseCase();
       await AppUtils.refreshAmazonAccessToken(
         getJWTAccessTokenUseCase: getJWTAccessTokenUseCase,
@@ -67,9 +68,9 @@ class APIInterceptor extends Interceptor {
         ApiConstants.versionCode: AppUtils.buildNumber,
         ApiConstants.flavor: AppUtils.flavor,
         ApiConstants.applicationName: AppUtils.driven,
-        ApiConstants.userId: DrivenSessionManager().userId,
-        ApiConstants.sysAccId: DrivenSessionManager().defaultSysAccountId,
-        ApiConstants.userName: DrivenSessionManager().mddbUserId,
+        ApiConstants.userId: SLSessionManager().userId,
+        ApiConstants.sysAccId: SLSessionManager().defaultSysAccountId,
+        ApiConstants.userName: SLSessionManager().mddbUserId,
       };
       // TODO(Smeet): Remove the check for location stg url .
 

@@ -152,8 +152,8 @@ class DcSiteLocatorUtils {
       String defaultFuel = UmaSLProperties.defaultProductType;
 
       if (!isGuest) {
-        if (DrivenSessionManager().selectedCardType != null) {
-          final fuelType = DrivenSessionManager().selectedCardType?.fuelType;
+        if (SLSessionManager().selectedCardType != null) {
+          final fuelType = SLSessionManager().selectedCardType?.fuelType;
           defaultFuel = fuelType?.value ?? UmaSLProperties.defaultProductType;
         }
       }
@@ -253,7 +253,7 @@ class DcSiteLocatorUtils {
               }
             } catch (_) {}
           } else {
-            return DrivenSessionManager().selectedCardType?.fuelType.value ??
+            return SLSessionManager().selectedCardType?.fuelType.value ??
                 UmaSLProperties.defaultProductType;
           }
         }
@@ -279,7 +279,7 @@ class DcSiteLocatorUtils {
           return UmaSLProperties.defaultCardType;
         }
       } else {
-        return DrivenSessionManager().selectedCardType?.key ?? '';
+        return SLSessionManager().selectedCardType?.key ?? '';
       }
     } catch (_) {
       return '';

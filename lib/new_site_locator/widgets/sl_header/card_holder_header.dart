@@ -21,16 +21,16 @@ class CardHolderHeader extends StatelessWidget {
   }
 
   String get _headerText {
-    final nickName = DrivenSessionManager().selectedCardNickname;
+    final nickName = SLSessionManager().selectedCardNickname;
 
-    if (DrivenSessionManager()
+    if (SLSessionManager()
         .selectedCardLastFourDigits
         .isNotNullEmptyOrWhitespace) {
-      return '$nickName *${DrivenSessionManager().selectedCardLastFourDigits}';
-    } else if (DrivenSessionManager()
+      return '$nickName *${SLSessionManager().selectedCardLastFourDigits}';
+    } else if (SLSessionManager()
         .selectedFleetId()
         .isNotNullEmptyOrWhitespace) {
-      return DrivenSessionManager().selectedFleetId();
+      return SLSessionManager().selectedFleetId();
     } else {
       return '';
     }
