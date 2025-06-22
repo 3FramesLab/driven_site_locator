@@ -28,7 +28,7 @@ class SiteInfoBottomSheetItem extends StatelessWidget {
         child: Center(
           child: SubTitleText(
             title: value ?? '',
-            color: SiteLocatorColors.blueColor,
+            color: SLColors.blueColor,
             fontSize: 20,
           ),
         ),

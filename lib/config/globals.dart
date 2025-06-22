@@ -28,7 +28,7 @@ class Globals {
   final HiveInterface hive = Hive;
   String? _appLogoPath;
 
-  void init({
+  Future<void> init({
     required String flavor,
     required String packageId,
     required String androidCertSignature,

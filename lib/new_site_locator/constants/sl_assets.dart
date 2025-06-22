@@ -4,6 +4,7 @@ class SLAssets {
   static const double logoSize = 40;
   static const assetPathCardTypes = 'assets/site_locator/card_types';
   static const assetPath = 'assets/site_locator';
+  static const assetPathComdata = 'assets/site_locator/comdata_dc';
 
   /// Card Types.
   static const fuelmanFleetCard = '$assetPathCardTypes/fuelman_fleet_card.png';
@@ -21,4 +22,33 @@ class SLAssets {
   static const currentLocationButtonIcon = 'assets/images/current_location.png';
 
   static const backupBrandLogoUrlsPath = '$assetPath/brand_logo_urls.json';
+
+  static const selectedServicePinFilePathDFC =
+      '$assetPathComdata/selected-service-pin-drop.png';
+  static const selectedNoLogoFuelPinFilePathDFC =
+      '$assetPathComdata/selected-no-logo-fuel-pin-drop.png';
+  static const clusterRegular = '$assetPathComdata/cluster_regular.png';
+  static const clusterLowest = '$assetPathComdata/cluster_lowest.png';
+  static const normalNoLogoFilePathDFC =
+      '$assetPathComdata/normal-no-logo-marker.png';
+  static const lowestPriceNoLogoPinDrop =
+      '$assetPathComdata/lowest-price-no-logo-pin-drop.png';
+  static const normalPinNoLogoNoPriceFilePathDFC =
+      '$assetPathComdata/normal-pin-no-logo-no-price.png';
+  static const normalMCPinNoLogoNoPriceFilePathDFC =
+      '$assetPathComdata/normal-mc-pin-no-logo-no-price.png';
+  static const normalServicePinFilePathDFC =
+      '$assetPathComdata/service-pin-drop.png';
+  static const normalPinNoPriceWithLogo =
+      '$assetPathComdata/pin-without-price-with-logo.png';
+  static const pinBgDiscountFilePath = '$assetPath/yellow-pin-drop.png';
+  static const pinBgFilePath = '$assetPath/white-pin-drop.png';
+
+  static const pinBgNormalFilePathDFC = '$assetPathComdata/normal-pin-drop.png';
+  static const normalPriceBannerPinFilePathDFC =
+      '$assetPathComdata/normal-marker.png';
+  static const lowestPricePinDrop =
+      '$assetPathComdata/lowest-price-pin-drop.png';
+  static const selectedWithLogoPinFilePathDFC =
+      '$assetPathComdata/selected-with-logo-pin-drop.png';
 }

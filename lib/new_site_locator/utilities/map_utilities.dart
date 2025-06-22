@@ -72,9 +72,10 @@ class MapUtilities {
   static Future<void> onLocationSettingsEnableCounter() async {
     final isLocationPermissionGranted = await getLocationPermissionStatus();
     if (!isLocationPermissionGranted) {
-      final int? tapCount = PreferenceUtils.getInt(
-          SLInternalText.locationEnableCounter,
-          defaultValue: 0);
+      final int? tapCount = Globals()
+              .sharedPreferences
+              .getInt(SLInternalText.locationEnableCounter) ??
+          0;
       if (tapCount == SLInternalText.locationEnableDialogCount - 1) {
         if (Get.isDialogOpen ?? false) {
           await Future.delayed(const Duration(
@@ -111,10 +112,11 @@ class MapUtilities {
     Get.back();
   }
 
-  static Future<void> updateTapCount(int count) async => PreferenceUtils.setInt(
-        SLInternalText.locationEnableCounter,
-        value: count,
-      );
+  static Future<void> updateTapCount(int count) async =>
+      Globals().sharedPreferences.setInt(
+            SLInternalText.locationEnableCounter,
+            count,
+          );
 
   static String appendLatLng(LatLng latLng) {
     return '${latLng.latitude},${latLng.longitude}';

@@ -14,11 +14,13 @@ class ApiConstants {
   static String basicAuthSecret = '';
   static String googleAPIKey = '';
   static String clientId = '';
-  static String client_secret = '';
+  static String clientSecret = '';
+
+  static const radiusForFetchingPlaces = 5000; //in meters
 
   static final siteLocatorAccessTokenJson = {
     'client_id': clientId,
-    'client_secret': client_secret,
+    'client_secret': clientSecret,
     'grant_type': 'client_credentials'
   };
 

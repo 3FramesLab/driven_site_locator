@@ -29,7 +29,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     return Focus(
       onFocusChange: (onFocus) {
         if (!onFocus) {
-          SiteLocatorUtils.hideKeyboard();
+          DcSiteLocatorUtils.hideKeyboard();
         }
         siteLocatorController.resetMarkers(PinVariantStore.statusList);
       },
@@ -110,8 +110,8 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     siteLocatorController.getSearchTrackAction();
     searchPlacesController.searchIconName(SLInternalText.clear);
     searchPlacesController.searchText = searchText;
-    if (Get.currentRoute == AdminRoutes.searchPlaceResultsView ||
-        Get.currentRoute == Routes.searchPlace) {
+    if (Get.currentRoute == SLRoutes.searchPlaceResultsView ||
+        Get.currentRoute == SLRoutes.searchPlace) {
       await searchPlacesController.getPlacesResults();
     } else {
       _goToResultPage();
@@ -161,8 +161,8 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     //     }
     //   }
     // });
-    NavTo.searchPlace(arguments: {
-      RouteArguments.fromScreen: SLInternalText.listView,
+    slNavTo.searchPlace(arguments: {
+      SLRouteArguments.fromScreen: SLInternalText.listView,
     })?.then((result) {
       if (result != null) {
         if (result is bool && result) {

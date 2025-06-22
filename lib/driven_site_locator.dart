@@ -5,7 +5,7 @@ import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/driven_site_locator_platform_interface.dart';
-import 'package:driven_site_locator/site_locator/configuration/site_locator_config.dart';
+import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 
 class DrivenSiteLocator {
   AppFlavor flavor = AppFlavor.none;
@@ -34,6 +34,9 @@ class DrivenSiteLocator {
   String _customerId = '';
   Widget? walletHeader;
 
+  // new
+  void Function()? onAddCardTap;
+
   DrivenSiteLocator._internal();
   static final DrivenSiteLocator _instance = DrivenSiteLocator._internal();
   static DrivenSiteLocator get instance => _instance;
@@ -54,9 +57,7 @@ class DrivenSiteLocator {
     setAppFlavor(flavor);
     SiteLocatorEntitlementUtils.instance.siteLocatorEntitlementRepository =
         siteLocatorEntitlementRepository;
-    await SiteLocatorConfig.init(
-      configDataJson: configDataJson,
-    );
+    UmaSLProperties.init(configJsonData: configDataJson);
   }
 
   Future<void> init({

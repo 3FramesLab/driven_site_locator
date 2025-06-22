@@ -7,10 +7,6 @@ int cacheStartingTime = 0;
 class CustomPin {
   static bool remoteBrandLogo = true;
 
-  static late ui.Image defaultBrandLogoSmall;
-  static late ui.Image defaultBrandLogoBig;
-  static late ui.Image normalPinBg;
-  static late ui.Image discountPinBg;
   static late ui.Image normalBannerPinBg;
   static late ui.Image lowestPriceBannerPinBg;
   static late ui.Image discountBannerPinBg;
@@ -55,7 +51,7 @@ class CustomPin {
   }
 
   static void bindAdhocDependencies() {
-    Get.lazyPut(CardholderSetupController.new);
+    // Get.lazyPut(CardholderSetupController.new);
     Get.lazyPut(SitesLoadingProgressController.new);
   }
 
@@ -65,17 +61,6 @@ class CustomPin {
   }
 
   static Future<void> preCacheSiteLocatorAssets() async {
-    defaultBrandLogoSmall = await defaultLogo(
-      BrandLogoSize.small,
-      BrandLogoSize.small,
-    );
-    defaultBrandLogoBig = await defaultLogo(
-      BrandLogoSize.big,
-      BrandLogoSize.big,
-      bigSize: true,
-    );
-    normalPinBg = await pinDropImageBg(hasDiscount: false);
-    discountPinBg = await pinDropImageBg(hasDiscount: true);
     normalBannerPinBg = await bannerPinImageBg(hasDiscount: false);
     lowestPriceBannerPinBg = await bannerPinImageBg(hasLowestFuelPrice: true);
     discountBannerPinBg = await bannerPinImageBg(hasDiscount: true);
@@ -89,15 +74,15 @@ class CustomPin {
     normalPinServiceStation = await normalServicePinImage();
     normalPinNoPriceWithLogo = await normalPinNoPriceWithLogoPinImage();
     selectedPinServiceStation = await selectedNoLogoNoPricePinImage(
-      SiteLocatorAssets.selectedServicePinFilePathDFC,
+      SLAssets.selectedServicePinFilePathDFC,
     );
     selectedNoLogoFuelPin = await selectedNoLogoNoPricePinImage(
-      SiteLocatorAssets.selectedNoLogoFuelPinFilePathDFC,
+      SLAssets.selectedNoLogoFuelPinFilePathDFC,
     );
 
     cacheStartingTime = DateTime.now().millisecondsSinceEpoch;
-    clusterImage = await _getClusterImage(SiteLocatorAssets.clusterRegular);
-    clusterLowest = await _getClusterImage(SiteLocatorAssets.clusterLowest);
+    clusterImage = await _getClusterImage(SLAssets.clusterRegular);
+    clusterLowest = await _getClusterImage(SLAssets.clusterLowest);
   }
 
   static Future<void> preCacheBrandLogosAssets(
@@ -115,10 +100,7 @@ class CustomPin {
         DateTime.now().millisecondsSinceEpoch - startingTime;
     final timeLogValue =
         'Brand logo cache event duration: ${trackedTime.toString()}';
-    Globals.dynatrace.tagEvent(timeLogValue);
-    if (kDebugMode) {
-      log(timeLogValue);
-    }
+    Globals().dynatrace.tagEvent(timeLogValue);
   }
 
   static Future<void> preCacheAllBrandLogos() async {
@@ -131,15 +113,15 @@ class CustomPin {
       urlStoreList = await siteLocationsService.fetchBrandLogoUrls(
               headerQueryParams: accessToken) ??
           [];
-    } on Exception catch (e) {
-      var errorMessage = DynatraceErrorMessages.getBrandLogosErrorName;
-      if (e is ErrorResponse) {
-        errorMessage = e.errorSummary ?? errorMessage;
-      }
-      Globals.dynatrace.logError(
-        name: DynatraceErrorMessages.getBrandLogosErrorValue,
-        value: errorMessage,
-      );
+    } on Exception catch (_) {
+      //   var errorMessage = DynatraceErrorMessages.getBrandLogosErrorName;
+      //   if (e is ErrorResponse) {
+      //     errorMessage = e.errorSummary ?? errorMessage;
+      //   }
+      //   Globals.dynatrace.logError(
+      //     name: DynatraceErrorMessages.getBrandLogosErrorValue,
+      //     value: errorMessage,
+      //   );
     }
     processCachingBrandLogos(urlStoreList);
   }
@@ -162,10 +144,10 @@ class CustomPin {
         final imageResized = await unit8ListBytesToImageConverter(imageBytes);
         brandLogosImageCacheStore.putIfAbsent(key, () => imageResized);
       } catch (_) {
-        Globals.dynatrace.logError(
-          name: 'Invalid Image',
-          value: 'Invalid Image unit8ListBytesToImageConverter',
-        );
+        Globals().dynatrace.logError(
+              name: 'Invalid Image',
+              value: 'Invalid Image unit8ListBytesToImageConverter',
+            );
       }
     }
   }
@@ -216,25 +198,6 @@ class CustomPin {
     return logoImage;
   }
 
-  static Future<ui.Image> defaultLogo(int width, int height,
-      {bool bigSize = false}) async {
-    ByteData defaultLogoByteData =
-        await rootBundle.load(SiteLocatorConfig.defaultBrandLogoPath);
-    // DFC Asset updates
-    if (AppUtils.isComdata && !MCSitesGovernor.isMCSitesViewEnabled) {
-      defaultLogoByteData = await rootBundle
-          .load(SiteLocatorConfig.defaultComdataSiteBrandLogoPath);
-    }
-    if (AppUtils.isComdata && MCSitesGovernor.isMCSitesViewEnabled) {
-      defaultLogoByteData =
-          await rootBundle.load(SiteLocatorAssets.mcSiteMCLogoDFC);
-    }
-    final int sizeToPass = MCSitesGovernor.isMCSitesViewEnabled
-        ? (bigSize ? MCLogoSize.big : MCLogoSize.small)
-        : width;
-    return bytesToResizedImage(defaultLogoByteData, sizeToPass, sizeToPass);
-  }
-
   static Future<ui.Image> pinDropImageBg({
     bool? hasDiscount,
     bool? hasGallonUp,
@@ -260,15 +223,11 @@ class CustomPin {
   }
 
   static int getPinDropImageBgWidth() {
-    return MCSitesGovernor.isMCSitesViewEnabled
-        ? MCPinDropBannerSize.width
-        : PinDropSize.width;
+    return PinDropSize.width;
   }
 
   static int getPinDropImageBgHeight() {
-    return MCSitesGovernor.isMCSitesViewEnabled
-        ? MCPinDropBannerSize.height
-        : PinDropSize.height;
+    return PinDropSize.height;
   }
 
   static Future<ui.Image> bannerPinImageBg({
@@ -298,9 +257,9 @@ class CustomPin {
   static Future<ui.Image> normalPriceNoLogoBgImage({
     bool hasLowestPrice = false,
   }) async {
-    String path = SiteLocatorAssets.normalNoLogoFilePathDFC;
+    String path = SLAssets.normalNoLogoFilePathDFC;
     if (hasLowestPrice) {
-      path = SiteLocatorAssets.lowestPriceNoLogoPinDrop;
+      path = SLAssets.lowestPriceNoLogoPinDrop;
     }
     final ByteData bgBannerByte = await rootBundle.load(path);
 
@@ -319,7 +278,7 @@ class CustomPin {
   }
 
   static Future<ui.Image> normalPinNoLogoNoPriceImage() async {
-    const path = SiteLocatorAssets.normalPinNoLogoNoPriceFilePathDFC;
+    const path = SLAssets.normalPinNoLogoNoPriceFilePathDFC;
     final ByteData bgBannerByte = await rootBundle.load(path);
 
     final Uint8List bgImageByteData = bgBannerByte.buffer.asUint8List();
@@ -333,7 +292,7 @@ class CustomPin {
   }
 
   static Future<ui.Image> normalMCPinNoLogoNoPriceImage() async {
-    const path = SiteLocatorAssets.normalMCPinNoLogoNoPriceFilePathDFC;
+    const path = SLAssets.normalMCPinNoLogoNoPriceFilePathDFC;
     final ByteData bgBannerByte = await rootBundle.load(path);
 
     final Uint8List bgImageByteData = bgBannerByte.buffer.asUint8List();
@@ -347,7 +306,7 @@ class CustomPin {
   }
 
   static Future<ui.Image> normalServicePinImage() async {
-    const path = SiteLocatorAssets.normalServicePinFilePathDFC;
+    const path = SLAssets.normalServicePinFilePathDFC;
     final ByteData bgBannerByte = await rootBundle.load(path);
 
     final Uint8List bgImageByteData = bgBannerByte.buffer.asUint8List();
@@ -361,7 +320,7 @@ class CustomPin {
   }
 
   static Future<ui.Image> normalPinNoPriceWithLogoPinImage() async {
-    const path = SiteLocatorAssets.normalPinNoPriceWithLogo;
+    const path = SLAssets.normalPinNoPriceWithLogo;
     final ByteData bgBannerByte = await rootBundle.load(path);
 
     final Uint8List bgImageByteData = bgBannerByte.buffer.asUint8List();
@@ -388,15 +347,11 @@ class CustomPin {
   }
 
   static int getBannerPinImageBgWidth() {
-    return MCSitesGovernor.isMCSitesViewEnabled
-        ? MCPinDropBannerSize.width
-        : NewPinDropBannerSize.width;
+    return NewPinDropBannerSize.width;
   }
 
   static int getBannerPinImageBgHeight() {
-    return MCSitesGovernor.isMCSitesViewEnabled
-        ? MCPinDropBannerSize.height
-        : NewPinDropBannerSize.height;
+    return NewPinDropBannerSize.height;
   }
 
   static Future<ui.Image> getBigPinBgImage(
@@ -412,13 +367,8 @@ class CustomPin {
 
     final Uint8List assetImageByteData = bigPinBgByteData.buffer.asUint8List();
 
-    int width = PinDropBigSize.width;
-    int height = PinDropBigSize.height;
-
-    if (AppUtils.isComdata && !MCSitesGovernor.isMCSitesViewEnabled) {
-      width = NewPinDropSelectedSize.width;
-      height = NewPinDropSelectedSize.height;
-    }
+    final width = NewPinDropSelectedSize.width;
+    final height = NewPinDropSelectedSize.height;
 
     final codec = await ui.instantiateImageCodec(
       assetImageByteData.buffer.asUint8List(),
@@ -426,15 +376,6 @@ class CustomPin {
       targetHeight: height,
     );
     return (await codec.getNextFrame()).image;
-  }
-
-  static Future<ui.Image> getDefaultLogoBig() async {
-    final sizetoPass = MCSitesGovernor.isMCSitesViewEnabled
-        ? MCLogoSize.big
-        : BrandLogoSize.big;
-    final logoBigFuture = defaultLogo(sizetoPass, sizetoPass, bigSize: true);
-    DefaultBrandLogos.big = await logoBigFuture;
-    return logoBigFuture;
   }
 
   static Future<BitmapDescriptor> selectedPinMarker(Site site) async {
@@ -450,12 +391,8 @@ class CustomPin {
     if (byteData != null) {
       codec = await ui.instantiateImageCodec(
         byteData.buffer.asUint8List(),
-        targetWidth: MCSitesGovernor.isMCSitesViewEnabled
-            ? MCLogoSize.small
-            : BrandLogoSize.small,
-        targetHeight: MCSitesGovernor.isMCSitesViewEnabled
-            ? MCLogoSize.small
-            : BrandLogoSize.small,
+        targetWidth: BrandLogoSize.small,
+        targetHeight: BrandLogoSize.small,
       );
     }
 
@@ -468,20 +405,7 @@ class CustomPin {
   static bool hasBrandLogoIdentifier(String? shopBrandLogoIdentifier) =>
       (shopBrandLogoIdentifier?.isNotEmpty ?? false) && remoteBrandLogo;
 
-  static bool canHideFuelPriceOnPinDrop() =>
-      siteLocatorController.isWelcomeScreen && AppUtils.isComdata;
-
-  static double? fuelPriceOnPinDrop(Site site) =>
-      canHideFuelPriceOnPinDrop() ? null : site.price;
-
-  static Future<ui.Image> getDefaultLogoSmall() async {
-    final logoSize = MCSitesGovernor.isMCSitesViewEnabled
-        ? MCLogoSize.small
-        : BrandLogoSize.small;
-    final logoSmallFuture = defaultLogo(logoSize, logoSize);
-    DefaultBrandLogos.small = await logoSmallFuture;
-    return logoSmallFuture;
-  }
+  static double? fuelPriceOnPinDrop(Site site) => site.price;
 
   static Future<BitmapDescriptor> normalPinMarker(Site site) async {
     return NormalPinDrop.make(site);
@@ -718,7 +642,7 @@ class CustomPin {
       style: priceTextStyle,
       children: [
         TextSpan(
-          text: '\n${isBestPrice ? ViewText.best : ViewText.lowest}',
+          text: '\n${isBestPrice ? SLViewText.best : SLViewText.lowest}',
           style: f20SemiBoldBlack.copyWith(
             fontSize: 30,
             color: isBestPrice ? DrivenColors.white : DrivenColors.black,

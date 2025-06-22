@@ -75,8 +75,6 @@ class NormalPinDrop {
 
     ui.Image? logoResized;
     ui.Image brandLogoToBePassed;
-    CustomPin.defaultBrandLogoSmall =
-        DefaultBrandLogos.small ?? await CustomPin.getDefaultLogoSmall();
 
     if (CustomPin.hasBrandLogoIdentifier(shopBrandLogoIdentifier)) {
       final cachedItem =
@@ -183,6 +181,9 @@ class NormalPinDrop {
   }
 
   static bool isTopBrand(String? brand) {
+    if (brand.isNullEmptyOrWhitespace) {
+      return false;
+    }
     if (UmaSLProperties.topFuelBrands.isEmpty) {
       return true;
     }

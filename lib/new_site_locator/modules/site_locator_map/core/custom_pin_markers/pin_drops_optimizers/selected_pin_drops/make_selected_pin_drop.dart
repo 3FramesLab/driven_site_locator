@@ -4,9 +4,7 @@ part of site_locator_map_module;
 
 class SelectedPinDrop {
   static Future<BitmapDescriptor> make(Site site) async {
-    final type = MCSitesGovernor.isMCSitesViewEnabled
-        ? PinDyeType.mc.name
-        : PinDyeType.pc.name;
+    final type = PinDyeType.pc.name;
     final dyeKey = PinDropDyesCache.dyeKey(site, type, isBig: true);
 
     return dispatchAfterCache(dyeKey, site);
@@ -41,16 +39,12 @@ class SelectedPinDrop {
       return CustomPin.selectedPinServiceStation;
     }
 
-    if (!NormalPinDrop.isTopBrand(shopBrandLogoIdentifier) &&
-        AppUtils.isComdata &&
-        !MCSitesGovernor.isMCSitesViewEnabled) {
+    if (!NormalPinDrop.isTopBrand(shopBrandLogoIdentifier)) {
       return CustomPin.selectedNoLogoFuelPin;
     }
 
     ui.Image? logoResized;
     ui.Image brandLogoToBePassed;
-    CustomPin.defaultBrandLogoBig =
-        DefaultBrandLogos.big ?? await CustomPin.getDefaultLogoBig();
 
     bool hasBrandLogo = false;
 
@@ -69,81 +63,40 @@ class SelectedPinDrop {
           );
           hasBrandLogo = true;
         }
-      } else {
-        logoResized = CustomPin.defaultBrandLogoBig;
       }
-    } else {
-      brandLogoToBePassed = CustomPin.defaultBrandLogoBig;
     }
 
-    if (!hasBrandLogo &&
-        (AppUtils.isComdata && !MCSitesGovernor.isMCSitesViewEnabled)) {
+    if (!hasBrandLogo) {
       return CustomPin.selectedNoLogoFuelPin;
     }
-    brandLogoToBePassed = logoResized ?? CustomPin.defaultBrandLogoBig;
-    // ByteData? selectedPinDropByteData;
-    ui.Image? selectedPinDropImage;
+    brandLogoToBePassed = logoResized!;
 
-    if (!MCSitesGovernor.isMCSitesViewEnabled) {
-      // Regular Selected Pin assembler
-      final selectedMarkerPainter = SelectedMarkerPainter(
-        selectedPinMarkerImage,
-        brandLogoToBePassed,
-        price: price,
-        site: site,
-      );
+    // Regular Selected Pin assembler
+    final selectedMarkerPainter = SelectedMarkerPainter(
+      selectedPinMarkerImage,
+      brandLogoToBePassed,
+      price: price,
+      site: site,
+    );
 
-      final width = selectedPinMarkerImage.width.toDouble();
-      final height = selectedPinMarkerImage.height.toDouble();
-      final widthAsInt = width.floor();
-      final heightAsInt = height.floor();
+    final width = selectedPinMarkerImage.width.toDouble();
+    final height = selectedPinMarkerImage.height.toDouble();
+    final widthAsInt = width.floor();
+    final heightAsInt = height.floor();
 
-      final pictureRecorder = ui.PictureRecorder();
+    final pictureRecorder = ui.PictureRecorder();
 
-      final canvas = Canvas(pictureRecorder);
+    final canvas = Canvas(pictureRecorder);
 
-      selectedMarkerPainter.paint(canvas, Size(width, height));
+    selectedMarkerPainter.paint(canvas, Size(width, height));
 
-      final recordedPicture = pictureRecorder.endRecording();
-      final img = await recordedPicture.toImage(widthAsInt, heightAsInt);
-      // selectedPinDropByteData =
-      //     await img.toByteData(format: ui.ImageByteFormat.png);
-      selectedPinDropImage = img;
-    } else {
-      // MC Pin assembler
-      final selectedMarkerPainter = MCPinSelectedMarkerPainter(
-        selectedPinMarkerImage,
-        brandLogoToBePassed,
-        price: price,
-        site: site,
-      );
-
-      final width = selectedPinMarkerImage.width.toDouble();
-      final height = selectedPinMarkerImage.height.toDouble();
-      final widthAsInt = width.floor();
-      final heightAsInt = height.floor();
-
-      final pictureRecorder = ui.PictureRecorder();
-
-      final canvas = Canvas(pictureRecorder);
-
-      selectedMarkerPainter.paint(canvas, Size(width, height));
-
-      final recordedPicture = pictureRecorder.endRecording();
-      final img = await recordedPicture.toImage(widthAsInt, heightAsInt);
-      // selectedPinDropByteData =
-      //     await img.toByteData(format: ui.ImageByteFormat.png);
-      selectedPinDropImage = img;
-    }
-    return selectedPinDropImage;
-    // return CustomPin.bytesToImage(selectedPinDropByteData!);
+    final recordedPicture = pictureRecorder.endRecording();
+    final img = await recordedPicture.toImage(widthAsInt, heightAsInt);
+    return img;
   }
 
   static Future<BitmapDescriptor> dispatchFinalizedPinDrop(
       Site site, ui.Image dyeImage) async {
-    if (MCSitesGovernor.isMCSitesViewEnabled && site.price != null) {
-      return writePrice(site, dyeImage);
-    }
     final pinDropByteData =
         await dyeImage.toByteData(format: ui.ImageByteFormat.png);
     return BitmapDescriptor.fromBytes(pinDropByteData!.buffer.asUint8List());

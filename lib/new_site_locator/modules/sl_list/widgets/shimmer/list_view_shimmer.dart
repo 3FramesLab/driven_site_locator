@@ -78,13 +78,9 @@ class ListViewCardShimmer extends StatelessWidget {
     const item = Expanded(
       child: Center(child: SkeletonShape(height: 30, width: 80)),
     );
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-      child:
-          // canShow3Items()
-          //     ? const Row(children: [item, item, item])
-          //     :
-          const Row(children: [item, item]),
+    return const Padding(
+      padding: EdgeInsets.only(top: 15, left: 10, right: 10),
+      child: Row(children: [item, item]),
     );
   }
 }

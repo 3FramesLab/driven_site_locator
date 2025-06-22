@@ -14,11 +14,8 @@ class MCPinSelectedPinPricePainter extends CustomPainter {
     final price = site.price;
     final Paint paint = Paint();
     canvas.drawImage(dyeImageBg, Offset.zero, paint);
-    Color priceTextColor = site.hasDiscount ? Colors.black : Colors.white;
+    final priceTextColor = site.hasDiscount ? Colors.black : Colors.white;
 
-    if (AppUtils.isComdata) {
-      priceTextColor = site.hasGallonUp ? Colors.white : Colors.black;
-    }
     final textStyle = CustomPin.priceStyle.copyWith(
       color: priceTextColor,
       fontSize: CustomPin.priceNot10(price) ? 38 : 28,

@@ -1,10 +1,9 @@
 part of sl_widget_module;
 
 class AddCard extends StatelessWidget {
-  final _entitlementRepository = Get.find<EntitlementRepository>();
-  final GuestHomeController controller = Get.find();
+  static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
-  AddCard({super.key});
+  const AddCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +11,9 @@ class AddCard extends StatelessWidget {
   }
 
   Widget get _addCard => _entitlementRepository.isGuestAddCardEnabled
-      ? ClickableText(title: 'Add card', onTap: controller.onAddCardTap)
+      ? ClickableText(
+          title: 'Add card',
+          onTap: DrivenSiteLocator.instance.onAddCardTap,
+        )
       : const SizedBox.shrink();
 }

@@ -30,7 +30,7 @@ class PinVariantStore {
     double? lowestFuelPrice,
   }) async {
     final List<MarkerDetails> listTemp = [];
-    if (DefaultBrandLogos.small == null || DefaultBrandLogos.big == null) {
+    if (!DefaultBrandLogos.isSetup) {
       await DefaultBrandLogos().setup();
     }
 

@@ -30,6 +30,7 @@ class SLInternalText {
   static const ratedStarColor = Color(0xFFffb300);
   static const unratedStarColor = Color(0XFFe0e0e0);
 
+  static const listView = 'listView';
   static const requestFailed = 'Failed to load request options';
   static const internalServerError =
       'Internal Server Error. Try again or contact a customer support representative';
@@ -158,4 +159,19 @@ class SLInternalText {
 
   static const locationFilePath = '/site_locator/';
   static const locationFileName = 'location_cache.txt';
+
+  static const List<CardProdType> propCardTypes = [
+    CardProdType.ol,
+    CardProdType.pd,
+    CardProdType.pe,
+    CardProdType.pl,
+    CardProdType.pc,
+    CardProdType.cc,
+    CardProdType.mc,
+  ];
+  static const List<CardProdType> onRoadCardTypes = [
+    CardProdType.od,
+    CardProdType.oe,
+    CardProdType.om,
+  ];
 }

@@ -10,7 +10,7 @@ class SaveGooglePlacePredictionUseCase
   Future<bool> execute(SaveGooglePlacePredictionParam param) async {
     try {
       final box = await hive.openBox<Predictions>(
-        DrivenConstants.predictionHiveBox,
+        SLInternalText.predictionHiveBox,
       );
 
       final predictions = param.predictions;

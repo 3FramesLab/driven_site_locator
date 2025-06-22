@@ -16,13 +16,11 @@ class PinDropDyesCache {
     bool isBig = false,
   }) {
     // hasDiscount & hasGallonUp merged to single param
-    final hasDiscount =
-        AppUtils.isComdata ? site.hasGallonUp : site.hasDiscount;
 
     return PinDropDyeKey(
       slType: type,
       hasPrice: getPriceCheck(site.price),
-      hasDiscount: hasDiscount,
+      hasDiscount: false,
       // brandLogo: getLogo(site.brandLogoIdentifier),
       brandLogo: site.brandLogoIdentifier ?? '',
       isService: site.isServiceStation,

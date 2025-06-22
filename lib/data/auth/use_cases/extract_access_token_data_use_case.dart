@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:driven_site_locator/data/use_cases/base_usecase.dart';
+import 'package:driven_site_locator/use_cases/base_usecase.dart';
 
 class ExtractAccessTokenDataUseCase
     extends BaseUseCase<Map<String, dynamic>, AccessTokenData> {

@@ -10,7 +10,7 @@ class GetGooglePlaceFromPlaceIdUseCase
   Future<List<Predictions>> execute() async {
     try {
       final box = await hive.openBox<Predictions>(
-        DrivenConstants.predictionHiveBox,
+        SLInternalText.predictionHiveBox,
       );
 
       final result = box.values.toList();

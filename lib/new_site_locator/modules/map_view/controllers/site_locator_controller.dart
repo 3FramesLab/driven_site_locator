@@ -2564,19 +2564,19 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
 
   // Cluster end region
 
-  Future<void> _fetchFromServerOnRefreshScenario() async {
-    isShowSearchThisArea(false);
-    isLatLngBoundsChanged(false);
-    markers.clear();
-    isShowLoading(true);
-    // setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
-    feedRelayToSitesLoadingProgress();
-    await fetchSitesFromServer();
-    rawSiteLocationsForFuelPricesApi =
-        siteLocations?.map(SiteLocation.clone).toList();
-    await handleSiteLocationResponse();
-    isShowLoading(false);
-  }
+  // Future<void> _fetchFromServerOnRefreshScenario() async {
+  //   isShowSearchThisArea(false);
+  //   isLatLngBoundsChanged(false);
+  //   markers.clear();
+  //   isShowLoading(true);
+  //   // setSitesLoadingProgress(SitesLoadingProgressProps.initialValue);
+  //   feedRelayToSitesLoadingProgress();
+  //   await fetchSitesFromServer();
+  //   rawSiteLocationsForFuelPricesApi =
+  //       siteLocations?.map(SiteLocation.clone).toList();
+  //   await handleSiteLocationResponse();
+  //   isShowLoading(false);
+  // }
 
   // Future<void> refreshFuelPriceApi() async {
   //   try {

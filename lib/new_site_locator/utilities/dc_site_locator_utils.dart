@@ -3,6 +3,7 @@ part of site_locator_module;
 class DcSiteLocatorUtils {
   static bool isFuelFilterSelectedSeparately = false;
   static bool representativePriceToggleValue = false;
+  static final entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
   static void hideKeyboard() {
     try {
@@ -240,7 +241,6 @@ class DcSiteLocatorUtils {
     } else {
       try {
         if (isGuest) {
-          final entitlementRepository = Get.find<EntitlementRepository>();
           if (entitlementRepository.isCardTypeFilterEnabled) {
             try {
               final SelectYourCardController selectYourCardController =
@@ -266,7 +266,6 @@ class DcSiteLocatorUtils {
   static String? getCardType() {
     try {
       if (isGuest) {
-        final entitlementRepository = Get.find<EntitlementRepository>();
         if (entitlementRepository.isCardTypeFilterEnabled) {
           try {
             final SelectYourCardController selectYourCardController =
@@ -461,7 +460,6 @@ class DcSiteLocatorUtils {
 
   static bool shouldInvokeGoogleRatingApi() {
     try {
-      final entitlementRepository = Get.find<EntitlementRepository>();
       return entitlementRepository.isInvokeGoogleRatingApiEnabled;
     } catch (_) {}
     return false;
@@ -469,7 +467,6 @@ class DcSiteLocatorUtils {
 
   static bool displayRepresentativePricing() {
     try {
-      final entitlementRepository = Get.find<EntitlementRepository>();
       return representativePriceToggleValue ||
           entitlementRepository.isRepresentativePriceDisclaimerEnabled;
     } catch (_) {}
@@ -479,8 +476,6 @@ class DcSiteLocatorUtils {
   static List<SlListTabModel> siteLocationListTabs() {
     final List<SlListTabModel> tabs = [];
     try {
-      final entitlementRepository = Get.find<EntitlementRepository>();
-
       if (entitlementRepository.isCheapestTabEnabled) {
         tabs.add(SlListTabModel(
           title: SLViewText.cheapest,
@@ -558,9 +553,11 @@ class DcSiteLocatorUtils {
     }
   }
 
-  static bool get isGuest => AppUtils.isGuest;
+  // static bool get isGuest => AppUtils.isGuest;
 
-  static bool get isCardholder => AppUtils.isCardHolder;
+  // static bool get isCardholder => AppUtils.isCardHolder;
+  static bool isGuest = false;
+  static bool isCardholder = false;
 }
 
 class SlListTabModel {

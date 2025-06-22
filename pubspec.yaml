@@ -80,8 +80,6 @@ flutter:
     - assets/site_locator/3.0x/
     - assets/site_locator/comdata/
     - assets/site_locator/comdata_dc/
-    - assets/site_locator/web/
-    - assets/site_locator/web_for_mobile/
     - assets/site_locator/card_types/
     - assets/site_locator/brand_logos/
     - assets/svgs/site_locator/

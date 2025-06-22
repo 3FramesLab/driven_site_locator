@@ -33,6 +33,9 @@ class SiteLocatorEntitlementRepository {
   final bool isSearchSitesEnabled;
   final bool isFixedCircleRadiusEnabled;
   final bool isMovingCircleRadiusEnabled;
+  final bool isInvokeGoogleRatingApiEnabled;
+  final bool isRepresentativePriceDisclaimerEnabled;
+  final bool isGuestAddCardEnabled;
 
   const SiteLocatorEntitlementRepository({
     required this.isAmenitiesFilterEnabled,
@@ -65,6 +68,9 @@ class SiteLocatorEntitlementRepository {
     required this.isSearchSitesEnabled,
     required this.isFixedCircleRadiusEnabled,
     required this.isMovingCircleRadiusEnabled,
+    required this.isInvokeGoogleRatingApiEnabled,
+    required this.isRepresentativePriceDisclaimerEnabled,
+    required this.isGuestAddCardEnabled,
   });
 }
 
@@ -138,4 +144,12 @@ class SiteLocatorEntitlementUtils {
       siteLocatorEntitlementRepository?.isFixedCircleRadiusEnabled ?? false;
   bool get isMovingCircleRadiusEnabled =>
       siteLocatorEntitlementRepository?.isMovingCircleRadiusEnabled ?? false;
+  bool get isInvokeGoogleRatingApiEnabled =>
+      siteLocatorEntitlementRepository?.isInvokeGoogleRatingApiEnabled ?? false;
+  bool get isRepresentativePriceDisclaimerEnabled =>
+      siteLocatorEntitlementRepository
+          ?.isRepresentativePriceDisclaimerEnabled ??
+      false;
+  bool get isGuestAddCardEnabled =>
+      siteLocatorEntitlementRepository?.isGuestAddCardEnabled ?? false;
 }

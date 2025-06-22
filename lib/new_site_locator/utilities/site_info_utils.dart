@@ -123,27 +123,27 @@ class SiteInfoUtils {
   static bool isDieselNetFieldAvailable(SiteLocation siteLocation) =>
       (siteLocation.dieselNet ?? 0) > 0;
 
-  static double _getDieselNetPriceNumeric(SiteLocation siteLocation) {
-    if (isDieselNetFieldAvailable(siteLocation)) {
-      return siteLocation.dieselNet?.truncateToDecimalPlaces(2) ?? 0;
-    }
-    return 0;
-  }
+  // static double _getDieselNetPriceNumeric(SiteLocation siteLocation) {
+  //   if (isDieselNetFieldAvailable(siteLocation)) {
+  //     return siteLocation.dieselNet?.truncateToDecimalPlaces(2) ?? 0;
+  //   }
+  //   return 0;
+  // }
 
-  static double _getGasNetPriceNumeric(SiteLocation siteLocation) {
-    if (isGasNetFieldAvailable(siteLocation)) {
-      return siteLocation.gasNet?.truncateToDecimalPlaces(2) ?? 0;
-    }
-    return 0;
-  }
+  // static double _getGasNetPriceNumeric(SiteLocation siteLocation) {
+  //   if (isGasNetFieldAvailable(siteLocation)) {
+  //     return siteLocation.gasNet?.truncateToDecimalPlaces(2) ?? 0;
+  //   }
+  //   return 0;
+  // }
 
-  static bool _canDisplayDieselRetailPrice(SiteLocation siteLocation) {
-    return isDieselRetailFieldAvailable(siteLocation);
-  }
+  // static bool _canDisplayDieselRetailPrice(SiteLocation siteLocation) {
+  //   return isDieselRetailFieldAvailable(siteLocation);
+  // }
 
-  static bool _canDisplayGasRetailPrice(SiteLocation siteLocation) {
-    return isGasRetailFieldAvailable(siteLocation);
-  }
+  // static bool _canDisplayGasRetailPrice(SiteLocation siteLocation) {
+  //   return isGasRetailFieldAvailable(siteLocation);
+  // }
 
   static bool isDieselRetailFieldAvailable(SiteLocation siteLocation) =>
       (siteLocation.dieselRetail ?? 0) > 0;

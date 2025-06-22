@@ -7,8 +7,8 @@ import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/new_site_locator/data/services/site_locations_service.dart';
 import 'package:driven_site_locator/new_site_locator/modules/site_ratings/models/site_place_id.dart';
-import 'package:driven_site_locator/use_cases/base_future_usecase.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
+import 'package:driven_site_locator/use_cases/base_future_usecase.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 

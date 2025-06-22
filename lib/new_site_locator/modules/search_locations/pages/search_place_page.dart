@@ -14,7 +14,6 @@ class SearchPlacePage extends StatelessWidget {
     _initData();
     return DrivenScaffold(
       backgroundColor: DrivenColors.white,
-      goesInactive: !MCSitesGovernor.isUnauthSLFlow,
       appBar: DrivenAppBar(
         leading: const DrivenBackButton(),
         backgroundColor: DrivenColors.white,
@@ -30,7 +29,7 @@ class SearchPlacePage extends StatelessWidget {
 
   void _initData() {
     _getArguments();
-    if (fromScreen == Routes.unauthSiteLocator) {
+    if (fromScreen == SLRoutes.unauthSiteLocator) {
       searchPlaceController.placesList.clear();
     } else if (fromScreen == SLInternalText.listView) {
       searchPlaceController.getPlacesResults();
@@ -80,8 +79,8 @@ class SearchPlacePage extends StatelessWidget {
   void _getArguments() {
     final args = Get.arguments;
     if (args != null && args is Map) {
-      if (args[RouteArguments.fromScreen] != null) {
-        fromScreen = args[RouteArguments.fromScreen];
+      if (args[SLRouteArguments.fromScreen] != null) {
+        fromScreen = args[SLRouteArguments.fromScreen];
       }
     }
   }

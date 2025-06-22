@@ -1,8 +1,18 @@
 library search_location_module;
 
 import 'package:driven_site_locator/config/globals.dart';
+import 'package:driven_site_locator/config/sl_nav_to.dart';
+import 'package:driven_site_locator/config/sl_route_arguments.dart';
+import 'package:driven_site_locator/config/sl_routes.dart';
+import 'package:driven_site_locator/constants/api_constants.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/driven_components/driven_scaffold.dart';
+import 'package:driven_site_locator/new_site_locator/data/services/site_locations_service.dart';
+import 'package:driven_site_locator/new_site_locator/models/google_geocoding_model.dart';
+import 'package:driven_site_locator/new_site_locator/models/google_place_model.dart';
+import 'package:driven_site_locator/new_site_locator/models/google_places/predictions.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
+import 'package:driven_site_locator/theme/site_locator_text_field_style.dart';
 import 'package:driven_site_locator/use_cases/base_future_usecase.dart';
 import 'package:driven_site_locator/use_cases/base_usecase.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,5 +32,4 @@ part 'widgets/new_search_place_list_item.dart';
 part 'widgets/new_search_place_list_view.dart';
 part 'widgets/search_place_list_item.dart';
 part 'widgets/search_place_list_view.dart';
-part 'widgets/search_place_results_view.dart';
 part 'widgets/search_place_textfield.dart';

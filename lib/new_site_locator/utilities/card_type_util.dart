@@ -1,11 +1,11 @@
-import 'package:driven_common/common/driven_constants.dart';
 import 'package:driven_site_locator/new_site_locator/models/cardholder_account_details_response.dart';
+import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 
 class CardTypeUtil {
   static CreditCardType getCardType(String? cardType) {
-    return DrivenConstants.propCardTypes.contains(getCardProdType(cardType))
+    return SLInternalText.propCardTypes.contains(getCardProdType(cardType))
         ? CreditCardType.prop
-        : DrivenConstants.onRoadCardTypes.contains(getCardProdType(cardType))
+        : SLInternalText.onRoadCardTypes.contains(getCardProdType(cardType))
             ? CreditCardType.onroad
             : CreditCardType.none;
   }
