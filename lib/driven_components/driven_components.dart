@@ -1,4 +1,4 @@
-export 'package:driven_common/driven_common_resources_module.dart';
+export 'package:driven_common_sl_pkg/driven_common_resources_module.dart';
 export 'package:flutter/material.dart';
 
 export 'count_badge.dart';

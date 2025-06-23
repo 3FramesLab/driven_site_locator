@@ -2,7 +2,7 @@ library extensions_module;
 
 import 'dart:collection';
 
-import 'package:driven_common/common/name_id_object.dart';
+import 'package:driven_common_sl_pkg/common/name_id_object.dart';
 import 'package:flutter/material.dart';
 
 part 'list_extensions.dart';

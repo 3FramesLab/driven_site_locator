@@ -161,12 +161,12 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  driven_common:
+  driven_common_sl_pkg:
     dependency: transitive
     description:
       path: "."
-      ref: driven-common
-      resolved-ref: a8cf0c94bd574268bdce89500a76f8a1856a9544
+      ref: driven-common-sl-pkg
+      resolved-ref: "657e0b5bfb20e8c92630dd23a42bffc9b3f2cd12"
       url: "https://git.fleetcor.com/ucx/flutter/super-app"
     source: git
     version: "0.0.5"

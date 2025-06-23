@@ -1,4 +1,4 @@
-import 'package:driven_common/common/driven_constants.dart';
+import 'package:driven_common_sl_pkg/common/driven_constants.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 
 class DrivenAppBar extends StatelessWidget implements PreferredSizeWidget {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:driven_common/extensions/extensions_module.dart';
+import 'package:driven_common_sl_pkg/extensions/extensions_module.dart';
 import 'package:driven_site_locator/common/access_token/get_jwt_access_token_use_case.dart';
 import 'package:driven_site_locator/config/sl_session_manager.dart';
 import 'package:driven_site_locator/data/auth/use_cases/extract_access_token_data_use_case.dart';

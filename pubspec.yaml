@@ -11,10 +11,10 @@ dependencies:
   app_settings: ^5.2.0
   cron: ^0.6.1
   dio: ^5.7.0
-  driven_common:
+  driven_common_sl_pkg:
     git:
       url: https://git.fleetcor.com/ucx/flutter/super-app
-      ref: driven-common
+      ref: driven-common-sl-pkg
       version: ^0.0.2
   equatable: "2.0.7"
   flutter:

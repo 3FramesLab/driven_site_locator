@@ -1,4 +1,4 @@
-// import 'package:driven_common/common/common_routes.dart';
+// import 'package:driven_common_sl_pkg/common/common_routes.dart';
 // import 'package:driven_site_locator/config/site_locator_routes.dart';
 // import 'package:driven_site_locator/driven_components/driven_components.dart';
 // import 'package:get/get.dart';

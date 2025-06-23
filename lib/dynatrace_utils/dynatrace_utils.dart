@@ -1,6 +1,6 @@
 // import 'dart:js' as dart_js;
 
-// import 'package:driven_common/globals.dart';
+// import 'package:driven_common_sl_pkg/globals.dart';
 // import 'package:driven_site_locator/site_locator/constants/site_locator_constants.dart';
 // import 'package:flutter/foundation.dart';
 

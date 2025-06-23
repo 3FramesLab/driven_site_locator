@@ -1,4 +1,4 @@
-import 'package:driven_common/common/money_maker.dart';
+import 'package:driven_common_sl_pkg/common/money_maker.dart';
 import 'package:driven_site_locator/constants/view_text.dart';
 import 'package:driven_site_locator/data/data_sources/remote/decodable.dart';
 import 'package:driven_site_locator/new_site_locator/utilities/card_type_util.dart';

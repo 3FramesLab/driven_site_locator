@@ -118,7 +118,7 @@ class CustomShapeCluster {
 // import 'dart:ui' as ui;
 
 // import 'package:driven/site_locator/site_locator_map/core/custom_pin_markers/custom_pin.dart';
-// import 'package:driven_common/styles/styles_module.dart';
+// import 'package:driven_common_sl_pkg/styles/styles_module.dart';
 // import 'package:flutter/material.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 

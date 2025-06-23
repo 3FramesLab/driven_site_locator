@@ -1,4 +1,4 @@
-import 'package:driven_common/dynatrace/driven_dynatrace.dart';
+import 'package:driven_common_sl_pkg/dynatrace/driven_dynatrace.dart';
 import 'package:driven_site_locator/analytics/aep_core.dart';
 import 'package:driven_site_locator/analytics/driven_analytics.dart';
 import 'package:driven_site_locator/new_site_locator/models/google_places/predictions.dart';

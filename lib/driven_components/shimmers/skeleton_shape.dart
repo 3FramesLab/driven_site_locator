@@ -1,4 +1,4 @@
-import 'package:driven_common/styles/styles_module.dart';
+import 'package:driven_common_sl_pkg/styles/styles_module.dart';
 import 'package:flutter/material.dart';
 
 class SkeletonShape extends StatelessWidget {
