@@ -29,6 +29,7 @@ class SLSessionManager {
   String selectedCardNickname = '';
   String selectedCardTypeValue = '';
   String selectedCardLastFourDigits = '';
+  String sysAccountId = '';  //selectedAccountDetails?.sysAccountId
   bool isNetworkVerified = true;
   bool isCardRelationCreated = false;
   bool isCardholder = false;

@@ -12,7 +12,6 @@ import 'package:driven_site_locator/data/data_sources/remote/api_route.dart';
 import 'package:driven_site_locator/data/data_sources/remote/decodable.dart';
 import 'package:driven_site_locator/data/data_sources/remote/dynatrace_logs_tracking.dart';
 import 'package:driven_site_locator/data/model/app_utils.dart';
-import 'package:driven_site_locator/extensions/extensions_module.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 
 class APIClient {

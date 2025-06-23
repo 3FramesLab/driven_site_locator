@@ -759,20 +759,16 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
     final cardToken = SLSessionManager().selectedCardToken;
 
     String? sysAccountId;
-    // TODO(Smeet): need work
-    // if (SLSessionManager()
-    //     .selectedCardSysAccountId
-    //     .isNotNullEmptyOrWhitespace) {
-    //   // CH
-    //   sysAccountId = SLSessionManager().selectedCardSysAccountId;
-    // } else if (SLSessionManager()
-    //         .selectedAccountDetails
-    //         ?.sysAccountId
-    //         .isNotNullEmptyOrWhitespace ??
-    //     false) {
-    //   // admin
-    //   sysAccountId = SLSessionManager().selectedAccountDetails?.sysAccountId;
-    // }
+
+    if (SLSessionManager()
+        .selectedCardSysAccountId
+        .isNotNullEmptyOrWhitespace) {
+      // CH
+      sysAccountId = SLSessionManager().selectedCardSysAccountId;
+    } else if (SLSessionManager().sysAccountId.isNotNullEmptyOrWhitespace) {
+      // admin
+      sysAccountId = SLSessionManager().sysAccountId;
+    }
 
     final siteSource = getSiteSourceFromCardTypeUseCase.execute(
       SLSessionManager().selectedCardTypeValue,
