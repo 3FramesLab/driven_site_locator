@@ -33,22 +33,23 @@ class FleetHeader extends StatelessWidget {
 
   Future<void> onFleetIdDetailsLinkTap() async {
     if (SLSessionManager().userId.isNotEmpty) {
-      late AdminDashboardController adminDashboardController;
-      if (Get.isRegistered<AdminDashboardController>()) {
-        adminDashboardController = Get.find<AdminDashboardController>();
-      } else {
-        adminDashboardController = Get.put(AdminDashboardController());
-      }
-      siteLocatorController.firstTimeLoading(true);
-      try {
-        await adminDashboardController.getCustomerIdList(
-          canCallChangeCustomerAPI: false,
-        );
-      } catch (_) {}
-      siteLocatorController.firstTimeLoading(false);
-      adminDashboardController.onCustomerIdTap(
-        callBack: fleetChangeCallback,
-      );
+      // TODO(Smeet): need to be handled for UMA/dfc2.0
+      // late AdminDashboardController adminDashboardController;
+      // if (Get.isRegistered<AdminDashboardController>()) {
+      //   adminDashboardController = Get.find<AdminDashboardController>();
+      // } else {
+      //   adminDashboardController = Get.put(AdminDashboardController());
+      // }
+      // siteLocatorController.firstTimeLoading(true);
+      // try {
+      //   await adminDashboardController.getCustomerIdList(
+      //     canCallChangeCustomerAPI: false,
+      //   );
+      // } catch (_) {}
+      // siteLocatorController.firstTimeLoading(false);
+      // adminDashboardController.onCustomerIdTap(
+      //   callBack: fleetChangeCallback,
+      // );
     }
   }
 

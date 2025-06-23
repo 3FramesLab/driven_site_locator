@@ -25,3 +25,5 @@ part 'single_function_dialog.dart';
 part 'cancel_text.dart';
 part 'site_info_panel/a_panel_handle.dart';
 part 'site_info_detail.dart';
+part 'custom_list_view_separated.dart';
+part 'site_locator_divider.dart';

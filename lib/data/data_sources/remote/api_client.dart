@@ -223,5 +223,6 @@ class APIClient {
   bool isDeviceTokenAvailable(Response<dynamic> response) =>
       response.headers.map
           .toString()
-          .containsIgnoreCase(SLInternalText.xDeviceTokenHeader);
+          .toLowerCase()
+          .contains(SLInternalText.xDeviceTokenHeader.toLowerCase());
 }

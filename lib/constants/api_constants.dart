@@ -8,7 +8,8 @@ class ApiConstants {
   //     'https://resourcecenter.comdata.com/driven-mobile-app/fmn-menu/';
 
   // TODO(Smeet): important pass value from super-app
-  static String baseUrl = '';
+  static String baseUrl = ''; // SL
+  static String mwBaseUrl = '';
   static String packageId = '';
   static String androidSignature = '';
   static String basicAuthSecret = '';
@@ -18,7 +19,7 @@ class ApiConstants {
 
   static const radiusForFetchingPlaces = 5000; //in meters
 
-  static final siteLocatorAccessTokenJson = {
+  static final jwtAccessTokenJson = {
     'client_id': clientId,
     'client_secret': clientSecret,
     'grant_type': 'client_credentials'

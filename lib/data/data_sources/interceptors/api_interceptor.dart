@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:driven_common/extensions/extensions_module.dart';
+import 'package:driven_site_locator/common/access_token/get_jwt_access_token_use_case.dart';
 import 'package:driven_site_locator/config/globals.dart';
 import 'package:driven_site_locator/config/sl_session_manager.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
@@ -41,7 +43,7 @@ class APIInterceptor extends Interceptor {
         );
   }
 
-  Future<String?> _getUUID() async => HiveDBUtil.getUUID();
+  String? _getUUID() => AppUtils.getUUID;
 
   Future<String> _getAccessToken() async {
     await _handleAccessToken();
@@ -62,7 +64,7 @@ class APIInterceptor extends Interceptor {
       RequestOptions options) async {
     try {
       final headersList = {
-        ApiConstants.deviceId: await _getUUID(),
+        ApiConstants.deviceId: _getUUID(),
         ApiConstants.versionName: AppUtils.versionNumber,
         ApiConstants.versionNumber: AppUtils.versionNumber,
         ApiConstants.versionCode: AppUtils.buildNumber,

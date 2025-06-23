@@ -12,7 +12,7 @@ class SiteLocatorAccessTokenController extends GetxController {
 
   Future<String?> getAccessToken() async {
     final response = await siteLocatorAccessTokenService
-        .getAccessToken(ApiConstants.siteLocatorAccessTokenJson);
+        .getAccessToken(ApiConstants.jwtAccessTokenJson);
     if (response != null && response.accessToken != null) {
       siteLocatorAccessToken = response.accessToken;
       await saveAccessToken();
