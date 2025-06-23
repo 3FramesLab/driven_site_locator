@@ -615,8 +615,8 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   // TODO(Smeet): need work
-  // bool get inFullMapViewScreen => Get.currentRoute == Routes.unauthSiteLocator;
-  bool get inFullMapViewScreen => true;
+  bool get inFullMapViewScreen =>
+      Get.currentRoute == SLRoutes.unauthSiteLocator;
 
   void _clearMapMarkersAndList() {
     markers.clear();

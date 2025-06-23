@@ -19,13 +19,12 @@ class SearchIconButton extends StatelessWidget {
                       label: SLSemanticStrings.gpsIconButton,
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO(Smeet): need superapp.
-                          // NavTo.searchPlace(
-                          //   arguments: {
-                          //     RouteArguments.fromScreen:
-                          //         Routes.unauthSiteLocator,
-                          //   },
-                          // );
+                          slNavTo.searchPlace(
+                            arguments: {
+                              SLRouteArguments.fromScreen:
+                                  SLRoutes.unauthSiteLocator,
+                            },
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),

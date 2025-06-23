@@ -74,7 +74,6 @@ class APIInterceptor extends Interceptor {
         ApiConstants.sysAccId: SLSessionManager().defaultSysAccountId,
         ApiConstants.userName: SLSessionManager().mddbUserId,
       };
-      // TODO(Smeet): Remove the check for location stg url .
 
       if (AppUtils.isQADebugMode) {
         log('\nAPI Headers list: $headersList');

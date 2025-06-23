@@ -7,12 +7,7 @@ class SelectYourCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _init();
-    // TODO(Smeet): important.
-    // return DrivenScaffold(
-    //   appBar: _appBar(),
-    //   body: _body(),
-    // );
-    return Scaffold(
+    return DrivenScaffold(
       appBar: _appBar(),
       body: _body(),
     );

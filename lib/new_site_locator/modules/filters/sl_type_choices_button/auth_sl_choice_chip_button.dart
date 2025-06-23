@@ -49,9 +49,7 @@ class AuthSLChoiceChipButton extends StatelessWidget {
       barrierColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       context: Get.context!,
-      builder: (_) => const SizedBox(),
-      // TODO(Smeet): important.
-      // builder: (context) => CardTypeListBottomSheet(),
+      builder: (context) => CardTypeListBottomSheet(),
     );
 
     authSLTypeChoiceController.selectedFilterHeader('');

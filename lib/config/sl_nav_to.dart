@@ -7,4 +7,8 @@ class SlNavTo {
   Future<T?>? searchPlace<T>({dynamic arguments}) async {
     return Get.toNamed(SLRoutes.searchPlace, arguments: arguments);
   }
+
+  Future<void> offUnauthSL() async {
+    await Get.offNamed(SLRoutes.unauthSiteLocator);
+  }
 }

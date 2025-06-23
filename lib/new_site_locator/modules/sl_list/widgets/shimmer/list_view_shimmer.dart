@@ -70,10 +70,6 @@ class ListViewCardShimmer extends StatelessWidget {
     );
   }
 
-  // TODO(Smeet): important.
-  // bool canShow3Items() =>
-  //     SiteLocatorConfig.discountIndicator != SiteLocatorConfig.notApplicable;
-
   Widget _footerSkeleton() {
     const item = Expanded(
       child: Center(child: SkeletonShape(height: 30, width: 80)),

@@ -12,13 +12,7 @@ class SLListViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      // TODO(Smeet): important.
-      // () => DrivenScaffold(
-      //   backgroundColor: DrivenColors.white,
-      //   appBar: siteLocatorController.isListViewOpenedFull() ? _appBar : null,
-      //   body: ListTabBarView(scrollController: scrollController),
-      // ),
-      () => Scaffold(
+      () => DrivenScaffold(
         backgroundColor: DrivenColors.white,
         appBar: siteLocatorController.isListViewOpenedFull() ? _appBar : null,
         body: ListTabBarView(scrollController: scrollController),
