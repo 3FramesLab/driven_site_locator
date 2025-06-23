@@ -166,7 +166,7 @@ packages:
     description:
       path: "."
       ref: driven-common
-      resolved-ref: "70cc23ca12d50b0bade646807885b5658ce7c43f"
+      resolved-ref: a8cf0c94bd574268bdce89500a76f8a1856a9544
       url: "https://git.fleetcor.com/ucx/flutter/super-app"
     source: git
     version: "0.0.5"

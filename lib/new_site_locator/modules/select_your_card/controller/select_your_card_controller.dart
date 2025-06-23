@@ -47,8 +47,7 @@ class SelectYourCardController extends GetxController {
       cardTypes().firstWhere((element) => element.key == key);
 
   void onContinueToMapClick() {
-    // TODO(Smeet): important.
-    // NavTo.offUnauthSL();
+    slNavTo.offUnauthSL();
   }
 
   // displayed on SL header, along with back button
