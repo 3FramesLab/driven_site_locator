@@ -9,8 +9,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class AppUtils {
-  static String get appVersionName =>
-      DrivenSiteLocator.instance.appVersionNumber;
+  // static String get appVersionName =>
+  //     DrivenSiteLocator.instance.appVersionNumber;
 
   static bool get isComdata =>
       DrivenSiteLocator.instance.flavor == AppFlavor.comdata;

@@ -1,13 +1,4 @@
 class ApiConstants {
-  // // Distance Matrix
-  // static const distanceMatrixGoogleUrl =
-  //     'https://maps.googleapis.com/maps/api/distancematrix/json?mode=driving&units=imperial';
-
-  // // Welcome screen
-  // static const fuelmanLegalUrl =
-  //     'https://resourcecenter.comdata.com/driven-mobile-app/fmn-menu/';
-
-  // TODO(Smeet): important pass value from super-app
   static String baseUrl = ''; // SL
   static String mwBaseUrl = '';
   static String packageId = '';

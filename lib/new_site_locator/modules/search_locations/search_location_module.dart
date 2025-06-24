@@ -6,7 +6,6 @@ import 'package:driven_site_locator/config/sl_route_arguments.dart';
 import 'package:driven_site_locator/config/sl_routes.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
-import 'package:driven_site_locator/driven_components/driven_scaffold.dart';
 import 'package:driven_site_locator/new_site_locator/data/services/site_locations_service.dart';
 import 'package:driven_site_locator/new_site_locator/models/google_geocoding_model.dart';
 import 'package:driven_site_locator/new_site_locator/models/google_place_model.dart';

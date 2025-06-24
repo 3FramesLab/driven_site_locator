@@ -18,10 +18,9 @@ class Globals {
   late DrivenDynatrace dynatrace;
   late AEPCore analytics;
   String? _appFlavor;
-  bool isCardHolderLogin = false;
-  late bool isComdata;
-  late String packageId;
-  late String androidCertSignature;
+  // late bool isComdata;
+  // late String packageId;
+  // late String androidCertSignature;
   late SharedPreferences sharedPreferences;
   late Future<bool> Function(String, {LaunchMode mode}) launch;
   late Future<bool> Function(String) canLaunch;
@@ -30,20 +29,11 @@ class Globals {
 
   Future<void> init({
     required String flavor,
-    required String packageId,
-    required String androidCertSignature,
-    required bool isComdata,
-    required String appLogoPath,
-    bool isCardHolderLogin = false,
   }) async {
     _appFlavor = flavor;
-    this.isCardHolderLogin = isCardHolderLogin;
-    this.packageId = packageId;
-    this.androidCertSignature = androidCertSignature;
-    this.isComdata = isComdata;
     initializeAnalytics();
     initializeDynatrace();
-    setAppLogoPath(appLogoPath);
+    // setAppLogoPath(appLogoPath);
     await initializeSharedPreferences();
     await initializeHiveDB();
     launch = url_launcher.launchUrlString;
@@ -64,13 +54,13 @@ class Globals {
 
   String get appFlavor => _appFlavor ?? 'comdata';
 
-  void setAppFlavor(String? appFlavor) {
-    _appFlavor = appFlavor;
-  }
+  // void setAppFlavor(String? appFlavor) {
+  //   _appFlavor = appFlavor;
+  // }
 
-  void setAppLogoPath(String? appLogoPath) {
-    _appLogoPath = appLogoPath;
-  }
+  // void setAppLogoPath(String? appLogoPath) {
+  //   _appLogoPath = appLogoPath;
+  // }
 
   String get appLogoPath => _appLogoPath ?? '';
 

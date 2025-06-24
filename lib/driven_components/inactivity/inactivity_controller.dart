@@ -2,7 +2,7 @@ part of inactivity_module;
 
 class InactivityController extends FullLifeCycleController
     with FullLifeCycleMixin {
-  final bool enabled = SLData.instance.isInactivityWrapperEnabled;
+  final bool enabled = DrivenSiteLocator.instance.isInactivityWrapperEnabled;
 
   VoidCallback? sessionExpiryWarningTimerCallback;
   VoidCallback? sessionExpiryTimerCallback;
@@ -27,7 +27,7 @@ class InactivityController extends FullLifeCycleController
 
   void _initSessionExpiryWarningTimer() {
     final sessionExpiryWarningTimeInMinutes =
-        SLData.instance.inactivityWarningTimeoutValue;
+        DrivenSiteLocator.instance.inactivityWarningTimeoutValue;
 
     if (sessionExpiryWarningTimeInMinutes > 0) {
       sessionExpiryWarningTimer = Timer(
@@ -39,7 +39,7 @@ class InactivityController extends FullLifeCycleController
 
   void _initSessionExpiryTimer() {
     final sessionExpiryTimeInMinutes =
-        SLData.instance.inactivityLogoutTimeoutValue;
+        DrivenSiteLocator.instance.inactivityLogoutTimeoutValue;
     if (sessionExpiryTimeInMinutes > 0) {
       sessionExpiryTimer = Timer(
         Duration(minutes: sessionExpiryTimeInMinutes),
@@ -68,7 +68,7 @@ class InactivityController extends FullLifeCycleController
     if (sessionExpiryTimerCallback != null) {
       sessionExpiryTimerCallback?.call();
     } else {
-      SLData.instance.onLogout!(expired: true);
+      DrivenSiteLocator.instance.onLogout!(expired: true);
     }
   }
 
@@ -125,7 +125,7 @@ class InactivityController extends FullLifeCycleController
 
   Widget _inactivityLogoutButton() {
     return UnderlinedButton.black(
-      onPressed: SLData.instance.onLogout,
+      onPressed: DrivenSiteLocator.instance.onLogout,
       text: ViewText.logOut,
     );
   }

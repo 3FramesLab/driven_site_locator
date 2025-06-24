@@ -5,11 +5,10 @@ import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
 import 'package:driven_site_locator/driven_site_locator_platform_interface.dart';
-import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 
 class DrivenSiteLocator {
   AppFlavor flavor = AppFlavor.none;
-  String appVersionNumber = '';
+  // String appVersionNumber = '';
   Future<Widget> Function()? logoutDialog;
   void Function()? navigateToLogin;
   bool? isInactivityWrapperActivated;
@@ -36,6 +35,10 @@ class DrivenSiteLocator {
 
   // new
   void Function()? onAddCardTap;
+  int inactivityLogoutTimeoutValue = 0;
+  int inactivityWarningTimeoutValue = 0;
+  bool isInactivityWrapperEnabled = true;
+  void Function({bool expired})? onLogout;
 
   DrivenSiteLocator._internal();
   static final DrivenSiteLocator _instance = DrivenSiteLocator._internal();
@@ -57,7 +60,19 @@ class DrivenSiteLocator {
     setAppFlavor(flavor);
     SiteLocatorEntitlementUtils.instance.siteLocatorEntitlementRepository =
         siteLocatorEntitlementRepository;
-    UmaSLProperties.init(configJsonData: configDataJson);
+    // UmaSLProperties.init(configJsonData: configDataJson);
+  }
+
+  Future<void> initNew({
+    required int inactivityLogoutTimeoutValue,
+    required int inactivityWarningTimeoutValue,
+    required bool isInactivityWrapperEnabled,
+    void Function({bool expired})? onLogout,
+  }) async {
+    this.inactivityLogoutTimeoutValue = inactivityLogoutTimeoutValue;
+    this.inactivityWarningTimeoutValue = inactivityWarningTimeoutValue;
+    this.isInactivityWrapperEnabled = isInactivityWrapperEnabled;
+    this.onLogout = onLogout;
   }
 
   Future<void> init({
@@ -65,7 +80,7 @@ class DrivenSiteLocator {
     required bool isInactivityWrapperActivated,
     AppFlavor flavor = AppFlavor.none,
     // Map<String, dynamic>? configDataJson,
-    String appVersionNumber = '',
+    // String appVersionNumber = '',
     Future<Widget> Function()? logoutDialog,
     void Function()? navigateToLogin,
     void Function(bool)? onTimerLogout,
@@ -76,7 +91,7 @@ class DrivenSiteLocator {
     Widget? walletHeader,
   }) async {
     setAppFlavor(flavor);
-    setAppVersionNumber(appVersionNumber);
+    // setAppVersionNumber(appVersionNumber);
     setLogoutDialog(logoutDialog);
     setIsInactivityWrapperActivated(isInactivityWrapperActivated);
     setBottomNavBarHeight(bottomNavBarHeight);
@@ -105,9 +120,9 @@ class DrivenSiteLocator {
     this.navigateToLogin = navigateToLogin;
   }
 
-  void setAppVersionNumber(String appVersionNumber) {
-    this.appVersionNumber = appVersionNumber;
-  }
+  // void setAppVersionNumber(String appVersionNumber) {
+  //   this.appVersionNumber = appVersionNumber;
+  // }
 
   void setIsInactivityWrapperActivated(bool isInactivityWrapperActivated) {
     this.isInactivityWrapperActivated = isInactivityWrapperActivated;

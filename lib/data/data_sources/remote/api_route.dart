@@ -1379,7 +1379,7 @@ class APIRoute implements APIRouteConfigurable {
   RequestOptions jwtAccessToken() {
     return RequestOptions(
       // path: locationsUrl('v1/token'),
-      path: locationsUrl('locations/v1/token'),
+      path: locationsUrl('v1/token'),
       method: APIMethod.post,
     );
   }

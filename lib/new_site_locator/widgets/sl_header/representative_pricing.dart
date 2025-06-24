@@ -56,5 +56,6 @@ class RepresentativePricing extends StatelessWidget {
   String get _dateStr =>
       '(As of ${DcSiteLocatorUtils.getRepresentativePricingDate()})';
 
-  Widget get _addCard => showAddCard ? AddCard() : const SizedBox.shrink();
+  Widget get _addCard =>
+      showAddCard ? const AddCard() : const SizedBox.shrink();
 }
