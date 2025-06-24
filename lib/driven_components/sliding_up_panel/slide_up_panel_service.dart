@@ -1,6 +1,6 @@
 part of sliding_up_panel_module;
 
-class SlideUpPanelService extends GetxService {
+class SLSlideUpPanelService extends GetxService {
   static const Widget defaultPanel = Text('');
   PanelController controller = PanelController();
   ScrollController? scrollController = ScrollController();

@@ -1,7 +1,7 @@
 part of sliding_up_panel_module;
 
 class DrivenSlideUpPanel extends StatelessWidget {
-  final SlideUpPanelService panel = Get.find();
+  final SLSlideUpPanelService panel = Get.find();
   final Widget? body;
   final ScrollController scrollController = ScrollController();
 
