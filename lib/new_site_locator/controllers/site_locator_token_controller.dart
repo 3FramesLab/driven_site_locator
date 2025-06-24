@@ -1,5 +1,5 @@
+import 'package:driven_site_locator/config/globals.dart';
 import 'package:driven_site_locator/constants/api_constants.dart';
-import 'package:driven_site_locator/data/data_sources/local/preference_utils.dart';
 import 'package:driven_site_locator/new_site_locator/data/services/site_locator_access_token_service.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 import 'package:get/get.dart';
@@ -21,10 +21,11 @@ class SLSiteLocatorAccessTokenController extends GetxController {
   }
 
   Future<void> saveAccessToken() async {
-    await PreferenceUtils.setString(
+    await Globals().sharedPreferences.setString(
         SLInternalText.siteLocatorAccessToken, siteLocatorAccessToken!);
-    await PreferenceUtils.setString(
-        SLInternalText.siteLocatorAccessTokenLastUpdatedTime,
-        DateTime.now().millisecondsSinceEpoch.toString());
+    await Globals().sharedPreferences.setString(
+          SLInternalText.siteLocatorAccessTokenLastUpdatedTime,
+          DateTime.now().millisecondsSinceEpoch.toString(),
+        );
   }
 }

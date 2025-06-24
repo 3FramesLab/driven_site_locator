@@ -32,7 +32,7 @@ class UmaSLProperties {
   static final _getMapZoomLevelUseCase = SLGetMapZoomLevelUseCase();
   static ClusterAlgorithm clusterAlgorithm = ClusterAlgorithm.maxDist;
 
-  static void init({Map<String, dynamic>? configJsonData}) {
+  static Future<void> init({Map<String, dynamic>? configJsonData}) async {
     try {
       _getConfigData(configJsonData);
       _setIsDisplayMapEnabled();
@@ -55,6 +55,7 @@ class UmaSLProperties {
       _setAutoSearchSiteIntervalInMs();
       _getMapRadius();
       _setClusterAlgorithm();
+      await CustomPin.initEvents();
     } catch (e) {
       Globals().dynatrace.logError(
             name: 'error in UMA SL properties init method',

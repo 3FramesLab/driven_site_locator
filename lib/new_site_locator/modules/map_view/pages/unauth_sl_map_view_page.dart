@@ -15,13 +15,17 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
 
   final SLSiteLocatorController siteLocatorController = Get.find();
   final AuthSLTypeChoicesController authSLTypeChoicesController = Get.find();
+  bool isFirstTime = true;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
-        siteLocatorController.onMapViewResume();
+        if (!isFirstTime) {
+          siteLocatorController.onMapViewResume();
+        }
+        isFirstTime = false;
         break;
       default:
         break;
