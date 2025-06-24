@@ -7,6 +7,6 @@ mixin SearchLocationState {
   RxString searchIconName = SLInternalText.searchIconName.obs;
   RxBool isLoading = false.obs;
 
-  late GetPlacesResultUseCase getPlacesResultUseCase;
-  late GetPlacesURLUseCase getPlacesURLUseCase;
+  late SLGetPlacesResultUseCase getPlacesResultUseCase;
+  late SLGetPlacesURLUseCase getPlacesURLUseCase;
 }

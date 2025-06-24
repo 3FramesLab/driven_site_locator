@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetSiteSourceFromCardTypeUseCase extends BaseUseCase<String, String> {
+class SLGetSiteSourceFromCardTypeUseCase extends BaseUseCase<String, String> {
   @override
   String execute(String param) {
     try {

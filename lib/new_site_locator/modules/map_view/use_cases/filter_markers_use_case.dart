@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class FilterMarkersUseCase
+class SLFilterMarkersUseCase
     extends BaseFutureUseCase<List<Marker>, FilterMarkersParams> {
   @override
   Future<List<Marker>> execute(FilterMarkersParams param) async {

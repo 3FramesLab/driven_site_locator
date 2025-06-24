@@ -1,7 +1,7 @@
 part of site_locator_map_module;
 
-class ComputeCircleRadiusUseCase extends BaseUseCase<double, double> {
-  ComputeCircleRadiusUseCase();
+class SLComputeCircleRadiusUseCase extends BaseUseCase<double, double> {
+  SLComputeCircleRadiusUseCase();
 
   @override
   double execute(double param) {

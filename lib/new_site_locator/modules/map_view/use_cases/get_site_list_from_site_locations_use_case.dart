@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetSiteListFromSiteLocationsUseCase
+class SLGetSiteListFromSiteLocationsUseCase
     extends BaseUseCase<List<Site>, GetSiteListFromSiteLocationsParams> {
   @override
   List<Site> execute(GetSiteListFromSiteLocationsParams param) =>

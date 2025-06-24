@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetAccessTokenForSitesUseCase extends BaseNoParamFutureUseCase<String> {
+class SLGetAccessTokenForSitesUseCase extends BaseNoParamFutureUseCase<String> {
   @override
   Future<String> execute() async {
     String? siteLocatorAccessToken;

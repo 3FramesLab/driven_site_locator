@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class AdjustDuplicateLatLngUseCase
+class SLAdjustDuplicateLatLngUseCase
     extends BaseUseCase<void, List<SiteLocation>?> {
   @override
   void execute(List<SiteLocation>? param) {

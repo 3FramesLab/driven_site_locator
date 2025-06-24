@@ -7,8 +7,8 @@ class SLSearchPlacesController extends GetxController with SearchLocationState {
 
   RxBool isRecentSearchesVisible = false.obs;
 
-  late SaveGooglePlacePredictionUseCase saveGooglePlacePredictionUseCase;
-  late GetGooglePlaceFromPlaceIdUseCase getGooglePlaceFromPlaceIdUseCase;
+  late SLSaveGooglePlacePredictionUseCase saveGooglePlacePredictionUseCase;
+  late SLGetGooglePlaceFromPlaceIdUseCase getGooglePlaceFromPlaceIdUseCase;
 
   @override
   void onInit() {
@@ -18,12 +18,12 @@ class SLSearchPlacesController extends GetxController with SearchLocationState {
 
   void initUseCases() {
     getPlacesResultUseCase = Get.put(
-        GetPlacesResultUseCase(siteLocationsService: siteLocationsService));
-    getPlacesURLUseCase = Get.put(GetPlacesURLUseCase());
-    saveGooglePlacePredictionUseCase = SaveGooglePlacePredictionUseCase(
+        SLGetPlacesResultUseCase(siteLocationsService: siteLocationsService));
+    getPlacesURLUseCase = Get.put(SLGetPlacesURLUseCase());
+    saveGooglePlacePredictionUseCase = SLSaveGooglePlacePredictionUseCase(
       hive: Globals().hive,
     );
-    getGooglePlaceFromPlaceIdUseCase = GetGooglePlaceFromPlaceIdUseCase(
+    getGooglePlaceFromPlaceIdUseCase = SLGetGooglePlaceFromPlaceIdUseCase(
       hive: Globals().hive,
     );
   }

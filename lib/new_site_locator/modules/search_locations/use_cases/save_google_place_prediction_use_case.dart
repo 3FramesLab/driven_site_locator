@@ -1,10 +1,10 @@
 part of search_location_module;
 
-class SaveGooglePlacePredictionUseCase
+class SLSaveGooglePlacePredictionUseCase
     extends BaseFutureUseCase<bool, SaveGooglePlacePredictionParam> {
   final HiveInterface hive;
 
-  SaveGooglePlacePredictionUseCase({required this.hive});
+  SLSaveGooglePlacePredictionUseCase({required this.hive});
 
   @override
   Future<bool> execute(SaveGooglePlacePredictionParam param) async {

@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GenerateSiteHashmapUseCase
+class SLGenerateSiteHashmapUseCase
     extends BaseUseCase<void, GenerateSiteHashmapParams> {
   @override
   void execute(GenerateSiteHashmapParams param) {

@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetSiteLocationsInVisibleMapRegionUseCase extends BaseFutureUseCase<
+class SLGetSiteLocationsInVisibleMapRegionUseCase extends BaseFutureUseCase<
     List<SiteLocation>, GetSiteLocationsInVisibleMapRegionParam> {
   @override
   Future<List<SiteLocation>> execute(

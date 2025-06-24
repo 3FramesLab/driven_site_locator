@@ -122,17 +122,18 @@ mixin SiteLocatorState {
   final menuPanelController = PanelController();
 
   //use cases
-  late ValidateLastSavedCenterLocationUseCase
+  late SLValidateLastSavedCenterLocationUseCase
       validateLastSavedCenterLocationUseCase;
-  late UpdateMarkerIconUseCase updateMarkerIconUseCase;
-  late GenerateMarkersUseCase generateMarkersUseCase;
-  late GetSiteListFromSiteLocationsUseCase getSiteListFromSiteLocationsUseCase;
-  late FilterMarkersUseCase filterMarkersUseCase;
-  late GetUserLocationUseCase getUserLocationUseCase;
-  late GetAccessTokenForSitesUseCase getAccessTokenForSitesUseCase;
-  late GetSelectedPlaceLatLngUseCase getLatLngForSelectedPlaceUseCase;
-  late ComputeCircleRadiusUseCase computeCircleRadiusUseCase;
-  late GetSiteLocationsInVisibleMapRegionUseCase
+  late SLUpdateMarkerIconUseCase updateMarkerIconUseCase;
+  late SLGenerateMarkersUseCase generateMarkersUseCase;
+  late SLGetSiteListFromSiteLocationsUseCase
+      getSiteListFromSiteLocationsUseCase;
+  late SLFilterMarkersUseCase filterMarkersUseCase;
+  late SLGetUserLocationUseCase getUserLocationUseCase;
+  late SLGetAccessTokenForSitesUseCase getAccessTokenForSitesUseCase;
+  late SLGetSelectedPlaceLatLngUseCase getLatLngForSelectedPlaceUseCase;
+  late SLComputeCircleRadiusUseCase computeCircleRadiusUseCase;
+  late SLGetSiteLocationsInVisibleMapRegionUseCase
       getSiteLocationsInVisibleMapRegionUseCase;
   late GetLowestFuelPriceUseCase getLowestFuelPriceUseCase;
   late GetSitesWithLowestFuelPriceUseCase getSitesWithLowestFuelPriceUseCase;
@@ -141,9 +142,9 @@ mixin SiteLocatorState {
   late SaveSitePlaceIdUseCase saveSitePlaceIdUseCase;
   late GetPlaceIdForSiteUseCase getPlaceIdForSiteUseCase;
   late MerchSiteFilterUseCase merchSiteFilterUseCase;
-  late GetCardAcceptedUseCase getCardAcceptedUseCase;
-  late GetSiteSourceFromCardTypeUseCase getSiteSourceFromCardTypeUseCase;
-  late AdjustDuplicateLatLngUseCase adjustDuplicateLatLngUseCase;
+  late SLGetCardAcceptedUseCase getCardAcceptedUseCase;
+  late SLGetSiteSourceFromCardTypeUseCase getSiteSourceFromCardTypeUseCase;
+  late SLAdjustDuplicateLatLngUseCase adjustDuplicateLatLngUseCase;
 
   bool isGenerateMapPinsOnFiltering = false;
   bool positionStreamStarted = false;
@@ -160,7 +161,7 @@ mixin SiteLocatorState {
 
   bool isExecuteCameraMoveForCardHolderOnFirstLaunch = true;
 
-  late GenerateSiteHashmapUseCase generateSiteHashmapUseCase;
+  late SLGenerateSiteHashmapUseCase generateSiteHashmapUseCase;
   Map<LatLng, Site> siteHashmap = {};
   List<SiteLocation> siteLocationDisplayData = [];
   // TODO(Smeet): Cluster work.
@@ -175,7 +176,7 @@ mixin SiteLocatorState {
   // ClusterManager? clusterManager;
   ClusterManager<SiteMapMarker>? clusterManager;
   final double densityThreshold = 10;
-  late CalculateSitesLoadingProgressUseCase
+  late SLCalculateSitesLoadingProgressUseCase
       calculateSitesLoadingProgressUseCase;
   // late Timer? sitesLoadingPeriodicTimer;
   RxBool isSitesLoadingTimerInitiated = false.obs;

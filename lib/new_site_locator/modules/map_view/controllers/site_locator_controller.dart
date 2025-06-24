@@ -118,24 +118,25 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
 
   void _initUseCases() {
     validateLastSavedCenterLocationUseCase =
-        Get.put(ValidateLastSavedCenterLocationUseCase());
+        Get.put(SLValidateLastSavedCenterLocationUseCase());
     calculateSitesLoadingProgressUseCase =
-        Get.put(CalculateSitesLoadingProgressUseCase());
-    updateMarkerIconUseCase = Get.put(UpdateMarkerIconUseCase());
-    generateMarkersUseCase = Get.put(GenerateMarkersUseCase());
+        Get.put(SLCalculateSitesLoadingProgressUseCase());
+    updateMarkerIconUseCase = Get.put(SLUpdateMarkerIconUseCase());
+    generateMarkersUseCase = Get.put(SLGenerateMarkersUseCase());
     getSiteListFromSiteLocationsUseCase =
-        Get.put(GetSiteListFromSiteLocationsUseCase());
-    filterMarkersUseCase = Get.put(FilterMarkersUseCase());
-    getUserLocationUseCase = Get.put(GetUserLocationUseCase());
-    getAccessTokenForSitesUseCase = Get.put(GetAccessTokenForSitesUseCase());
+        Get.put(SLGetSiteListFromSiteLocationsUseCase());
+    filterMarkersUseCase = Get.put(SLFilterMarkersUseCase());
+    getUserLocationUseCase = Get.put(SLGetUserLocationUseCase());
+    getAccessTokenForSitesUseCase = Get.put(SLGetAccessTokenForSitesUseCase());
     getLatLngForSelectedPlaceUseCase = Get.put(
-      GetSelectedPlaceLatLngUseCase(siteLocationsService: siteLocationsService),
+      SLGetSelectedPlaceLatLngUseCase(
+          siteLocationsService: siteLocationsService),
     );
-    computeCircleRadiusUseCase = Get.put(ComputeCircleRadiusUseCase());
+    computeCircleRadiusUseCase = Get.put(SLComputeCircleRadiusUseCase());
     // applyClusterUseCase = Get.put(ApplyClusterUseCase());
-    generateSiteHashmapUseCase = Get.put(GenerateSiteHashmapUseCase());
+    generateSiteHashmapUseCase = Get.put(SLGenerateSiteHashmapUseCase());
     getSiteLocationsInVisibleMapRegionUseCase =
-        GetSiteLocationsInVisibleMapRegionUseCase();
+        SLGetSiteLocationsInVisibleMapRegionUseCase();
     getLowestFuelPriceUseCase = GetLowestFuelPriceUseCase();
     getSitesWithLowestFuelPriceUseCase = GetSitesWithLowestFuelPriceUseCase();
     fetchPlaceIDUseCase = FetchPlaceIDUseCase(
@@ -147,9 +148,9 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     saveSitePlaceIdUseCase = SaveSitePlaceIdUseCase(hive: Globals().hive);
     getPlaceIdForSiteUseCase = GetPlaceIdForSiteUseCase(hive: Globals().hive);
     merchSiteFilterUseCase = MerchSiteFilterUseCase();
-    getCardAcceptedUseCase = GetCardAcceptedUseCase();
-    getSiteSourceFromCardTypeUseCase = GetSiteSourceFromCardTypeUseCase();
-    adjustDuplicateLatLngUseCase = AdjustDuplicateLatLngUseCase();
+    getCardAcceptedUseCase = SLGetCardAcceptedUseCase();
+    getSiteSourceFromCardTypeUseCase = SLGetSiteSourceFromCardTypeUseCase();
+    adjustDuplicateLatLngUseCase = SLAdjustDuplicateLatLngUseCase();
   }
 
   Future<void> subscribeToLocationStream() async {

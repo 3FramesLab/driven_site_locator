@@ -1,6 +1,6 @@
 part of search_location_module;
 
-class GetPlacesURLUseCase extends BaseNoParamUseCase<String> {
+class SLGetPlacesURLUseCase extends BaseNoParamUseCase<String> {
   @override
   String execute() {
     const componentsForFetchingPlaces = 'country:us|country:ca';

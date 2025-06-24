@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GenerateMarkersUseCase
+class SLGenerateMarkersUseCase
     extends BaseUseCase<List<Marker>, GenerateMarkersParams> {
   @override
   List<Marker> execute(GenerateMarkersParams param) => param.markerDetailsList

@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetMapZoomLevelUseCase
+class SLGetMapZoomLevelUseCase
     extends BaseUseCase<double, GetMapZoomLevelParams> {
   @override
   double execute(GetMapZoomLevelParams param) => getMapZoomLevel(param);

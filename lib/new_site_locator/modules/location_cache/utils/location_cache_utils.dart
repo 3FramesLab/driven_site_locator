@@ -15,8 +15,8 @@ class LocationCacheUtils {
       WriteSitesInLocationCacheUseCase();
   ReadSitesFromLocationCacheUseCase readSitesFromLocationCacheUseCase =
       ReadSitesFromLocationCacheUseCase();
-  ValidateLastSavedCenterLocationUseCase validateLastCenterLocationUseCase =
-      ValidateLastSavedCenterLocationUseCase();
+  SLValidateLastSavedCenterLocationUseCase validateLastCenterLocationUseCase =
+      SLValidateLastSavedCenterLocationUseCase();
 
   Future<bool> shouldFetchSitesFromRemote(
       LatLng currentLocation, double mapRadius) async {

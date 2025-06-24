@@ -29,7 +29,7 @@ class UmaSLProperties {
   static String displayFuelPrice = '';
   static int autoSearchSiteIntervalInMs = 2000;
 
-  static final _getMapZoomLevelUseCase = GetMapZoomLevelUseCase();
+  static final _getMapZoomLevelUseCase = SLGetMapZoomLevelUseCase();
   static ClusterAlgorithm clusterAlgorithm = ClusterAlgorithm.maxDist;
 
   static void init({Map<String, dynamic>? configJsonData}) {

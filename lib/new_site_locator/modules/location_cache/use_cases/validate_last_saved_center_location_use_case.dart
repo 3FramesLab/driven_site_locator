@@ -1,6 +1,6 @@
 part of location_cache_module;
 
-class ValidateLastSavedCenterLocationUseCase
+class SLValidateLastSavedCenterLocationUseCase
     extends BaseFutureUseCase<bool, LatLng> {
   @override
   Future<bool> execute(LatLng param) async {

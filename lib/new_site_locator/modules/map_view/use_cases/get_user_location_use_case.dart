@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetUserLocationUseCase extends BaseNoParamFutureUseCase<LatLng> {
+class SLGetUserLocationUseCase extends BaseNoParamFutureUseCase<LatLng> {
   @override
   Future<LatLng> execute() async {
     var currentUserLocation = SLInternalText.defaultUserLocation;

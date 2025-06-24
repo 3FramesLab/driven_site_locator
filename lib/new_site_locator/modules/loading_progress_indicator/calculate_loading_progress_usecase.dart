@@ -1,6 +1,6 @@
 part of loading_progress_indicator_module;
 
-class CalculateSitesLoadingProgressUseCase
+class SLCalculateSitesLoadingProgressUseCase
     extends BaseUseCase<double, CalculateSitesLoadingProgressParam> {
   @override
   double execute(CalculateSitesLoadingProgressParam param) {

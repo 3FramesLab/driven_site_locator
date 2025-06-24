@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class UpdateMarkerIconUseCase
+class SLUpdateMarkerIconUseCase
     extends BaseUseCase<void, UpdateMarkerIconParams> {
   @override
   void execute(UpdateMarkerIconParams param) {

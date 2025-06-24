@@ -1,6 +1,6 @@
 part of map_view_module;
 
-class GetCardAcceptedUseCase extends BaseUseCase<String, SiteLocation> {
+class SLGetCardAcceptedUseCase extends BaseUseCase<String, SiteLocation> {
   @override
   String execute(SiteLocation param) {
     final cardAccepted = param.cardsAcceptedAtSite;

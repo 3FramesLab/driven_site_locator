@@ -1,9 +1,9 @@
 part of search_location_module;
 
-class GetSelectedPlaceLatLngUseCase extends BaseFutureUseCase<
+class SLGetSelectedPlaceLatLngUseCase extends BaseFutureUseCase<
     GoogleGeoCodingModel?, GetLatLngForSelectedPlaceUseCaseParams> {
   final SLSiteLocationsService siteLocationsService;
-  GetSelectedPlaceLatLngUseCase({required this.siteLocationsService});
+  SLGetSelectedPlaceLatLngUseCase({required this.siteLocationsService});
   @override
   Future<GoogleGeoCodingModel?> execute(
           GetLatLngForSelectedPlaceUseCaseParams param) async =>

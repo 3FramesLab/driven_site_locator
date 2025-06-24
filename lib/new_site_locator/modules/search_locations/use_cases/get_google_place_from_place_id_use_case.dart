@@ -1,10 +1,10 @@
 part of search_location_module;
 
-class GetGooglePlaceFromPlaceIdUseCase
+class SLGetGooglePlaceFromPlaceIdUseCase
     extends BaseNoParamFutureUseCase<List<Predictions>> {
   final HiveInterface hive;
 
-  GetGooglePlaceFromPlaceIdUseCase({required this.hive});
+  SLGetGooglePlaceFromPlaceIdUseCase({required this.hive});
 
   @override
   Future<List<Predictions>> execute() async {
