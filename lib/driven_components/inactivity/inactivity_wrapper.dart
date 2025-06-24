@@ -2,7 +2,7 @@
 part of inactivity_module;
 
 class SLInactivityWrapper extends StatelessWidget {
-  final SLInactivityController controller = Get.find();
+  final SLInactivityController controller = Get.put(SLInactivityController());
 
   final Widget? child;
   VoidCallback? sessionExpiryWarningTimerCallback;
