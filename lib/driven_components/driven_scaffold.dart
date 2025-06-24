@@ -61,7 +61,7 @@ class DrivenScaffold extends StatelessWidget {
   }
 
   Widget _inactivityWrapper(Widget widget) {
-    return goesInactive ? InactivityWrapper(child: widget) : widget;
+    return goesInactive ? SLInactivityWrapper(child: widget) : widget;
   }
 
   // Widget _forceUpdateWrapper(Widget widget) {

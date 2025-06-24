@@ -1,14 +1,14 @@
 // ignore_for_file: must_be_immutable
 part of inactivity_module;
 
-class InactivityWrapper extends StatelessWidget {
-  final InactivityController controller = Get.find();
+class SLInactivityWrapper extends StatelessWidget {
+  final SLInactivityController controller = Get.find();
 
   final Widget? child;
   VoidCallback? sessionExpiryWarningTimerCallback;
   VoidCallback? sessionExpiryTimerCallback;
 
-  InactivityWrapper({
+  SLInactivityWrapper({
     required this.child,
     this.sessionExpiryWarningTimerCallback,
     this.sessionExpiryTimerCallback,

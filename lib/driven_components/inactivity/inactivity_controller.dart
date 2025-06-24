@@ -1,6 +1,6 @@
 part of inactivity_module;
 
-class InactivityController extends FullLifeCycleController
+class SLInactivityController extends FullLifeCycleController
     with FullLifeCycleMixin {
   final bool enabled = DrivenSiteLocator.instance.isInactivityWrapperEnabled;
 
