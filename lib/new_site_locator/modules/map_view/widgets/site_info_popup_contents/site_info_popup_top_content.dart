@@ -3,7 +3,7 @@ part of map_view_module;
 class SiteInfoPopupTopContent extends StatelessWidget {
   SiteInfoPopupTopContent(this.selectedSiteLocation, this.milesData);
 
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation selectedSiteLocation;
   final String milesData;
 

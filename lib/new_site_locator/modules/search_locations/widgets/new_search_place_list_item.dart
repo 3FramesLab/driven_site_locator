@@ -1,8 +1,8 @@
 part of search_location_module;
 
 class NewSearchPlaceListItem extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
-  final SearchPlacesController searchPlacesController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
+  final SLSearchPlacesController searchPlacesController = Get.find();
   final Predictions predictions;
   final int rowIndex;
 

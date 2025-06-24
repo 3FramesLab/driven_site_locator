@@ -1,7 +1,7 @@
 part of sl_list_module;
 
 class RecentListView extends StatelessWidget {
-  final siteLocatorController = Get.find<SiteLocatorController>();
+  final siteLocatorController = Get.find<SLSiteLocatorController>();
 
   RecentListView({super.key});
 

@@ -15,8 +15,8 @@ class SearchPlaceTextField extends StatefulWidget {
 }
 
 class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
-  final SiteLocatorController siteLocatorController = Get.find();
-  final SearchPlacesController searchPlacesController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
+  final SLSearchPlacesController searchPlacesController = Get.find();
 
   @override
   void initState() {

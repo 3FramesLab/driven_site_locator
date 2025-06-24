@@ -4,7 +4,7 @@ void siteDetailPopup(
   SiteLocation selectedSiteLocation, {
   Color barrierColor = const Color(0x80000000),
 }) {
-  final siteLocatorController = Get.find<SiteLocatorController>();
+  final siteLocatorController = Get.find<SLSiteLocatorController>();
 
   siteLocatorController.isSiteInfoDialogOpened(true);
   final milesData = siteLocatorController.displayMiles(selectedSiteLocation);

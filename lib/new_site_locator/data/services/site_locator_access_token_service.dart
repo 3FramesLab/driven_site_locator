@@ -6,7 +6,7 @@ import 'package:driven_site_locator/data/data_sources/remote/api_route.dart';
 import 'package:driven_site_locator/new_site_locator/models/site_locator_access_token.dart';
 import 'package:get/get.dart';
 
-class SiteLocatorAccessTokenService extends GetxService {
+class SLSiteLocatorAccessTokenService extends GetxService {
   final apiClient = APIClient(
       options: BaseOptions(
     baseUrl: ApiConstants.baseUrl,

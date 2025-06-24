@@ -15,7 +15,7 @@ class ListTabBarView extends StatefulWidget {
 class _ListTabBarViewState extends State<ListTabBarView>
     with TickerProviderStateMixin {
   late TabController tabController;
-  final siteLocatorController = Get.find<SiteLocatorController>();
+  final siteLocatorController = Get.find<SLSiteLocatorController>();
   final siteLocationListTabs = DcSiteLocatorUtils.siteLocationListTabs();
   static final entitlementRepository = SiteLocatorEntitlementUtils.instance;
 

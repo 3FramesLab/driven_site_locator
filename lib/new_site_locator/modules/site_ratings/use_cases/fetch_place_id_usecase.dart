@@ -2,7 +2,7 @@ part of site_ratings_module;
 
 class FetchPlaceIDUseCase
     extends BaseFutureUseCase<String, FetchPlaceIDUseCaseParams> {
-  final SiteLocationsService siteLocationsService;
+  final SLSiteLocationsService siteLocationsService;
 
   FetchPlaceIDUseCase({required this.siteLocationsService});
 

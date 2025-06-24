@@ -1,7 +1,7 @@
 part of map_view_module;
 
 class SiteAddress extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation siteLocation;
 
   SiteAddress({

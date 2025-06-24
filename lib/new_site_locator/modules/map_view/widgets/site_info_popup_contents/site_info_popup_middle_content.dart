@@ -1,7 +1,7 @@
 part of map_view_module;
 
 class SiteInfoPopupMiddleContent extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation selectedSiteLocation;
   final filterController = Get.find<AuthSLTypeChoicesController>();
 

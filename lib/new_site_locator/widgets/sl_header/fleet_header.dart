@@ -3,7 +3,7 @@ part of sl_widget_module;
 class FleetHeader extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Future<void> Function()? fleetChangeCallback;
-  final siteLocatorController = Get.find<SiteLocatorController>();
+  final siteLocatorController = Get.find<SLSiteLocatorController>();
 
   FleetHeader({
     required this.padding,

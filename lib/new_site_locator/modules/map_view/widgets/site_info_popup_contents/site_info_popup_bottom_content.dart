@@ -5,7 +5,7 @@ part of map_view_module;
 class SiteInfoPopupBottomContent extends StatelessWidget {
   SiteInfoPopupBottomContent(this.selectedSiteLocation);
 
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
   final SiteLocation selectedSiteLocation;
   String cardAccepted = '';

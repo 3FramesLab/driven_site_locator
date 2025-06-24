@@ -1,7 +1,7 @@
 part of site_ratings_module;
 
 class SiteRating extends StatelessWidget {
-  final SiteRatingController siteRatingController = Get.find();
+  final SLSiteRatingController siteRatingController = Get.find();
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
   final SiteLocation siteLocation;

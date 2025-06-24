@@ -55,7 +55,7 @@ class DcSiteLocatorUtils {
           Get.find<AuthSLTypeChoicesController>();
       authSLTypeChoicesController.resetFilters();
 
-      final siteLocatorController = Get.find<SiteLocatorController>();
+      final siteLocatorController = Get.find<SLSiteLocatorController>();
       siteLocatorController.resetData();
     } catch (_) {}
   }
@@ -68,21 +68,21 @@ class DcSiteLocatorUtils {
         final controller = Get.find<AuthSLTypeChoicesController>();
         controller.setFuelFilter(cardType.fuelType.value);
       }
-      final siteLocatorController = Get.find<SiteLocatorController>();
+      final siteLocatorController = Get.find<SLSiteLocatorController>();
       await siteLocatorController.onFilterSelected();
     } catch (_) {}
   }
 
   static void isGenerateMapPinsOnFiltering({bool value = false}) {
     try {
-      final siteLocatorController = Get.find<SiteLocatorController>();
+      final siteLocatorController = Get.find<SLSiteLocatorController>();
       siteLocatorController.isGenerateMapPinsOnFiltering = value;
     } catch (_) {}
   }
 
   static void applyMerchFilters() {
     try {
-      final siteLocatorController = Get.find<SiteLocatorController>();
+      final siteLocatorController = Get.find<SLSiteLocatorController>();
       siteLocatorController.filterSiteLocations(
         showNoFilterLocationDialog: true,
         shouldSortList: true,
@@ -537,7 +537,7 @@ class DcSiteLocatorUtils {
   }
 
   static List<SiteLocation> getSortedList({
-    required SiteLocatorController siteLocatorController,
+    required SLSiteLocatorController siteLocatorController,
     required ListViewSorting listViewSorting,
   }) {
     // return siteLocatorController.sortedListViewData();

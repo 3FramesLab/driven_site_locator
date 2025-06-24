@@ -1,7 +1,7 @@
 part of map_view_module;
 
 class ApplyForComdataCard extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
 
   ApplyForComdataCard({super.key});
 

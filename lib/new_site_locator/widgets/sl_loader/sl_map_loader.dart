@@ -1,8 +1,8 @@
 part of sl_widget_module;
 
 class SlMapLoader extends StatelessWidget {
-  final siteLocatorController = Get.find<SiteLocatorController>();
-  final controller = Get.find<SitesLoadingProgressController>();
+  final siteLocatorController = Get.find<SLSiteLocatorController>();
+  final controller = Get.find<SLSitesLoadingProgressController>();
 
   SlMapLoader({super.key});
 
@@ -11,8 +11,8 @@ class SlMapLoader extends StatelessWidget {
     return Obx(
       () {
         return Visibility(
-          visible: Get.find<SiteLocatorController>().isShowLoading() ||
-              Get.find<SiteLocatorController>().isShowLoading(),
+          visible: Get.find<SLSiteLocatorController>().isShowLoading() ||
+              Get.find<SLSiteLocatorController>().isShowLoading(),
           child: StarProgressIndicator(
             starColor: Colors.white,
             inactiveColor: Colors.white.withOpacity(0.7),

@@ -2,7 +2,7 @@
 
 part of map_view_module;
 
-class SiteLocatorController extends GetxController with SiteLocatorState {
+class SLSiteLocatorController extends GetxController with SiteLocatorState {
   StreamSubscription<Position>? locationStreamSubscription;
 
   @override
@@ -1048,7 +1048,7 @@ class SiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   void clearSearchPlaceInput() {
-    final searchPlacesController = Get.find<SearchPlacesController>();
+    final searchPlacesController = Get.find<SLSearchPlacesController>();
     if (searchPlacesController.searchTextEditingController.text.isNotEmpty &&
         canClearSearchTextField &&
         selectedPlace == null) {

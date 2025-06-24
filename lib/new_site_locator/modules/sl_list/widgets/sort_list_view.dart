@@ -15,7 +15,7 @@ class SortListView extends StatefulWidget {
 }
 
 class _SortListViewState extends State<SortListView> {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
 
   @override
   void initState() {

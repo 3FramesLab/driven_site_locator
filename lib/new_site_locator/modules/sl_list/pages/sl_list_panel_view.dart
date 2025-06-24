@@ -12,7 +12,7 @@ class SLListPanelView extends StatefulWidget {
 }
 
 class _SLListPanelViewState extends State<SLListPanelView> {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   late ScrollController listScrollController;
 
   @override

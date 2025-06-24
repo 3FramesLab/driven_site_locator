@@ -1,8 +1,8 @@
 part of site_ratings_module;
 
-class SiteRatingController extends GetxController {
-  final SiteLocatorController siteLocatorController = Get.find();
-  late SiteLocationsService siteLocationsService;
+class SLSiteRatingController extends GetxController {
+  final SLSiteLocatorController siteLocatorController = Get.find();
+  late SLSiteLocationsService siteLocationsService;
 
   SiteRatingEntity calculateSiteRating(SiteLocation siteLocation) {
     final identifier = siteLocation.masterIdentifier;

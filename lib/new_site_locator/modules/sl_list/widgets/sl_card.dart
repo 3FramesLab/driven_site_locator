@@ -1,8 +1,8 @@
 part of sl_list_module;
 
-class SLCard extends GetView<SiteLocatorController> {
+class SLCard extends GetView<SLSiteLocatorController> {
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
-  final SiteLocatorController _siteLocatorController = Get.find();
+  final SLSiteLocatorController _siteLocatorController = Get.find();
 
   final SiteLocation siteLocation;
   final int index;

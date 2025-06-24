@@ -1,7 +1,7 @@
 part of sl_list_module;
 
 class SLListViewPage extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final ScrollController? scrollController;
 
   SLListViewPage({

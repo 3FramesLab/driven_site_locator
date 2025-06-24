@@ -2,7 +2,7 @@ part of site_ratings_module;
 
 class GetRatingsFromPlaceIdUseCase
     extends BaseFutureUseCase<double, GetRatingsFromPlaceIdParams> {
-  final SiteLocationsService siteLocationsService;
+  final SLSiteLocationsService siteLocationsService;
 
   GetRatingsFromPlaceIdUseCase({required this.siteLocationsService});
 

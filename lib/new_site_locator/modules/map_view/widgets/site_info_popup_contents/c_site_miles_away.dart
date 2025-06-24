@@ -1,7 +1,7 @@
 part of map_view_module;
 
 class SiteMilesAway extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation siteLocation;
 
   SiteMilesAway({
@@ -44,7 +44,7 @@ class SiteMilesAway extends StatelessWidget {
   Widget _drivingMiles() {
     return Obx(
       () {
-        final SiteLocatorController siteLocatorController = Get.find();
+        final SLSiteLocatorController siteLocatorController = Get.find();
         final milesData = siteLocatorController.displayMiles(siteLocation);
 
         final linkStyle = f14RegularGrey.copyWith(

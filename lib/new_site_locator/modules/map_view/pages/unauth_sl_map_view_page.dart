@@ -9,11 +9,11 @@ class DCUnauthSLMapViewPage extends StatefulWidget {
 
 class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
     with WidgetsBindingObserver {
-  final SearchPlacesController searchPlacesController = Get.find();
+  final SLSearchPlacesController searchPlacesController = Get.find();
   final siteInfoScrollController = ScrollController();
   final listViewPanelScrollController = ScrollController();
 
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final AuthSLTypeChoicesController authSLTypeChoicesController = Get.find();
 
   @override

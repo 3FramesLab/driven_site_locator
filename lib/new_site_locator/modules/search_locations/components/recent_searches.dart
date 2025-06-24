@@ -1,7 +1,7 @@
 part of search_location_module;
 
 class RecentSearches extends StatelessWidget {
-  final SearchPlacesController searchPlaceController = Get.find();
+  final SLSearchPlacesController searchPlaceController = Get.find();
 
   RecentSearches({super.key});
 

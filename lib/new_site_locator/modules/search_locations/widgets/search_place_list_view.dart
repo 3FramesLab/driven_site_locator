@@ -8,7 +8,7 @@ class SearchPlacesListView extends StatefulWidget {
 }
 
 class _SearchPlacesListViewState extends State<SearchPlacesListView> {
-  final SearchPlacesController searchPlacesController = Get.find();
+  final SLSearchPlacesController searchPlacesController = Get.find();
 
   @override
   void initState() {

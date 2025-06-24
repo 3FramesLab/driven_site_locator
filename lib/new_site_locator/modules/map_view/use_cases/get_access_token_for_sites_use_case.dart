@@ -5,8 +5,9 @@ class GetAccessTokenForSitesUseCase extends BaseNoParamFutureUseCase<String> {
   Future<String> execute() async {
     String? siteLocatorAccessToken;
     if (isAccessTokenExpired) {
-      final SiteLocatorAccessTokenController siteLocatorAccessTokenController =
-          Get.put(SiteLocatorAccessTokenController());
+      final SLSiteLocatorAccessTokenController
+          siteLocatorAccessTokenController =
+          Get.put(SLSiteLocatorAccessTokenController());
       siteLocatorAccessToken =
           await siteLocatorAccessTokenController.getAccessToken();
     } else {

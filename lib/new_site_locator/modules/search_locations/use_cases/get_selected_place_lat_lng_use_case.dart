@@ -2,7 +2,7 @@ part of search_location_module;
 
 class GetSelectedPlaceLatLngUseCase extends BaseFutureUseCase<
     GoogleGeoCodingModel?, GetLatLngForSelectedPlaceUseCaseParams> {
-  final SiteLocationsService siteLocationsService;
+  final SLSiteLocationsService siteLocationsService;
   GetSelectedPlaceLatLngUseCase({required this.siteLocationsService});
   @override
   Future<GoogleGeoCodingModel?> execute(

@@ -1,7 +1,7 @@
 part of search_location_module;
 
-class SearchPlacesController extends GetxController with SearchLocationState {
-  SiteLocationsService siteLocationsService = Get.find();
+class SLSearchPlacesController extends GetxController with SearchLocationState {
+  SLSiteLocationsService siteLocationsService = Get.find();
   RxList<Predictions> placesList = <Predictions>[].obs;
   RxList<Predictions> recentSearches = <Predictions>[].obs;
 
@@ -61,17 +61,17 @@ class SearchPlacesController extends GetxController with SearchLocationState {
       searchIconName() == SLInternalText.search ? Icons.search : Icons.clear;
 
   Future<void> getUpdatedSitesData(
-    SiteLocatorController siteLocatorController,
+    SLSiteLocatorController siteLocatorController,
   ) async =>
       siteLocatorController.onReCenterButtonClicked();
 
   Future<void> resetMapViewOnClearSearchTextfield(
-    SiteLocatorController siteLocatorController,
+    SLSiteLocatorController siteLocatorController,
   ) async =>
       getUpdatedSitesData(siteLocatorController);
 
   Future<void> resetListViewOnClearSearchTextfield(
-    SiteLocatorController siteLocatorController,
+    SLSiteLocatorController siteLocatorController,
   ) async {
     siteLocatorController.isInitialListLoading(true);
     await getUpdatedSitesData(siteLocatorController);

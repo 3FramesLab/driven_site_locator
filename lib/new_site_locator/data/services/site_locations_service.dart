@@ -16,7 +16,7 @@ import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dar
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class SiteLocationsService extends GetxService {
+class SLSiteLocationsService extends GetxService {
   final apiClient = APIClient(
     options: BaseOptions(
       baseUrl: ApiConstants.baseUrl,

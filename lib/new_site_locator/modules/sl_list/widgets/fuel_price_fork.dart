@@ -6,7 +6,7 @@ class SLCardFuelPriceFork extends StatelessWidget {
   SLCardFuelPriceFork(this.siteLocation, {Key? key}) : super(key: key);
 
   final SiteLocation siteLocation;
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   bool showSavingsText = false;
   double retailPrice = 0;
   double discountPrice = 0;

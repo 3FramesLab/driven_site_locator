@@ -3,7 +3,7 @@ part of map_view_module;
 class SiteInfoActionButtons extends StatelessWidget {
   SiteInfoActionButtons(this.selectedSiteLocation);
 
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation selectedSiteLocation;
 
   @override

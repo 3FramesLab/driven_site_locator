@@ -1,7 +1,7 @@
 part of map_view_module;
 
 class SearchIconButton extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   static final _entitlementRepository = SiteLocatorEntitlementUtils.instance;
 
   SearchIconButton({super.key});

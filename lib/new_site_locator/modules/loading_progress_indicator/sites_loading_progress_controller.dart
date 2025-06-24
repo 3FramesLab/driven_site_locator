@@ -1,6 +1,6 @@
 part of loading_progress_indicator_module;
 
-class SitesLoadingProgressController extends GetxController {
+class SLSitesLoadingProgressController extends GetxController {
   RxDouble progressValue = 0.0.obs;
   RxBool canShowIndicator = false.obs;
   RxString statusMessage =
@@ -33,7 +33,7 @@ class SitesLoadingProgressController extends GetxController {
 
   Future<void> onSearchThisAreaButtonTap() async {
     isMapPositionChanged(false);
-    final siteLocatorController = Get.find<SiteLocatorController>();
+    final siteLocatorController = Get.find<SLSiteLocatorController>();
     if (!isLoading.value && !completeMapLoader.value) {
       buttonWidth.value = 50;
       await Future.delayed(buttonWidthAnimationDuration);

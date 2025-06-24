@@ -2,7 +2,7 @@ part of search_location_module;
 
 class GetPlacesResultUseCase
     extends BaseFutureUseCase<GooglePlacesModel?, GetPlacesResultParams> {
-  final SiteLocationsService siteLocationsService;
+  final SLSiteLocationsService siteLocationsService;
   GetPlacesResultUseCase({required this.siteLocationsService});
   @override
   Future<GooglePlacesModel?> execute(GetPlacesResultParams param) async =>

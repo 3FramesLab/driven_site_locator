@@ -1,7 +1,7 @@
 part of sl_list_module;
 
 class RecentListItem extends StatelessWidget {
-  final siteLocatorController = Get.find<SiteLocatorController>();
+  final siteLocatorController = Get.find<SLSiteLocatorController>();
   final SiteLocation siteLocation;
   final int index;
 

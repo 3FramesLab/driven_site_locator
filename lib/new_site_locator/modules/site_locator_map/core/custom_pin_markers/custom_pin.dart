@@ -32,14 +32,14 @@ class CustomPin {
   );
 
   static final pindropImagePathUseCase = Get.put(PindropImagePathUseCase());
-  static SiteLocatorAccessTokenService siteLocatorAccessTokenService =
-      Get.put(SiteLocatorAccessTokenService());
+  static SLSiteLocatorAccessTokenService siteLocatorAccessTokenService =
+      Get.put(SLSiteLocatorAccessTokenService());
 
-  static SiteLocatorAccessTokenController siteLocatorAccessTokenController =
-      Get.put(SiteLocatorAccessTokenController());
+  static SLSiteLocatorAccessTokenController siteLocatorAccessTokenController =
+      Get.put(SLSiteLocatorAccessTokenController());
 
-  static SiteLocatorController siteLocatorController =
-      Get.put(SiteLocatorController());
+  static SLSiteLocatorController siteLocatorController =
+      Get.put(SLSiteLocatorController());
 
   static Future<void> initEvents(
       {bool setup = true, bool canCacheAllLogos = true}) async {
@@ -52,7 +52,7 @@ class CustomPin {
 
   static void bindAdhocDependencies() {
     // Get.lazyPut(CardholderSetupController.new);
-    Get.lazyPut(SitesLoadingProgressController.new);
+    Get.lazyPut(SLSitesLoadingProgressController.new);
   }
 
   static Future<void> preCache({bool canCacheAllLogos = true}) async {
@@ -104,8 +104,8 @@ class CustomPin {
   }
 
   static Future<void> preCacheAllBrandLogos() async {
-    final SiteLocationsService siteLocationsService =
-        Get.put(SiteLocationsService());
+    final SLSiteLocationsService siteLocationsService =
+        Get.put(SLSiteLocationsService());
     List<dynamic> urlStoreList = [];
 
     try {

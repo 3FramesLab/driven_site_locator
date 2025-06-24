@@ -3,8 +3,8 @@
 part of search_location_module;
 
 class SearchPlacePage extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
-  final SearchPlacesController searchPlaceController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
+  final SLSearchPlacesController searchPlaceController = Get.find();
   String fromScreen = '';
 
   SearchPlacePage({super.key});

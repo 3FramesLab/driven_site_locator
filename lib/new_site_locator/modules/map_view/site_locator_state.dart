@@ -1,11 +1,11 @@
 part of map_view_module;
 
 mixin SiteLocatorState {
-  SiteLocationsService siteLocationsService = Get.find();
-  SiteLocatorAccessTokenController siteLocatorAccessTokenController =
-      Get.put(SiteLocatorAccessTokenController());
-  final searchPlacesController = Get.put(SearchPlacesController());
-  final SitesLoadingProgressController sitesLoadingProgressController =
+  SLSiteLocationsService siteLocationsService = Get.find();
+  SLSiteLocatorAccessTokenController siteLocatorAccessTokenController =
+      Get.put(SLSiteLocatorAccessTokenController());
+  final searchPlacesController = Get.put(SLSearchPlacesController());
+  final SLSitesLoadingProgressController sitesLoadingProgressController =
       Get.find();
 
   RxDouble infoPanelInitialHeight =

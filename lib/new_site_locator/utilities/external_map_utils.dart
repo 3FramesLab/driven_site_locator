@@ -1,7 +1,7 @@
 part of site_locator_module;
 
 class ExternalMapUtils {
-  final SiteLocatorController _siteLocatorController = Get.find();
+  final SLSiteLocatorController _siteLocatorController = Get.find();
   final double? _lat;
   final double? _lng;
 

@@ -8,7 +8,7 @@ class SiteLocatorMap extends StatefulWidget {
   final bool? customMarker;
   final Function(CameraPosition)? onCameraMove;
   final Function()? onCameraIdle;
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
   final bool isFixedCircleRadiusVisible;
   final bool isMovingCircleRadiusVisible;
   final Color fixedCircleRadiusColor;
@@ -111,7 +111,7 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
 
   Future<void> _updateCamera(GoogleMapController controller) async {
     if (widget.siteLocatorController.selectedPlace != null &&
-       SLSessionManager().isUserAuthenticated) {
+        SLSessionManager().isUserAuthenticated) {
       await widget.siteLocatorController.getLatLngForSelectedPlace(
           widget.siteLocatorController.selectedPlace!);
     } else if (widget.siteLocatorController.markers().isNotEmpty) {

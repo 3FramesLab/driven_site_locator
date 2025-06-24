@@ -4,11 +4,11 @@ import 'package:driven_site_locator/new_site_locator/data/services/site_locator_
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 import 'package:get/get.dart';
 
-class SiteLocatorAccessTokenController extends GetxController {
+class SLSiteLocatorAccessTokenController extends GetxController {
   String? siteLocatorAccessToken;
 
-  SiteLocatorAccessTokenService siteLocatorAccessTokenService =
-      Get.put(SiteLocatorAccessTokenService());
+  SLSiteLocatorAccessTokenService siteLocatorAccessTokenService =
+      Get.put(SLSiteLocatorAccessTokenService());
 
   Future<String?> getAccessToken() async {
     final response = await siteLocatorAccessTokenService

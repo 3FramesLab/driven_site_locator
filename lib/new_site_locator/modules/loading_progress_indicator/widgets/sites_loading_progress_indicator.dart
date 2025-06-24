@@ -1,7 +1,7 @@
 part of loading_progress_indicator_module;
 
 class SitesLoadingProgressIndicator extends StatelessWidget {
-  final SitesLoadingProgressController loadingProgressController = Get.find();
+  final SLSitesLoadingProgressController loadingProgressController = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,8 @@ part of map_view_module;
 class SearchThisAreaButtonWithLoader extends StatelessWidget {
   SearchThisAreaButtonWithLoader({super.key});
 
-  final SiteLocatorController siteLocatorController = Get.find();
-  final SitesLoadingProgressController controller = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
+  final SLSitesLoadingProgressController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

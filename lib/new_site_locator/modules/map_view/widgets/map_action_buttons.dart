@@ -2,7 +2,7 @@ part of map_view_module;
 
 class MapActionButtons extends StatelessWidget {
   final Function()? onGpsIconTap;
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
 
   MapActionButtons({
     this.onGpsIconTap,

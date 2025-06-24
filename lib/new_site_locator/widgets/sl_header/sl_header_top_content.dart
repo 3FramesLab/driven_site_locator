@@ -1,7 +1,7 @@
 part of sl_widget_module;
 
 class SLHeaderTopContent extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
 
   @override
   Widget build(BuildContext context) {

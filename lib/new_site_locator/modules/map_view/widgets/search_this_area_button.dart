@@ -1,7 +1,7 @@
 part of map_view_module;
 
 class SearchThisAreaButton extends StatelessWidget {
-  final SiteLocatorController siteLocatorController = Get.find();
+  final SLSiteLocatorController siteLocatorController = Get.find();
 
   SearchThisAreaButton({super.key});
 
