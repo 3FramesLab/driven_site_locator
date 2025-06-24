@@ -12,7 +12,7 @@ class SiteLocatorTextFieldStyle {
   BoxDecoration _searchTextfieldIconDecoration(Color? color) => BoxDecoration(
         border: Border.all(
           color: SLColors.blackWithOpacity75,
-          width: 25,
+          width: 0.25,
         ),
         color: color,
         shape: BoxShape.circle,

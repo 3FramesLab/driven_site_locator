@@ -7,6 +7,10 @@ class SLAssets {
   static const assetPath = 'packages/driven_site_locator/assets/site_locator';
   static const assetPathComdata =
       'packages/driven_site_locator/assets/site_locator/comdata_dc';
+  static const svgAssetsPath =
+      'packages/driven_site_locator/assets/svgs/site_locator';
+  static const slBrandLogoPath =
+      'packages/driven_site_locator/assets/site_locator/brand_logos';
 
   /// Card Types.
   static const fuelmanFleetCard = '$assetPathCardTypes/fuelman_fleet_card.png';

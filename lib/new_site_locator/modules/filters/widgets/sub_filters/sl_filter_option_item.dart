@@ -67,11 +67,11 @@ class SLFilterOptionItem extends StatelessWidget {
   }
 
   Widget get _svgIcon => SvgPicture.asset(
-        'assets/svgs/site_locator/${siteFilter.icon}',
+        '${SLAssets.svgAssetsPath}/${siteFilter.icon}',
       );
 
   Widget get _pngIcon => Image.asset(
-        'assets/site_locator/brand_logos/${siteFilter.icon}',
+        '${SLAssets.slBrandLogoPath}/${siteFilter.icon}',
         height: 24,
         width: 24,
       );

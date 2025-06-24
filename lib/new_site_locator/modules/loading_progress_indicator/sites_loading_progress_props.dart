@@ -2,7 +2,7 @@ part of loading_progress_indicator_module;
 
 class SitesLoadingProgressProps {
   static const String fuelPumpIconPath =
-      'assets/site_locator/fuel_pump_icon.png';
+      'packages/driven_site_locator/assets/site_locator/fuel_pump_icon.png';
   static const String findingFuelLocationMessage = 'Finding Fueling Locations';
   static const String retrievingFuelPricesUnAuthMessage =
       'Retrieving Fuel Prices';
