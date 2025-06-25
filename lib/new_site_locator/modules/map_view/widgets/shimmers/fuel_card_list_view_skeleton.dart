@@ -1,7 +1,7 @@
 part of map_view_module;
 
-class FuelCardListViewItemSkeleton extends StatelessWidget {
-  const FuelCardListViewItemSkeleton({super.key});
+class SLFuelCardListViewItemSkeleton extends StatelessWidget {
+  const SLFuelCardListViewItemSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {

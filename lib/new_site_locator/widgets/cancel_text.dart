@@ -1,8 +1,8 @@
 part of sl_widget_module;
 
-class CancelText extends StatelessWidget {
+class SLCancelText extends StatelessWidget {
   final VoidCallback onCancelTap;
-  const CancelText({required this.onCancelTap});
+  const SLCancelText({required this.onCancelTap});
 
   @override
   Widget build(BuildContext context) {

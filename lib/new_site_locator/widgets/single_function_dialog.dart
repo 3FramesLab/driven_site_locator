@@ -33,7 +33,7 @@ class SingleFunctionDialog extends StatelessWidget {
                 text: buttonTitle,
                 height: 48,
               ),
-              CancelText(
+              SLCancelText(
                 onCancelTap: onCancelTap,
               ),
             ]),

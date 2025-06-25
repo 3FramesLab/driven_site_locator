@@ -1,7 +1,7 @@
 part of map_view_module;
 
-class AddNewCardSkeleton extends StatelessWidget {
-  const AddNewCardSkeleton({super.key});
+class SLAddNewCardSkeleton extends StatelessWidget {
+  const SLAddNewCardSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
