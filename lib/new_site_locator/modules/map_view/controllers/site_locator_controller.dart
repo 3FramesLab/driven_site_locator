@@ -2744,10 +2744,12 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
   double lastSearchedRadius = 0;
   Future<void> onFilterSelected() async {
     firstTimeLoading(true);
+    isShowLoading(true);
     try {
       await getSiteLocationsData();
     } catch (_) {}
     firstTimeLoading(false);
+    isShowLoading(false);
   }
 
   String getFormattedAcceptedCards(SiteLocation siteLocation) {
