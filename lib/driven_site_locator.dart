@@ -24,6 +24,7 @@ class DrivenSiteLocator {
   String _appLoginUserType = '';
   bool _isWelcomeScreen = false;
   bool _isCardholderFullMapScreen = false;
+  bool useDefaultHeader = true;
   // bool _isPreviousScreenLogin = false;
 
   // Wallet module's data members
@@ -32,6 +33,7 @@ class DrivenSiteLocator {
   String _accountCode = '';
   String _customerId = '';
   Widget? walletHeader;
+  Widget? fuelCardHeader;
 
   // new
   void Function()? onAddCardTap;
@@ -68,11 +70,13 @@ class DrivenSiteLocator {
     required int inactivityWarningTimeoutValue,
     required bool isInactivityWrapperEnabled,
     void Function({bool expired})? onLogout,
+    bool useDefaultHeader = true,
   }) async {
     this.inactivityLogoutTimeoutValue = inactivityLogoutTimeoutValue;
     this.inactivityWarningTimeoutValue = inactivityWarningTimeoutValue;
     this.isInactivityWrapperEnabled = isInactivityWrapperEnabled;
     this.onLogout = onLogout;
+    this.useDefaultHeader = useDefaultHeader;
   }
 
   Future<void> init({

@@ -5,6 +5,9 @@ class SLHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!DrivenSiteLocator.instance.useDefaultHeader) {
+      return DrivenSiteLocator.instance.fuelCardHeader ?? const SizedBox.shrink();
+    }
     return SLHeaderTopContent();
   }
 
