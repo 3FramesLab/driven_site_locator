@@ -80,7 +80,8 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
               currentFocus.focusedChild != null) {
             currentFocus.focusedChild?.unfocus();
           }
-          widget.siteLocatorController.resetMarkers(PinVariantStore.statusList);
+          widget.siteLocatorController
+              .resetMarkers(SLPinVariantStore.statusList);
         },
       ),
     );

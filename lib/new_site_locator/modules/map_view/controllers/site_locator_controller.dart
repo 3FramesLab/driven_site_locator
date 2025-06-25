@@ -213,7 +213,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     try {
       // ignore: parameter_assignments
       forceApiCall = true;
-      await PinVariantStore.iniDefaultLogos();
+      await SLPinVariantStore.iniDefaultLogos();
 
       await callSiteLocationSummaryFromServer(
         updateLocationCache: updateLocationCache,
@@ -660,7 +660,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> processSiteLocations(
       List<SiteLocation> siteLocationsList) async {
-    PinVariantStore.statusList = [];
+    SLPinVariantStore.statusList = [];
     lowestFuelPrice = null;
     sitesIdentifierWithLowestFuelPrice.clear();
     siteList(toSiteLocatorMap(siteLocationsList));
@@ -757,7 +757,10 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       fleetId = SLSessionManager().selectedFleetId();
     }
 
-    final cardToken = SLSessionManager().selectedCardToken;
+    String cardToken = '';
+    if (SLSessionManager().selectedCardToken.isNotNullEmptyOrWhitespace) {
+      cardToken = SLSessionManager().selectedCardToken;
+    }
 
     String? sysAccountId;
 
@@ -840,7 +843,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
           !isMapPinTapped &&
           !isClusterClick &&
           searchPlacesController.searchText.isEmpty) {
-        resetMarkers(PinVariantStore.statusList);
+        resetMarkers(SLPinVariantStore.statusList);
 
         // await applyClustering();
 
@@ -1152,7 +1155,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<bool> generateMapPinList() async {
     final brandPinVariantList = await getPinVariantStatusList();
-    PinVariantStore.statusList = brandPinVariantList;
+    SLPinVariantStore.statusList = brandPinVariantList;
     rawMarkersList =
         generateMarkerList(brandPinVariantList, SLInternalText.resetCode);
 
@@ -1289,7 +1292,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<List<MarkerDetails>> getPinVariantStatusList() async {
-    return PinVariantStore.generateStore(
+    return SLPinVariantStore.generateStore(
       siteList: siteList,
       lowestFuelPrice: lowestFuelPrice,
     );
@@ -2267,7 +2270,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       };
 
   Future<void> _onMarkerTap(SiteMapMarker mapMarker) async {
-    final markerDetails = PinVariantStore.statusList.firstWhereOrNull(
+    final markerDetails = SLPinVariantStore.statusList.firstWhereOrNull(
       (e) => e.site.id == mapMarker.site?.id,
     );
     if (markerDetails != null) {
@@ -2276,7 +2279,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   Future<void> _onClusterTap(List<SiteMapMarker> markers) async {
-    resetMarkers(PinVariantStore.statusList);
+    resetMarkers(SLPinVariantStore.statusList);
     isClusterClick = true;
     final markersLatLng = markers.map((e) => e.latLng).toList();
     final bounds = MapUtilities.getBoundsFromLatLngs(markersLatLng);
@@ -2338,7 +2341,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   BitmapDescriptor _getMarkerBitmap(SiteMapMarker mapMarker) {
-    final markerDetails = PinVariantStore.statusList.firstWhereOrNull(
+    final markerDetails = SLPinVariantStore.statusList.firstWhereOrNull(
       (e) => e.site.id == mapMarker.site?.id,
     );
     if (markerDetails != null) {
@@ -2768,7 +2771,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
   }
 
   void onRecentViewListItemClick(SiteLocation siteLocation) {
-    final markerDetail = PinVariantStore.statusList.firstWhereOrNull(
+    final markerDetail = SLPinVariantStore.statusList.firstWhereOrNull(
       (e) =>
           e.keyIdentifier == siteLocation.masterIdentifier &&
           e.site.shopName == siteLocation.locationName,
@@ -2795,5 +2798,13 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     sortListByRatings.clear();
     recentViewSiteLocations.clear();
     selectedListTabIndex = 0;
+  }
+
+  Future<void> onCardChange() async {
+    isShowLoading(true);
+    try {
+      await getSiteLocationsData();
+    } catch (_) {}
+    isShowLoading(false);
   }
 }

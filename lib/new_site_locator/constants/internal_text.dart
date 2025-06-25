@@ -160,6 +160,8 @@ class SLInternalText {
   static const locationFilePath = '/site_locator/';
   static const locationFileName = 'location_cache.txt';
 
+  static const defaultSysAccountId = '0_0000_3';
+
   static const List<CardProdType> propCardTypes = [
     CardProdType.ol,
     CardProdType.pd,

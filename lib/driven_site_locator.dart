@@ -41,6 +41,7 @@ class DrivenSiteLocator {
   int inactivityWarningTimeoutValue = 0;
   bool isInactivityWrapperEnabled = true;
   void Function({bool expired})? onLogout;
+  bool isUserAuthenticated = false;
 
   DrivenSiteLocator._internal();
   static final DrivenSiteLocator _instance = DrivenSiteLocator._internal();

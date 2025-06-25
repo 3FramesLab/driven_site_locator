@@ -31,7 +31,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
         if (!onFocus) {
           DcSiteLocatorUtils.hideKeyboard();
         }
-        siteLocatorController.resetMarkers(PinVariantStore.statusList);
+        siteLocatorController.resetMarkers(SLPinVariantStore.statusList);
       },
       child: _searchTextField(),
     );
@@ -101,7 +101,7 @@ class _SearchPlaceTextFieldState extends State<SearchPlaceTextField> {
     if (searchText.isNotEmpty) {
       if (_isSearchIcon || forceSearch) {
         await _executeSearchPlace(searchText);
-        siteLocatorController.resetMarkers(PinVariantStore.statusList);
+        siteLocatorController.resetMarkers(SLPinVariantStore.statusList);
       } else if (_isClearIcon) {
         await onClearIconTapped();
       }

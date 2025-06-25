@@ -2,7 +2,7 @@ part of site_locator_map_module;
 
 int startTime = DateTime.now().millisecondsSinceEpoch;
 
-class PinVariantStore {
+class SLPinVariantStore {
   static List<MarkerDetails> statusList = [];
 
   static Future<List<MarkerDetails>> init() async {

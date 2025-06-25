@@ -174,7 +174,8 @@ class DcSiteLocatorUtils {
   }) {
     final Map<String, dynamic> jsonData = {
       SLInternalText.siteClusterParam: 'N',
-      SLInternalText.sysAccountIdParam: sysAccountId ?? '0_0000_3',
+      SLInternalText.sysAccountIdParam:
+          sysAccountId ?? SLInternalText.defaultSysAccountId,
       SLInternalText.latitudeStartHereParam: centerLatLng.latitude.toString(),
       SLInternalText.longitudeStartHereParam: centerLatLng.longitude.toString(),
       SLInternalText.radiusParam: radius.toStringAsFixed(5),
