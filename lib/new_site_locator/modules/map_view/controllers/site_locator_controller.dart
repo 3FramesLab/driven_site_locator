@@ -2793,6 +2793,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     sortListByDistance.clear();
     sortListByPrice.clear();
     sortListByRatings.clear();
+    recentViewSiteLocations.clear();
     selectedListTabIndex = 0;
   }
 }
