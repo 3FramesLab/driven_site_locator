@@ -117,6 +117,8 @@ mixin SiteLocatorState {
   List<Marker> rawMarkersList = [];
   MarkerDetails? prevSelectedMarkerDetails;
   MarkerDetails? previousMarkerDetails;
+  SiteLocation? previousSiteLocation;
+  bool isSiteInfoPanelOpenFromList = false;
   RxList<Marker> welcomeScreenMarkers = <Marker>[].obs;
 
   final menuPanelController = PanelController();

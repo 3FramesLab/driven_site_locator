@@ -15,7 +15,6 @@ class SLGetSiteListFromSiteLocationsUseCase
       longitude: siteLocation.siteLongitude ?? 0,
       price: getPriceData(siteLocation),
       hasDiscount: getDiscountFlag(siteLocation),
-      hasGallonUp: getGallonUpFlag(siteLocation),
       brandLogoIdentifier: getBrandLogoIdentifier(siteLocation),
     );
   }

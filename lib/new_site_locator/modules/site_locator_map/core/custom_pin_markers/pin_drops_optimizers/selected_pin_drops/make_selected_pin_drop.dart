@@ -26,12 +26,6 @@ class SelectedPinDrop {
   static Future<ui.Image> makeSelectedPinDropDyeImage(Site site) async {
     final double? price = site.price;
     final shopBrandLogoIdentifier = site.brandLogoIdentifier;
-    // TODO(Smeet): May require this code going forward.
-    // final hasDiscount =
-    //     AppUtils.isComdata ? site.hasGallonUp : site.hasDiscount;
-    // final selectedPinMarkerImage = hasDiscount
-    //     ? CustomPin.selectedPinBgForDiscountPrice
-    //     : CustomPin.selectedPinBgForNormalPrice;
 
     final selectedPinMarkerImage = CustomPin.selectedPinBgForNormalPrice;
 

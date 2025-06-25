@@ -34,9 +34,15 @@ class ApplyForComdataCard extends StatelessWidget {
     //   title: SLViewText.ourFuelCards,
     //   url: DrivenConfiguration.applyCardUrl,
     // ).then((_) {
-    //   if (siteLocatorController.previousMarkerDetails != null) {
-    //     siteLocatorController
-    //         .onMarkerTap(siteLocatorController.previousMarkerDetails!);
+    //   if (siteLocatorController.isSiteInfoPanelOpenFromList) {
+    //     if (siteLocatorController.previousSiteLocation != null) {
+    //       siteDetailPopup(siteLocatorController.previousSiteLocation!);
+    //     }
+    //   } else {
+    //     if (siteLocatorController.previousMarkerDetails != null) {
+    //       siteLocatorController
+    //           .onMarkerTap(siteLocatorController.previousMarkerDetails!);
+    //     }
     //   }
     // });
   }

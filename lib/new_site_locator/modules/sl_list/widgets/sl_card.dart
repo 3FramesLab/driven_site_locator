@@ -78,6 +78,8 @@ class SLCard extends GetView<SLSiteLocatorController> {
     // controller.selectedSiteListIndex.value =
     //     controller.selectedSiteListIndex() == index ? -1 : index;
     _siteLocatorController.updateRecentViewLocations(siteLocation);
+    _siteLocatorController.previousSiteLocation = siteLocation;
+    _siteLocatorController.isSiteInfoPanelOpenFromList = true;
     siteDetailPopup(siteLocation);
   }
 

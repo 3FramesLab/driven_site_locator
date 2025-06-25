@@ -1207,6 +1207,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       _highlightSelectedMarker(item);
       prevSelectedMarkerDetails = item;
       previousMarkerDetails = item;
+      isSiteInfoPanelOpenFromList = false;
 
       if (selectedMapPinKey == SLInternalText.resetCode) {
         unawaited(closeLocationInfoPanel());
@@ -2278,36 +2279,39 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     resetMarkers(PinVariantStore.statusList);
     isClusterClick = true;
     final markersLatLng = markers.map((e) => e.latLng).toList();
-    final position = MapUtilities.getBoundsFromLatLngs(markersLatLng);
-    var zoomLevel = await googleMapController?.getZoomLevel();
-
-    if (!inFullMapViewScreen) {
-      zoomLevel = await welcomeGoogleMapController?.getZoomLevel();
-    }
-
-    final newCenterPosition = MapUtilities.latLngBoundCenter(
-      northeast: position.northeast,
-      southwest: position.southwest,
+    final bounds = MapUtilities.getBoundsFromLatLngs(markersLatLng);
+    await googleMapController?.animateCamera(
+      CameraUpdate.newLatLngBounds(bounds, 10),
     );
+    // var zoomLevel = await googleMapController?.getZoomLevel();
 
-    if (zoomLevel != null) {
-      final newZoomLevel = zoomLevel + 1.5;
-      if (inFullMapViewScreen) {
-        await googleMapController?.animateCamera(
-          CameraUpdate.newLatLngZoom(
-            newCenterPosition,
-            newZoomLevel >= 21 ? 21 : newZoomLevel,
-          ),
-        );
-      } else {
-        await welcomeGoogleMapController?.animateCamera(
-          CameraUpdate.newLatLngZoom(
-            newCenterPosition,
-            newZoomLevel >= 21 ? 21 : newZoomLevel,
-          ),
-        );
-      }
-    }
+    // if (!inFullMapViewScreen) {
+    //   zoomLevel = await welcomeGoogleMapController?.getZoomLevel();
+    // }
+
+    // final newCenterPosition = MapUtilities.latLngBoundCenter(
+    //   northeast: position.northeast,
+    //   southwest: position.southwest,
+    // );
+
+    // if (zoomLevel != null) {
+    //   final newZoomLevel = zoomLevel + 1.5;
+    //   if (inFullMapViewScreen) {
+    //     await googleMapController?.animateCamera(
+    //       CameraUpdate.newLatLngZoom(
+    //         newCenterPosition,
+    //         newZoomLevel >= 21 ? 21 : newZoomLevel,
+    //       ),
+    //     );
+    //   } else {
+    //     await welcomeGoogleMapController?.animateCamera(
+    //       CameraUpdate.newLatLngZoom(
+    //         newCenterPosition,
+    //         newZoomLevel >= 21 ? 21 : newZoomLevel,
+    //       ),
+    //     );
+    //   }
+    // }
   }
 
   Future<BitmapDescriptor> _getClusterBitmap(

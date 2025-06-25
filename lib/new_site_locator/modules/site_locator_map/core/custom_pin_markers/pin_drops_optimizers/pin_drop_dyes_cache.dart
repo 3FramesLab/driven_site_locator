@@ -15,18 +15,12 @@ class PinDropDyesCache {
     bool hasLowestFuelPrice = false,
     bool isBig = false,
   }) {
-    // hasDiscount & hasGallonUp merged to single param
-
     return PinDropDyeKey(
       slType: type,
       hasPrice: getPriceCheck(site.price),
       hasDiscount: false,
-      // brandLogo: getLogo(site.brandLogoIdentifier),
       brandLogo: site.brandLogoIdentifier ?? '',
       isService: site.isServiceStation,
-      // brandLogo: isBig
-      //     ? site.brandLogoIdentifier ?? ''
-      // : getLogo(site.brandLogoIdentifier),
       hasLowestFuelPrice: hasLowestFuelPrice,
     );
   }

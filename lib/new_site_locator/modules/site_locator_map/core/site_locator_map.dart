@@ -55,7 +55,7 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
   Widget build(BuildContext context) {
     return Obx(
       () => GoogleMap(
-        padding: const EdgeInsets.all(25),
+        // padding: const EdgeInsets.all(25),
         gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
             EagerGestureRecognizer.new,
