@@ -29,7 +29,6 @@ class SiteInfoPopupMiddleContent extends StatelessWidget {
             const SizedBox(height: 8),
           ] else
             _fuelPriceNoAvailableText,
-          _applyForComdataCard,
           _actionButtons,
           const SizedBox(height: 8),
         ],
@@ -99,8 +98,6 @@ class SiteInfoPopupMiddleContent extends StatelessWidget {
             : null,
         retailPrice: selectedSiteLocation.retailPriceCng,
       );
-
-  Widget get _applyForComdataCard => ApplyForComdataCard();
 
   bool get _displayDiscountedPrice =>
       DcSiteLocatorUtils.displayDiscountedPrice();

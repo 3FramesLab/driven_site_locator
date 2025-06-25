@@ -8,20 +8,11 @@ class ApplyForComdataCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DcSiteLocatorUtils.isGuest
-        ? GestureDetector(
-            onTap: _onTap,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  SLViewText.applyForAComdataCard,
-                  textAlign: TextAlign.left,
-                  style: f16SemiBoldPrimary.copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
+        ? Padding(
+            padding: const EdgeInsets.only(top: 24),
+            child: PrimaryButton(
+              text: SLViewText.applyForAComdataCard,
+              onPressed: _onTap,
             ),
           )
         : const SizedBox.shrink();

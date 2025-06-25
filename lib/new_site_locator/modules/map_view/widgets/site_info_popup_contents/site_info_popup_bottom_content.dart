@@ -65,6 +65,7 @@ class SiteInfoPopupBottomContent extends StatelessWidget {
         const SizedBox(height: 2),
         _amenitiesDescription(),
         _cardAcceptedView,
+        ApplyForComdataCard(),
       ],
     );
   }

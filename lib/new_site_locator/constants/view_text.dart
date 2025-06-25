@@ -67,7 +67,7 @@ class SLViewText {
       'Please note: This does not consider any custom fee arrangements between a cardholder and Comdata or a fleet and individual merchants.';
   static const best = 'Best';
   static const gallonUp = 'Gallon up';
-  static const applyForAComdataCard = 'Apply for a Comdata card';
+  static const applyForAComdataCard = 'Apply for a Comdata card now';
   static const mcQuickFilterKeysList = [
     'masterCard',
     'diesel',
@@ -105,6 +105,9 @@ class SLViewText {
   static const service = 'Service';
   static const shareYourLocation = 'Share your location';
   static const unavailable = 'Unavailable';
+  static const noTruckStopFound = 'No truck stops found';
+  static const noTruckStopFoundDesc =
+      'Please remove / adjust the filters or search on a different area.';
 
   /// API
   static const somethingWentWrong = 'Something went wrong. Please try again.';

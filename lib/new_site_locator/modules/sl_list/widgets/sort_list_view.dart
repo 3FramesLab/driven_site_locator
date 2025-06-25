@@ -34,6 +34,9 @@ class _SortListViewState extends State<SortListView> {
   Widget get _listView => Obx(
         () {
           final siteLocations = getSortedList();
+          if (siteLocations.isEmpty) {
+            return _noLocationFoundColumn;
+          }
           return ListView.builder(
             key: const Key('best_rated_list_view'),
             itemCount: siteLocations.length,
@@ -52,4 +55,24 @@ class _SortListViewState extends State<SortListView> {
       listViewSorting: widget.listViewSorting,
     );
   }
+
+  Widget get _noLocationFoundColumn => const Padding(
+        padding: EdgeInsets.only(left: 16, right: 40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              SLViewText.noTruckStopFound,
+              style: f16ExtraBoldBlack,
+              textScaler: TextScaler.linear(1),
+            ),
+            Text(
+              SLViewText.noTruckStopFoundDesc,
+              style: f14SemiBoldBlack,
+              textScaler: TextScaler.linear(1),
+            )
+          ],
+        ),
+      );
 }
