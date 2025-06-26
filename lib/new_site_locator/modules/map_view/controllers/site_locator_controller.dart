@@ -786,6 +786,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       siteSource: siteSource,
       radius: radius,
     );
+    print('debug-print: jsonData = $jsonData');
     return jsonData;
   }
 
