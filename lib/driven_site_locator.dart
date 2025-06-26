@@ -34,6 +34,8 @@ class DrivenSiteLocator {
   String _customerId = '';
   Widget? walletHeader;
   Widget? fuelCardHeader;
+  Widget? unAuthenticatedMenu;
+
 
   // new
   void Function()? onAddCardTap;
