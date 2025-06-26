@@ -6,9 +6,16 @@ class SLHeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!DrivenSiteLocator.instance.useDefaultHeader) {
-      return DrivenSiteLocator.instance.fuelCardHeader ?? const SizedBox.shrink();
+      return getHeaderWidget();
     }
     return SLHeaderTopContent();
+  }
+
+  Widget getHeaderWidget() {
+    if (DrivenSiteLocator.instance.isUserAuthenticated) {
+      return DrivenSiteLocator.instance.walletHeader ?? const SizedBox.shrink();
+    }
+    return DrivenSiteLocator.instance.fuelCardHeader ?? const SizedBox.shrink();
   }
 
   /// archive

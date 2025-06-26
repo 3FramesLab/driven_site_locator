@@ -84,6 +84,7 @@ class SLInactivityController extends FullLifeCycleController
       Routes.amazonWelcome,
       Routes.amazonWallet,
       Routes.removeAmazonCard,
+      SLRoutes.unauthSiteLocator,
     ];
     return excludedRoutes.contains(Get.currentRoute);
   }
