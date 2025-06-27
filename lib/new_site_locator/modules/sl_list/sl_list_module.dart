@@ -2,6 +2,7 @@ library sl_list_module;
 
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/driven_site_locator.dart';
 import 'package:driven_site_locator/new_site_locator/new_site_locator_module.dart';
 import 'package:get/get.dart';
 

@@ -36,7 +36,6 @@ class DrivenSiteLocator {
   Widget? fuelCardHeader;
   Widget? unAuthenticatedMenu;
 
-
   // new
   void Function()? onAddCardTap;
   int inactivityLogoutTimeoutValue = 0;
@@ -74,12 +73,16 @@ class DrivenSiteLocator {
     required bool isInactivityWrapperEnabled,
     void Function({bool expired})? onLogout,
     bool useDefaultHeader = true,
+    Widget? walletHeader,
+    Widget? fuelCardHeader,
   }) async {
     this.inactivityLogoutTimeoutValue = inactivityLogoutTimeoutValue;
     this.inactivityWarningTimeoutValue = inactivityWarningTimeoutValue;
     this.isInactivityWrapperEnabled = isInactivityWrapperEnabled;
     this.onLogout = onLogout;
     this.useDefaultHeader = useDefaultHeader;
+    this.walletHeader = walletHeader;
+    this.fuelCardHeader = fuelCardHeader;
   }
 
   Future<void> init({

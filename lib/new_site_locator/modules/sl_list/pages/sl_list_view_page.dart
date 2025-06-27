@@ -28,15 +28,23 @@ class SLListViewPage extends StatelessWidget {
             siteLocatorController.listViewPanelController.close();
           },
         ),
-        title: Align(
-          alignment: _appBarTitleAlignment,
-          child: SLHeader(
-            padding: const EdgeInsets.only(right: 6),
-            fleetChangeCallback: _fleetChangeCallback,
-          ),
-        ),
+        title: _title,
         actions: [if (DcSiteLocatorUtils.isGuest) AddCard()],
       );
+
+  Widget? get _title {
+    if (DrivenSiteLocator.instance.useDefaultHeader) {
+      return Align(
+        alignment: _appBarTitleAlignment,
+        child: SLHeader(
+          padding: const EdgeInsets.only(right: 6),
+          fleetChangeCallback: _fleetChangeCallback,
+        ),
+      );
+    } else {
+      return null;
+    }
+  }
 
   AlignmentGeometry get _appBarTitleAlignment {
     return DcSiteLocatorUtils.isGuest

@@ -31,7 +31,7 @@ class CustomPin {
     fontWeight: FontWeight.bold,
   );
 
-  static final pindropImagePathUseCase = Get.put(PindropImagePathUseCase());
+  static final pindropImagePathUseCase = Get.put(SLPindropImagePathUseCase());
   static SLSiteLocatorAccessTokenService siteLocatorAccessTokenService =
       Get.put(SLSiteLocatorAccessTokenService());
 

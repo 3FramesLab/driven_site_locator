@@ -1,8 +1,8 @@
 part of site_locator_map_module;
 
-class PindropImagePathUseCase
+class SLPindropImagePathUseCase
     extends BaseUseCase<String, PindropImagePathUseCaseParam> {
-  PindropImagePathUseCase();
+  SLPindropImagePathUseCase();
 
   @override
   String execute(PindropImagePathUseCaseParam param) {
