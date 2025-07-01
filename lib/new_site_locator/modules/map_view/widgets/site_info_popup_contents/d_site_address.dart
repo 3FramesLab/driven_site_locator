@@ -17,20 +17,8 @@ class SiteAddress extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8),
       child: DrivenTooltip(
         controller: _superTooltipController,
-        tooltipContent: GestureDetector(
-          onTap: () {
-            siteAddressController.onAddressToolTipClick(
-              _superTooltipController,
-              siteLocation,
-            );
-          },
-          child: Obx(
-            () => Text(
-              siteAddressController.toolTipText(),
-              style: f14RegularWhite,
-            ),
-          ),
-        ),
+        onShow: _onShowTooltip,
+        tooltipContent: _tooltipContent,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,6 +28,28 @@ class SiteAddress extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _onShowTooltip() {
+    siteAddressController.cancelDelay();
+    siteAddressController.resetTooltipText();
+  }
+
+  Widget get _tooltipContent => GestureDetector(
+        onTap: _onTooltipTap,
+        child: Obx(
+          () => Text(
+            siteAddressController.toolTipText(),
+            style: f14RegularWhite,
+          ),
+        ),
+      );
+
+  void _onTooltipTap() {
+    siteAddressController.onAddressToolTipClick(
+      _superTooltipController,
+      siteLocation,
     );
   }
 
