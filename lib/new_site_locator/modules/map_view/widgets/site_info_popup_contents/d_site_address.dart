@@ -3,6 +3,8 @@ part of map_view_module;
 class SiteAddress extends StatelessWidget {
   final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation siteLocation;
+  final siteAddressController = Get.find<SiteAddressController>();
+  final _superTooltipController = DrivenSuperTooltipController();
 
   SiteAddress({
     required this.siteLocation,
@@ -13,13 +15,30 @@ class SiteAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _icon,
-          const SizedBox(width: 4),
-          _addressText,
-        ],
+      child: DrivenTooltip(
+        controller: _superTooltipController,
+        tooltipContent: GestureDetector(
+          onTap: () {
+            siteAddressController.onAddressToolTipClick(
+              _superTooltipController,
+              siteLocation,
+            );
+          },
+          child: Obx(
+            () => Text(
+              siteAddressController.toolTipText(),
+              style: f14RegularWhite,
+            ),
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _icon,
+            const SizedBox(width: 4),
+            _addressText,
+          ],
+        ),
       ),
     );
   }

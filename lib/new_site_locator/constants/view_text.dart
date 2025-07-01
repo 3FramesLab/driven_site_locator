@@ -111,4 +111,7 @@ class SLViewText {
 
   /// API
   static const somethingWentWrong = 'Something went wrong. Please try again.';
+
+  static const copyAddress = 'Copy address';
+  static const copied = 'Copied!';
 }

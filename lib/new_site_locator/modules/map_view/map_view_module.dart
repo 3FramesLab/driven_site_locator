@@ -36,6 +36,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel2/sliding_up_panel2.dart';
 
 part 'controllers/site_locator_controller.dart';
+part 'controllers/site_address_controller.dart';
 part 'models/card_type_mapping.dart';
 part 'models/enum_values.dart';
 part 'models/fuel_prices.dart';
