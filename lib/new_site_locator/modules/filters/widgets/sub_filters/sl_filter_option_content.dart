@@ -18,7 +18,7 @@ class SLFilterOptionContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              PanelHandle(),
+              const PanelHandle(),
               _titleRow,
               _listView,
               _actionButtons,

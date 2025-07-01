@@ -48,6 +48,7 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
       siteLocatorController.isFullMapViewFirstLaunch = true;
       siteLocatorController.isUnauthSLChannel(true);
       siteLocatorController.markers.clear();
+      await siteLocatorController.showSLHelpSheet();
 
       await siteLocatorController.updateCurrentMapZoomLevel(
           mapController: siteLocatorController.googleMapController);
@@ -122,6 +123,7 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
                   _filtersAndLoader,
                   // SearchThisAreaButtonWithLoader(),
                   _mapActionButtons,
+                  _helpButton,
                 ],
               ),
             ),
@@ -146,6 +148,12 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
 
   Widget get _mapActionButtons => MapActionButtons(
         onGpsIconTap: siteLocatorController.onRecenterButtonTap,
+      );
+
+  Widget get _helpButton => Positioned(
+        left: 6,
+        bottom: 10,
+        child: SLHelpButton(),
       );
 
   Widget _siteLocatorMapUI() => SiteLocatorMapUI(

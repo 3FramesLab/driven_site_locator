@@ -114,4 +114,8 @@ class SLViewText {
 
   static const copyAddress = 'Copy address';
   static const copied = 'Copied!';
+  static const getReadyToStartSavingNow = 'Get ready to start saving now!';
+  static const easierToFilterDesc = 'Easier to filter and find what you need.';
+  static const lookingForLowestPriceDesc =
+      'Looking for the lowest fuel prices?\nFind the yellow PINs!';
 }

@@ -555,6 +555,15 @@ class DcSiteLocatorUtils {
     }
   }
 
+  static Future<void> showSLHelpSheet() async {
+    final filterHeaders =
+        UmaSLProperties.filters.map((e) => e.quickFilterLabel).toList();
+    await Get.bottomSheet(
+      SLHelpContent(filterHeaders: filterHeaders),
+      isScrollControlled: true,
+    );
+  }
+
   // static bool get isGuest => AppUtils.isGuest;
 
   // static bool get isCardholder => AppUtils.isCardHolder;

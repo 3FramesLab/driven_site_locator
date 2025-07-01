@@ -58,4 +58,7 @@ class SLAssets {
       '$assetPathComdata/lowest-price-pin-drop.png';
   static const selectedWithLogoPinFilePathDFC =
       '$assetPathComdata/selected-with-logo-pin-drop.png';
+
+  static const lowestPriceCluster = '$svgAssetsPath/lowest_price_cluster.svg';
+  static const lowestPricePin = '$svgAssetsPath/lowest_price_pin.svg';
 }
