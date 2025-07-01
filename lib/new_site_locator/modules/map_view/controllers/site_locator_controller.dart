@@ -328,6 +328,10 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       });
     }
 
+    if (UmaSLProperties.adjustDuplicateLatLng) {
+      adjustDuplicateLatLngUseCase.execute(siteLocations);
+    }
+
     if (DcSiteLocatorUtils.isGuest) {
       DcSiteLocatorUtils.setNewDiscountedDieselPrice(siteLocations ?? []);
     }
@@ -786,7 +790,6 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       siteSource: siteSource,
       radius: radius,
     );
-    print('debug-print: jsonData = $jsonData');
     return jsonData;
   }
 
@@ -2238,7 +2241,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       _updateMarkers,
       markerBuilder: _markerBuilder,
       // levels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
-      // stopClusteringZoom: 17.0,
+      stopClusteringZoom: UmaSLProperties.stopClusterAtZoomLevel,
       clusterAlgorithm: UmaSLProperties.clusterAlgorithm,
     );
     await clusterManager?.setMapId(googleMapController!.mapId);

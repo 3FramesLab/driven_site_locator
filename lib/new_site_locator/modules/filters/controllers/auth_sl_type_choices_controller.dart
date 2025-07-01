@@ -22,12 +22,15 @@ class AuthSLTypeChoicesController extends GetxController {
   List<NewSiteFilter> selectedFiltersAllFilters = [];
   bool isGallonUpFilterSelected = false;
   final List<String> visibleBrandFilterKeys = [];
+  String selectedFilterPanelKey = '';
 
   final searchBrandEditingController = TextEditingController();
   final equality = const DeepCollectionEquality();
 
   final viewMoreFilterClickUseCase = ViewMoreFilterClickUseCase();
   final filterOptionClickUseCase = FilterOptionClickUseCase();
+
+  PersistentBottomSheetController? filterBottomSheetController;
 
   SiteFilter selectAllBrandsFilter = SiteFilter(
     key: SLInternalText.selectAllBrandsKey,
@@ -470,6 +473,12 @@ class AuthSLTypeChoicesController extends GetxController {
           .toList();
       list.removeWhere((e) => e == SLInternalText.viewMoreKey);
       visibleBrandFilterKeys.assignAll(list);
+    }
+  }
+
+  void closeFilterPanel() {
+    if (filterBottomSheetController != null) {
+      filterBottomSheetController?.close();
     }
   }
 }

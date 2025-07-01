@@ -164,11 +164,9 @@ packages:
   driven_common_sl_pkg:
     dependency: transitive
     description:
-      path: "."
-      ref: driven-common-sl-pkg
-      resolved-ref: "657e0b5bfb20e8c92630dd23a42bffc9b3f2cd12"
-      url: "https://git.fleetcor.com/ucx/flutter/super-app"
-    source: git
+      path: "/Users/smeet/Smeet/Fleetcor/FlutterProjects/driven-common/super-app"
+      relative: false
+    source: path
     version: "0.0.5"
   driven_site_locator:
     dependency: "direct main"
@@ -949,6 +947,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  super_tooltip:
+    dependency: transitive
+    description:
+      name: super_tooltip
+      sha256: "55c0764554c961846d489503b76a1fc33ec2120bd7407266b77a34abbf3ed471"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.9"
   term_glyph:
     dependency: transitive
     description:
@@ -1118,5 +1124,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.5.0 <4.0.0"
+  dart: ">=3.5.4 <4.0.0"
   flutter: ">=3.24.0"

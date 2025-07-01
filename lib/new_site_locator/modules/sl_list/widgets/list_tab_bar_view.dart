@@ -145,7 +145,9 @@ class _ListTabBarViewState extends State<ListTabBarView>
         ));
       }
       if (entitlementRepository.isRecentTabEnabled) {
-        tabViews.add(RecentSiteListView());
+        tabViews.add(RecentSiteListView(
+          scrollController: widget.scrollController,
+        ));
       }
     } catch (_) {}
     return tabViews;

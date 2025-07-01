@@ -48,18 +48,32 @@ class SiteInfoPanelHeader extends StatelessWidget {
       );
 
   Widget get _brandNameText => Text(
-        SiteInfoUtils.displayFuelBrandName(siteLocation),
+        _brandName,
         style: f18ExtraBoldBlack,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
 
-  Widget get _siteNameText => Text(
+  String get _brandName {
+    if (SiteInfoUtils.isUnbrandedStoreName(siteLocation)) {
+      return SiteInfoUtils.getLocationName(siteLocation);
+    } else {
+      return SiteInfoUtils.displayFuelBrandName(siteLocation);
+    }
+  }
+
+  Widget get _siteNameText {
+    if (SiteInfoUtils.isUnbrandedStoreName(siteLocation)) {
+      return const SizedBox.shrink();
+    } else {
+      return Text(
         SiteInfoUtils.getLocationName(siteLocation),
         style: f14SemiBoldBlack,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
+    }
+  }
 
   Widget _cancelButton(context) {
     return InkWell(

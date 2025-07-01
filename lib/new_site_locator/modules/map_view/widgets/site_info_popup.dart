@@ -2,6 +2,7 @@ part of map_view_module;
 
 void siteDetailPopup(
   SiteLocation selectedSiteLocation, {
+  bool showPrice = true,
   Color barrierColor = const Color(0x80000000),
 }) {
   final siteLocatorController = Get.find<SLSiteLocatorController>();
@@ -30,7 +31,10 @@ void siteDetailPopup(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SiteInfoPopupTopContent(selectedSiteLocation, milesData),
-                  SiteInfoPopupMiddleContent(selectedSiteLocation),
+                  SiteInfoPopupMiddleContent(
+                    selectedSiteLocation,
+                    showPrice: showPrice,
+                  ),
                   SiteInfoPopupBottomContent(selectedSiteLocation),
                 ],
               ),

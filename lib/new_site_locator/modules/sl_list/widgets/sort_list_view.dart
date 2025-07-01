@@ -43,7 +43,10 @@ class _SortListViewState extends State<SortListView> {
             controller: widget.scrollController,
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
-              return SLCard(siteLocations[index], index);
+              return SLCard(
+                siteLocation: siteLocations[index],
+                index: index,
+              );
             },
           );
         },

@@ -54,6 +54,7 @@ class DcSiteLocatorUtils {
       final authSLTypeChoicesController =
           Get.find<AuthSLTypeChoicesController>();
       authSLTypeChoicesController.resetFilters();
+      authSLTypeChoicesController.closeFilterPanel();
 
       final siteLocatorController = Get.find<SLSiteLocatorController>();
       siteLocatorController.resetData();

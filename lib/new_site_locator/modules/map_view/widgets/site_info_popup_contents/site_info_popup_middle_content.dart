@@ -3,9 +3,14 @@ part of map_view_module;
 class SiteInfoPopupMiddleContent extends StatelessWidget {
   final SLSiteLocatorController siteLocatorController = Get.find();
   final SiteLocation selectedSiteLocation;
+  final bool showPrice;
   final filterController = Get.find<AuthSLTypeChoicesController>();
 
-  SiteInfoPopupMiddleContent(this.selectedSiteLocation);
+  SiteInfoPopupMiddleContent(
+    this.selectedSiteLocation, {
+    this.showPrice = true,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +29,21 @@ class SiteInfoPopupMiddleContent extends StatelessWidget {
       child: Column(
         children: [
           if (getIsServiceStation()) _serviceStationText,
-          if (_isAnyPriceAvailable) ...[
-            ..._fuelPricePack(),
-            const SizedBox(height: 8),
-          ] else
-            _fuelPriceNoAvailableText,
+          if (showPrice) ..._fuelPrice else const SizedBox(height: 8),
           _actionButtons,
           const SizedBox(height: 8),
         ],
       ),
     );
   }
+
+  List<Widget> get _fuelPrice => _isAnyPriceAvailable
+      ? [
+          if (!getIsServiceStation()) const SizedBox(height: 8),
+          ..._fuelPricePack(),
+          const SizedBox(height: 8),
+        ]
+      : [_fuelPriceNoAvailableText];
 
   List<Widget> _fuelPricePack() {
     final displayFuelPrice = UmaSLProperties.displayFuelPrice;

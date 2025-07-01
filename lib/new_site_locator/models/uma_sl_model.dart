@@ -18,6 +18,9 @@ class UmaSLModel {
   dynamic displayFuelPrice;
   dynamic clusterAlgorithm;
   dynamic autoSearchSiteIntervalInMs;
+  dynamic unbrandedStoreNames;
+  dynamic stopClusterAtZoomLevel;
+  dynamic adjustDuplicateLatLng;
 
   UmaSLModel({
     this.filters,
@@ -39,6 +42,9 @@ class UmaSLModel {
     this.displayFuelPrice,
     this.clusterAlgorithm,
     this.autoSearchSiteIntervalInMs,
+    this.unbrandedStoreNames,
+    this.stopClusterAtZoomLevel,
+    this.adjustDuplicateLatLng,
   });
 
   factory UmaSLModel.fromJson(Map<String, dynamic> json) {
@@ -62,6 +68,9 @@ class UmaSLModel {
       displayFuelPrice: json['displayFuelPrice'],
       clusterAlgorithm: json['clusterAlgorithm'],
       autoSearchSiteIntervalInMs: json['autoSearchSiteIntervalInMs'],
+      unbrandedStoreNames: json['unbrandedStoreNames'],
+      stopClusterAtZoomLevel: json['stopClusterAtZoomLevel'],
+      adjustDuplicateLatLng: json['adjustDuplicateLatLng'],
     );
   }
 }
