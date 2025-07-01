@@ -1,9 +1,13 @@
 part of sl_list_module;
 
 class RecentListView extends StatelessWidget {
+  final ScrollController? scrollController;
   final siteLocatorController = Get.find<SLSiteLocatorController>();
 
-  RecentListView({super.key});
+  RecentListView({
+    this.scrollController,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +15,12 @@ class RecentListView extends StatelessWidget {
       () => ListView.builder(
         itemCount: siteLocatorController.recentViewSiteLocations.length,
         padding: EdgeInsets.zero,
+        controller: scrollController,
         itemBuilder: (context, index) {
-          return RecentListItem(
+          return SLCard(
             siteLocation: siteLocatorController.recentViewSiteLocations[index],
             index: index,
+            showPrice: false,
           );
         },
       ),

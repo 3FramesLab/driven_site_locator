@@ -9,6 +9,7 @@ class SiteLocatorMap extends StatefulWidget {
   final Function(CameraPosition)? onCameraMove;
   final Function()? onCameraIdle;
   final SLSiteLocatorController siteLocatorController = Get.find();
+  final AuthSLTypeChoicesController filterController = Get.find();
   final bool isFixedCircleRadiusVisible;
   final bool isMovingCircleRadiusVisible;
   final Color fixedCircleRadiusColor;
@@ -75,6 +76,7 @@ class SiteLocatorMapState extends State<SiteLocatorMap> {
         onCameraIdle: widget.onCameraIdle,
         onTap: (point) {
           FocusScope.of(context).requestFocus(FocusNode());
+          widget.filterController.closeFilterPanel();
           final FocusScopeNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus &&
               currentFocus.focusedChild != null) {

@@ -19,6 +19,10 @@ class SiteInfoUtils {
           siteLocation.fuelBrand?.toLowerCase() !=
               SLInternalText.unbranded.toLowerCase());
 
+  static bool isUnbrandedStoreName(SiteLocation siteLocation) =>
+      UmaSLProperties.unbrandedStoreNames
+          .contains(displayFuelBrandName(siteLocation));
+
   static String displayFuelBrandName(SiteLocation siteLocation) =>
       getDisplayFuelBrand(siteLocation);
 

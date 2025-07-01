@@ -9,7 +9,7 @@ class CardTypeListBottomSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PanelHandle(),
+          const PanelHandle(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(

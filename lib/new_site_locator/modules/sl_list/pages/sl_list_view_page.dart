@@ -29,7 +29,7 @@ class SLListViewPage extends StatelessWidget {
           },
         ),
         title: _title,
-        actions: [if (DcSiteLocatorUtils.isGuest) AddCard()],
+        actions: [if (DcSiteLocatorUtils.isGuest) const AddCard()],
       );
 
   Widget? get _title {

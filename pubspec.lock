@@ -275,7 +275,7 @@ packages:
     description:
       path: "."
       ref: driven-common-sl-pkg
-      resolved-ref: d624378f00362db20ba581da7686ae7de943e76e
+      resolved-ref: "245f809e3fb6f94f641f422de1c605a308563b89"
       url: "https://git.fleetcor.com/ucx/flutter/super-app"
     source: git
     version: "0.0.5"
@@ -1211,6 +1211,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  super_tooltip:
+    dependency: transitive
+    description:
+      name: super_tooltip
+      sha256: "55c0764554c961846d489503b76a1fc33ec2120bd7407266b77a34abbf3ed471"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.9"
   term_glyph:
     dependency: transitive
     description:

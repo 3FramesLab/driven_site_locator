@@ -6,8 +6,13 @@ class SLCard extends GetView<SLSiteLocatorController> {
 
   final SiteLocation siteLocation;
   final int index;
+  final bool showPrice;
 
-  SLCard(this.siteLocation, this.index);
+  SLCard({
+    required this.siteLocation,
+    required this.index,
+    this.showPrice = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +50,10 @@ class SLCard extends GetView<SLSiteLocatorController> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 3),
-                  SLCardFuelPriceFork(siteLocation),
+                  if (showPrice) ...[
+                    const SizedBox(width: 3),
+                    SLCardFuelPriceFork(siteLocation),
+                  ]
                 ],
               ),
             ),
@@ -59,18 +66,32 @@ class SLCard extends GetView<SLSiteLocatorController> {
   }
 
   Widget get _brandNameText => Text(
-        SiteInfoUtils.displayFuelBrandName(siteLocation),
+        _brandName,
         style: f16ExtraBoldBlack,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
 
-  Widget get _siteNameText => Text(
+  String get _brandName {
+    if (SiteInfoUtils.isUnbrandedStoreName(siteLocation)) {
+      return SiteInfoUtils.getLocationName(siteLocation);
+    } else {
+      return SiteInfoUtils.displayFuelBrandName(siteLocation);
+    }
+  }
+
+  Widget get _siteNameText {
+    if (SiteInfoUtils.isUnbrandedStoreName(siteLocation)) {
+      return const SizedBox.shrink();
+    } else {
+      return Text(
         SiteInfoUtils.getLocationName(siteLocation),
         style: f14SemiBoldBlack,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
+    }
+  }
 
   void onListItemTap() {
     /// Uncomment below lines if we want expand and collapse the addition
@@ -80,7 +101,7 @@ class SLCard extends GetView<SLSiteLocatorController> {
     _siteLocatorController.updateRecentViewLocations(siteLocation);
     _siteLocatorController.previousSiteLocation = siteLocation;
     _siteLocatorController.isSiteInfoPanelOpenFromList = true;
-    siteDetailPopup(siteLocation);
+    siteDetailPopup(siteLocation, showPrice: showPrice);
   }
 
   Widget get _footer => Obx(() {

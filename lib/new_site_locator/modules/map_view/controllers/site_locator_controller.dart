@@ -328,6 +328,10 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       });
     }
 
+    if (UmaSLProperties.adjustDuplicateLatLng) {
+      adjustDuplicateLatLngUseCase.execute(siteLocations);
+    }
+
     if (DcSiteLocatorUtils.isGuest) {
       DcSiteLocatorUtils.setNewDiscountedDieselPrice(siteLocations ?? []);
     }
@@ -786,7 +790,6 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       siteSource: siteSource,
       radius: radius,
     );
-    print('debug-print: jsonData = $jsonData');
     return jsonData;
   }
 
@@ -894,7 +897,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
 
   Future<void> updateFullMapViewSitesData({bool forceApiCall = false}) async {
     try {
-      bool canMakeApiCall = forceApiCall;
+      final canMakeApiCall = forceApiCall;
       // if (SLSessionManager().isUserAuthenticated &&
       //     AppUtils.isCardHolderLogin &&
       //     Get.find<WalletController>().walletService.isSelectedCardChanged) {
@@ -1816,24 +1819,6 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     await getSiteLocationsData();
   }
 
-  /// This default handler will take care of only closing the view.
-  void onPanelSlideEventHandler(double pos) {
-    if (_isPanelOpenedToFullView(pos)) {
-      _setFullViewStatus();
-    }
-    if (_isPanelDraggedDownToClose(pos)) {
-      _setClosedStatus();
-    } else {
-      if (_isPanelClosed(pos)) {
-        setFloatingButtonsVisibility(buttonsVisibility: true);
-      } else {
-        if (gpsIconButtonVisible() && searchIconButtonVisible()) {
-          setFloatingButtonsVisibility(buttonsVisibility: false);
-        }
-      }
-    }
-  }
-
   bool _isPanelOpenedToFullView(double pos) =>
       mapViewSiteInfoPanelController.isAttached &&
       (mapViewSiteInfoPanelController.isPanelOpen ||
@@ -1849,11 +1834,6 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     showFullViewExtraData(true);
   }
 
-  bool _isPanelDraggedDownToClose(double pos) =>
-      isSiteInfoFullViewed() && pos < 0.45;
-
-  bool _isPanelClosed(double pos) => !showOpacity.value && pos == 0.0;
-
   void _setClosedStatus() {
     showOpacity(false);
     showFullViewExtraData(false);
@@ -1864,6 +1844,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     if (buttonsVisibility != null) {
       gpsIconButtonVisible(buttonsVisibility);
       searchIconButtonVisible(buttonsVisibility);
+      helpButtonVisible(buttonsVisibility);
       canShowFloatingMapButtons(buttonsVisibility);
       isShowSearchThisArea(buttonsVisibility);
     }
@@ -2022,6 +2003,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
     try {
       // isShowLoading(true);
 
+      await showSLHelpSheet();
       await checkAndRequestLocationPermission();
       await _getUserLocation();
       await calcLatLngBoundsAndZoomLevels(mapController: mapController);
@@ -2238,7 +2220,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       _updateMarkers,
       markerBuilder: _markerBuilder,
       // levels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
-      // stopClusteringZoom: 17.0,
+      stopClusteringZoom: UmaSLProperties.stopClusterAtZoomLevel,
       clusterAlgorithm: UmaSLProperties.clusterAlgorithm,
     );
     await clusterManager?.setMapId(googleMapController!.mapId);
@@ -2787,6 +2769,19 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       onMarkerTap(markerDetail);
     } else {
       // TODO(Smeet): Handle the case where the marker detail is not found.
+    }
+  }
+
+  Future<void> showSLHelpSheet() async {
+    final result =
+        Globals().sharedPreferences.getBool(SLInternalText.isFirstTimeSLKey) ??
+            true;
+
+    if (result) {
+      await Globals()
+          .sharedPreferences
+          .setBool(SLInternalText.isFirstTimeSLKey, false);
+      await DcSiteLocatorUtils.showSLHelpSheet();
     }
   }
 

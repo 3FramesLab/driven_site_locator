@@ -31,6 +31,9 @@ class UmaSLProperties {
 
   static final _getMapZoomLevelUseCase = SLGetMapZoomLevelUseCase();
   static ClusterAlgorithm clusterAlgorithm = ClusterAlgorithm.maxDist;
+  static List<String> unbrandedStoreNames = [];
+  static double? stopClusterAtZoomLevel;
+  static bool adjustDuplicateLatLng = false;
 
   static Future<void> init({Map<String, dynamic>? configJsonData}) async {
     try {
@@ -55,6 +58,9 @@ class UmaSLProperties {
       _setAutoSearchSiteIntervalInMs();
       _getMapRadius();
       _setClusterAlgorithm();
+      _setUnbrandedStoreNames();
+      _setStopClusterAtZoomLevel();
+      _setAdjustDuplicateLatLng();
       await CustomPin.initEvents();
     } catch (e) {
       Globals().dynatrace.logError(
@@ -397,6 +403,61 @@ class UmaSLProperties {
       }
     } catch (e) {
       clusterAlgorithm = ClusterAlgorithm.maxDist;
+      Globals().dynatrace.logError(
+            name: 'error in fetching cluster algorithm',
+            value: e.toString(),
+            reason: e.toString(),
+          );
+    }
+  }
+
+  static void _setUnbrandedStoreNames() {
+    try {
+      if (configProperties?.unbrandedStoreNames != null) {
+        unbrandedStoreNames =
+            (configProperties?.unbrandedStoreNames as List<dynamic>)
+                .toStringList()
+                .map((e) => e.toUpperCase())
+                .toList();
+      }
+    } catch (e) {
+      unbrandedStoreNames = [];
+      Globals().dynatrace.logError(
+            name: 'error in fetching cluster algorithm',
+            value: e.toString(),
+            reason: e.toString(),
+          );
+    }
+  }
+
+  static void _setStopClusterAtZoomLevel() {
+    try {
+      if (configProperties?.stopClusterAtZoomLevel != null &&
+          configProperties?.stopClusterAtZoomLevel[AppUtils.flavor] != null) {
+        final stopClusterAtZoomLevelStr = configProperties
+            ?.stopClusterAtZoomLevel[AppUtils.flavor]
+            .toString();
+        stopClusterAtZoomLevel =
+            double.tryParse(stopClusterAtZoomLevelStr ?? '');
+      }
+    } catch (e) {
+      Globals().dynatrace.logError(
+            name: 'error in fetching cluster algorithm',
+            value: e.toString(),
+            reason: e.toString(),
+          );
+    }
+  }
+
+  static void _setAdjustDuplicateLatLng() {
+    try {
+      if (configProperties?.adjustDuplicateLatLng != null &&
+          configProperties?.adjustDuplicateLatLng[AppUtils.flavor] != null) {
+        adjustDuplicateLatLng =
+            configProperties?.adjustDuplicateLatLng[AppUtils.flavor] ?? false;
+      }
+    } catch (e) {
+      adjustDuplicateLatLng = false;
       Globals().dynatrace.logError(
             name: 'error in fetching cluster algorithm',
             value: e.toString(),

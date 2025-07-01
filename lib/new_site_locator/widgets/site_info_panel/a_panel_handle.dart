@@ -1,6 +1,13 @@
 part of sl_widget_module;
 
 class PanelHandle extends StatelessWidget {
+  final Color? color;
+
+  const PanelHandle({
+    this.color,
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,7 +19,7 @@ class PanelHandle extends StatelessWidget {
             width: 33,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey[500],
+              color: color ?? Colors.grey[500],
               borderRadius: const BorderRadius.all(Radius.circular(12)),
             ),
           ),

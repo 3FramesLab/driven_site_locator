@@ -54,6 +54,7 @@ class DcSiteLocatorUtils {
       final authSLTypeChoicesController =
           Get.find<AuthSLTypeChoicesController>();
       authSLTypeChoicesController.resetFilters();
+      authSLTypeChoicesController.closeFilterPanel();
 
       final siteLocatorController = Get.find<SLSiteLocatorController>();
       siteLocatorController.resetData();
@@ -552,6 +553,15 @@ class DcSiteLocatorUtils {
       case ListViewSorting.recent:
         return siteLocatorController.recentViewSiteLocations();
     }
+  }
+
+  static Future<void> showSLHelpSheet() async {
+    final filterHeaders =
+        UmaSLProperties.filters.map((e) => e.quickFilterLabel).toList();
+    await Get.bottomSheet(
+      SLHelpContent(filterHeaders: filterHeaders),
+      isScrollControlled: true,
+    );
   }
 
   // static bool get isGuest => AppUtils.isGuest;

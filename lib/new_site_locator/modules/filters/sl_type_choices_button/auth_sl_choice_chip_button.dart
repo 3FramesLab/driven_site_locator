@@ -55,19 +55,47 @@ class AuthSLChoiceChipButton extends StatelessWidget {
     authSLTypeChoiceController.selectedFilterHeader('');
   }
 
-  Future<void> showFilterOptionBottomSheet(
-      BuildContext context, Filter filter) async {
-    await showModalBottomSheet(
-        barrierColor: Colors.transparent,
+  void showFilterOptionBottomSheet(
+    BuildContext context,
+    Filter filter,
+  ) {
+    if (authSLTypeChoiceController.selectedFilterPanelKey.contains(item.key) &&
+        authSLTypeChoiceController.filterBottomSheetController != null) {
+      authSLTypeChoiceController.filterBottomSheetController?.close();
+      return;
+    }
+
+    authSLTypeChoiceController.filterBottomSheetController = showBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
-        isScrollControlled: true,
         builder: (context) {
-          return SLFilterOptionContent(
-            filter: filter,
-          );
+          return SLFilterOptionContent(filter: filter);
         });
 
-    authSLTypeChoiceController.selectedFilterHeader('');
+    authSLTypeChoiceController.selectedFilterPanelKey = filter.key;
+
+    authSLTypeChoiceController.filterBottomSheetController?.closed.then((_) {
+      authSLTypeChoiceController.selectedFilterHeader('');
+      authSLTypeChoiceController.filterBottomSheetController = null;
+    });
   }
+
+  ///
+  /// Archive method for future use.
+  ///
+  // Future<void> showFilterOptionBottomSheet(
+  //     BuildContext context, Filter filter) async {
+  //   await showModalBottomSheet(
+  //       barrierColor: Colors.transparent,
+  //       backgroundColor: Colors.transparent,
+  //       context: context,
+  //       isScrollControlled: true,
+  //       builder: (context) {
+  //         return SLFilterOptionContent(
+  //           filter: filter,
+  //         );
+  //       });
+
+  //   authSLTypeChoiceController.selectedFilterHeader('');
+  // }
 }

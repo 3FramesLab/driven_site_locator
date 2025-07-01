@@ -162,6 +162,10 @@ class SLInternalText {
 
   static const defaultSysAccountId = '0_0000_3';
 
+  static const merchants = 'Merchants';
+  static const fuel = 'Fuel';
+  static const isFirstTimeSLKey = 'is_first_time_sl';
+
   static const List<CardProdType> propCardTypes = [
     CardProdType.ol,
     CardProdType.pd,
