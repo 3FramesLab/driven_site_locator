@@ -123,7 +123,7 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
                   _filtersAndLoader,
                   // SearchThisAreaButtonWithLoader(),
                   _mapActionButtons,
-                  _helpButton,
+                  _helpAndMenuButton,
                 ],
               ),
             ),
@@ -150,11 +150,7 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
         onGpsIconTap: siteLocatorController.onRecenterButtonTap,
       );
 
-  Widget get _helpButton => Positioned(
-        left: 6,
-        bottom: 10,
-        child: SLHelpButton(),
-      );
+  Widget get _helpAndMenuButton => const HelpAndMenuButton();
 
   Widget _siteLocatorMapUI() => SiteLocatorMapUI(
         onCameraMove: siteLocatorController.onCameraMove,

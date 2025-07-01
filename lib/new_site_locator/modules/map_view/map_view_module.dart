@@ -17,6 +17,7 @@ import 'package:driven_site_locator/data/data_sources/remote/dynatrace_logs_trac
 import 'package:driven_site_locator/data/model/app_utils.dart';
 import 'package:driven_site_locator/data/model/entitlement_repository.dart';
 import 'package:driven_site_locator/driven_components/driven_components.dart';
+import 'package:driven_site_locator/driven_site_locator.dart';
 import 'package:driven_site_locator/new_site_locator/controllers/site_locator_token_controller.dart';
 import 'package:driven_site_locator/new_site_locator/data/services/site_locations_service.dart';
 import 'package:driven_site_locator/new_site_locator/models/distance_matrix.dart';
@@ -63,6 +64,8 @@ part 'widgets/custom_login_signup_button.dart';
 part 'widgets/dialogs/share_my_location_dialog.dart';
 part 'widgets/floating_map_button.dart';
 part 'widgets/map_action_buttons.dart';
+part 'widgets/help_and_menu_buttons.dart';
+part 'widgets/sl_menu_button.dart';
 part 'widgets/sl_help_content/sl_help_button.dart';
 part 'widgets/sl_help_content/sl_help_content.dart';
 part 'widgets/sl_help_content/sl_help_filter_list.dart';

@@ -1845,6 +1845,7 @@ class SLSiteLocatorController extends GetxController with SiteLocatorState {
       gpsIconButtonVisible(buttonsVisibility);
       searchIconButtonVisible(buttonsVisibility);
       helpButtonVisible(buttonsVisibility);
+      menuButtonVisible(buttonsVisibility);
       canShowFloatingMapButtons(buttonsVisibility);
       isShowSearchThisArea(buttonsVisibility);
     }
