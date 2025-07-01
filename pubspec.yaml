@@ -12,11 +12,11 @@ dependencies:
   cron: ^0.6.1
   dio: ^5.7.0
   driven_common_sl_pkg:
-    path: /Users/smeet/Smeet/Fleetcor/FlutterProjects/driven-common/super-app
-  #   git:
-  #     url: https://git.fleetcor.com/ucx/flutter/super-app
-  #     ref: driven-common-sl-pkg
-  #     version: ^0.0.2
+  #   path: /Users/smeet/Smeet/Fleetcor/FlutterProjects/driven-common/super-app
+    git:
+      url: https://git.fleetcor.com/ucx/flutter/super-app
+      ref: driven-common-sl-pkg
+      version: ^0.0.2
   equatable: "2.0.7"
   flutter:
     sdk: flutter

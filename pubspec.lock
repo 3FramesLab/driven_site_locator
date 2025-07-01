@@ -273,9 +273,11 @@ packages:
   driven_common_sl_pkg:
     dependency: "direct main"
     description:
-      path: "/Users/smeet/Smeet/Fleetcor/FlutterProjects/driven-common/super-app"
-      relative: false
-    source: path
+      path: "."
+      ref: driven-common-sl-pkg
+      resolved-ref: "245f809e3fb6f94f641f422de1c605a308563b89"
+      url: "https://git.fleetcor.com/ucx/flutter/super-app"
+    source: git
     version: "0.0.5"
   dynatrace_flutter_plugin:
     dependency: transitive

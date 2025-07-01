@@ -207,7 +207,7 @@
     },
     {
       "name": "driven_common_sl_pkg",
-      "rootUri": "file:///Users/smeet/Smeet/Fleetcor/FlutterProjects/driven-common/super-app",
+      "rootUri": "file:///Users/smeet/.pub-cache/git/super-app-245f809e3fb6f94f641f422de1c605a308563b89/",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -1082,7 +1082,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-07-01T07:38:05.882624Z",
+  "generated": "2025-07-01T09:04:58.687187Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/smeet/Smeet/FlutterSDK/flutter",
