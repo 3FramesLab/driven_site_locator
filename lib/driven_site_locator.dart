@@ -43,6 +43,7 @@ class DrivenSiteLocator {
   bool isInactivityWrapperEnabled = true;
   void Function({bool expired})? onLogout;
   bool isUserAuthenticated = false;
+  void Function()? onMapMenuButtonTap;
 
   DrivenSiteLocator._internal();
   static final DrivenSiteLocator _instance = DrivenSiteLocator._internal();

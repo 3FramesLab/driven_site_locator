@@ -79,6 +79,7 @@ mixin SiteLocatorState {
   RxBool canShowFloatingMapButtons = true.obs;
   RxBool searchIconButtonVisible = true.obs;
   RxBool helpButtonVisible = true.obs;
+  RxBool menuButtonVisible = true.obs;
   RxMap<String, double> milesDataCache = RxMap({});
   RxString milesDisplay = ''.obs;
   bool isShowBackButton = false;
