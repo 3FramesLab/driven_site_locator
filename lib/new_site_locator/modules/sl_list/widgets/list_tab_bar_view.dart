@@ -37,7 +37,12 @@ class _ListTabBarViewState extends State<ListTabBarView>
         children: [
           _searchTextField(),
           _tabView,
-          Expanded(child: _tabBarView),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 87),
+              child: _tabBarView,
+            ),
+          ),
         ],
       ),
     );

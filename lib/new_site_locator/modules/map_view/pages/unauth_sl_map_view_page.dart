@@ -43,6 +43,7 @@ class DCUnauthSLMapViewPageState extends State<DCUnauthSLMapViewPage>
   void initState() {
     MapUtilities.onLocationSettingsEnableCounter();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      siteLocatorController.isListViewOpenedFull(false);
       await authSLTypeChoicesController.updateAuthFilterList();
       DcSiteLocatorUtils.setPreFilters();
       siteLocatorController.isFullMapViewFirstLaunch = true;
