@@ -124,7 +124,10 @@ class _ListTabBarViewState extends State<ListTabBarView>
         ),
       ),
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Text('$label (${siteLocations.length})'),
+      child: Text(
+        '$label (${siteLocations.length})',
+        textScaler: const TextScaler.linear(1),
+      ),
     );
   }
 

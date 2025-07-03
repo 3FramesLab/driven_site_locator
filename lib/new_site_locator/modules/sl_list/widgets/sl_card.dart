@@ -70,6 +70,7 @@ class SLCard extends GetView<SLSiteLocatorController> {
         style: f16ExtraBoldBlack,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
+        textScaler: const TextScaler.linear(1),
       );
 
   String get _brandName {

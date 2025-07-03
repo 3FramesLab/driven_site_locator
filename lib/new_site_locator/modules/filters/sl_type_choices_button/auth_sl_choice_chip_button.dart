@@ -21,6 +21,7 @@ class AuthSLChoiceChipButton extends StatelessWidget {
       label: Text(
         item.quickFilterLabel,
         style: isSelectedOption ? f14SemiboldWhite : normalChipText,
+        textScaler: const TextScaler.linear(1),
       ),
       selectedColor: tealColor,
       backgroundColor: DrivenColors.white,
