@@ -90,6 +90,7 @@ class SLCard extends GetView<SLSiteLocatorController> {
         style: f14SemiBoldBlack,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
+        textScaler: const TextScaler.linear(1),
       );
     }
   }
