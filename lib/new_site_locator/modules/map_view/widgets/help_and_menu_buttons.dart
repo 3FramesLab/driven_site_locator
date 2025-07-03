@@ -12,8 +12,8 @@ class HelpAndMenuButton extends StatelessWidget {
     return Positioned(
       left: 6,
       bottom: DrivenSiteLocator.instance.isUserAuthenticated
-          ? (87 + 10)
-          : 10, //bottom navigation bar height
+          ? (DrivenSiteLocator.instance.getBottomNavBarHeight() + 10)
+          : 10,
       child: Column(
         children: [
           SLMenuButton(),

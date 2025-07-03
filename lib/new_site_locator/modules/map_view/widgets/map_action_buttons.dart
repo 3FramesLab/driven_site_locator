@@ -22,8 +22,8 @@ class MapActionButtons extends StatelessWidget {
     return Positioned(
       right: 6,
       bottom: DrivenSiteLocator.instance.isUserAuthenticated
-          ? (87 + 10)
-          : 10, //bottom navigation bar height
+          ? (DrivenSiteLocator.instance.getBottomNavBarHeight() + 10)
+          : 10,
       child: Column(
         children: [
           SearchIconButton(),

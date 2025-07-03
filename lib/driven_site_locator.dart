@@ -95,7 +95,7 @@ class DrivenSiteLocator {
     Future<Widget> Function()? logoutDialog,
     void Function()? navigateToLogin,
     void Function(bool)? onTimerLogout,
-    double? bottomNavBarHeight,
+    double? bottomNavBarHeight = 87,
     Future<void> Function(String value)? setLocatorMapAsPreferredHomeScreen,
     void Function()? navigateToCardholderSiteLocatorMap,
     Future<void> Function()? navigateToAdminLocatorTab,

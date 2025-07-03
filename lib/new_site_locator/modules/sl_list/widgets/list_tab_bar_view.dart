@@ -39,7 +39,8 @@ class _ListTabBarViewState extends State<ListTabBarView>
           _tabView,
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 87),
+              padding: EdgeInsets.only(
+                  bottom: DrivenSiteLocator.instance.getBottomNavBarHeight()),
               child: _tabBarView,
             ),
           ),

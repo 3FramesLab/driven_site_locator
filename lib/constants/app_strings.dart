@@ -8,7 +8,7 @@ class AppStrings {
   static const fuelmanWelcomeScreenInfo =
       'View your account balance, pay your bill, view your purchase activity, and manage your cards quickly and easily from anywhere at anytime.';
   static const fuelmanLegalPrivacy = 'Legal & Privacy';
-  static const bottomNavBarHeight = 0.0;
+  static const bottomNavBarHeight = 87.0;
   static const trueText = 'true';
   static const falseText = 'false';
   static const noneText = 'none';
