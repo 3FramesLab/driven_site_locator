@@ -38,6 +38,7 @@ class SiteMilesAway extends StatelessWidget {
           style: style ?? f14RegularGrey,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          textScaler: const TextScaler.linear(1),
         ),
       );
 

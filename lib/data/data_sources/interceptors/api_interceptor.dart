@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:driven_common_sl_pkg/extensions/extensions_module.dart';
+// import 'package:driven_common_sl_pkg/extensions/extensions_module.dart';
 import 'package:driven_site_locator/common/access_token/get_jwt_access_token_use_case.dart';
 import 'package:driven_site_locator/config/globals.dart';
 import 'package:driven_site_locator/config/sl_session_manager.dart';
@@ -45,20 +45,20 @@ class APIInterceptor extends Interceptor {
 
   String? _getUUID() => AppUtils.getUUID;
 
-  Future<String> _getAccessToken() async {
-    await _handleAccessToken();
-    return 'Bearer ${SLSessionManager().jwtAccessToken}';
-  }
+  // Future<String> _getAccessToken() async {
+  //   await _handleAccessToken();
+  //   return 'Bearer ${SLSessionManager().jwtAccessToken}';
+  // }
 
-  Future<void> _handleAccessToken() async {
-    if (SLSessionManager().jwtAccessToken.isNullEmptyOrWhitespace ||
-        AppUtils.isTokenExpired(SLSessionManager().jwtAccessToken)) {
-      final getJWTAccessTokenUseCase = GetJWTAccessTokenUseCase();
-      await AppUtils.refreshAmazonAccessToken(
-        getJWTAccessTokenUseCase: getJWTAccessTokenUseCase,
-      );
-    }
-  }
+  // Future<void> _handleAccessToken() async {
+  //   if (SLSessionManager().jwtAccessToken.isNullEmptyOrWhitespace ||
+  //       AppUtils.isTokenExpired(SLSessionManager().jwtAccessToken)) {
+  //     final getJWTAccessTokenUseCase = GetJWTAccessTokenUseCase();
+  //     await AppUtils.refreshAmazonAccessToken(
+  //       getJWTAccessTokenUseCase: getJWTAccessTokenUseCase,
+  //     );
+  //   }
+  // }
 
   Future<Map<String, dynamic>> getRequestHeadersList(
       RequestOptions options) async {

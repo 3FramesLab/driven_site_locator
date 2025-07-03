@@ -65,6 +65,7 @@ class SiteAddress extends StatelessWidget {
           style: f14RegularGrey,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
+          textScaler: const TextScaler.linear(1),
         ),
       );
 

@@ -185,14 +185,14 @@ class DrivenSiteLocator {
 
   String getAppLoginUserType() => _appLoginUserType;
 
-  //TODO: Set this value in super app
+  // TODO(Smeet): Set this value in super app
   void setIsWelcomeScreen(bool isWelcomeScreen) {
     _isWelcomeScreen = isWelcomeScreen;
   }
 
   bool getIsWelcomeScreen() => _isWelcomeScreen;
 
-  //TODO: Set this value in super app
+  // TODO(Smeet): Set this value in super app
   void setIsCardholderFullMapScreen(bool isCardholderFullMapScreen) {
     _isCardholderFullMapScreen = isCardholderFullMapScreen;
   }
